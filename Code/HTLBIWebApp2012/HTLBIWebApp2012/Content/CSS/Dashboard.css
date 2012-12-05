@@ -1,0 +1,245 @@
+﻿/*++++++++++++++++++++++++++++Box++++++++++++++++++++++++++++*/
+.boxed
+{
+    font-style:normal;
+    font-family:helvetica, arial, verdana, sans-serif;   
+    margin: 0px;
+    padding: 0px;         
+}
+table.tableHeader th
+{
+    background:url("../Images/dark-table-head.gif") repeat-x top left; 
+    padding:11px 6px 10px 6px; 
+    font-size:12px; 
+    color:#42424c; 
+    text-shadow:1px 1px 0 #fff
+}
+.boxed .title
+{
+    /*Tạo 2 góc bo tròn cho panel ở top*/
+    -moz-border-radius-topleft: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-radius-topright: 10px;
+    -webkit-border-top-right-radius: 10px;
+
+    /*border:1px solid #AECAF0;*/
+    /*background: url(../Images/dxr.gif) repeat-x;*/    
+    /*background: url(../Images/dark-table-head.gif) repeat-x;    */
+    border:0.3px solid #CECFCF;
+    background:url("../Images/dark-table-head.gif") repeat-x top left;    
+    /*color:Black;*/
+    color:#42424c;
+    text-shadow:1px 1px 0 #fff; /*New*/
+    font-weight:bold;
+    text-transform: uppercase;
+    vertical-align: middle;
+    height:20px;
+    padding: 3px 0px 0px 10px;
+}
+.boxed .title h2
+{
+    height: 18px;
+    padding: 1px 0px 0px 5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+.boxed .content
+{
+    padding: 3px; /*padding: 10px;*/ /*Mới chỉnh lại: 19/05/2011 11:26 AM*/
+    background-color:#F2F8FF;
+    /*Tạo 2 góc bo tròn cho panel ở bottom*/   
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -webkit-border-bottom-right-radius: 10px;  
+    
+    /*
+    border-left:0.3px solid #AECAF0;
+    border-right:0.3px solid #AECAF0; 
+    border-bottom:0.3px solid #AECAF0;  
+    */
+    border-left:0.3px solid #CECFCF;
+    border-right:0.3px solid #CECFCF; 
+    border-bottom:0.3px solid #CECFCF;
+    
+    /*overflow-x:*/
+    overflow-x:scroll;
+    overflow-y:hidden;
+}
+.boxed .contentNoScroll
+{
+    padding: 3px; /*padding: 10px;*/ /*Mới chỉnh lại: 19/05/2011 11:26 AM*/
+    background-color:#F2F8FF;
+    /*Tạo 2 góc bo tròn cho panel ở bottom*/   
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-radius-bottomright: 10px;
+    -webkit-border-bottom-right-radius: 10px;  
+    
+    /*
+    border-left:0.3px solid #AECAF0;
+    border-right:0.3px solid #AECAF0; 
+    border-bottom:0.3px solid #AECAF0;  
+    */
+    border-left:0.3px solid #CECFCF;
+    border-right:0.3px solid #CECFCF; 
+    border-bottom:0.3px solid #CECFCF;
+}
+.boxed .content .detail
+{
+    text-align: right;
+}
+.boxed .content .detail a
+{
+    color: #E58C24;
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*++++++++++++++++++++++++++++ Box 4 Zone +++++++++++++++++++++++++++*/    
+.box-4zone-container
+{        
+    width:100%;
+    left:0;
+    top:0;
+    position:relative;
+}    
+
+.box-topleft
+{        
+    width:49.75%; /*50%;*/
+    height:50%;
+    left:0px;
+    top:0px;
+    position:absolute;        
+}
+.box-topright
+{
+    width:49.75%;  /*50%;*/
+    height:50%;
+    left:50.25%; /*50.55%;*/
+    position:relative;
+}
+.box-bottomleft
+{
+    width:49.75%;
+    height:50%;
+    left:0px;
+    margin-top:5px;
+    position:absolute;        
+}
+.box-bottomright
+{
+    width:49.75%;
+    height:50%;
+    left:50.25%;
+    margin-top:5px;
+    position:relative;    
+}
+/*================*/
+.box-topleft_mini
+{        
+    width:41.55%; /*width:40%;*/
+    height:50%;
+    left:0px;
+    top:0px;
+    position:absolute;        
+}
+.box-topright_mini
+{
+    width:41.55%;
+    height:50%;
+    left:42%; /*left:40.55%;*/
+    position:relative;
+}
+.box-bottomleft_mini
+{
+    width:41.55%;
+    height:50%;
+    left:0px;
+    margin-top:5px;
+    position:absolute;        
+}
+.box-bottomright_mini
+{
+    width:41.55%;
+    height:50%;
+    left:42%;
+    position:relative;
+    margin-top:5px;    
+}
+.box-toprightbottomleft_mini
+{
+    width:16%; /*19%*/ /*width:19.55%;*/
+    height:50%;
+    top:0px;
+    left:84%; /*left:81%;*/
+    position:absolute;
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/*++++++++++++++++++++++++++++ Dashboard Content ++++++++++++++++++++++++++*/
+.labelField
+{
+    vertical-align:middle;
+    white-space:nowrap; 
+}
+.hleft
+{
+    text-align:left;   
+}
+.inputField
+{
+    vertical-align:middle;
+    width:130px;    
+    font-family:Tahoma;
+    font-size:12pt;
+    font-style:italic;
+}
+.customRowSeperate
+{
+    height:3px;
+}
+.customColSeperate
+{
+    height:3px;
+    
+}
+.customTablePadding
+{
+    margin-left:-3px;
+    margin-top:-2px;
+    left:0px;
+    width:101.2%;
+}
+.box2
+{
+    width:700px;
+    height:200px;    
+}
+.box4
+{
+    width:100%; /*415px;*/
+}
+.titleBox
+{
+    font-family:Tahoma;
+    vertical-align:middle;
+    height:20px;
+}
+.contentBox
+{
+    font-family:Tahoma;
+}
+.tabTitle
+{
+    cursor:pointer;
+    margin-left:1px;
+    margin-right:1px;    
+    /*
+    border-bottom-style:dashed;
+    border-bottom-width:thick;
+    border-bottom-color:#F2F8FF;
+    */    
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

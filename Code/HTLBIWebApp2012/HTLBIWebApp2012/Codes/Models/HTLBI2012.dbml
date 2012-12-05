@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HTLBI2012" Class="HTLBI2012DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=serverhtl1;Initial Catalog=HTLBI2012;Persist Security Info=True;User ID=tech" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="HTLBI2012_ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.systbl_UserMenu" Member="systbl_UserMenus">
+    <Type Name="systbl_UserMenu">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MenuCode" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="systbl_Menu_systbl_UserMenu" Member="systbl_Menu" ThisKey="MenuCode" OtherKey="Code" Type="systbl_Menu" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lsttbl_DWTable" Member="lsttbl_DWTables">
+    <Type Name="lsttbl_DWTable">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TblCat" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="BizCat" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TblName" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TblAliasVI" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TblAliasEN" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RefInfo" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Association Name="lsttbl_DWTable_lsttbl_DWColumn" Member="lsttbl_DWColumns" ThisKey="TblName" OtherKey="TblName_Virtual" Type="lsttbl_DWColumn" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lsttbl_MappingType" Member="lsttbl_MappingTypes">
+    <Type Name="lsttbl_MappingType">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TypeMapping" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.systbl_UserDashboard" Member="systbl_UserDashboards">
+    <Type Name="systbl_UserDashboard">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DbrdCode" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ShowCells" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="[View]" Member="View" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="[Add]" Member="Add" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Edit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="[Delete]" Member="Delete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="lsttbl_Dashboard_systbl_UserDashboard" Member="lsttbl_Dashboard" ThisKey="DbrdCode" OtherKey="Code" Type="lsttbl_Dashboard" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lsttbl_DashboardSource" Member="lsttbl_DashboardSources">
+    <Type Name="lsttbl_DashboardSource">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SettingCat" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="WHCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NameVI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NameEN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NameFormatVI" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NameFormatEN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="JsonStr" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lsttbl_Widget" Member="lsttbl_Widgets">
+    <Type Name="lsttbl_Widget">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="WidgetType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DSCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="WHCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JsonStr" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lsttbl_WidgetInteraction" Member="lsttbl_WidgetInteractions">
+    <Type Name="lsttbl_WidgetInteraction">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WidgetCode" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="JsonStr" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lsttbl_DWColumn" Member="lsttbl_DWColumns">
+    <Type Name="lsttbl_DWColumn">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TblName_Actual" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TblName_Virtual" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ColName" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ColAliasVI" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ColAliasEN" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DataType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsKey" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="lsttbl_DWTable_lsttbl_DWColumn" Member="lsttbl_DWTable" ThisKey="TblName_Virtual" OtherKey="TblName" Type="lsttbl_DWTable" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lsttbl_DWTableRelationship" Member="lsttbl_DWTableRelationships">
+    <Type Name="lsttbl_DWTableRelationship">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="WHCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Parent" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Children" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="LinkedField" Type="System.String" DbType="NVarChar(400) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.systbl_Menu" Member="systbl_Menus">
+    <Type Name="systbl_Menu">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IsDefault" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Visible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SortOrder" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ParentCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NameVI" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="NameEN" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="systbl_Menu_systbl_UserMenu" Member="systbl_UserMenus" ThisKey="Code" OtherKey="MenuCode" Type="systbl_UserMenu" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lsttbl_Dashboard" Member="lsttbl_Dashboards">
+    <Type Name="lsttbl_Dashboard">
+      <Column Name="ID" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IsDefault" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="WHCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="JsonStr" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="lsttbl_Dashboard_systbl_UserDashboard" Member="systbl_UserDashboards" ThisKey="Code" OtherKey="DbrdCode" Type="systbl_UserDashboard" />
+    </Type>
+  </Table>
+</Database>

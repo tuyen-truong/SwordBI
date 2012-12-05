@@ -1,0 +1,15 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Shared/FullMaster.Master" AutoEventWireup="true" CodeBehind="GeneralMaster.Master.cs" Inherits="HTLBIWebApp2012.Shared.GeneralMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="headContent" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="bodyContent" runat="server">
+    <!--CENTER-->
+    <div id="mb_full">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">        
+        </asp:ContentPlaceHolder>
+        <!--Announce-->
+    </div>
+    <!-- END CENTER -->
+    <div style="clear: both;">&nbsp;</div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="footerContent" runat="server">
+</asp:Content>

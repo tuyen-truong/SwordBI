@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="wcPortletParams.ascx.cs" Inherits="HTLBIWebApp2012.App.Dashboard.wcPortletParams" %>
+<div ID="container_Params" runat="server" style="width:100%"></div>

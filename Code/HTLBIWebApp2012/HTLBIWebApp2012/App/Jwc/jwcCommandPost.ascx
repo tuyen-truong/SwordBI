@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="jwcCommandPost.ascx.cs" Inherits="HTLBIWebApp2012.App.Jwc.jwcCommandPost" %>
+<input type="button" id="<%=this.MyID%>" title="<%=this.ToolTipText%>" style="background-image:url('../../Images/Other/next.png'); background-position:center; background-repeat:no-repeat; vertical-align:middle; width:21px; height:21px" />

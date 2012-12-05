@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.5" name="HTLBI2012">
+  <DataContextMoniker Name="/HTLBI2012DataContext" />
+  <nestedChildShapes>
+    <classShape Id="6b9bada9-90d5-475d-b30d-add65454a453" absoluteBounds="0.75, 1.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/HTLBI2012DataContext/systbl_UserMenu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7d2bc12d-95c4-4989-8b63-8bb7b7da2eec" absoluteBounds="0.76500000000000012, 1.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2d52bccb-e60d-480a-94e8-8c1e3b3914fb" absoluteBounds="5.375, 1.5, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/HTLBI2012DataContext/lsttbl_DWTable" />
+      <nestedChildShapes>
+        <elementListCompartment Id="00d74d3e-f87e-4a03-b7f7-5d98319d5186" absoluteBounds="5.3900000000000006, 1.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="07b6093d-4223-4f34-af93-95ebde2e5891" absoluteBounds="5.375, 4, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/HTLBI2012DataContext/lsttbl_MappingType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="47f02114-1efb-4cc2-be61-fe2c4dc08235" absoluteBounds="5.3900000000000006, 4.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="10974846-7d4d-4346-926a-e959501e1697" absoluteBounds="3.25, 6.5, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/HTLBI2012DataContext/systbl_UserDashboard" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1a26b018-d236-46f4-adab-329d713f402b" absoluteBounds="3.2649999999999997, 6.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="443fcd1d-b4c5-475c-a14c-4282a6000ee9" absoluteBounds="0.75, 6.5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/HTLBI2012DataContext/lsttbl_DashboardSource" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8c0edfd1-1eeb-4466-bbc4-292ff211675f" absoluteBounds="0.76499999999999968, 6.9600000000000009, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a25e5506-30e3-46e1-80da-2f66ffe59a23" absoluteBounds="5.375, 5.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/HTLBI2012DataContext/lsttbl_Widget" />
+      <nestedChildShapes>
+        <elementListCompartment Id="af76f4a5-156c-4760-9c42-3a58e2f0ce3f" absoluteBounds="5.39, 6.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ec389c66-f980-420d-b3f1-266fd5356b73" absoluteBounds="5.375, 7.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/HTLBI2012DataContext/lsttbl_WidgetInteraction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="97c87af4-1a23-49ec-a757-d8d243b6e946" absoluteBounds="5.3900000000000006, 8.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7c5a4045-9bb0-48da-a140-213d4e131247" absoluteBounds="8.125, 1.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/HTLBI2012DataContext/lsttbl_DWColumn" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8b3dfc7a-f956-4072-b5c6-54fecba2cafb" absoluteBounds="8.14, 1.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.375 : 2.67390055338542); (8.125 : 2.67390055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/HTLBI2012DataContext/lsttbl_DWTable/lsttbl_DWTable_lsttbl_DWColumn" />
+      <nodes>
+        <classShapeMoniker Id="2d52bccb-e60d-480a-94e8-8c1e3b3914fb" />
+        <classShapeMoniker Id="7c5a4045-9bb0-48da-a140-213d4e131247" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="2df31c1d-6c23-42e7-9b66-364b339ce95f" absoluteBounds="8.125, 4.125, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/HTLBI2012DataContext/lsttbl_DWTableRelationship" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2ec4efda-c627-4df9-a52f-a12ff1e4415d" absoluteBounds="8.14, 4.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="01fb11c7-de44-4298-b15f-2a66c00eec44" absoluteBounds="0.75, 3.375, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/HTLBI2012DataContext/systbl_Menu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fe9a3d3f-b885-4dc1-bb74-78b218647080" absoluteBounds="0.765, 3.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.75 : 3.375); (1.75 : 3.07859537760417)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HTLBI2012DataContext/systbl_Menu/systbl_Menu_systbl_UserMenu" />
+      <nodes>
+        <classShapeMoniker Id="01fb11c7-de44-4298-b15f-2a66c00eec44" />
+        <classShapeMoniker Id="6b9bada9-90d5-475d-b30d-add65454a453" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="329efb34-d5b5-4f4f-942d-37205fb4263c" absoluteBounds="3.25, 3.375, 2, 1.9631982421875">
+      <DataClassMoniker Name="/HTLBI2012DataContext/lsttbl_Dashboard" />
+      <nestedChildShapes>
+        <elementListCompartment Id="36c1a5ab-beec-4703-8bff-5ff539d1dffc" absoluteBounds="3.265, 3.835, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.25 : 5.3381982421875); (4.25 : 6.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HTLBI2012DataContext/lsttbl_Dashboard/lsttbl_Dashboard_systbl_UserDashboard" />
+      <nodes>
+        <classShapeMoniker Id="329efb34-d5b5-4f4f-942d-37205fb4263c" />
+        <classShapeMoniker Id="10974846-7d4d-4346-926a-e959501e1697" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="HTLBI2012_DW" Class="HTLBI2012DWDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=serverhtl1;Initial Catalog=HTLBI2012_DW;Persist Security Info=True;User ID=tech" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="HTLBI2012_DWConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.DimProject" Member="DimProjects">
+    <Type Name="DimProject">
+      <Column Name="PrjCode" Type="System.String" DbType="NVarChar(25) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PrjName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Locked" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="DataSource" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="UserSign" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DimFirm" Member="DimFirms">
+    <Type Name="DimFirm">
+      <Column Name="FirmCode" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirmName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DataSource" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="UserSign" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

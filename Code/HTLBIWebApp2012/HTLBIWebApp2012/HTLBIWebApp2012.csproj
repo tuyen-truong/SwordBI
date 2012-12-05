@@ -1,0 +1,1185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9DFF00B-F36B-4D46-B3D4-C525C8558167}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HTLBIWebApp2012</RootNamespace>
+    <AssemblyName>HTLBIWebApp2012</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CECOM, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\CECOM.Vol11\CECOM\bin\Debug\CECOM.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v10.2.Core, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v10.2.Core, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxGauges.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxGridView.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxPivotGrid.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v10.2.Web, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v10.2.Core, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v10.2.Presets, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\CE\SourceCode\CECOM.Vol11\CECOM\bin\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\BILogin.aspx" />
+    <Content Include="App\Analysis\Analysis.aspx" />
+    <Content Include="App\Dashboard\wcPortletParams.ascx" />
+    <Content Include="App\Dashboard\wcTwoPortlet_Grid.ascx" />
+    <Content Include="App\Dashboard\wcThreePortlet_Grid.ascx" />
+    <Content Include="App\Dashboard\wcFourPortlet_Grid.ascx" />
+    <Content Include="App\Dashboard\Dashboard.aspx" />
+    <Content Include="App\Dashboard\wcFourPortlet_Flow.ascx" />
+    <Content Include="App\Dashboard\wcSwitchDashboard.ascx" />
+    <Content Include="App\Dashboard\wcThreePortlet_Flow.ascx" />
+    <Content Include="App\Dashboard\wcTwoPortlet_Flow.ascx" />
+    <Content Include="App\Jwc\jwcComboBox.ascx" />
+    <Content Include="App\Jwc\jwcComboBoxChecked.ascx" />
+    <Content Include="App\Jwc\jwcCommandPost.ascx" />
+    <Content Include="App\Jwc\jwcDateEdit.ascx" />
+    <Content Include="App\Report\Report.aspx" />
+    <Content Include="App\Setting\AnalysisSetting.aspx" />
+    <Content Include="App\Setting\DashboardSetting.aspx" />
+    <Content Include="App\Setting\PortletSetting.aspx" />
+    <Content Include="App\Setting\ReportSetting.aspx" />
+    <Content Include="App\Setting\Setting.aspx" />
+    <Content Include="App\Setting\wcDashboardSetting.ascx" />
+    <Content Include="App\Setting\wcInteractionFieldHierarchy.ascx" />
+    <Content Include="App\Setting\wcInteractionFilter.ascx" />
+    <Content Include="App\Setting\wcInteractionSetting.ascx" />
+    <Content Include="App\Setting\wcKPIContextMetric_Calc.ascx" />
+    <Content Include="App\Setting\wcCalcField.ascx" />
+    <Content Include="App\Setting\wcDatasourceSetting.ascx" />
+    <Content Include="App\Setting\wcKPISetting.ascx" />
+    <Content Include="App\Setting\wcLayoutSetting.ascx" />
+    <Content Include="App\Setting\wcTimeFilterPrev.ascx" />
+    <Content Include="App\Setting\wcKPIContextMetric.ascx" />
+    <Content Include="App\Setting\wcKPIMeasure.ascx" />
+    <Content Include="App\Setting\wcKPIDimension.ascx" />
+    <Content Include="App\Setting\wcPropGauge_StateRange.ascx" />
+    <Content Include="App\Setting\wcPropGrid_Column.ascx" />
+    <Content Include="App\UserControls\wcChart.ascx" />
+    <Content Include="App\UserControls\wcFullCGauge.ascx" />
+    <Content Include="App\UserControls\wcGrid.ascx" />
+    <Content Include="App\UserControls\wcHalfCGauge.ascx" />
+    <Content Include="App\UserControls\wcLGauge.ascx" />
+    <Content Include="App\Setting\wcNumFilter.ascx" />
+    <Content Include="App\Setting\wcTimeFilter.ascx" />
+    <Content Include="App\Setting\wcNormalFilter.ascx" />
+    <Content Include="App\Setting\wcPropChart.ascx" />
+    <Content Include="App\UserControls\wcPortlet.ascx" />
+    <Content Include="App\UserControls\wcQuaterCGauge.ascx" />
+    <Content Include="App\UserControls\wcThreeFourCGauge.ascx" />
+    <Content Include="App\Setting\wcPropGauge.ascx" />
+    <Content Include="App\Setting\wcPropGrid.ascx" />
+    <Content Include="Content\Images\2col-top.png" />
+    <Content Include="Content\Images\2col.png" />
+    <Content Include="Content\Images\ActionEdit16.png" />
+    <Content Include="Content\Images\ad_120x600.jpg" />
+    <Content Include="Content\Images\alert-failure.gif" />
+    <Content Include="Content\Images\banner_refl.png" />
+    <Content Include="Content\Images\bgHeader.gif" />
+    <Content Include="Content\Images\bgHeader01.gif" />
+    <Content Include="Content\Images\bgHeader02.gif" />
+    <Content Include="Content\Images\bgindex.png" />
+    <Content Include="Content\Images\bgmenu1.gif" />
+    <Content Include="Content\Images\bgmenu2.gif" />
+    <Content Include="Content\Images\bg_Login.gif" />
+    <Content Include="Content\Images\bg_menu.png" />
+    <Content Include="Content\Images\bg_menu1.png" />
+    <Content Include="Content\Images\bl.png" />
+    <Content Include="Content\Images\br.png" />
+    <Content Include="Content\Images\bt_search_header.png" />
+    <Content Include="Content\Images\button.gif" />
+    <Content Include="Content\Images\cal.gif" />
+    <Content Include="Content\Images\clearHead.png" />
+    <Content Include="Content\Images\close.gif" />
+    <Content Include="Content\Images\Color MS Excel.png" />
+    <Content Include="Content\Images\colorPickerRow.gif" />
+    <Content Include="Content\Images\content-left_both.gif" />
+    <Content Include="Content\Images\content-left_on.gif" />
+    <Content Include="Content\Images\content-right_both.gif" />
+    <Content Include="Content\Images\content-right_on.gif" />
+    <Content Include="Content\Images\create-campaign.png" />
+    <Content Include="Content\Images\dark-grey-table-head-left.gif" />
+    <Content Include="Content\Images\dark-grey-table-head-right.gif" />
+    <Content Include="Content\Images\dark-grey-table-head.gif" />
+    <Content Include="Content\Images\dark-table-head-left.gif" />
+    <Content Include="Content\Images\dark-table-head-right.gif" />
+    <Content Include="Content\Images\dark-table-head.gif" />
+    <Content Include="Content\Images\dash-head-left.gif" />
+    <Content Include="Content\Images\dash-head-right.gif" />
+    <Content Include="Content\Images\dash-table-head.gif" />
+    <Content Include="Content\Images\drop1.gif" />
+    <Content Include="Content\Images\drop2.gif" />
+    <Content Include="Content\Images\dxr.gif" />
+    <Content Include="Content\Images\EnFlag.gif" />
+    <Content Include="Content\Images\favicon.ico" />
+    <Content Include="Content\Images\footer-dark-grey-left.gif" />
+    <Content Include="Content\Images\footer-dark-grey-right.gif" />
+    <Content Include="Content\Images\footer-dark-grey.gif" />
+    <Content Include="Content\Images\Footer_CreatorInfor.gif" />
+    <Content Include="Content\Images\Footer_CustomListSetting.gif" />
+    <Content Include="Content\Images\Footer_RuleList.gif" />
+    <Content Include="Content\Images\Footer_SaveControl.gif" />
+    <Content Include="Content\Images\Footer_TaskDetail.gif" />
+    <Content Include="Content\Images\Footer_TaskList.gif" />
+    <Content Include="Content\Images\Footer_WorkerInforLeft.gif" />
+    <Content Include="Content\Images\Footer_WorkerInforRight.gif" />
+    <Content Include="Content\Images\goal-quote.gif" />
+    <Content Include="Content\Images\header-bg-left.gif" />
+    <Content Include="Content\Images\header-bg.gif" />
+    <Content Include="Content\Images\Header01Center.gif" />
+    <Content Include="Content\Images\Header02.gif" />
+    <Content Include="Content\Images\icon_chart_16.png" />
+    <Content Include="Content\Images\icon_table_16.png" />
+    <Content Include="Content\Images\img02.jpg" />
+    <Content Include="Content\Images\img03.gif" />
+    <Content Include="Content\Images\img04.gif" />
+    <Content Include="Content\Images\img05.gif" />
+    <Content Include="Content\Images\img06.gif" />
+    <Content Include="Content\Images\img07.gif" />
+    <Content Include="Content\Images\img08.gif" />
+    <Content Include="Content\Images\img10.gif" />
+    <Content Include="Content\Images\imgFooter.gif" />
+    <Content Include="Content\Images\index.jpg" />
+    <Content Include="Content\Images\left-sub_on.gif" />
+    <Content Include="Content\Images\left1.gif" />
+    <Content Include="Content\Images\left2.gif" />
+    <Content Include="Content\Images\left_both.gif" />
+    <Content Include="Content\Images\left_both_1.gif" />
+    <Content Include="Content\Images\left_on.gif" />
+    <Content Include="Content\Images\light-table-head-left.gif" />
+    <Content Include="Content\Images\light-table-head-right.gif" />
+    <Content Include="Content\Images\light-table-head.gif" />
+    <Content Include="Content\Images\login-case.png" />
+    <Content Include="Content\Images\login-footer.png" />
+    <Content Include="Content\Images\Login16.png" />
+    <Content Include="Content\Images\LoginButton.png" />
+    <Content Include="Content\Images\LoginButton1.gif" />
+    <Content Include="Content\Images\LoginIcon.png" />
+    <Content Include="Content\Images\logo.gif" />
+    <Content Include="Content\Images\logo.jpg" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\mainquotes.png" />
+    <Content Include="Content\Images\menu.gif" />
+    <Content Include="Content\Images\mr.png" />
+    <Content Include="Content\Images\page.gif" />
+    <Content Include="Content\Images\pro_drop4_0a.gif" />
+    <Content Include="Content\Images\pro_drop4_0b.gif" />
+    <Content Include="Content\Images\pro_drop4_2a.gif" />
+    <Content Include="Content\Images\pro_drop4_2b.gif" />
+    <Content Include="Content\Images\pro_drop4_back.gif" />
+    <Content Include="Content\Images\resend.png" />
+    <Content Include="Content\Images\right-sub_on.gif" />
+    <Content Include="Content\Images\right1.gif" />
+    <Content Include="Content\Images\right2.gif" />
+    <Content Include="Content\Images\right_both.gif" />
+    <Content Include="Content\Images\right_both_1.gif" />
+    <Content Include="Content\Images\right_on.gif" />
+    <Content Include="Content\Images\seperator.gif" />
+    <Content Include="Content\Images\smallOff.png" />
+    <Content Include="Content\Images\smallTick.png" />
+    <Content Include="Content\Images\spacer.gif" />
+    <Content Include="Content\Images\subnav-divider.png" />
+    <Content Include="Content\Images\subnav_bg.jpg" />
+    <Content Include="Content\Images\subnav_separator.jpg" />
+    <Content Include="Content\Images\switch-client-on.gif" />
+    <Content Include="Content\Images\switch-client.gif" />
+    <Content Include="Content\Images\tab-round.png" />
+    <Content Include="Content\Images\tab-round_1.png" />
+    <Content Include="Content\Images\table-footer-left.gif" />
+    <Content Include="Content\Images\table-footer-middle.gif" />
+    <Content Include="Content\Images\table-footer-right.gif" />
+    <Content Include="Content\Images\table-footer-round-proxy.gif" />
+    <Content Include="Content\Images\table-footer-round-rule.gif" />
+    <Content Include="Content\Images\table-footer-round.gif" />
+    <Content Include="Content\Images\table-footer.gif" />
+    <Content Include="Content\Images\table-head.gif" />
+    <Content Include="Content\Images\table-stats-left.gif" />
+    <Content Include="Content\Images\table-stats-right.gif" />
+    <Content Include="Content\Images\table-stats.gif" />
+    <Content Include="Content\Images\table-tab-header-cap.gif" />
+    <Content Include="Content\Images\table-tab-header-left.gif" />
+    <Content Include="Content\Images\table-tab-header-right.gif" />
+    <Content Include="Content\Images\table-tab-header.gif" />
+    <Content Include="Content\Images\table-tab-left.gif" />
+    <Content Include="Content\Images\table-tab-off-left-of-on.gif" />
+    <Content Include="Content\Images\table-tab-off-left.gif" />
+    <Content Include="Content\Images\table-tab-off-right.gif" />
+    <Content Include="Content\Images\table-tab-off.gif" />
+    <Content Include="Content\Images\table-tab-right-none.gif" />
+    <Content Include="Content\Images\table-tab-right.gif" />
+    <Content Include="Content\Images\tableft.gif" />
+    <Content Include="Content\Images\tabright.gif" />
+    <Content Include="Content\Images\tab_bg.jpg" />
+    <Content Include="Content\Images\tl.png" />
+    <Content Include="Content\Images\tr.png" />
+    <Content Include="Content\Images\trash.gif" />
+    <Content Include="Content\Images\ViFlag.gif" />
+    <Content Include="Content\Images\vnFlag.png" />
+    <Content Include="Content\Images\wand-small.png" />
+    <Content Include="Images\Appearance\Chameleon.png" />
+    <Content Include="Images\Appearance\Dark Flat.png" />
+    <Content Include="Images\Appearance\Dark.png" />
+    <Content Include="Images\Appearance\Default.png" />
+    <Content Include="Images\Appearance\Gray.png" />
+    <Content Include="Images\Appearance\In A Fog.png" />
+    <Content Include="Images\Appearance\Light.png" />
+    <Content Include="Images\Appearance\Nature Colors.png" />
+    <Content Include="Images\Appearance\Northern Lights.png" />
+    <Content Include="Images\Appearance\Pastel Kit.png" />
+    <Content Include="Images\Appearance\Terracotta Pie.png" />
+    <Content Include="Images\Appearance\The Trees.png" />
+    <Content Include="Images\Control\chart-Area.png" />
+    <Content Include="Images\Control\chart-Bar.png" />
+    <Content Include="Images\Control\chart-Doughnut.png" />
+    <Content Include="Images\Control\chart-Line.png" />
+    <Content Include="Images\Control\chart-Pie.png" />
+    <Content Include="Images\Control\chart-Point.png" />
+    <Content Include="Images\Control\chart-RadarArea.png" />
+    <Content Include="Images\Control\chart-RadarLine.png" />
+    <Content Include="Images\Control\chart-RadarPoint.png" />
+    <Content Include="Images\Control\chart-ScatterLine.png" />
+    <Content Include="Images\Control\chart-SideBySideStackedBar.png" />
+    <Content Include="Images\Control\chart-Spline.png" />
+    <Content Include="Images\Control\chart-SplineArea.png" />
+    <Content Include="Images\Control\chart-StackedArea.png" />
+    <Content Include="Images\Control\chart-StackedBar.png" />
+    <Content Include="Images\Control\chart-StackedLine.png" />
+    <Content Include="Images\Control\chart-StackedSplineArea.png" />
+    <Content Include="Images\Control\chart-StepArea.png" />
+    <Content Include="Images\Control\chart-StepLine.png" />
+    <Content Include="Images\Control\chart-SwiftPlot.png" />
+    <Content Include="Images\Control\gauge-cir-wide.png" />
+    <Content Include="Images\Control\gauge-CircleFull.png" />
+    <Content Include="Images\Control\gauge-CircleHalf.png" />
+    <Content Include="Images\Control\gauge-CircleQuaterLeft.png" />
+    <Content Include="Images\Control\gauge-CircleQuaterRight.png" />
+    <Content Include="Images\Control\gauge-CircleThreeFour.png" />
+    <Content Include="Images\Control\gauge-LinearHorizontal.png" />
+    <Content Include="Images\Control\gauge-LinearVertical.png" />
+    <Content Include="Images\Control\grid-GridView.png" />
+    <Content Include="Images\Control\traffic-lights.png" />
+    <Content Include="Images\Other\down.png" />
+    <Content Include="Images\Other\next.png" />
+    <Content Include="Images\Other\trendarrow_down.png" />
+    <Content Include="Images\Other\trendarrow_up.png" />
+    <Content Include="Images\Other\trend_ok.png" />
+    <Content Include="Scripts\JQuery\autoNumeric-1.7.4.js" />
+    <Content Include="Scripts\JQuery\jquery-1.7.2.min.js" />
+    <Content Include="Shared\About.aspx" />
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="Content\CSS\css.css" />
+    <Content Include="Content\CSS\css_002.css" />
+    <Content Include="Content\CSS\Dashboard.css" />
+    <Content Include="Content\CSS\Login.css" />
+    <Content Include="Content\CSS\menu.css" />
+    <Content Include="Content\CSS\popcalendar.css" />
+    <Content Include="Content\CSS\Site.css" />
+    <Content Include="Index.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\forControls.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery-ui-i18n.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-af.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-ar.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-az.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-bg.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-bs.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-ca.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-cs.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-da.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-de.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-el.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-en-GB.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-eo.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-es.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-et.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-eu.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-fa.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-fi.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-fo.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-fr-CH.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-fr.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-he.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-hr.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-hu.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-hy.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-id.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-is.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-it.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-ja.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-ko.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-lt.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-lv.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-ms.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-nl.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-no.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-pl.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-pt-BR.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-ro.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-ru.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-sk.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-sl.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-sq.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-sr-SR.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-sr.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-sv.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-ta.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-th.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-tr.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-uk.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-vi.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-zh-CN.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-zh-HK.js" />
+    <Content Include="Scripts\JQuery\i18n\jquery.ui.datepicker-zh-TW.js" />
+    <Content Include="Scripts\JQuery\images\calendar.gif" />
+    <Content Include="Scripts\JQuery\images\demo-config-on-tile.gif" />
+    <Content Include="Scripts\JQuery\images\demo-config-on.gif" />
+    <Content Include="Scripts\JQuery\images\demo-spindown-closed.gif" />
+    <Content Include="Scripts\JQuery\images\demo-spindown-open.gif" />
+    <Content Include="Scripts\JQuery\images\icon-docs-info.gif" />
+    <Content Include="Scripts\JQuery\images\jqueryui_32x32.png" />
+    <Content Include="Scripts\JQuery\images\jquery_32x32.png" />
+    <Content Include="Scripts\JQuery\images\pbar-ani.gif" />
+    <Content Include="Scripts\JQuery\images\sizzlejs_32x32.png" />
+    <Content Include="Scripts\JQuery\images\transparent_1x1.png" />
+    <Content Include="Scripts\JQuery\jquery-1.4.2.min.js" />
+    <Content Include="Scripts\JQuery\jquery-ui-1.8.2.custom.min.js" />
+    <Content Include="Scripts\JQuery\jquery.maskedinput-1.2.2.min.js" />
+    <Content Include="Scripts\JQuery\jquery.numberformatter-1.2.2.min.js" />
+    <Content Include="Scripts\JQuery\Json-ende.js" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-anim_basic_16x16.gif" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.all.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.base.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.button.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.core.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.slider.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Scripts\JQuery\themes\base\jquery.ui.theme.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-anim_basic_16x16.gif" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery-ui-1.8.2.custom.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.accordion.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.all.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.autocomplete.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.base.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.button.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.core.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.datepicker.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.dialog.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.progressbar.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.resizable.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.selectable.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.slider.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.tabs.css" />
+    <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.theme.css" />
+    <Content Include="Scripts\menu.js" />
+    <Content Include="Scripts\popcalendar.js" />
+    <Content Include="Shared\UserControl\wcSubMenu_bak.ascx" />
+    <Content Include="Shared\UserControl\wcMainMenu.ascx" />
+    <Content Include="Shared\UserControl\wcSubMenu.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\BILogin.aspx.cs">
+      <DependentUpon>BILogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\BILogin.aspx.designer.cs">
+      <DependentUpon>BILogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Analysis\Analysis.aspx.cs">
+      <DependentUpon>Analysis.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Analysis\Analysis.aspx.designer.cs">
+      <DependentUpon>Analysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\OnePortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\TenPortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\NinePortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\ParamCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\EightPortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\SevenPortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\SixPortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\FivePortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\TwoPortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\LayoutPortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\ThreePortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Base\FourPortletCtrlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcPortletParams.ascx.cs">
+      <DependentUpon>wcPortletParams.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcPortletParams.ascx.designer.cs">
+      <DependentUpon>wcPortletParams.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcTwoPortlet_Grid.ascx.cs">
+      <DependentUpon>wcTwoPortlet_Grid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcTwoPortlet_Grid.ascx.designer.cs">
+      <DependentUpon>wcTwoPortlet_Grid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePortlet_Grid.ascx.cs">
+      <DependentUpon>wcThreePortlet_Grid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePortlet_Grid.ascx.designer.cs">
+      <DependentUpon>wcThreePortlet_Grid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcFourPortlet_Grid.ascx.cs">
+      <DependentUpon>wcFourPortlet_Grid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcFourPortlet_Grid.ascx.designer.cs">
+      <DependentUpon>wcFourPortlet_Grid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcFourPortlet_Flow.ascx.cs">
+      <DependentUpon>wcFourPortlet_Flow.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcFourPortlet_Flow.ascx.designer.cs">
+      <DependentUpon>wcFourPortlet_Flow.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcSwitchDashboard.ascx.cs">
+      <DependentUpon>wcSwitchDashboard.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcSwitchDashboard.ascx.designer.cs">
+      <DependentUpon>wcSwitchDashboard.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePortlet_Flow.ascx.cs">
+      <DependentUpon>wcThreePortlet_Flow.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePortlet_Flow.ascx.designer.cs">
+      <DependentUpon>wcThreePortlet_Flow.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcTwoPortlet_Flow.ascx.cs">
+      <DependentUpon>wcTwoPortlet_Flow.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcTwoPortlet_Flow.ascx.designer.cs">
+      <DependentUpon>wcTwoPortlet_Flow.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Jwc\jwcComboBox.ascx.cs">
+      <DependentUpon>jwcComboBox.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Jwc\jwcComboBox.ascx.designer.cs">
+      <DependentUpon>jwcComboBox.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Jwc\jwcComboBoxChecked.ascx.cs">
+      <DependentUpon>jwcComboBoxChecked.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Jwc\jwcComboBoxChecked.ascx.designer.cs">
+      <DependentUpon>jwcComboBoxChecked.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Jwc\jwcCommandPost.ascx.cs">
+      <DependentUpon>jwcCommandPost.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Jwc\jwcCommandPost.ascx.designer.cs">
+      <DependentUpon>jwcCommandPost.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Jwc\jwcControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Jwc\jwcDateEdit.ascx.cs">
+      <DependentUpon>jwcDateEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Jwc\jwcDateEdit.ascx.designer.cs">
+      <DependentUpon>jwcDateEdit.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Report\Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Report\Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\AnalysisSetting.aspx.cs">
+      <DependentUpon>AnalysisSetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\AnalysisSetting.aspx.designer.cs">
+      <DependentUpon>AnalysisSetting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\DashboardSetting.aspx.cs">
+      <DependentUpon>DashboardSetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\DashboardSetting.aspx.designer.cs">
+      <DependentUpon>DashboardSetting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\PortletSetting.aspx.cs">
+      <DependentUpon>PortletSetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\PortletSetting.aspx.designer.cs">
+      <DependentUpon>PortletSetting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\ReportSetting.aspx.cs">
+      <DependentUpon>ReportSetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\ReportSetting.aspx.designer.cs">
+      <DependentUpon>ReportSetting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\Setting.aspx.cs">
+      <DependentUpon>Setting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\Setting.aspx.designer.cs">
+      <DependentUpon>Setting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcDashboardSetting.ascx.cs">
+      <DependentUpon>wcDashboardSetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcDashboardSetting.ascx.designer.cs">
+      <DependentUpon>wcDashboardSetting.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcInteractionFieldHierarchy.ascx.cs">
+      <DependentUpon>wcInteractionFieldHierarchy.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcInteractionFieldHierarchy.ascx.designer.cs">
+      <DependentUpon>wcInteractionFieldHierarchy.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcInteractionFilter.ascx.cs">
+      <DependentUpon>wcInteractionFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcInteractionFilter.ascx.designer.cs">
+      <DependentUpon>wcInteractionFilter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcInteractionSetting.ascx.cs">
+      <DependentUpon>wcInteractionSetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcInteractionSetting.ascx.designer.cs">
+      <DependentUpon>wcInteractionSetting.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcKPIContextMetric_Calc.ascx.cs">
+      <DependentUpon>wcKPIContextMetric_Calc.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcKPIContextMetric_Calc.ascx.designer.cs">
+      <DependentUpon>wcKPIContextMetric_Calc.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcCalcField.ascx.cs">
+      <DependentUpon>wcCalcField.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcCalcField.ascx.designer.cs">
+      <DependentUpon>wcCalcField.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcDatasourceSetting.ascx.cs">
+      <DependentUpon>wcDatasourceSetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcDatasourceSetting.ascx.designer.cs">
+      <DependentUpon>wcDatasourceSetting.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcKPISetting.ascx.cs">
+      <DependentUpon>wcKPISetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcKPISetting.ascx.designer.cs">
+      <DependentUpon>wcKPISetting.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcLayoutSetting.ascx.cs">
+      <DependentUpon>wcLayoutSetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcLayoutSetting.ascx.designer.cs">
+      <DependentUpon>wcLayoutSetting.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcTimeFilterPrev.ascx.cs">
+      <DependentUpon>wcTimeFilterPrev.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcTimeFilterPrev.ascx.designer.cs">
+      <DependentUpon>wcTimeFilterPrev.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcKPIContextMetric.ascx.cs">
+      <DependentUpon>wcKPIContextMetric.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcKPIContextMetric.ascx.designer.cs">
+      <DependentUpon>wcKPIContextMetric.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcKPIMeasure.ascx.cs">
+      <DependentUpon>wcKPIMeasure.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcKPIMeasure.ascx.designer.cs">
+      <DependentUpon>wcKPIMeasure.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcKPIDimension.ascx.cs">
+      <DependentUpon>wcKPIDimension.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcKPIDimension.ascx.designer.cs">
+      <DependentUpon>wcKPIDimension.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcPropGauge_StateRange.ascx.cs">
+      <DependentUpon>wcPropGauge_StateRange.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcPropGauge_StateRange.ascx.designer.cs">
+      <DependentUpon>wcPropGauge_StateRange.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcPropGrid_Column.ascx.cs">
+      <DependentUpon>wcPropGrid_Column.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcPropGrid_Column.ascx.designer.cs">
+      <DependentUpon>wcPropGrid_Column.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcChart.ascx.cs">
+      <DependentUpon>wcChart.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcChart.ascx.designer.cs">
+      <DependentUpon>wcChart.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcFullCGauge.ascx.cs">
+      <DependentUpon>wcFullCGauge.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcFullCGauge.ascx.designer.cs">
+      <DependentUpon>wcFullCGauge.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcGrid.ascx.cs">
+      <DependentUpon>wcGrid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcGrid.ascx.designer.cs">
+      <DependentUpon>wcGrid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcHalfCGauge.ascx.cs">
+      <DependentUpon>wcHalfCGauge.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcHalfCGauge.ascx.designer.cs">
+      <DependentUpon>wcHalfCGauge.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcLGauge.ascx.cs">
+      <DependentUpon>wcLGauge.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcLGauge.ascx.designer.cs">
+      <DependentUpon>wcLGauge.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcNumFilter.ascx.cs">
+      <DependentUpon>wcNumFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcNumFilter.ascx.designer.cs">
+      <DependentUpon>wcNumFilter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcTimeFilter.ascx.cs">
+      <DependentUpon>wcTimeFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcTimeFilter.ascx.designer.cs">
+      <DependentUpon>wcTimeFilter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcNormalFilter.ascx.cs">
+      <DependentUpon>wcNormalFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcNormalFilter.ascx.designer.cs">
+      <DependentUpon>wcNormalFilter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcPropChart.ascx.cs">
+      <DependentUpon>wcPropChart.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcPropChart.ascx.designer.cs">
+      <DependentUpon>wcPropChart.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcPortlet.ascx.cs">
+      <DependentUpon>wcPortlet.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcPortlet.ascx.designer.cs">
+      <DependentUpon>wcPortlet.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcQuaterCGauge.ascx.cs">
+      <DependentUpon>wcQuaterCGauge.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcQuaterCGauge.ascx.designer.cs">
+      <DependentUpon>wcQuaterCGauge.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcThreeFourCGauge.ascx.cs">
+      <DependentUpon>wcThreeFourCGauge.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcThreeFourCGauge.ascx.designer.cs">
+      <DependentUpon>wcThreeFourCGauge.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcPropGauge.ascx.cs">
+      <DependentUpon>wcPropGauge.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcPropGauge.ascx.designer.cs">
+      <DependentUpon>wcPropGauge.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\wcPropGrid.ascx.cs">
+      <DependentUpon>wcPropGrid.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\wcPropGrid.ascx.designer.cs">
+      <DependentUpon>wcPropGrid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Codes\BLL\MySys.cs" />
+    <Compile Include="Codes\Utils\ControlBaseClasses.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Codes\Utils\DemoData.cs" />
+    <Compile Include="Codes\Utils\Extensions.cs" />
+    <Compile Include="Codes\Utils\Helpers.cs" />
+    <Compile Include="Codes\Utils\MySession.cs" />
+    <Compile Include="Codes\Utils\ObjectClasses.cs" />
+    <Compile Include="Codes\Utils\OLAPConnector.cs" />
+    <Compile Include="Shared\About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Codes\BLL\MyBI.cs" />
+    <Compile Include="Codes\Models\HTLBI2012.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HTLBI2012.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Codes\Models\HTLBI2012DW.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HTLBI2012DW.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Codes\Utils\GlobalVar.cs" />
+    <Compile Include="Codes\Utils\LanguageManager.cs" />
+    <Compile Include="Codes\Utils\PageBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shared\DashboardMaster.master.cs">
+      <DependentUpon>DashboardMaster.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\DashboardMaster.master.designer.cs">
+      <DependentUpon>DashboardMaster.master</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\FullMaster.Master.cs">
+      <DependentUpon>FullMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\FullMaster.Master.designer.cs">
+      <DependentUpon>FullMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\GeneralMaster.Master.cs">
+      <DependentUpon>GeneralMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\GeneralMaster.Master.designer.cs">
+      <DependentUpon>GeneralMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\UserControl\wcSubMenu_bak.ascx.cs">
+      <DependentUpon>wcSubMenu_bak.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\UserControl\wcSubMenu_bak.ascx.designer.cs">
+      <DependentUpon>wcSubMenu_bak.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\UserControl\wcMainMenu.ascx.cs">
+      <DependentUpon>wcMainMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\UserControl\wcMainMenu.ascx.designer.cs">
+      <DependentUpon>wcMainMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\UserControl\wcSubMenu.ascx.cs">
+      <DependentUpon>wcSubMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\UserControl\wcSubMenu.ascx.designer.cs">
+      <DependentUpon>wcSubMenu.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+    <Content Include="Shared\Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\Office2010Blue\ASPxButton.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxButtonEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxCalendar.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxCallbackPanel.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxCaptcha.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxCheckBox.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxCloudControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxColorEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxComboBox.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxDataView.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxDateEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxDateNavigator.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxDropDownEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxFileManager.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxFilterControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxGridLookup.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxGridView.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxHeadline.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxHtmlEditor.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxHyperLink.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxLabel.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxListBox.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxLoadingPanel.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxMemo.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxMenu.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxNavBar.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxNewsControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxPageControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxPager.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxPivotGrid.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxPopupControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxPopupMenu.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxProgressBar.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxRadioButton.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxRadioButtonList.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxRatingControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxRoundPanel.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxScheduler.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxSiteMapControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxSpellChecker.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxSpinEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxSplitter.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxTabControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxTextBox.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxTimeEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxTitleIndex.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxTreeList.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxTreeView.skin" />
+    <Content Include="App_Themes\Office2010Blue\ASPxUploadControl.skin" />
+    <Content Include="App_Themes\Office2010Blue\MonthEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\RecurrenceTypeEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\ReportToolbar.skin" />
+    <Content Include="App_Themes\Office2010Blue\ReportViewer.skin" />
+    <Content Include="App_Themes\Office2010Blue\WeekDaysEdit.skin" />
+    <Content Include="App_Themes\Office2010Blue\WeekOfMonthEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxButton.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxButtonEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxCalendar.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxCallbackPanel.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxCaptcha.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxCheckBox.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxCloudControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxColorEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxComboBox.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxDataView.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxDateEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxDateNavigator.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxDropDownEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxFileManager.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxFilterControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxGridLookup.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxGridView.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxHeadline.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxHtmlEditor.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxHyperLink.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxLabel.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxListBox.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxLoadingPanel.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxMemo.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxMenu.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxNavBar.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxNewsControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxPageControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxPager.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxPivotGrid.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxPopupControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxPopupMenu.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxProgressBar.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxRadioButton.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxRadioButtonList.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxRatingControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxRoundPanel.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxScheduler.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxSiteMapControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxSpellChecker.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxSpinEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxSplitter.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxTabControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxTextBox.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxTimeEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxTitleIndex.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxTreeList.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxTreeView.skin" />
+    <Content Include="App_Themes\Office2010Silver\ASPxUploadControl.skin" />
+    <Content Include="App_Themes\Office2010Silver\MonthEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\RecurrenceTypeEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\ReportToolbar.skin" />
+    <Content Include="App_Themes\Office2010Silver\ReportViewer.skin" />
+    <Content Include="App_Themes\Office2010Silver\WeekDaysEdit.skin" />
+    <Content Include="App_Themes\Office2010Silver\WeekOfMonthEdit.skin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Codes\Models\HTLBI2012.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>HTLBI2012.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Codes\Models\HTLBI2012DW.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>HTLBI2012DW.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Shared\FullMaster.Master" />
+    <Content Include="Shared\GeneralMaster.Master" />
+    <Content Include="Shared\DashboardMaster.master" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Codes\Models\HTLBI2012.dbml.layout">
+      <DependentUpon>HTLBI2012.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Codes\Models\HTLBI2012DW.dbml.layout">
+      <DependentUpon>HTLBI2012DW.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2075</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

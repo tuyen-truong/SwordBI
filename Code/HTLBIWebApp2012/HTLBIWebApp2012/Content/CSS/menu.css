@@ -1,0 +1,65 @@
+#nav {
+	width:600px;
+	height:54px;
+	margin:0;
+	padding:0;
+}
+
+#nav * {
+	text-align:center;
+	color:#fff;
+	font-weight:bold;
+	text-decoration:none;
+	font-family:arial, helvetica, sans-serif;
+	font-size:9pt;
+}
+
+#nav ul, #nav ul li {
+	margin:0;
+	padding:0;
+	list-tyle-type:none;
+}
+#nav ul li { display:inline; }
+
+ul#tabBar { float:left; }
+
+ul#tabBar li a {
+	display:block;
+	float:left;
+	width:90px;
+	height:29px;
+	line-height:39px;
+	background:url(../Images/tab_bg.jpg) 0 10px no-repeat;
+	border-left:4px solid #fff;
+	overflow:hidden; /* fixes IE display bug */
+}
+
+ul#tabBar li a:hover {
+	line-height:29px;
+	background:url(../Images/tab_bg.jpg) top left no-repeat;
+}
+
+#subNav ul { display:none; }
+
+#subNav {
+	clear:both;
+	height:25px;
+	background:url(../Images/subnav_bg.jpg) top left repeat-x;
+	padding-left:100px;
+}
+
+#subNav ul {
+	float:left;
+	background:url(../Images/subnav_separator.jpg) top left no-repeat;
+}
+
+#subNav ul li a {
+	display:block;
+	float:left;
+	width:150px;
+	text-align:center;
+	line-height:25px;
+	background:url(../Images/subnav_separator.jpg) top right no-repeat;
+}
+
+#subNav li a:hover { color:#cde7ff; }
