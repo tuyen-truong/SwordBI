@@ -336,6 +336,8 @@
     <Content Include="Images\Other\trend_ok.png" />
     <Content Include="Scripts\JQuery\autoNumeric-1.7.4.js" />
     <Content Include="Scripts\JQuery\jquery-1.7.2.min.js" />
+    <Content Include="Scripts\JQuery\jquery.numberformatter-1.2.3.min.js" />
+    <Content Include="Scripts\JQuery\jshashtable-2.1.js" />
     <Content Include="Shared\About.aspx" />
     <Content Include="Account\ChangePassword.aspx" />
     <Content Include="Account\ChangePasswordSuccess.aspx" />
@@ -419,7 +421,6 @@
     <Content Include="Scripts\JQuery\jquery-1.4.2.min.js" />
     <Content Include="Scripts\JQuery\jquery-ui-1.8.2.custom.min.js" />
     <Content Include="Scripts\JQuery\jquery.maskedinput-1.2.2.min.js" />
-    <Content Include="Scripts\JQuery\jquery.numberformatter-1.2.2.min.js" />
     <Content Include="Scripts\JQuery\Json-ende.js" />
     <Content Include="Scripts\JQuery\themes\base\images\ui-anim_basic_16x16.gif" />
     <Content Include="Scripts\JQuery\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -885,6 +886,9 @@
       <DependentUpon>wcPropGrid.ascx</DependentUpon>
     </Compile>
     <Compile Include="Codes\BLL\MySys.cs" />
+    <Compile Include="Codes\Models\HTLBI2012.cs">
+      <DependentUpon>HTLBI2012.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Codes\Utils\ControlBaseClasses.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

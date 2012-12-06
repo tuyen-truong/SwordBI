@@ -35,6 +35,7 @@ namespace HTLBIWebApp2012.App.Setting
         #endregion
 
         #region Members
+        /*
         private DashboardDefine Get_DefineInfo()
         {
             try
@@ -102,6 +103,7 @@ namespace HTLBIWebApp2012.App.Setting
             this.ctrl_DashboardFilters.Controls.Clear();
             this.CtrlDashboardFilterIDs.Clear();
         }
+        */
         #endregion        
 
         #region Events
@@ -112,107 +114,6 @@ namespace HTLBIWebApp2012.App.Setting
                 // Load Data WareHouse
                 Helpers.SetDataSource(this.cboDataDW, MyBI.Me.GetDW(), "Value", "Text");
             }
-
-            // Load template..
-            Helpers.SetDataSource(this.cboTemplate, DashboardDefine.Get_Template(), "Code", "Name", this.cboTemplate.Value);
-            
-            // Load Portlet by WHCode.
-            var ds = MyBI.Me.Get_Widget(this.WHCode).ToList();
-            Helpers.SetDataSource(this.lbxAvailablePortlet, ds, "Code", "Name");
-
-            //Tạo lại control....
-            if (this.IsPostBack)
-                this.Add_FilterControl(true);
-        }
-        protected void btn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var btn = sender as ASPxButton;
-                if (btn.ID == this.btnIn.ID)
-                {
-                    var item = this.lbxAvailablePortlet.SelectedItem;
-                    if (item == null) return;
-                    var portletCode = Lib.NTE(item.Value);
-                    var info = new COMCodeNameObj(portletCode, item.Text);
-                    var sel_UsingPortlet = MySession.DashboardDefine_UsingPortlet;
-                    if (sel_UsingPortlet.ToArray().Exists(p => p.GetStr("Code") == info.Code)) return;
-                    sel_UsingPortlet.Add(info);
-                    Helpers.SetDataSource(this.lbxUsingPortlet, sel_UsingPortlet, "Code", "Name");
-                }
-                else if (btn.ID == this.btnOut.ID)
-                {
-                    var itemRemove = lbxUsingPortlet.SelectedItem;
-                    this.lbxUsingPortlet.Items.Remove(itemRemove);
-                    var objRemove = MySession.DashboardDefine_UsingPortlet.ToArray()
-                        .FirstOrDefault(p => p.GetStr("Code") == Lib.NTE(itemRemove.Value));
-                    MySession.DashboardDefine_UsingPortlet.Remove(objRemove);
-                }
-                else if (btn.ID == this.btnView.ID)
-                { 
-                    
-                }
-                else if (btn.ID == this.btnNew.ID)
-                {
-                    this.Reset_Info();
-                }
-                else if (btn.ID == this.btnEdit.ID)
-                {
-                    this.Reset_Info();
-                    if (this.lbxDashboard.SelectedItem == null) return;
-                    var dbrdCode = Lib.NTE(this.lbxDashboard.SelectedItem.Value);
-                    MySession.DashboardDefine_CurEditing = dbrdCode;
-                    var obj = MyBI.Me.Get_DashboardBy(dbrdCode);
-                    var objDbrd = obj.JsonObj;                    
-                    this.txtDisplayName.Text = objDbrd.DisplayName;
-                    this.cboTemplate.Value = objDbrd.Template;
-                    this.chkIsDefault.Checked = obj.IsDefault;
-                    var usingPortlets = objDbrd.Get_UsingPortlets();
-                    MySession.DashboardDefine_UsingPortlet.AddRange(usingPortlets);
-                    Helpers.SetDataSource(this.lbxUsingPortlet, usingPortlets, "Code", "Name");
-                    // Add Filter.
-                    foreach (var item in objDbrd.Filters)
-                    {
-                        var ctrl = this.Add_FilterControl(false);
-                        ctrl.Set_FilterInfo(item);
-                    }
-                }
-                else if (btn.ID == this.btnSave.ID)
-                {
-                    var objSett = this.Get_DefineInfo();
-                    var actionName = Lib.IsNOE(MySession.DashboardDefine_CurEditing) ? "Add new " : "Update ";
-                    try
-                    {
-                        // Gọi hàm save
-                        var objDbrd = new lsttbl_Dashboard()
-                        {
-                            Code = Lib.IfNOE(MySession.DashboardDefine_CurEditing, string.Format("dbrd_{0}_{1}", this.WHCode, DateTime.Now.ToString("yyyyMMddHHmmss"))),
-                            Name = this.txtDisplayName.Text,
-                            WHCode = this.WHCode,
-                            JsonStr = objSett.ToJsonStr(),
-                            IsDefault = this.chkIsDefault.Checked
-                        };
-                        MyBI.Me.Save_Dashboard(objDbrd);
-                        Helpers.SetDataSource(this.lbxDashboard, MyBI.Me.Get_Dashboard(this.WHCode).ToList(), "Code", "Name");
-                        MySession.DashboardDefine_CurEditing = objDbrd.Code;
-                    }
-                    catch { this.Set_SaveMsgText(string.Format("{0} failed!", actionName), true); }
-                    this.Set_SaveMsgText(string.Format("{0} success!", actionName), false);
-                }
-                else if (btn.ID == this.btnAddDashboardFilter.ID)
-                    this.Add_FilterControl(false);                
-            }
-            catch { }
-        }
-        protected void FilterCtrl_Remove(object sender, EventArgs args)
-        {
-            try
-            {
-                var ctrlID = (sender.GetVal("Parent") as Control).ID;
-                this.CtrlDashboardFilterIDs.RemoveAll(p => p.Split(',', StringSplitOptions.RemoveEmptyEntries).First() == ctrlID);
-                this.ctrl_DashboardFilters.Controls.RemoveAll(p => p.ID == ctrlID);
-            }
-            catch { }
         }
         protected void cbp_Callback(object sender, DevExpress.Web.ASPxClasses.CallbackEventArgsBase e)
         {
@@ -225,7 +126,8 @@ namespace HTLBIWebApp2012.App.Setting
         {
             this.WHCode = Lib.NTE(this.cboDataDW.Value);
             // Load Available dashboard...
-            Helpers.SetDataSource(this.lbxDashboard, MyBI.Me.Get_Dashboard(this.WHCode).ToList(), "Code", "Name");
+            lstDashboard.DataSource = MyBI.Me.Get_Dashboard(WHCode);
+            lstDashboard.DataBind();
         }
     }
 }
