@@ -99,4 +99,5 @@
         </Columns>
         <SettingsPager Mode="ShowAllRecords" />
     </dx:ASPxGridView>
+    <dx1:ASPxListBox runat="server" ID="lstBox" />
 </div>

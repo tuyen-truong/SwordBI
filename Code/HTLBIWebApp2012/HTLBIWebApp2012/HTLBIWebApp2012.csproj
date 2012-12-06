@@ -107,6 +107,7 @@
     <Content Include="App\Jwc\jwcDateEdit.ascx" />
     <Content Include="App\Report\Report.aspx" />
     <Content Include="App\Setting\AnalysisSetting.aspx" />
+    <Content Include="App\Setting\DashboardEdit.aspx" />
     <Content Include="App\Setting\DashboardSetting.aspx" />
     <Content Include="App\Setting\PortletSetting.aspx" />
     <Content Include="App\Setting\ReportSetting.aspx" />
@@ -653,6 +654,13 @@
     </Compile>
     <Compile Include="App\Setting\AnalysisSetting.aspx.designer.cs">
       <DependentUpon>AnalysisSetting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\DashboardEdit.aspx.cs">
+      <DependentUpon>DashboardEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\DashboardEdit.aspx.designer.cs">
+      <DependentUpon>DashboardEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="App\Setting\DashboardSetting.aspx.cs">
       <DependentUpon>DashboardSetting.aspx</DependentUpon>

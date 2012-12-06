@@ -5,23 +5,43 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using HTLBIWebApp2012.Codes.BLL;
+using CECOM;
 
 namespace HTLBIWebApp2012.App.Setting
 {
     public partial class DashboardSetting : PageBase
     {
-        protected override void OnLoad(EventArgs e)
+        protected string WHCode { get; set; }
+
+        protected void Page_Load(object sender, EventArgs e)
         {
-            base.OnLoad(e);
-            try
+            Page.Title = "Dashboard List";
+            if (!IsPostBack)
             {
-                var whCode = this.Get_Param("whcode");
-                if (!string.IsNullOrEmpty(whCode))
-                {
-                    this.wcDashboardSetting1.WHCode = whCode;
-                }
+                // Load Data WareHouse
+                Helpers.SetDataSource(cboDataDW, MyBI.Me.GetDW(), "Value", "Text");
+
+                WHCode = Get_Param(PageArgs.WHCode);
+                cboDataDW.Value = WHCode;
+                GetDashboardList(WHCode);
             }
-            catch { }
         }
+
+        protected void cboDataDW_ValueChanged(object sender, EventArgs e)
+        {
+            WHCode = Lib.NTE(cboDataDW.Value);
+            GetDashboardList(WHCode);
+        }
+
+        /// <summary>
+        /// Load available dashboard by specified WHCode.
+        /// Then output to lstDashboard
+        /// </summary>
+        /// <param name="WHCode">Warehouse Code</param>
+        private void GetDashboardList(string WHCode)
+        {
+            lstDashboard.DataSource = MyBI.Me.Get_Dashboard(WHCode);
+            lstDashboard.DataBind();
+        }     
     }
 }

@@ -22,12 +22,57 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// wcDashboardSetting1 control.
+        /// DataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HTLBIWebApp2012.App.Setting.wcDashboardSetting wcDashboardSetting1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink DataSource;
+        
+        /// <summary>
+        /// ASPxHyperLink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink ASPxHyperLink1;
+        
+        /// <summary>
+        /// ASPxHyperLink2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink ASPxHyperLink2;
+        
+        /// <summary>
+        /// cboDataDW control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cboDataDW;
+        
+        /// <summary>
+        /// lblLstTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLstTitle;
+        
+        /// <summary>
+        /// lstDashboard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxGridView.ASPxGridView lstDashboard;
     }
 }

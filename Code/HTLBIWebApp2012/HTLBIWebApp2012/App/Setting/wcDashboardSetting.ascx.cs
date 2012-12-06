@@ -128,6 +128,14 @@ namespace HTLBIWebApp2012.App.Setting
             // Load Available dashboard...
             lstDashboard.DataSource = MyBI.Me.Get_Dashboard(WHCode);
             lstDashboard.DataBind();
+
+            // Load availavle dashboard
+            /*
+            lstBox.DataSource = MyBI.Me.Get_Widget(WHCode);
+            lstBox.DataBind();
+            */
+            var ds = MyBI.Me.Get_Widget(WHCode).ToList();
+            Helpers.SetDataSource(this.lstBox, ds, "Code", "Name");
         }
     }
 }

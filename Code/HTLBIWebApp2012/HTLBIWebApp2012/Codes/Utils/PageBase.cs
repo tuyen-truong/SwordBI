@@ -11,6 +11,11 @@ namespace HTLBIWebApp2012
     {
         public const string SESSION_KEY_LANGUAGE = "CURRENT_LANGUAGE";
 
+        public static class PageArgs
+        {
+            public const string WHCode = "whcode";
+        }
+
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
