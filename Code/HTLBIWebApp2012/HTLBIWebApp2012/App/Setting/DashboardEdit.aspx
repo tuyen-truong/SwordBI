@@ -4,28 +4,106 @@
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="margin: 5px">
-        <asp:Label runat="server" Text="Display Name"></asp:Label></div>
+<style type="text/css">
+table.layout-style
+{
+    border-spacing: 5px 20px;
+}
+</style>
+    <table style="padding: 10px;" cellspacing="10">
+        <tr>
+            <td>Display Name</td>
+            <td><dx:ASPxTextBox ID="txtDashboardName" runat="server" ClientInstanceName="txtDashboardName" Width="250px"></dx:ASPxTextBox></td>
+        </tr>
+    </table>
     <fieldset style="margin: 5px">
         <legend>Layout Style</legend>
-        <div style="margin: 5px">
-            <span style="float: left; width: 150px;">Two Pane</span>
-            <div style="float: left;">
-                fdfd</div>
-        </div>
-        <div style="clear:both; height: 1px;"></div>
-        <div style="margin: 5px;">
-            <span style="float:left; width:150px;">Three Pane</span>
-            <div>fdfdf</div>
-        </div>
-        <div style="clear:both; height: 1px;"></div>
-        <div style="margin: 5px">
-            <span style="float:left; width:150px;">Four Pane</span>
-            <div>fdfdf</div>
-        </div>
+        <table class="layout-style">
+            <tr>
+                <td style="vertical-align: middle; width: 150px">
+                    Two Pane
+                </td>
+                <td valign="middle">
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_1" />
+                </td>
+                <td valign="middle">
+                    <asp:Image ID="Image6" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                        Width="96" Height="96" />
+                </td>
+                <td valign="middle">
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_2" />
+                </td>
+                <td valign="middle">
+                    <asp:Image ID="Image1" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                        Width="96" Height="96" />
+                </td>
+                <td valign="middle">
+                </td>
+                <td valign="middle">
+                </td>
+                <td valign="middle">
+                </td>
+                <td valign="middle">
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: middle; width: 150px">Three Pane</td>
+                <td valign="middle">
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_1" />
+                </td>
+                <td valign="middle">
+                    <asp:Image ID="Image2" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                        Width="96" Height="96" />
+                </td>
+                <td valign="middle">
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton1" />
+                </td>
+                <td valign="middle">
+                    <asp:Image ID="Image3" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                        Width="96" Height="96" />
+                </td>
+                <td valign="middle">
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton2" />
+                </td>
+                <td valign="middle">
+                    <asp:Image ID="Image4" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                        Width="96" Height="96" />
+                </td>
+                <td valign="middle">
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton3" />
+                </td>
+                <td valign="middle">
+                    <asp:Image ID="Image5" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                        Width="96" Height="96" />
+                </td>
+            </tr>
+            <tr style="padding-top: 50px;">
+                <td style="vertical-align: middle; width: 150px;">Four Pane</td>
+                <td valign="middle">
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton4" />
+                </td>
+                <td valign="middle">
+                    <asp:Image ID="Image7" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                        Width="96" Height="96" />
+                </td>
+                <td valign="middle">
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton5" />
+                </td>
+                <td valign="middle">
+                    <asp:Image ID="Image8" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                        Width="96" Height="96" />
+                </td>
+                <td valign="middle">
+                </td>
+                <td valign="middle">
+                </td>
+                <td valign="middle">
+                </td>
+                <td valign="middle">
+                </td>
+            </tr>
+        </table>
     </fieldset>
-    <br />
-    <br />
     <fieldset style="margin: 5px">
         <legend>Filters</legend>
         <dx:ASPxButton ID="btnAddDashboardFilter" runat="server" Text="Add Filter">

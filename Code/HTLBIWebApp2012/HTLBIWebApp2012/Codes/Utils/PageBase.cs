@@ -14,6 +14,7 @@ namespace HTLBIWebApp2012
         public static class PageArgs
         {
             public const string WHCode = "whcode";
+            public const string DashboardId = "dbid";
         }
 
         protected override void OnInit(EventArgs e)

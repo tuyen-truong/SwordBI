@@ -45,6 +45,9 @@
         <dx:ASPxGridView ID="lstDashboard" runat="server" AutoGenerateColumns="false" Width="80%">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="0" Width="50%">
+                    <DataItemTemplate>
+                        <asp:HyperLink runat="server" Text='<%# Eval("Name") %>' NavigateUrl='<%# Eval("ID", "~/App/Setting/DashboardEdit.aspx?dbid={0}") %>' ID="ctl"></asp:HyperLink>
+                    </DataItemTemplate>
                     <Settings AllowDragDrop="False" />
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn Caption="Template" VisibleIndex="1" Width="40%">
