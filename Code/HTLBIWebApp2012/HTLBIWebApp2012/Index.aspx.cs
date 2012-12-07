@@ -19,6 +19,14 @@ namespace HTLBIWebApp2012
         {
             try
             {
+                System.Data.DataTable dt = new System.Data.DataTable("TEST");
+                dt.Columns.Add("Name", Type.GetType("System.String"));
+                dt.Columns.Add("Template", Type.GetType("System.String"));
+                dt.Columns.Add("Default", Type.GetType("System.Boolean"));
+                dt.Rows.Add(new object[] { "Name1", "Template1", true });
+                dt.Rows.Add(new object[] { "Name2", "Template2", false });
+                grid.DataSource = dt;
+                grid.DataBind();
                 //var mnuObj = MySys.Me.Get_MenuRoot().FirstOrDefault(p => p.IsDefault);
                 //var urlDefault = string.Format("/App/{0}/{0}.aspx?mmnucode={1}", mnuObj.Url, mnuObj.Code);
                 //Response.Redirect(urlDefault);
