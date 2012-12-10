@@ -42,6 +42,13 @@ namespace HTLBIWebApp2012.App.Setting
         {
             lstDashboard.DataSource = MyBI.Me.Get_Dashboard(WHCode);
             lstDashboard.DataBind();
+            List<Codes.Models.lsttbl_Dashboard> dashboards = MyBI.Me.Get_Dashboard(WHCode).ToList();
+            //dashboards.Where(
+            foreach (Codes.Models.lsttbl_Dashboard tbl in dashboards)
+            {
+                //tbl.JsonObj.
+
+            }
         }     
     }
 }

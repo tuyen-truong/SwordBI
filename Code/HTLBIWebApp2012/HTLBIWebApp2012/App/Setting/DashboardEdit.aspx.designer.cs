@@ -13,6 +13,15 @@ namespace HTLBIWebApp2012.App.Setting {
     public partial class DashboardEdit {
         
         /// <summary>
+        /// ScriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager;
+        
+        /// <summary>
         /// txtDashboardName control.
         /// </summary>
         /// <remarks>
@@ -76,13 +85,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.Image Image2;
         
         /// <summary>
-        /// RadioButton1 control.
+        /// ThreePane_2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton1;
+        protected global::System.Web.UI.WebControls.RadioButton ThreePane_2;
         
         /// <summary>
         /// Image3 control.
@@ -94,13 +103,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.Image Image3;
         
         /// <summary>
-        /// RadioButton2 control.
+        /// ThreePane_3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton2;
+        protected global::System.Web.UI.WebControls.RadioButton ThreePane_3;
         
         /// <summary>
         /// Image4 control.
@@ -112,13 +121,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.Image Image4;
         
         /// <summary>
-        /// RadioButton3 control.
+        /// ThreePane_4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton3;
+        protected global::System.Web.UI.WebControls.RadioButton ThreePane_4;
         
         /// <summary>
         /// Image5 control.
@@ -130,13 +139,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.Image Image5;
         
         /// <summary>
-        /// RadioButton4 control.
+        /// FourPane_1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton4;
+        protected global::System.Web.UI.WebControls.RadioButton FourPane_1;
         
         /// <summary>
         /// Image7 control.
@@ -148,22 +157,22 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.Image Image7;
         
         /// <summary>
-        /// RadioButton5 control.
+        /// UpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton RadioButton5;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel;
         
         /// <summary>
-        /// Image8 control.
+        /// ctrl_DashboardFilters control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image8;
+        protected global::System.Web.UI.WebControls.Panel ctrl_DashboardFilters;
         
         /// <summary>
         /// btnAddDashboardFilter control.
@@ -173,5 +182,14 @@ namespace HTLBIWebApp2012.App.Setting {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btnAddDashboardFilter;
+        
+        /// <summary>
+        /// UpdateProcess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProcess;
     }
 }

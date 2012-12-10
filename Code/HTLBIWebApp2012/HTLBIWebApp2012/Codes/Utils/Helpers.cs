@@ -23,7 +23,7 @@ using System.Web.Security;
 
 namespace HTLBIWebApp2012
 {
-    public class Helpers
+    public static class Helpers
     {
         #region Declares
         private const string sitemapFileName = "BIMenu.sitemap";
@@ -668,6 +668,23 @@ namespace HTLBIWebApp2012
                     return pText_EN;
             }
             return pText_EN;
+        }
+
+        public static Control FindControlRecur(this Control thisControl, string ctlID)
+        {
+            if (thisControl.ID == ctlID)
+            {
+                return thisControl;
+            }
+            foreach (Control ctl in thisControl.Controls)
+            {
+                Control foundCtl = Helpers.FindControlRecur(ctl, ctlID);
+                if (foundCtl != null)
+                {
+                    return foundCtl;
+                }
+            }
+            return null;
         }
     }
 }

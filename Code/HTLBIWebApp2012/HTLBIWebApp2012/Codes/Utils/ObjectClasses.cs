@@ -949,12 +949,21 @@ namespace HTLBIWebApp2012
         {
             return new List<COMCodeNameObj>()
             {
+                /*
                 new COMCodeNameObj( "TwoPortlet_Flow", "Two Portlet Flow" ),
                 new COMCodeNameObj( "TwoPortlet_Grid", "Two Portlet Grid" ),
                 new COMCodeNameObj( "ThreePortlet_Flow", "Three Portlet Flow" ),
                 new COMCodeNameObj( "ThreePortlet_Grid", "Three Portlet Grid" ),
                 new COMCodeNameObj( "FourPortlet_Flow", "Four Portlet Flow" ),
                 new COMCodeNameObj( "FourPortlet_Grid", "Four Portlet Grid" )
+                */
+                new COMCodeNameObj("TwoPane_1", ""),
+                new COMCodeNameObj("TwoPane_2", ""),
+                new COMCodeNameObj("ThreePane_1", ""),
+                new COMCodeNameObj("ThreePane_2", ""),
+                new COMCodeNameObj("ThreePane_3", ""),
+                new COMCodeNameObj("ThreePane_4", ""),
+                new COMCodeNameObj("FourPane_1", ""),
             };
         }
     }

@@ -4,6 +4,7 @@
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManager ID="ScriptManager" runat="server" />
 <style type="text/css">
 table.layout-style
 {
@@ -56,21 +57,21 @@ table.layout-style
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton1" />
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_2" />
                 </td>
                 <td valign="middle">
                     <asp:Image ID="Image3" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton2" />
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_3" />
                 </td>
                 <td valign="middle">
                     <asp:Image ID="Image4" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton3" />
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_4" />
                 </td>
                 <td valign="middle">
                     <asp:Image ID="Image5" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
@@ -80,18 +81,15 @@ table.layout-style
             <tr style="padding-top: 50px;">
                 <td style="vertical-align: middle; width: 150px;">Four Pane</td>
                 <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton4" />
+                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="FourPane_1" />
                 </td>
                 <td valign="middle">
                     <asp:Image ID="Image7" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="RadioButton5" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image8" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
-                        Width="96" Height="96" />
                 </td>
                 <td valign="middle">
                 </td>
@@ -106,7 +104,21 @@ table.layout-style
     </fieldset>
     <fieldset style="margin: 5px">
         <legend>Filters</legend>
-        <dx:ASPxButton ID="btnAddDashboardFilter" runat="server" Text="Add Filter">
+        <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <asp:Panel runat="server" ID="ctrl_DashboardFilters"></asp:Panel>
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="btnAddDashboardFilter" />
+            </Triggers>
+        </asp:UpdatePanel>
+        <dx:ASPxButton ID="btnAddDashboardFilter" runat="server" Text="Add Filter" 
+            onclick="btnAddDashboardFilter_Click">
         </dx:ASPxButton>
+        <asp:UpdateProgress ID="UpdateProcess" AssociatedUpdatePanelID="UpdatePanel" DisplayAfter="0" DynamicLayout="false" runat="server">
+            <ProgressTemplate>
+                <asp:Label runat="server" ID="lbUpdateProcess" Text="..."></asp:Label>
+            </ProgressTemplate>
+        </asp:UpdateProgress>
     </fieldset>
 </asp:Content>
