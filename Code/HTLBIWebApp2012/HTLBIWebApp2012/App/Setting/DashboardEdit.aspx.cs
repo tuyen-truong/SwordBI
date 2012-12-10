@@ -8,6 +8,7 @@ using HTLBIWebApp2012.Codes.Models;
 using HTLBIWebApp2012.Codes.BLL;
 using DevExpress.Web.ASPxEditors;
 using CECOM;
+using System.Collections;
 
 namespace HTLBIWebApp2012.App.Setting
 {
@@ -33,22 +34,44 @@ namespace HTLBIWebApp2012.App.Setting
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Page.Title = "Edit Dashboard";
             DashboardId = Get_Param(PageArgs.DashboardId);
             if (string.IsNullOrEmpty(DashboardId))
             {
                 // TODO: New Dashboard
+                Page.Title = "New Dashboard";
             }
             else
             {
+                Page.Title = "Edit Dashboard";
                 Dashboard = MyBI.Me.Get_Dashboard().FirstOrDefault(db => db.ID == Int32.Parse(DashboardId));
-                txtDashboardName.Text = Dashboard.JsonObj.DisplayName;
                 WHCode = Dashboard.WHCode;
-
-                RadioButton radio = Helpers.FindControlRecur(Page, Dashboard.JsonObj.Template) as RadioButton;
-                if (radio != null)
+                if (!IsPostBack)
                 {
-                    radio.Checked = true;
+                    txtDashboardName.Text = Dashboard.JsonObj.DisplayName;
+                    // Layout style
+                    RadioButton radio = Helpers.FindControlRecur(Page, Dashboard.JsonObj.Template) as RadioButton;
+                    if (radio != null)
+                    {
+                        radio.Checked = true;
+                    }
+                    // Available portlets
+                    IQueryable<lsttbl_Widget> availablePortlets = MyBI.Me.Get_Widget(WHCode);
+                    Helpers.SetDataSource(lbxAvailablePortlet, availablePortlets, "Code", "Name");
+                    // Using portlets
+                    List<COMCodeNameObj> usingPortlets = Dashboard.JsonObj.Get_UsingPortlets();
+                    MySession.DashboardDefine_UsingPortlet.Clear();
+                    MySession.DashboardDefine_UsingPortlet.AddRange(usingPortlets);
+                    Helpers.SetDataSource(lbxUsingPortlet, usingPortlets, "Code", "Name");
+                    // Add Filter.
+                    List<InteractionFilter> filters = Dashboard.JsonObj.Filters;
+                    foreach (var item in filters)
+                    {
+                        var ctrl = this.Add_FilterControl(false);
+                        ctrl.Set_FilterInfo(item);
+                    }
+                    MySession.DashboardDefine_CurEditing = Dashboard.Code;
+                    // Default ?
+                    chkDefault.Checked = Dashboard.IsDefault;
                 }
             }
             if (IsPostBack)
@@ -67,6 +90,110 @@ namespace HTLBIWebApp2012.App.Setting
             string ctrlID = (sender.GetVal("Parent") as Control).ID;
             CtrlDashboardFilterIDs.RemoveAll(p => p.Split(',', StringSplitOptions.RemoveEmptyEntries).First() == ctrlID);
             ctrl_DashboardFilters.Controls.RemoveAll(p => p.ID == ctrlID);
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            DashboardDefine dbDefine = new DashboardDefine()
+            {
+                DisplayName = txtDashboardName.Text
+            };
+            // detect template
+            if (FourPane_1.Checked)
+            {
+                dbDefine.Template = "FourPane_1";
+            }
+            else if (TwoPane_2.Checked)
+            {
+                dbDefine.Template = "TwoPane_1";
+            }
+            else if (ThreePane_1.Checked)
+            {
+                dbDefine.Template = "ThreePane_1";
+            }
+            else if (ThreePane_2.Checked)
+            {
+                dbDefine.Template = "ThreePane_2";
+            }
+            else if (ThreePane_3.Checked)
+            {
+                dbDefine.Template = "ThreePane_3";
+            }
+            else if (ThreePane_4.Checked)
+            {
+                dbDefine.Template = "ThreePane_4";
+            }
+            else
+            {
+                // default case
+                dbDefine.Template = "TwoPane_1";
+            }
+            // filters
+            dbDefine.Filters = this.ctrl_DashboardFilters.Controls.OfType<wcInteractionFilter>()
+                    .Select(p => p.Get_FilterInfo()).ToList();
+            // portlets which are used
+            dbDefine.UsingPortlets = MySession.DashboardDefine_UsingPortlet
+                    .OfType<COMCodeNameObj>().Select(p => p.Code).ToList();
+
+            lsttbl_Dashboard db = new lsttbl_Dashboard()
+            {
+                Code = Lib.IfNOE(MySession.DashboardDefine_CurEditing, String.Format("dbrd_{0}_{1}", WHCode, DateTime.Now.ToString("yyyyMMddHHmmss"))),
+                Name = txtDashboardName.Text,
+                WHCode = this.WHCode,
+                JsonStr = dbDefine.ToJsonStr(),
+                IsDefault = chkDefault.Checked
+            };
+            MyBI.Me.Save_Dashboard(db);
+            // clean session data
+            MySession.DashboardDefine_CurEditing = null;
+            MySession.DashboardDefine_UsingPortlet.Clear();
+            Response.Redirect("DashboardSetting.aspx?whcode=" + WHCode);
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DashboardSetting.aspx?whcode=" + WHCode);
+        }
+
+        protected void BtnAddRemovePortlet_Click(object sender, EventArgs e)
+        {
+            ASPxButton btn = sender as ASPxButton;
+            if (btn.ID == btnPortletAdd.ID)
+            {
+                ListEditItem selectedItem =lbxAvailablePortlet.SelectedItem;
+                if (selectedItem == null)
+                {
+                    return;
+                }
+                string portletCode = Lib.NTE(selectedItem.Value);
+                COMCodeNameObj portletInfo = new COMCodeNameObj()
+                {
+                    Code = portletCode,
+                    Name = selectedItem.Text
+                };
+                ArrayList usingPortlets = MySession.DashboardDefine_UsingPortlet;
+                if (!usingPortlets.ToArray().Exists(pl => pl.GetStr("Code") == portletInfo.Code))
+                {
+                    // if not exist
+                    usingPortlets.Add(portletInfo);
+                    Helpers.SetDataSource(lbxUsingPortlet, usingPortlets, "Code", "Name");
+                }
+            }
+            else
+            {
+                // remove portlet
+                ListEditItem removeItem = lbxUsingPortlet.SelectedItem;
+                if (removeItem == null)
+                {
+                    return;
+                }
+                // remove item from listbox
+                lbxUsingPortlet.Items.Remove(removeItem);
+                // remove item from saved session
+                ArrayList usingPortlets = MySession.DashboardDefine_UsingPortlet;
+                COMCodeNameObj removeObj = usingPortlets.ToArray().FirstOrDefault(pl => pl.GetStr("Code") == Lib.NTE(removeItem.Value)) as COMCodeNameObj;
+                usingPortlets.Remove(removeObj);
+            }
         }
 
         private wcInteractionFilter Add_FilterControl(bool isReCreate)
@@ -96,7 +223,5 @@ namespace HTLBIWebApp2012.App.Setting
             CtrlDashboardFilterIDs.Add(ctrl.ID);
             return ctrl;
         }
-
-
     }
 }

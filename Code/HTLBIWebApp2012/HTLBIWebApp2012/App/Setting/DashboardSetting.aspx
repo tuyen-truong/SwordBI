@@ -18,7 +18,7 @@
             list-style-type: none;
         }
     </style>
-    <div id="divNavigation">
+    <div id="divNavigation" style="margin-top: 10px; margin-left: 10px">
         <ul class="menu">
             <li>
                 <dx:ASPxHyperLink runat="server" ID="DataSource" ClientInstanceName="DataSource"
@@ -36,11 +36,17 @@
             </li>
         </ul>
     </div>
-    <div id="divWarehouseFilter" style="margin-top: 10px;">
-        <dx:ASPxComboBox ID="cboDataDW" runat="server" AutoPostBack="true" OnValueChanged="cboDataDW_ValueChanged">
-        </dx:ASPxComboBox>
-    </div>
-    <div id="divDashboardList" style="margin-top: 5px">
+    <br />
+    <table style="margin-left: 10px">
+        <tr>
+            <td>Data Warehouse</td>
+            <td><dx:ASPxComboBox ID="cboDataDW" runat="server" AutoPostBack="true" OnValueChanged="cboDataDW_ValueChanged">
+                </dx:ASPxComboBox>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <div id="divDashboardList" style="margin-left: 10px">
         <asp:Label runat="server" ID="lblLstTitle" Text="Dashboard List" Font-Bold="true"></asp:Label>
         <dx:ASPxGridView ID="lstDashboard" runat="server" AutoGenerateColumns="false" Width="80%">
             <Columns>
