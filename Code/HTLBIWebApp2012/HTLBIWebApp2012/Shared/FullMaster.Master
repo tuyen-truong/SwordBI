@@ -13,16 +13,32 @@
     <link href="../Content/CSS/css_002.css" rel="stylesheet" type="text/css" />
     <link href="../Scripts/JQuery/themes/cupertino/jquery-ui-1.8.2.custom.css" rel="stylesheet" type="text/css" />
 
-    <script src="../../Scripts/JQuery/jquery-1.7.2.min.js" type="text/javascript"></script>
-    <script src="../../Scripts/JQuery/autoNumeric-1.7.4.js" type="text/javascript"></script>    
-    <script src="../../Scripts/JQuery/jshashtable-2.1.js" type="text/javascript"></script>
-    <script src="../../Scripts/JQuery/jquery.numberformatter-1.2.3.min.js" type="text/javascript"></script>
-    <script src="../../Scripts/JQuery/jquery.maskedinput-1.2.2.min.js" type="text/javascript"></script>
-    <script src="../../Scripts/JQuery/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
-    <script src="../../Scripts/JQuery/Json-ende.js" type="text/javascript"></script>    
-    <script src="../../Scripts/common.js" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="headContent" runat="server">
     </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+        var App = {
+            path: location.protocol + '//' + location.host,
+            getPath: function () {
+                return this.path;
+            },
+            loadLib: function () {
+                var libs = [];
+                libs.push("/Scripts/JQuery/jquery-1.7.2.min.js");
+                libs.push("/Scripts/JQuery/autoNumeric-1.7.4.js");
+                libs.push("/Scripts/JQuery/jshashtable-2.1.js");
+                libs.push("/Scripts/JQuery/jquery.numberformatter-1.2.3.min.js");
+                libs.push("/Scripts/JQuery/jquery.maskedinput-1.2.2.min.js");
+                libs.push("/Scripts/JQuery/jquery-ui-1.8.2.custom.min.js");
+                libs.push("/Scripts/JQuery/Json-ende.js");
+                libs.push("/Scripts/common.js");
+                for (var i = 0; i < libs.length; i++) {
+                    var lib_path = this.getPath() + libs[i];
+                    document.write('<script src="' + lib_path + '" type="text/javascript"><\/script>');
+                }
+            }
+        };
+        App.loadLib();
+    </script>
 </head>
 <body>
     <script type="text/javascript" language="javascript">

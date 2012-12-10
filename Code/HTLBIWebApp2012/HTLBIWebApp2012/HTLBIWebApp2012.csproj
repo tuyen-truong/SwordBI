@@ -110,6 +110,8 @@
     <Content Include="App\Setting\DashboardEdit.aspx" />
     <Content Include="App\Setting\DashboardSetting.aspx" />
     <Content Include="App\Setting\PortletSetting.aspx" />
+    <Content Include="App\Setting\Portlet\Edit.aspx" />
+    <Content Include="App\Setting\Portlet\Items.aspx" />
     <Content Include="App\Setting\ReportSetting.aspx" />
     <Content Include="App\Setting\Setting.aspx" />
     <Content Include="App\Setting\wcDashboardSetting.ascx" />
@@ -676,6 +678,20 @@
     <Compile Include="App\Setting\PortletSetting.aspx.designer.cs">
       <DependentUpon>PortletSetting.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App\Setting\Portlet\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\Portlet\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\Portlet\Items.aspx.cs">
+      <DependentUpon>Items.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\Portlet\Items.aspx.designer.cs">
+      <DependentUpon>Items.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App\Setting\ReportSetting.aspx.cs">
       <DependentUpon>ReportSetting.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -894,9 +910,6 @@
       <DependentUpon>wcPropGrid.ascx</DependentUpon>
     </Compile>
     <Compile Include="Codes\BLL\MySys.cs" />
-    <Compile Include="Codes\Models\HTLBI2012.cs">
-      <DependentUpon>HTLBI2012.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Codes\Utils\ControlBaseClasses.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

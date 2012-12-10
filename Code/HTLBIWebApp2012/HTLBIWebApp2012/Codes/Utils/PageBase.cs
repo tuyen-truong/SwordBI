@@ -15,6 +15,7 @@ namespace HTLBIWebApp2012
         {
             public const string WHCode = "whcode";
             public const string DashboardId = "dbid";
+            public const string PortletId = "plid";
         }
 
         protected override void OnInit(EventArgs e)
