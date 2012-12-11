@@ -288,11 +288,25 @@ namespace HTLBIWebApp2012.Codes.BLL
             var db = GlobalVar.DbBI;
             try
             {
-                var objFound = db.lsttbl_Dashboards.FirstOrDefault(p => p.Code == info.Code);
+                System.Data.Linq.Table<lsttbl_Dashboard> dashboards = db.lsttbl_Dashboards;
+                var objFound = dashboards.FirstOrDefault(p => p.Code == info.Code);
                 if (objFound == null)
+                {
                     db.lsttbl_Dashboards.InsertOnSubmit(info);
+                }
                 else
+                {
                     objFound.UpdateOnSubmit(info);
+                }
+                // update IsDefault
+                if (info.IsDefault)
+                {
+                    foreach (lsttbl_Dashboard tbl in dashboards)
+                    {
+                        if (tbl.Code == info.Code) { continue; }
+                        tbl.IsDefault = false;
+                    }
+                }
 
                 db.SubmitChanges();
             }

@@ -16,7 +16,7 @@ namespace HTLBIWebApp2012.Shared.UserControl
         {
             get
             {
-                return Helpers.CombinePath(Helpers.GetVirtualPath_FromCurrentToRoot(Page.Request), "Content/Images");
+                return Helpers.CombinePath(String.Format("{0}{1}",Request.Url.Authority, Request.ApplicationPath), "/Content/Images");
             }
         }
         public string WriteMenuToHTML()
@@ -24,11 +24,12 @@ namespace HTLBIWebApp2012.Shared.UserControl
             // Cần lấy theo UserMenu của user hiện hành...
             var lstMnuObj = MySys.Me.Get_Menu().Where(p => p.ParentCode == null || p.ParentCode == "").ToArray();
             var ret = "";
+            string appPath = Request.ApplicationPath == "/" ? "" : Request.ApplicationPath;
             foreach (var item in lstMnuObj)
             {
                 var li_idname = string.Format("li_{0}", item.Code);
                 var a_id = string.Format("a_{0}", item.Code);
-                var a_href = string.Format("/App/{0}/{0}.aspx?mmnucode={1}", item.Url, item.Code);
+                var a_href = string.Format("{2}/App/{0}/{0}.aspx?mmnucode={1}", item.Url, item.Code, appPath);
                 ret +=
                 "<li name=\"" + li_idname + "\" id=\"" + li_idname + "\">" +
                     "<a id=\"" + a_id + "\" href=\"" + a_href + "\">" +

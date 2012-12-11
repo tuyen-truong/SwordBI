@@ -37,8 +37,23 @@ namespace HTLBIWebApp2012.App.Setting
             DashboardId = Get_Param(PageArgs.DashboardId);
             if (string.IsNullOrEmpty(DashboardId))
             {
-                // TODO: New Dashboard
                 Page.Title = "New Dashboard";
+                WHCode = Get_Param(PageArgs.WHCode);
+                if (!IsPostBack)
+                {
+                    // clean up session data
+                    MySession.DashboardDefine_CurEditing = null;
+                    MySession.DashboardDefine_UsingPortlet.Clear();
+                    // clean up control value
+                    txtDashboardName.Text = "";
+                    TwoPane_1.Checked = true;
+                    // clean up filters
+                    ctrl_DashboardFilters.Controls.Clear();
+                    CtrlDashboardFilterIDs.Clear();
+                    // Available portlets
+                    IQueryable<lsttbl_Widget> availablePortlets = MyBI.Me.Get_Widget(WHCode);
+                    Helpers.SetDataSource(lbxAvailablePortlet, availablePortlets, "Code", "Name");
+                }
             }
             else
             {
@@ -105,7 +120,7 @@ namespace HTLBIWebApp2012.App.Setting
             }
             else if (TwoPane_2.Checked)
             {
-                dbDefine.Template = "TwoPane_1";
+                dbDefine.Template = "TwoPane_2";
             }
             else if (ThreePane_1.Checked)
             {
@@ -194,6 +209,11 @@ namespace HTLBIWebApp2012.App.Setting
                 COMCodeNameObj removeObj = usingPortlets.ToArray().FirstOrDefault(pl => pl.GetStr("Code") == Lib.NTE(removeItem.Value)) as COMCodeNameObj;
                 usingPortlets.Remove(removeObj);
             }
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DashboardSetting.aspx?whcode=" + WHCode);
         }
 
         private wcInteractionFilter Add_FilterControl(bool isReCreate)

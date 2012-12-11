@@ -41,14 +41,14 @@ fieldset.dashboard-layout-style, fieldset.dashboard-filter
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_1" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image6" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                    <asp:Image ID="Image6" ImageUrl="~/Images/TwoPane_1.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_2" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image1" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                    <asp:Image ID="Image1" ImageUrl="~/Images/TwoPane_2.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
@@ -66,28 +66,28 @@ fieldset.dashboard-layout-style, fieldset.dashboard-filter
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_1" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image2" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                    <asp:Image ID="Image2" ImageUrl="~/Images/ThreePane_1.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_2" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image3" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                    <asp:Image ID="Image3" ImageUrl="~/Images/ThreePane_2.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_3" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image4" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                    <asp:Image ID="Image4" ImageUrl="~/Images/ThreePane_3.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_4" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image5" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                    <asp:Image ID="Image5" ImageUrl="~/Images/ThreePane_4.png" runat="server"
                         Width="96" Height="96" />
                 </td>
             </tr>
@@ -97,7 +97,7 @@ fieldset.dashboard-layout-style, fieldset.dashboard-filter
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="FourPane_1" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image7" ImageUrl="~/Images/Appearance/Dark Flat.png" runat="server"
+                    <asp:Image ID="Image7" ImageUrl="~/Images/FourPane_1.png" runat="server"
                         Width="96" Height="96" />
                 </td>
                 <td valign="middle">
@@ -184,16 +184,15 @@ fieldset.dashboard-layout-style, fieldset.dashboard-filter
         </asp:UpdateProgress>
     </fieldset>
     <div style="margin-left: 10px;"><dx:ASPxCheckBox runat="server" ID="chkDefault" Text="Is Default" /></div>
-    <table style="margin: 5px 10px">
-        <tr>
-            <td><dx:ASPxButton runat="server" ID="btnSave" OnClick="btnSave_Click" Text="Save"></dx:ASPxButton></td>
-            <td>
-                <asp:UpdatePanel runat="server" ID="upCancel">
-                    <ContentTemplate>
-                        <dx:ASPxButton runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"></dx:ASPxButton>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </td>
-        </tr>
-    </table>
+    <asp:UpdatePanel ID="toolbarAction" runat="server">
+        <ContentTemplate>
+            <table style="margin: 5px 10px">
+                <tr>
+                    <td><dx:ASPxButton runat="server" ID="btnSave" OnClick="btnSave_Click" Text="Save"></dx:ASPxButton></td>
+                    <td><dx:ASPxButton runat="server" ID="btnDelete" OnClick="btnDelete_Click" Text="Delete" Visible="false"></dx:ASPxButton></td>
+                    <td><dx:ASPxButton runat="server" ID="btnCancel" Text="Cancel" OnClick="btnCancel_Click"></dx:ASPxButton></td>
+                </tr>
+            </table>        
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

@@ -247,6 +247,15 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxEditors.ASPxCheckBox chkDefault;
         
         /// <summary>
+        /// toolbarAction control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel toolbarAction;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -256,13 +265,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btnSave;
         
         /// <summary>
-        /// upCancel control.
+        /// btnDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upCancel;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnDelete;
         
         /// <summary>
         /// btnCancel control.

@@ -24,6 +24,8 @@ namespace HTLBIWebApp2012.App.Setting
                 WHCode = Get_Param(PageArgs.WHCode);
                 cboDataDW.Value = WHCode;
                 GetDashboardList(WHCode);
+                // create add new link
+                SetAddNewUrl();
             }
         }
 
@@ -31,6 +33,8 @@ namespace HTLBIWebApp2012.App.Setting
         {
             WHCode = Lib.NTE(cboDataDW.Value);
             GetDashboardList(WHCode);
+            // create add new link
+            SetAddNewUrl();
         }
 
         /// <summary>
@@ -49,6 +53,13 @@ namespace HTLBIWebApp2012.App.Setting
                 //tbl.JsonObj.
 
             }
-        }     
+        }
+        /// <summary>
+        /// Make add new url
+        /// </summary>     
+        private void SetAddNewUrl()
+        {
+            lnkAddNew.NavigateUrl = String.Format("DashboardEdit.aspx?whcode={0}", WHCode);
+        }
     }
 }

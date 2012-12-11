@@ -957,13 +957,13 @@ namespace HTLBIWebApp2012
                 new COMCodeNameObj( "FourPortlet_Flow", "Four Portlet Flow" ),
                 new COMCodeNameObj( "FourPortlet_Grid", "Four Portlet Grid" )
                 */
-                new COMCodeNameObj("TwoPane_1", ""),
-                new COMCodeNameObj("TwoPane_2", ""),
-                new COMCodeNameObj("ThreePane_1", ""),
-                new COMCodeNameObj("ThreePane_2", ""),
-                new COMCodeNameObj("ThreePane_3", ""),
-                new COMCodeNameObj("ThreePane_4", ""),
-                new COMCodeNameObj("FourPane_1", ""),
+                new COMCodeNameObj( "TwoPane_1", "Two Portlet Flow" ),
+                new COMCodeNameObj( "TwoPane_2", "Two Portlet Grid" ),
+                new COMCodeNameObj( "ThreePane_1", "Three Portlet 1" ), // one left, 2 right
+                new COMCodeNameObj( "ThreePane_2", "Three Portlet 2" ), // 2 left, one right
+                new COMCodeNameObj( "ThreePane_3", "Three Portlet 3" ), // one over, 2 below
+                new COMCodeNameObj( "ThreePane_4", "Three Portlet 4" ), // 2 over, 1 below
+                new COMCodeNameObj( "FourPane_1", "Four Portlet Grid" )
             };
         }
     }
@@ -4101,6 +4101,23 @@ namespace HTLBIWebApp2012
                 get
                 {
                     return DashboardDefine.FromJsonStr(this.JsonStr);
+                }
+            }
+            public string TemplateName
+            {
+                get
+                {
+                    List<COMCodeNameObj> templateNames = DashboardDefine.Get_Template();
+                    string templateName = string.Empty;
+                    foreach (COMCodeNameObj obj in templateNames)
+                    {
+                        if (obj.Code == this.JsonObj.Template)
+                        {
+                            templateName = obj.Name;
+                            break;
+                        }
+                    }
+                    return templateName;
                 }
             }
             public void UpdateOnSubmit(string code, string name, string whCode, string jsonStr, bool isDefault)

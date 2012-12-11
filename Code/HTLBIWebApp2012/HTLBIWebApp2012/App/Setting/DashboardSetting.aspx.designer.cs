@@ -58,13 +58,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cboDataDW;
         
         /// <summary>
-        /// lblLstTitle control.
+        /// lnkAddNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLstTitle;
+        protected global::System.Web.UI.WebControls.HyperLink lnkAddNew;
         
         /// <summary>
         /// lstDashboard control.
