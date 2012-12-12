@@ -10,19 +10,19 @@ namespace HTLBIWebApp2012.App.Setting
 {
     public partial class PortletEdit : PageBase
     {
-        private string PortletId { get; set; }
+        private string WGCode { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsAsync) { return; }
-            PortletId = Get_Param(PageArgs.PortletId);
-            if (string.IsNullOrEmpty(PortletId))
+            WGCode = Get_Param(PageArgs.WidgetCode);
+            if (string.IsNullOrEmpty(WGCode))
             {
                 // TODO: add new
             }
             else
             {
-                MyBI.Me.Get_Widget().FirstOrDefault(wg => wg.ID == Int32.Parse(PortletId));
+                MyBI.Me.Get_Widget().FirstOrDefault(wg => wg.ID == Int32.Parse(WGCode));
             }
         }
     }

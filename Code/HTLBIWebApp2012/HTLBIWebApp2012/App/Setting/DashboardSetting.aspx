@@ -47,7 +47,7 @@
     </table>
     <div id="divDashboardList" style="margin: 10px">
         <span style="font-weight: bold; float: left; padding: 5px 0 5px">Dashboard List&nbsp;&nbsp;</span>
-        <div style="float: left; padding: 5px; background: url('/DXR.axd?r=0_1984-K31Q5') repeat-x scroll left top #E7EBEF"><asp:HyperLink runat="server" NavigateUrl="~/App/Setting/DashboardEdit.aspx" Text="Add New" ID="lnkAddNew"></asp:HyperLink></div>
+        <div style="float: left; padding: 5px; background: #E7EBEF"><asp:HyperLink runat="server" NavigateUrl="~/App/Setting/DashboardEdit.aspx" Text="Add New" ID="lnkAddNew"></asp:HyperLink></div>
         <div style="clear:both"></div>
         <dx:ASPxGridView ID="lstDashboard" runat="server" AutoGenerateColumns="false" Width="80%">
             <Columns>

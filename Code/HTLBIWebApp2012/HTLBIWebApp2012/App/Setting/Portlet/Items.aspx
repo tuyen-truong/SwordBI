@@ -22,7 +22,7 @@
         <Columns>
             <dx:GridViewDataTextColumn Caption="DS Name" FieldName="Name" VisibleIndex="0" Width="40%">
                 <DataItemTemplate>
-                    <asp:HyperLink runat="server" Text='<%# Eval("Name") %>' NavigateUrl='<%# Eval("ID", "~/App/Setting/Portlet/Edit.aspx?plid={0}") %>' ID="ctl"></asp:HyperLink>
+                    <asp:HyperLink runat="server" Text='<%# Eval("Name") %>' NavigateUrl='<%# Eval("Code", "~/App/Setting/Portlet/Edit.aspx?wgcode={0}") %>' ID="ctl"></asp:HyperLink>
                 </DataItemTemplate>
                 <Settings AllowDragDrop="False" />
             </dx:GridViewDataTextColumn>
