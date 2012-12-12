@@ -4031,6 +4031,12 @@ namespace HTLBIWebApp2012
         }
         public partial class lsttbl_Widget
         {
+            public static class WidgetTypeName
+            {
+                public const string Guage = "gauge";
+                public const string Chart = "chart";
+                public const string Grid = "grid";
+            }
             public WidgetChart JsonObj_Chart
             {
                 get
@@ -4050,6 +4056,40 @@ namespace HTLBIWebApp2012
                 get
                 {
                     return WidgetGrid.FromJsonStr(this.JsonStr);
+                }
+            }
+
+            public lsttbl_DashboardSource DataSource
+            {
+                get { return MyBI.Me.Get_DashboardSourceBy(DSCode); }
+            }
+
+            public String DSName
+            {
+                get
+                {
+                    if (DSCode.ToUpper().Contains("DS"))
+                    {
+                        return DataSource.NameEN;
+                    }
+                    else if (!String.IsNullOrEmpty(DataSource.ParentCode))
+                    {
+                        lsttbl_DashboardSource parent = MyBI.Me.Get_DashboardSourceBy(DataSource.ParentCode);
+                        return parent.NameEN;
+                    }
+                    return String.Empty;
+                }
+            }
+
+            public String KPIName
+            {
+                get
+                {
+                    if (DSCode.ToUpper().Contains("KPI"))
+                    {
+                        return DataSource.NameEN;
+                    }
+                    return String.Empty;
                 }
             }
 

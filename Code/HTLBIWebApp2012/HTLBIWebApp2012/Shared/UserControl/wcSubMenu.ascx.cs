@@ -23,21 +23,20 @@ namespace HTLBIWebApp2012.Shared.UserControl
                 var parentObj = MySys.Me.Get_Menu(parentCode);
                 var lsSub = MySys.Me.Get_MenuChild(parentCode).ToList();
                 var ret = "";
-                string appPath = Request.ApplicationPath == "/" ? "" : Request.ApplicationPath;
                 var count = lsSub.Count;
                 for (int i = 0; i < count; i++)
                 {
                     var item = lsSub[i];
                     var txt = item.NameEN;
                     var a_id = string.Format("a_{0}", item.Code);
-                    var a_href = string.Format("{2}/App/{0}/{0}.aspx?submnucode={1}", parentObj.Url, item.Code, appPath);
+                    var a_href = ResolveUrl(String.Format("~/App/{0}/{0}.aspx?submnucode={1}", parentObj.Url, item.Code));
                     ret += "<a id=\"" + a_id + "\" href=\"" + a_href + "\" >" + txt + "</a>\r\n";
                     if (i < count - 1) ret += " | ";
                 }
                 // Lưu mã của menu sẽ mặc định chọn đầu tiên, theo thiết lập lưu trong table systbl_Menu ở database quản lý.
                 var firstDefault = lsSub.FirstOrDefault(p => p.IsDefault);
                 if (firstDefault != null)
-                    GlobalVar.FirstURL = string.Format("{2}/App/{0}/{0}.aspx?submnucode={1}", parentObj.Url, firstDefault.Code, appPath);
+                    GlobalVar.FirstURL = ResolveUrl(String.Format("~/App/{0}/{0}.aspx?submnucode={1}", parentObj.Url, firstDefault.Code));
                 else
                     GlobalVar.FirstURL = string.Empty;
                 return ret;

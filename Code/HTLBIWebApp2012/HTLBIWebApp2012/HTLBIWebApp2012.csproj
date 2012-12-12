@@ -109,9 +109,8 @@
     <Content Include="App\Setting\AnalysisSetting.aspx" />
     <Content Include="App\Setting\DashboardEdit.aspx" />
     <Content Include="App\Setting\DashboardSetting.aspx" />
+    <Content Include="App\Setting\PortletItems.aspx" />
     <Content Include="App\Setting\PortletSetting.aspx" />
-    <Content Include="App\Setting\Portlet\Edit.aspx" />
-    <Content Include="App\Setting\Portlet\Items.aspx" />
     <Content Include="App\Setting\ReportSetting.aspx" />
     <Content Include="App\Setting\Setting.aspx" />
     <Content Include="App\Setting\wcDashboardSetting.ascx" />
@@ -678,26 +677,19 @@
     <Compile Include="App\Setting\DashboardSetting.aspx.designer.cs">
       <DependentUpon>DashboardSetting.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App\Setting\PortletItems.aspx.cs">
+      <DependentUpon>PortletItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\PortletItems.aspx.designer.cs">
+      <DependentUpon>PortletItems.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App\Setting\PortletSetting.aspx.cs">
       <DependentUpon>PortletSetting.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="App\Setting\PortletSetting.aspx.designer.cs">
       <DependentUpon>PortletSetting.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="App\Setting\Portlet\Edit.aspx.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App\Setting\Portlet\Edit.aspx.designer.cs">
-      <DependentUpon>Edit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="App\Setting\Portlet\Items.aspx.cs">
-      <DependentUpon>Items.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App\Setting\Portlet\Items.aspx.designer.cs">
-      <DependentUpon>Items.aspx</DependentUpon>
     </Compile>
     <Compile Include="App\Setting\ReportSetting.aspx.cs">
       <DependentUpon>ReportSetting.aspx</DependentUpon>
