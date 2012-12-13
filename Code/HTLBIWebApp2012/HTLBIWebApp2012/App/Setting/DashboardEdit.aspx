@@ -41,15 +41,15 @@ fieldset.dashboard-layout-style, fieldset.dashboard-filter
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_1" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image6" ImageUrl="~/Images/TwoPane_1.png" runat="server"
-                        Width="96" Height="96" />
+                    <asp:Image ID="Image6" ImageUrl="~/Images/TwoPane_1.jpg" runat="server"
+                        Width="72" Height="72" />
                 </td>
                 <td valign="middle">
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_2" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image1" ImageUrl="~/Images/TwoPane_2.png" runat="server"
-                        Width="96" Height="96" />
+                    <asp:Image ID="Image1" ImageUrl="~/Images/TwoPane_2.jpg" runat="server"
+                        Width="72" Height="72" />
                 </td>
                 <td valign="middle">
                 </td>
@@ -66,29 +66,29 @@ fieldset.dashboard-layout-style, fieldset.dashboard-filter
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_1" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image2" ImageUrl="~/Images/ThreePane_1.png" runat="server"
-                        Width="96" Height="96" />
+                    <asp:Image ID="Image2" ImageUrl="~/Images/ThreePane_1.jpg" runat="server"
+                        Width="72" Height="72" />
                 </td>
                 <td valign="middle">
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_2" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image3" ImageUrl="~/Images/ThreePane_2.png" runat="server"
-                        Width="96" Height="96" />
+                    <asp:Image ID="Image3" ImageUrl="~/Images/ThreePane_2.jpg" runat="server"
+                        Width="72" Height="72" />
                 </td>
                 <td valign="middle">
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_3" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image4" ImageUrl="~/Images/ThreePane_3.png" runat="server"
-                        Width="96" Height="96" />
+                    <asp:Image ID="Image4" ImageUrl="~/Images/ThreePane_3.jpg" runat="server"
+                        Width="72" Height="72" />
                 </td>
                 <td valign="middle">
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_4" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image5" ImageUrl="~/Images/ThreePane_4.png" runat="server"
-                        Width="96" Height="96" />
+                    <asp:Image ID="Image5" ImageUrl="~/Images/ThreePane_4.jpg" runat="server"
+                        Width="72" Height="72" />
                 </td>
             </tr>
             <tr style="padding-top: 50px;">
@@ -97,8 +97,8 @@ fieldset.dashboard-layout-style, fieldset.dashboard-filter
                     <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="FourPane_1" />
                 </td>
                 <td valign="middle">
-                    <asp:Image ID="Image7" ImageUrl="~/Images/FourPane_1.png" runat="server"
-                        Width="96" Height="96" />
+                    <asp:Image ID="Image7" ImageUrl="~/Images/FourPane_1.jpg" runat="server"
+                        Width="72" Height="72" />
                 </td>
                 <td valign="middle">
                 </td>
