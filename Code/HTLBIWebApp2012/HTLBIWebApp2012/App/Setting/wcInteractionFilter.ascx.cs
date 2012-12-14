@@ -49,7 +49,7 @@ namespace HTLBIWebApp2012.App.Setting
                 this.cbbSourceField.ClientVisible = false;
             else
                 this.cbbSourceField.ClientVisible = true;
-            this.ID = info.Name;            
+            //this.ID = info.Name;            
             this.cbbControl.Value = info.Control;
             this.cbbSourceField.Value = info.SourceField;
             this.txtCaption.Text = info.Caption;

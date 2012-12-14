@@ -8,31 +8,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
-    <style type="text/css">
-        ul.menu
-        {
-        }
-        ul.menu li
-        {
-            display: inline-block;
-            list-style-type: none;
-        }
-    </style>
     <div id="divNavigation" style="margin-top: 10px; margin-left: 10px">
         <ul class="menu">
             <li>
                 <dx:ASPxHyperLink runat="server" ID="DataSource" ClientInstanceName="DataSource"
-                    Text="Data Source" />
+                    Text="Data Source" NavigateUrl="~/App/Setting/DatasourceList.aspx" />
             </li>
             <li>&nbsp;|&nbsp;</li>
             <li>
                 <dx:ASPxHyperLink runat="server" ID="ASPxHyperLink1" ClientInstanceName="DataSource"
-                    Text="KPIs" />
+                    Text="KPIs" NavigateUrl="~/App/Setting/KpiList.aspx" />
             </li>
             <li>&nbsp;|&nbsp;</li>
             <li>
                 <dx:ASPxHyperLink runat="server" ID="ASPxHyperLink2" ClientInstanceName="DataSource"
-                    Text="Layouts" />
+                    Text="Layouts" NavigateUrl="~/App/Setting/LayoutList.aspx" />
             </li>
         </ul>
     </div>
@@ -49,7 +39,7 @@
         <span style="font-weight: bold; float: left; padding: 5px 0 5px">Dashboard List&nbsp;&nbsp;</span>
         <div style="float: left; padding: 5px; background: #E7EBEF"><asp:HyperLink runat="server" NavigateUrl="~/App/Setting/DashboardEdit.aspx" Text="Add New" ID="lnkAddNew"></asp:HyperLink></div>
         <div style="clear:both"></div>
-        <dx:ASPxGridView ID="lstDashboard" runat="server" AutoGenerateColumns="false" Width="80%">
+        <dx:ASPxGridView ID="lstDashboard" runat="server" AutoGenerateColumns="false" Width="100%">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="0" Width="50%">
                     <DataItemTemplate>

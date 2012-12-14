@@ -5,25 +5,6 @@
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager" runat="server" />
-<style type="text/css">
-table th
-{
-    white-space: nowrap;
-}
-th.normal
-{
-    font-weight:normal;
-}
-fieldset
-{
-    padding: 5px 10px 5px;
-    margin: 10px;
-}
-fieldset.dashboard-layout-style, fieldset.dashboard-filter
-{
-    width: 50%;
-}
-</style>
     <table style="margin: 10px;">
         <tr>
             <td>Display Name</td>
@@ -34,7 +15,7 @@ fieldset.dashboard-layout-style, fieldset.dashboard-filter
         <legend>Layout Style</legend>
         <table>
             <tr>
-                <th style="vertical-align: middle; width: 150px;">
+                <th style="vertical-align: middle; width: 150px;" class="normal">
                     Two Pane
                 </th>
                 <td valign="middle">

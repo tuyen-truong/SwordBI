@@ -65,5 +65,10 @@ namespace HTLBIWebApp2012.App.Setting
         //        this.My_wcLayoutSetting.Raise_OnChange(cat, args);
         //    }
         //}
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            String str = "";
+        }
     }
 }

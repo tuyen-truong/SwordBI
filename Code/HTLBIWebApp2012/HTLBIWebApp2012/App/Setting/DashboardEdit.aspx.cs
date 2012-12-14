@@ -78,6 +78,7 @@ namespace HTLBIWebApp2012.App.Setting
                     MySession.DashboardDefine_UsingPortlet.AddRange(usingPortlets);
                     Helpers.SetDataSource(lbxUsingPortlet, usingPortlets, "Code", "Name");
                     // Add Filter.
+                    ctrl_DashboardFilters.Controls.Clear();
                     List<InteractionFilter> filters = Dashboard.JsonObj.Filters;
                     foreach (var item in filters)
                     {
@@ -91,6 +92,7 @@ namespace HTLBIWebApp2012.App.Setting
             }
             if (IsPostBack)
             {
+                ctrl_DashboardFilters.Controls.Clear();
                 Add_FilterControl(true);
             }
         }

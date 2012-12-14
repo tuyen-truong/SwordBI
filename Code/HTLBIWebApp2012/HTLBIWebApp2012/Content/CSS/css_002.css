@@ -268,3 +268,24 @@ div.segmentDivider span {
 	background: #2f4367;
 }
 
+/* ------ MENU ------ */
+ul.menu{}
+ul.menu li 
+{
+    display: inline-block;
+    list-style-type: none;
+}
+
+#contentpage th.normal{font-weight: normal !important; white-space:nowrap;}
+#divDashboardList, #divPortletList{margin:10px 10px 0; max-width:1024px;}
+
+fieldset{padding:5px 10px 5px; margin:10px; max-width:1024px;}
+
+input[type="checkbox"]
+{
+    margin-left: 2px;
+}
+/* ----- DEVExpress modifier ------ */
+.dxbButton_Office2010Silver div.dxb {
+    padding: 2px 15px !important;
+}

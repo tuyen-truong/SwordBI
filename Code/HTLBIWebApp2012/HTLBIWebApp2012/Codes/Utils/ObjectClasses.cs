@@ -4093,6 +4093,29 @@ namespace HTLBIWebApp2012
                 }
             }
 
+            public String LayoutImageUrl
+            {
+                get
+                {
+                    String imageUrl = "~/Images/Control/{0}-{1}.png";
+                    switch(WidgetType)
+                    {
+                        case WidgetTypeName.Chart:
+                            imageUrl = String.Format(imageUrl, WidgetType, JsonObj_Chart.ChartType);
+                            break;
+                        case WidgetTypeName.Guage:
+                            imageUrl = String.Format(imageUrl, WidgetType, JsonObj_Gauge.VisibleType);
+                            break;
+                        case WidgetTypeName.Grid:
+                            imageUrl = String.Format(imageUrl, WidgetType, "GridView");
+                            break;
+                        default:
+                            throw new Exception("Invalid widget type.");
+                    }
+                    return imageUrl;
+                }
+            }
+
             public lsttbl_Widget(string code, string jsonStr)
             {
                 this.Code = code;

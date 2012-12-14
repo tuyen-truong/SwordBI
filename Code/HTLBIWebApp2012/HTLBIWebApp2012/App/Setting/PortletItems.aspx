@@ -14,28 +14,27 @@
         </td>
     </tr>
 </table>
-<br />
-<div id="divDashboardList" style="margin-left: 10px">
+<div id="divPortletList" style="margin-left: 10px">
     <span style="font-weight: bold; float: left; padding: 5px 0 5px">Portlet List&nbsp;&nbsp;</span>
     <div style="float: left; padding: 5px; background: #E7EBEF"><asp:HyperLink runat="server" NavigateUrl="~/App/Setting/PortletSetting.aspx" Text="Add New" ID="lnkAddNew"></asp:HyperLink></div>
     <div style="clear:both"></div>
-    <dx:ASPxGridView ID="gridPortletList" runat="server" AutoGenerateColumns="false" Width="80%">
+    <dx:ASPxGridView ID="gridPortletList" runat="server" AutoGenerateColumns="false" Width="100%">
         <Columns>
-            <dx:GridViewDataTextColumn Caption="Portlet Name" FieldName="Name" VisibleIndex="0" Width="25%">
+            <dx:GridViewDataTextColumn Caption="DS Name" FieldName="DSName" VisibleIndex="0" Width="40%">
                 <DataItemTemplate>
-                    <asp:HyperLink runat="server" Text='<%# Eval("Name") %>' NavigateUrl='<%# Eval("Code", "~/App/Setting/PortletSetting.aspx?wgcode={0}") %>' ID="ctl"></asp:HyperLink>
+                    <asp:HyperLink runat="server" Text='<%# Eval("DSName") %>' NavigateUrl='<%# Eval("Code", "~/App/Setting/PortletSetting.aspx?wgcode={0}") %>' ID="ctl"></asp:HyperLink>
                 </DataItemTemplate>
                 <Settings AllowDragDrop="False" AllowSort="False" />
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="DS Name" FieldName="DSName" VisibleIndex="1" Width="25%">
-                <Settings AllowSort="False" />
-            </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="KPI Name" FieldName="KPIName" VisibleIndex="2"  Width="25%">
+            <dx:GridViewDataTextColumn Caption="KPI Name" FieldName="KPIName" VisibleIndex="0"  Width="40%">
                 <Settings AllowDragDrop="False" AllowSort="False" />
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Layout" VisibleIndex="3" Width="25%">
+            <dx:GridViewDataColumn Caption="Layout" FieldName="LayoutImageUrl" VisibleIndex="0">
+                <DataItemTemplate>
+                    <asp:Image ImageUrl='<%# Eval("LayoutImageUrl") %>' runat="server" AlternateText="" />
+                </DataItemTemplate>
                 <Settings AllowDragDrop="False" AllowSort="False" />
-            </dx:GridViewDataTextColumn>
+            </dx:GridViewDataColumn>
         </Columns>
         <SettingsPager Mode="ShowAllRecords" />
     </dx:ASPxGridView>
