@@ -36,7 +36,15 @@ namespace HTLBIWebApp2012.App.Setting
                 return (curKPI != null) ? curKPI.ParentCode : this.MyPage.DSCode;
             }
         }
-        public string KPICode { get { return Lib.NTE(this.cboKPI.Value); } }
+        public string KPICode
+        { 
+            get { return Lib.NTE(this.cboKPI.Value); }
+            set
+            {
+                this.cboKPI.Value = value;
+                cbo_ValueChanged(this.cboKPI, new EventArgs());
+            }
+        }
         public bool IsCurrentActive
         {
             get

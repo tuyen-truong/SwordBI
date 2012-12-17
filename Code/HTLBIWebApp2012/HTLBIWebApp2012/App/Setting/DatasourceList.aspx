@@ -14,20 +14,20 @@
         </td>
     </tr>
 </table>
-<div style="margin-left: 10px">
+<div style="margin-left: 10px" class="htl-grid-part">
     <span style="font-weight: bold;">Data Source List</span>
-    <dx:ASPxGridView ID="lstDatasource" runat="server" AutoGenerateColumns="false" Width="80%">
+    <dx:ASPxGridView ID="lstDatasource" runat="server" AutoGenerateColumns="false" Width="100%">
         <Columns>
-            <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="0" Width="50%">
+            <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="0" Width="40%">
                 <DataItemTemplate>
                     <asp:HyperLink runat="server" Text='<%# Eval("NameEN") %>' NavigateUrl='<%# Eval("ID", "~/App/Setting/DashboardEdit.aspx?dbid={0}") %>' ID="ctl"></asp:HyperLink>
                 </DataItemTemplate>
                 <Settings AllowDragDrop="False" AllowSort="False" />
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="--" VisibleIndex="1" Width="40%">
+            <dx:GridViewDataTextColumn Caption="--" VisibleIndex="1" Width="30%">
                 <Settings AllowDragDrop="False" AllowSort="False" />
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="---" VisibleIndex="2">
+            <dx:GridViewDataTextColumn Caption="---" VisibleIndex="2" Width="30%">
                 <Settings AllowDragDrop="False" AllowSort="False" />
             </dx:GridViewDataTextColumn>
         </Columns>

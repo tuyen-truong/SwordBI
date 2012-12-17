@@ -4,24 +4,25 @@
 <%@ Register Assembly="DevExpress.Web.ASPxGridView.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<div id="divNavigation">
+<div id="divNavigation" style="margin-top: 10px; margin-left: 10px">
     <ul class="menu">
         <li>
             <dx:ASPxHyperLink runat="server" ID="DataSource" ClientInstanceName="DataSource"
-                Text="Data Source" />
+                Text="Data Source" NavigateUrl="~/App/Setting/DatasourceList.aspx" />
         </li>
         <li>&nbsp;|&nbsp;</li>
         <li>
-            <dx:ASPxHyperLink runat="server" ID="ASPxHyperLink1" ClientInstanceName="DataSource"
-                Text="KPIs" />
+            <dx:ASPxHyperLink runat="server" ID="KpiList" ClientInstanceName="KpiList"
+                Text="KPIs" NavigateUrl="~/App/Setting/KpiList.aspx" />
         </li>
         <li>&nbsp;|&nbsp;</li>
         <li>
-            <dx:ASPxHyperLink runat="server" ID="ASPxHyperLink2" ClientInstanceName="DataSource"
-                Text="Layouts" />
+            <dx:ASPxHyperLink runat="server" ID="LayoutList" ClientInstanceName="LayoutList"
+                Text="Layouts" NavigateUrl="~/App/Setting/LayoutList.aspx" />
         </li>
     </ul>
 </div>
+<br />
 <table style="margin-left: 10px">
     <tr>
         <td>Data Warehouse</td>

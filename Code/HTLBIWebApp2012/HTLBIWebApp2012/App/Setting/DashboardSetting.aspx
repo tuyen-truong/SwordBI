@@ -16,12 +16,12 @@
             </li>
             <li>&nbsp;|&nbsp;</li>
             <li>
-                <dx:ASPxHyperLink runat="server" ID="ASPxHyperLink1" ClientInstanceName="DataSource"
+                <dx:ASPxHyperLink runat="server" ID="KpiList" ClientInstanceName="KpiList"
                     Text="KPIs" NavigateUrl="~/App/Setting/KpiList.aspx" />
             </li>
             <li>&nbsp;|&nbsp;</li>
             <li>
-                <dx:ASPxHyperLink runat="server" ID="ASPxHyperLink2" ClientInstanceName="DataSource"
+                <dx:ASPxHyperLink runat="server" ID="LayoutList" ClientInstanceName="LayoutList"
                     Text="Layouts" NavigateUrl="~/App/Setting/LayoutList.aspx" />
             </li>
         </ul>

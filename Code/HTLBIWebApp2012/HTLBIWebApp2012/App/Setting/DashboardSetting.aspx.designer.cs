@@ -31,22 +31,22 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink DataSource;
         
         /// <summary>
-        /// ASPxHyperLink1 control.
+        /// KpiList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink ASPxHyperLink1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink KpiList;
         
         /// <summary>
-        /// ASPxHyperLink2 control.
+        /// LayoutList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink ASPxHyperLink2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink LayoutList;
         
         /// <summary>
         /// cboDataDW control.

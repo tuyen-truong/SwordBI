@@ -4064,6 +4064,22 @@ namespace HTLBIWebApp2012
                 get { return MyBI.Me.Get_DashboardSourceBy(DSCode); }
             }
 
+            /// <summary>
+            /// Get data source code. Alternative of DSCode
+            /// </summary>
+            public String DataSourceCode
+            {
+                get
+                {
+                    if (DSCode.ToUpper().Contains("DS"))
+                    {
+                        return DataSource.Code;
+                    }
+
+                    return String.IsNullOrEmpty(DataSource.ParentCode) ? "" : DataSource.ParentCode;
+                }
+            }
+
             public String DSName
             {
                 get
@@ -4079,6 +4095,11 @@ namespace HTLBIWebApp2012
                     }
                     return String.Empty;
                 }
+            }
+
+            public String KPICode
+            {
+                get { return DataSource.SettingCat.ToUpper().Equals("DS") ? String.Empty : DataSource.Code; }
             }
 
             public String KPIName

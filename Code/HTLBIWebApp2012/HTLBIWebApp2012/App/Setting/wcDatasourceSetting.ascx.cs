@@ -44,6 +44,29 @@ namespace HTLBIWebApp2012.App.Setting
                 if (value == null) GC.Collect();
             }
         }
+        public String DataWareHouse
+        {
+            set
+            {
+                this.cboDataDW.Value = value;
+                cbo_ValueChanged(this.cboDataDW, new EventArgs());
+            }
+        }
+        public String DataSource
+        {
+            set
+            {
+                this.cboDatasource.Value = value;
+                cbo_ValueChanged(this.cboDatasource, new EventArgs());
+            }
+        }
+        public String DataSourceName
+        {
+            set
+            {
+                this.txtDisplayName.Text = value;
+            }
+        }
         #endregion
 
         #region Members
@@ -396,7 +419,7 @@ namespace HTLBIWebApp2012.App.Setting
                 {
                     var item = this.lbxField.SelectedItem;
                     if (item == null) return;
-                    var tblName = Lib.NTE(item.GetValue("TblName"));
+                    var tblName = Lib.NTE(item.GetValue("TblName_Virtual"));
                     var colName = Lib.NTE(item.GetValue("ColName"));
                     var colAlias = Lib.NTE(item.GetValue("ColAliasVI"));
                     var colDataType = Lib.NTE(item.GetValue("DataType"));
@@ -410,7 +433,7 @@ namespace HTLBIWebApp2012.App.Setting
                 {
                     var item = this.lbxMetricField.SelectedItem;
                     if (item == null) return;
-                    var tblName = Lib.NTE(item.GetValue("TblName"));
+                    var tblName = Lib.NTE(item.GetValue("TblName_Virtual"));
                     var colName = Lib.NTE(item.GetValue("ColName"));
                     var colAlias = Lib.NTE(item.GetValue("ColAliasVI"));
                     var colDataType = Lib.NTE(item.GetValue("DataType"));
@@ -434,7 +457,14 @@ namespace HTLBIWebApp2012.App.Setting
                     MySession.DSDefine_SelSumInfo.RemoveAll(p => p.Field.KeyField == Lib.NTE(item.GetValue("Field.KeyField")));
                 }
             }
+#if DEBUG
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+#else
             catch { }
+#endif
         }
         protected void lbx_SelectedIndexChanged(object sender, EventArgs e)
         {

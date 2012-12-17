@@ -16,6 +16,7 @@ namespace HTLBIWebApp2012.App.Setting
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Page.Title = "Portlet List";
             if (!IsPostBack)
             {
                 // Load Data WareHouse
@@ -27,24 +28,6 @@ namespace HTLBIWebApp2012.App.Setting
                     cboDataDW.Value = WHCode;
                     gridPortletList.DataSource = MyBI.Me.Get_Widget(WHCode);
                     gridPortletList.DataBind();
-                    IQueryable<lsttbl_Widget> widgets = MyBI.Me.Get_Widget(WHCode);
-                    foreach (lsttbl_Widget wg in widgets)
-                    {
-                        if (wg.WidgetType == "gauge")
-                        {
-                            WidgetGauge wgGauge = wg.JsonObj_Gauge;
-
-                        }
-                        else if (wg.WidgetType == "chart")
-                        {
-                            WidgetChart wgChart = wg.JsonObj_Chart;
-                        }
-                        else
-                        {
-                            // grid
-                            WidgetGrid wgGrid = wg.JsonObj_Grid;
-                        }
-                    }
                 }
             }
 

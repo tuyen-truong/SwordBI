@@ -66,9 +66,30 @@ namespace HTLBIWebApp2012.App.Setting
         //    }
         //}
 
-        protected void Page_Init(object sender, EventArgs e)
+        private String WidgetCode { get; set; }
+        
+        protected void Page_OnLoad(object sender, EventArgs e)
         {
-            String str = "";
+            Page.Title = "Portlet Setting";
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                WidgetCode = Get_Param(PageArgs.WidgetCode);
+                lsttbl_Widget widget = MyBI.Me.Get_Widget_ByCode(WidgetCode);
+                // Data source
+                My_wcDSSetting.DataWareHouse = widget.WHCode;
+                My_wcDSSetting.DataSource = widget.DataSourceCode;
+                My_wcDSSetting.DataSourceName = widget.DSName;
+                // KPI Setting
+                My_wcKPISetting.KPICode = widget.KPICode;
+                // Layout Setting
+                My_wcLayoutSetting.LayoutCode = widget.Code;
+            }
+            
+
         }
     }
 }

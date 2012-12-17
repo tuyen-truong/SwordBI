@@ -107,10 +107,10 @@
     <Content Include="App\Jwc\jwcDateEdit.ascx" />
     <Content Include="App\Report\Report.aspx" />
     <Content Include="App\Setting\AnalysisSetting.aspx" />
+    <Content Include="App\Setting\KpiList.aspx" />
     <Content Include="App\Setting\DashboardEdit.aspx" />
     <Content Include="App\Setting\DashboardSetting.aspx" />
     <Content Include="App\Setting\DatasourceList.aspx" />
-    <Content Include="App\Setting\KpiList.aspx" />
     <Content Include="App\Setting\LayoutList.aspx" />
     <Content Include="App\Setting\PortletItems.aspx" />
     <Content Include="App\Setting\PortletSetting.aspx" />
@@ -666,6 +666,13 @@
     <Compile Include="App\Setting\AnalysisSetting.aspx.designer.cs">
       <DependentUpon>AnalysisSetting.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App\Setting\KpiList.aspx.cs">
+      <DependentUpon>KpiList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\KpiList.aspx.designer.cs">
+      <DependentUpon>KpiList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App\Setting\DashboardEdit.aspx.cs">
       <DependentUpon>DashboardEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -686,13 +693,6 @@
     </Compile>
     <Compile Include="App\Setting\DatasourceList.aspx.designer.cs">
       <DependentUpon>DatasourceList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="App\Setting\KpiList.aspx.cs">
-      <DependentUpon>KpiList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App\Setting\KpiList.aspx.designer.cs">
-      <DependentUpon>KpiList.aspx</DependentUpon>
     </Compile>
     <Compile Include="App\Setting\LayoutList.aspx.cs">
       <DependentUpon>LayoutList.aspx</DependentUpon>

@@ -43,7 +43,13 @@ namespace HTLBIWebApp2012.App.Setting
                 return !string.IsNullOrEmpty(this.MyPage.KPICode) ? this.MyPage.KPICode : this.MyPage.DSCode;
             }
         }
-        public string LayoutCode { get { return Lib.NTE(this.cboLayout.Value); } }
+        public string LayoutCode { get { return Lib.NTE(this.cboLayout.Value); }
+            set
+            {
+                this.cboLayout.Value = value;
+                cbo_ValueChanged(this.cboLayout, new EventArgs());
+            }
+        }
         public string CtrlTypeStr { get { return Lib.NTE(this.cboCtrlType.Value); } }
         public string ViewTypeStr { get { return Lib.NTE(this.cboCtrl.Value).Split('-', StringSplitOptions.RemoveEmptyEntries).Last(); } }
         protected string CurPropCtrl
