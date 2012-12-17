@@ -22,9 +22,7 @@ namespace HTLBIWebApp2012.App.Setting
                 // Load data warehouse
                 Helpers.SetDataSource(cboDataDW, MyBI.Me.GetDW(), "Value", "Text");
                 cboDataDW.Value = WHCode;
-
-                lstKpiList.DataSource = MyBI.Me.Get_DashboardSource(WHCode);
-                lstKpiList.DataBind();
+                cboDataDW_ValueChanged(this.cboDataDW, new EventArgs());
             }
         }
 

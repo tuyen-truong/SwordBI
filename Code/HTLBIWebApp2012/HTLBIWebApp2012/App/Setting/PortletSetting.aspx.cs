@@ -68,7 +68,7 @@ namespace HTLBIWebApp2012.App.Setting
 
         private String WidgetCode { get; set; }
         
-        protected void Page_OnLoad(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
             Page.Title = "Portlet Setting";
         }
@@ -78,18 +78,20 @@ namespace HTLBIWebApp2012.App.Setting
             if (!IsPostBack)
             {
                 WidgetCode = Get_Param(PageArgs.WidgetCode);
-                lsttbl_Widget widget = MyBI.Me.Get_Widget_ByCode(WidgetCode);
-                // Data source
-                My_wcDSSetting.DataWareHouse = widget.WHCode;
-                My_wcDSSetting.DataSource = widget.DataSourceCode;
-                My_wcDSSetting.DataSourceName = widget.DSName;
-                // KPI Setting
-                My_wcKPISetting.KPICode = widget.KPICode;
-                // Layout Setting
-                My_wcLayoutSetting.LayoutCode = widget.Code;
+                if (!String.IsNullOrEmpty(WidgetCode))
+                {
+                    lsttbl_Widget widget = MyBI.Me.Get_Widget_ByCode(WidgetCode);
+                    if (widget == null) { return; }
+                    // Data source
+                    My_wcDSSetting.DataWareHouse = widget.WHCode;
+                    My_wcDSSetting.DataSource = widget.DataSourceCode;
+                    My_wcDSSetting.DataSourceName = widget.DSName;
+                    // KPI Setting
+                    My_wcKPISetting.KPICode = widget.KPICode;
+                    // Layout Setting
+                    My_wcLayoutSetting.LayoutCode = widget.Code;
+                }
             }
-            
-
         }
     }
 }

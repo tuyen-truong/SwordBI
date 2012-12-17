@@ -494,6 +494,7 @@
     <Content Include="Scripts\JQuery\themes\cupertino\jquery.ui.theme.css" />
     <Content Include="Scripts\menu.js" />
     <Content Include="Scripts\popcalendar.js" />
+    <Content Include="Shared\UserControl\wcPortletPicker.ascx" />
     <Content Include="Shared\UserControl\wcSubMenu_bak.ascx" />
     <Content Include="Shared\UserControl\wcMainMenu.ascx" />
     <Content Include="Shared\UserControl\wcSubMenu.ascx" />
@@ -1031,6 +1032,13 @@
     </Compile>
     <Compile Include="Shared\GeneralMaster.Master.designer.cs">
       <DependentUpon>GeneralMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\UserControl\wcPortletPicker.ascx.cs">
+      <DependentUpon>wcPortletPicker.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Shared\UserControl\wcPortletPicker.ascx.designer.cs">
+      <DependentUpon>wcPortletPicker.ascx</DependentUpon>
     </Compile>
     <Compile Include="Shared\UserControl\wcSubMenu_bak.ascx.cs">
       <DependentUpon>wcSubMenu_bak.ascx</DependentUpon>

@@ -3,6 +3,8 @@
 
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+<%@ Register TagPrefix="wc" TagName="wcPortletPicket" Src="~/Shared/UserControl/wcPortletPicker.ascx" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager" runat="server" />
     <table style="margin: 10px;">
@@ -15,83 +17,94 @@
         <legend>Layout Style</legend>
         <table>
             <tr>
-                <th style="vertical-align: middle; width: 150px;" class="normal">
-                    Two Pane
-                </th>
-                <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_1" />
+                <td>
+                    <table>
+                        <tr>
+                            <th style="vertical-align: middle; width: 150px;" class="normal">
+                                Two Pane
+                            </th>
+                            <td valign="middle">
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_1" />
+                            </td>
+                            <td valign="middle">
+                                <asp:Image ID="Image6" ImageUrl="~/Images/TwoPane_1.jpg" runat="server"
+                                    Width="72" Height="72" />
+                            </td>
+                            <td valign="middle">
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_2" />
+                            </td>
+                            <td valign="middle">
+                                <asp:Image ID="Image1" ImageUrl="~/Images/TwoPane_2.jpg" runat="server"
+                                    Width="72" Height="72" />
+                            </td>
+                            <td valign="middle">
+                            </td>
+                            <td valign="middle">
+                            </td>
+                            <td valign="middle">
+                            </td>
+                            <td valign="middle">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="vertical-align: middle; width: 150px">Three Pane</th>
+                            <td valign="middle">
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_1" />
+                            </td>
+                            <td valign="middle">
+                                <asp:Image ID="Image2" ImageUrl="~/Images/ThreePane_1.jpg" runat="server"
+                                    Width="72" Height="72" />
+                            </td>
+                            <td valign="middle">
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_2" />
+                            </td>
+                            <td valign="middle">
+                                <asp:Image ID="Image3" ImageUrl="~/Images/ThreePane_2.jpg" runat="server"
+                                    Width="72" Height="72" />
+                            </td>
+                            <td valign="middle">
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_3" />
+                            </td>
+                            <td valign="middle">
+                                <asp:Image ID="Image4" ImageUrl="~/Images/ThreePane_3.jpg" runat="server"
+                                    Width="72" Height="72" />
+                            </td>
+                            <td valign="middle">
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_4" />
+                            </td>
+                            <td valign="middle">
+                                <asp:Image ID="Image5" ImageUrl="~/Images/ThreePane_4.jpg" runat="server"
+                                    Width="72" Height="72" />
+                            </td>
+                        </tr>
+                        <tr style="padding-top: 50px;">
+                            <th style="vertical-align: middle; width: 150px;">Four Pane</th>
+                            <td valign="middle">
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="FourPane_1" />
+                            </td>
+                            <td valign="middle">
+                                <asp:Image ID="Image7" ImageUrl="~/Images/FourPane_1.jpg" runat="server"
+                                    Width="72" Height="72" />
+                            </td>
+                            <td valign="middle">
+                            </td>
+                            <td valign="middle">
+                            </td>
+                            <td valign="middle">
+                            </td>
+                            <td valign="middle">
+                            </td>
+                            <td valign="middle">
+                            </td>
+                            <td valign="middle">
+                            </td>
+                        </tr>
+                    </table>
                 </td>
-                <td valign="middle">
-                    <asp:Image ID="Image6" ImageUrl="~/Images/TwoPane_1.jpg" runat="server"
-                        Width="72" Height="72" />
-                </td>
-                <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_2" />
-                </td>
-                <td valign="middle">
-                    <asp:Image ID="Image1" ImageUrl="~/Images/TwoPane_2.jpg" runat="server"
-                        Width="72" Height="72" />
-                </td>
-                <td valign="middle">
-                </td>
-                <td valign="middle">
-                </td>
-                <td valign="middle">
-                </td>
-                <td valign="middle">
-                </td>
-            </tr>
-            <tr>
-                <th style="vertical-align: middle; width: 150px">Three Pane</th>
-                <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_1" />
-                </td>
-                <td valign="middle">
-                    <asp:Image ID="Image2" ImageUrl="~/Images/ThreePane_1.jpg" runat="server"
-                        Width="72" Height="72" />
-                </td>
-                <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_2" />
-                </td>
-                <td valign="middle">
-                    <asp:Image ID="Image3" ImageUrl="~/Images/ThreePane_2.jpg" runat="server"
-                        Width="72" Height="72" />
-                </td>
-                <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_3" />
-                </td>
-                <td valign="middle">
-                    <asp:Image ID="Image4" ImageUrl="~/Images/ThreePane_3.jpg" runat="server"
-                        Width="72" Height="72" />
-                </td>
-                <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_4" />
-                </td>
-                <td valign="middle">
-                    <asp:Image ID="Image5" ImageUrl="~/Images/ThreePane_4.jpg" runat="server"
-                        Width="72" Height="72" />
-                </td>
-            </tr>
-            <tr style="padding-top: 50px;">
-                <th style="vertical-align: middle; width: 150px;">Four Pane</th>
-                <td valign="middle">
-                    <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="FourPane_1" />
-                </td>
-                <td valign="middle">
-                    <asp:Image ID="Image7" ImageUrl="~/Images/FourPane_1.jpg" runat="server"
-                        Width="72" Height="72" />
-                </td>
-                <td valign="middle">
-                </td>
-                <td valign="middle">
-                </td>
-                <td valign="middle">
-                </td>
-                <td valign="middle">
-                </td>
-                <td valign="middle">
-                </td>
-                <td valign="middle">
+                <td valign="top">
+                    <div>
+                        <wc:wcPortletPicket runat="server" ID="PortletPicker" />
+                    </div>
                 </td>
             </tr>
         </table>

@@ -22,16 +22,14 @@ namespace HTLBIWebApp2012.App.Setting
                 // Load data warehouse
                 Helpers.SetDataSource(cboDataDW, MyBI.Me.GetDW(), "Value", "Text");
                 cboDataDW.Value = WHCode;
-
-                lstDatasource.DataSource = MyBI.Me.Get_DashboardSource(WHCode);
-                lstDatasource.DataBind();
+                cboDataDW_ValueChanged(this.cboDataDW, new EventArgs());
             }
         }
 
         protected void cboDataDW_ValueChanged(object sender, EventArgs e)
         {
             WHCode = Lib.NTE(cboDataDW.Value);
-            lstDatasource.DataSource = MyBI.Me.Get_DashboardSource(WHCode);
+            lstDatasource.DataSource = MyBI.Me.Get_DashboardSource(WHCode, "DS");
             lstDatasource.DataBind();
         }
     }

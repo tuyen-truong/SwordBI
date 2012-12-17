@@ -95,6 +95,8 @@ namespace HTLBIWebApp2012.App.Setting
                 ctrl_DashboardFilters.Controls.Clear();
                 Add_FilterControl(true);
             }
+            PortletPicker.WHCode = WHCode;
+            PortletPicker1.WHCode = WHCode;
         }
 
         protected void btnAddDashboardFilter_Click(object sender, EventArgs e)
@@ -111,6 +113,7 @@ namespace HTLBIWebApp2012.App.Setting
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            ListEditItem item = PortletPicker.SelectedItem;
             DashboardDefine dbDefine = new DashboardDefine()
             {
                 DisplayName = txtDashboardName.Text

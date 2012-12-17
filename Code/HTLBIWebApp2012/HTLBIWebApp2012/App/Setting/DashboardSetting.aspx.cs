@@ -23,9 +23,7 @@ namespace HTLBIWebApp2012.App.Setting
 
                 WHCode = Get_Param(PageArgs.WHCode);
                 cboDataDW.Value = WHCode;
-                GetDashboardList(WHCode);
-                // create add new link
-                SetAddNewUrl();
+                cboDataDW_ValueChanged(this.cboDataDW, new EventArgs());
             }
         }
 
@@ -35,6 +33,10 @@ namespace HTLBIWebApp2012.App.Setting
             GetDashboardList(WHCode);
             // create add new link
             SetAddNewUrl();
+            // Set Navigation Url
+            DataSource.NavigateUrl = String.Format("DatasourceList.aspx?whcode={0}", WHCode);
+            KpiList.NavigateUrl = String.Format("KpiList.aspx?whcode={0}", WHCode);
+            LayoutList.NavigateUrl = String.Format("LayoutList.aspx?whcode={0}", WHCode);
         }
 
         /// <summary>
@@ -46,13 +48,6 @@ namespace HTLBIWebApp2012.App.Setting
         {
             lstDashboard.DataSource = MyBI.Me.Get_Dashboard(WHCode);
             lstDashboard.DataBind();
-            List<Codes.Models.lsttbl_Dashboard> dashboards = MyBI.Me.Get_Dashboard(WHCode).ToList();
-            //dashboards.Where(
-            foreach (Codes.Models.lsttbl_Dashboard tbl in dashboards)
-            {
-                //tbl.JsonObj.
-
-            }
         }
         /// <summary>
         /// Make add new url
