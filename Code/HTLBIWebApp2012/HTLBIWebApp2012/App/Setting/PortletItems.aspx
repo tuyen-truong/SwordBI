@@ -4,7 +4,24 @@
 <%@ Register Assembly="DevExpress.Web.ASPxGridView.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<br />
+<div id="divNavigation">
+    <ul class="menu">
+        <li>
+            <dx:ASPxHyperLink runat="server" ID="DataSource" ClientInstanceName="DataSource"
+                Text="Data Source" />
+        </li>
+        <li>&nbsp;|&nbsp;</li>
+        <li>
+            <dx:ASPxHyperLink runat="server" ID="ASPxHyperLink1" ClientInstanceName="DataSource"
+                Text="KPIs" />
+        </li>
+        <li>&nbsp;|&nbsp;</li>
+        <li>
+            <dx:ASPxHyperLink runat="server" ID="ASPxHyperLink2" ClientInstanceName="DataSource"
+                Text="Layouts" />
+        </li>
+    </ul>
+</div>
 <table style="margin-left: 10px">
     <tr>
         <td>Data Warehouse</td>

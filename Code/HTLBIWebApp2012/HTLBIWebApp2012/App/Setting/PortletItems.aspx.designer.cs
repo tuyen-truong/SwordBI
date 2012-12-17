@@ -13,6 +13,33 @@ namespace HTLBIWebApp2012.App.Setting {
     public partial class PortletItems {
         
         /// <summary>
+        /// DataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink DataSource;
+        
+        /// <summary>
+        /// ASPxHyperLink1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink ASPxHyperLink1;
+        
+        /// <summary>
+        /// ASPxHyperLink2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxHyperLink ASPxHyperLink2;
+        
+        /// <summary>
         /// cboDataDW control.
         /// </summary>
         /// <remarks>

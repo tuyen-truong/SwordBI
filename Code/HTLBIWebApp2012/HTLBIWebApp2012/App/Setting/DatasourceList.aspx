@@ -1,3 +1,37 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Shared/GeneralMaster.Master" AutoEventWireup="true" CodeBehind="DatasourceList.aspx.cs" Inherits="HTLBIWebApp2012.App.Setting.DatasourceList" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+<%@ Register Assembly="DevExpress.Web.ASPxGridView.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<table style="margin: 10px">
+    <tr>
+        <td>Data Warehouse</td>
+        <td><dx:ASPxComboBox ID="cboDataDW" runat="server" AutoPostBack="true" OnValueChanged="cboDataDW_ValueChanged">
+            </dx:ASPxComboBox>
+        </td>
+    </tr>
+</table>
+<div style="margin-left: 10px">
+    <span style="font-weight: bold;">Data Source List</span>
+    <dx:ASPxGridView ID="lstDatasource" runat="server" AutoGenerateColumns="false" Width="80%">
+        <Columns>
+            <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="0" Width="50%">
+                <DataItemTemplate>
+                    <asp:HyperLink runat="server" Text='<%# Eval("NameEN") %>' NavigateUrl='<%# Eval("ID", "~/App/Setting/DashboardEdit.aspx?dbid={0}") %>' ID="ctl"></asp:HyperLink>
+                </DataItemTemplate>
+                <Settings AllowDragDrop="False" AllowSort="False" />
+            </dx:GridViewDataTextColumn>
+            <dx:GridViewDataTextColumn Caption="--" VisibleIndex="1" Width="40%">
+                <Settings AllowDragDrop="False" AllowSort="False" />
+            </dx:GridViewDataTextColumn>
+            <dx:GridViewDataTextColumn Caption="---" VisibleIndex="2">
+                <Settings AllowDragDrop="False" AllowSort="False" />
+            </dx:GridViewDataTextColumn>
+        </Columns>
+        <SettingsPager Mode="ShowAllRecords" />
+    </dx:ASPxGridView>
+</div>
 </asp:Content>
