@@ -15,9 +15,17 @@
     }
 // ]]
 </script>
-<div>
+<style type="text/css">
+.htl-button-showmodal
+{
+    right: -20px;
+    top: -10px;
+    position:absolute;
+}
+</style>
+<div style="position:absolute;">
     <dx:ASPxListBox runat="server" ID="m_portletCandidate" Width="100%" ClientInstanceName="CandidatePortlet"></dx:ASPxListBox>
-    <dx:ASPxButton runat="server" ID="btnShowModal" AutoPostBack="false" Text="Add Portlet">
+    <dx:ASPxButton runat="server" ID="btnShowModal" AutoPostBack="false" Text="Add Portlet" CssClass="htl-button-showmodal">
         <ClientSideEvents Click="function(s, e) { ShowModalPopup(); }" />
     </dx:ASPxButton>
 </div>

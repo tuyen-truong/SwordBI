@@ -96,7 +96,6 @@ namespace HTLBIWebApp2012.App.Setting
                 Add_FilterControl(true);
             }
             PortletPicker.WHCode = WHCode;
-            PortletPicker1.WHCode = WHCode;
         }
 
         protected void btnAddDashboardFilter_Click(object sender, EventArgs e)

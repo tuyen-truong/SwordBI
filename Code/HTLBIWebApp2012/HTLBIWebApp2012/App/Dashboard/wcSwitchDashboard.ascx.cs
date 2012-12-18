@@ -41,7 +41,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                         Helpers.SetDataSource(this.cboDashboard, ds.ToList(), "Code", "Name", this.cboDashboard.Value);
 
                     // Tạo link đến trang setting cho các dashboard.
-                    var url = string.Format("/App/Setting/Setting.aspx?mmnucode=sett&submnucode=sett_Dashboard&whcode={0}", objMnuSub.Url);
+                    var url = ResolveUrl(string.Format("~/App/Setting/Setting.aspx?mmnucode=sett&submnucode=sett_Dashboard&whcode={0}", objMnuSub.Url));
                     this.lblGotoDashboardSetting.Text = "<a href=\"" + url + "\">Go to dashboard setting<a/>";
                 }
             }
