@@ -13,22 +13,6 @@
     <p>
         To learn more about ASP.NET visit <a href="http://www.asp.net" title="ASP.NET Website">www.asp.net</a>.
     </p>
-    <dx:ASPxGridView ID="grid" runat="server" ClientInstanceName="grid" KeyFieldName="(None)" Width="50%" AutoGenerateColumns="false">
-    <Columns>
-    <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="0" Width="40%" />
-    <dx:GridViewDataTextColumn FieldName="Template" VisibleIndex="1" Width="40%" />
-    <dx:GridViewDataCheckColumn FieldName="Default" VisibleIndex="2" Width="20%" />
-    </Columns>
-        <Templates>
-            <EmptyDataRow>
-            <tr>
-                <td>1</td>
-                <td></td>
-                <td></td>
-            </tr>
-            </EmptyDataRow>
-        </Templates>
-    </dx:ASPxGridView>
     <p>
         You can also find <a href="http://go.microsoft.com/fwlink/?LinkID=152368&amp;clcid=0x409"
             title="MSDN ASP.NET Docs">documentation on ASP.NET at MSDN</a>.

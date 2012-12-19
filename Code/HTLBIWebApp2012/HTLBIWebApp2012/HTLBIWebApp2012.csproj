@@ -251,6 +251,7 @@
     <Content Include="Content\Images\right_both_1.gif" />
     <Content Include="Content\Images\right_on.gif" />
     <Content Include="Content\Images\seperator.gif" />
+    <Content Include="Content\Images\setting_16.png" />
     <Content Include="Content\Images\smallOff.png" />
     <Content Include="Content\Images\smallTick.png" />
     <Content Include="Content\Images\spacer.gif" />
