@@ -2,7 +2,6 @@
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 
-<link href="../../Content/CSS/Dashboard.css" rel="stylesheet" type="text/css" />
 <div id="palParmams" class="boxed">
     <center class="title">Dashboard parameters</center>
     <div class="contentNoScroll">

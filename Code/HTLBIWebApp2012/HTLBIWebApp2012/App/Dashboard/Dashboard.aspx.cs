@@ -77,9 +77,13 @@ namespace HTLBIWebApp2012.App.Dashboard
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            Page.Header.Controls.Add(new LiteralControl(@"<link src="">" + ResolveUrl("~/Content/CSS/Dashboard.css") + @"""  rel=""stylesheet"" type=""text/css"" />"));
+            Title = "Dashboards";
             this.OnChange += this_OnChange;
             //Tạo lại control....
             if (this.IsPostBack) this.Load_Dashboard(true, null);
+            
+            Page.Controls.Add(new TwoPane1(TwoPane1.PaneType.Flow));
         }
         protected override void OnLoadComplete(EventArgs e)
         {
@@ -132,8 +136,10 @@ namespace HTLBIWebApp2012.App.Dashboard
         private Table CreateFlow()
         {
             Table tblLayout = new Table();
+            tblLayout.Style.Add(HtmlTextWriterStyle.Width, "100%");
             TableRow tblRow = new TableRow();
-            
+
+            tblRow = new TableRow();            
             TableCell tblCell = new TableCell();
             tblCell.Text = "Cell1";
             tblRow.Cells.Add(tblCell);
@@ -149,6 +155,55 @@ namespace HTLBIWebApp2012.App.Dashboard
         {
             Table tblLayout = new Table();
             return tblLayout;
+        }
+    }
+
+    public class TwoPane1: Table
+    {
+        public enum PaneType
+        {
+            Flow = 1,
+            Grid = 2
+        }
+
+        public TwoPane1(PaneType pType)
+            : base()
+        {
+            TableRow rowHeader = AddRow();
+            HtmlGenericControl div = new HtmlGenericControl("div");
+            div.ID = "palParmams";
+            div.Attributes["class"] = "boxed";
+            HtmlGenericControl contentTitle = new HtmlGenericControl("center");
+            contentTitle.Attributes["class"] = "title";
+            contentTitle.InnerText = "Dashboard parameters";
+            div.Controls.Add(contentTitle);
+            HtmlGenericControl content = new HtmlGenericControl("div");
+            content.ID = "container_Dashboard_Param";
+            div.Controls.Add(content);
+            rowHeader.Controls.Add(div);
+            switch (pType)
+            {
+                case PaneType.Flow:
+                    
+                    break;
+                case PaneType.Grid:
+                    
+                    break;
+                default:
+                    throw new Exception("Invalid.");
+            }
+        }
+
+        TableRow AddRow()
+        {
+            TableRow tr = new TableRow();
+            this.Rows.Add(tr);
+            return new TableRow();
+        }
+
+        TableCell AddCell()
+        {
+            return new TableCell();
         }
     }
 }
