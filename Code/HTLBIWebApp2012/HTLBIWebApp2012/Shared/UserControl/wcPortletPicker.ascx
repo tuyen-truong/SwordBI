@@ -4,25 +4,19 @@
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 
 <asp:PlaceHolder runat="server" ID="PortletPickerPlaceHolder">
-<script type="text/javascript">
-// <![CDATA[
-    function ShowModalPopup() {
-        PopupPicker.Show();
-    }
 
-    function PopupPicker_btnOK_Click() {
-        alert(AvailablePortlet);
-    }
-// ]]
-</script>
 <div>
-    <dx:ASPxListBox runat="server" ID="m_portletCandidate" Width="100%" ClientInstanceName="CandidatePortlet"></dx:ASPxListBox>
+    <dx:ASPxListBox runat="server" ID="m_portletCandidate" Width="100%"></dx:ASPxListBox>
     <dx:ASPxButton runat="server" ID="btnShowModal" AutoPostBack="false" Text="Add Portlet">
-        <ClientSideEvents Click="function(s, e) { ShowModalPopup(); }" />
+        <ClientSideEvents Click="function(s, e) { 
+                var pn = s.name.replace('btnShowModal', '');
+                
+                ShowModalPopup(pn + 'PopupPicker'); 
+            }" />
     </dx:ASPxButton>
 </div>
 <dx:ASPxPopupControl runat="server" ID="PopupPicker" CloseAction="CloseButton" Modal="true"
-    PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" ClientInstanceName="PopupPicker"
+    PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter"
     HeaderText="Available Portlets" AllowDragging="true" EnableAnimation="false" EnableViewState="false">
     <ClientSideEvents PopUp="function(s, e){}" />
     <ContentStyle>
@@ -35,19 +29,26 @@
                     <dx:PanelContent runat="server">
                         <table width="100%">
                             <tr>
-                                <td><dx:ASPxListBox runat="server" ID="AvailablePortlet" Width="100%" ClientInstanceName="AvailablePortlet"></dx:ASPxListBox></td>
+                                <td><dx:ASPxListBox runat="server" ID="AvailablePortlet" Width="100%"></dx:ASPxListBox></td>
                             </tr>
                             <tr>
                                 <td>
                                     <dx:ASPxButton runat="server" ID="btnOK" Text="OK" AutoPostBack="false">
-                                        <ClientSideEvents Click="function(s, e) { 
-                                            var item = AvailablePortlet.GetSelectedItem();
-                                            if (item)
+                                        <ClientSideEvents Click="function(s, e) {
+                                            var popupname = s.name.replace('_Panel1_btnOK', '');
+                                            var AvailablePortlet = window[popupname + '_Panel1_AvailablePortlet'];
+                                            var selecteditem = AvailablePortlet.GetSelectedItem();
+                                            if (selecteditem)
                                             {
-                                                CandidatePortlet.ClearItems();
-                                                CandidatePortlet.AddItem(item.text, item.value);
+                                                var n = popupname.replace('PopupPicker', '');
+                                                //console.log(eval(n + 'm_portletCandidate');
+                                                var CandidatePortlet = window[n + 'm_portletCandidate'];
+                                                if( CandidatePortlet ) {
+                                                    CandidatePortlet.ClearItems();
+                                                    CandidatePortlet.AddItem(selecteditem.text, selecteditem.value);
+                                                }
                                             }
-                                            PopupPicker.Hide(); }" />
+                                            window[popupname].Hide(); }" />
                                     </dx:ASPxButton>
                                 </td>
                             </tr>

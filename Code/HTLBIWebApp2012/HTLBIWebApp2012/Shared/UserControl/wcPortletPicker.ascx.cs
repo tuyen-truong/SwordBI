@@ -14,6 +14,16 @@ namespace HTLBIWebApp2012.Shared.UserControl
         protected void Page_Init()
         {
             m_portletCandidate.Width = 200;
+
+            String csname = "PortletPicker";
+            Type cstype = this.GetType();
+            ClientScriptManager csm = Page.ClientScript;
+            if (!csm.IsClientScriptBlockRegistered(csname))
+            {
+                csm.RegisterClientScriptBlock(cstype, csname, wcPortletPicker.PortletPickerScript);
+            }
+            //csm.RegisterStartupScript()
+            m_portletCandidate.ClientInstanceName = m_portletCandidate.ClientID;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -35,6 +45,28 @@ namespace HTLBIWebApp2012.Shared.UserControl
             get
             {
                 return this.m_portletCandidate.SelectedItem;
+            }
+        }
+
+        public static string PortletPickerScript
+        {
+            get
+            {
+                return @"
+<script type=""text/javascript"">
+    function ShowModalPopup(name) {
+        var popup = window[name];
+        if( popup ) {
+            popup.Show();
+        }
+        //PopupPicker.Show();
+    }
+
+    function PopupPicker_btnOK_Click() {
+        alert(AvailablePortlet);
+    }
+</script>
+";
             }
         }
     }

@@ -83,7 +83,7 @@ namespace HTLBIWebApp2012.App.Dashboard
             //Tạo lại control....
             if (this.IsPostBack) this.Load_Dashboard(true, null);
             
-            Page.Controls.Add(new TwoPane1(TwoPane1.PaneType.Flow));
+            //Page.Controls.Add(new TwoPane1(TwoPane1.PaneType.Flow));
         }
         protected override void OnLoadComplete(EventArgs e)
         {
@@ -204,6 +204,22 @@ namespace HTLBIWebApp2012.App.Dashboard
         TableCell AddCell()
         {
             return new TableCell();
+        }
+    }
+
+    public class LayoutTable : HtmlTable
+    {
+        public LayoutTable(string cssClass)
+            : base()
+        {
+            CellPadding = 0;
+            CellSpacing = 0;
+            Border = 0;
+            if (string.IsNullOrEmpty(cssClass))
+            {
+                Width = "100%";
+                Style.Add("max-width", "1024px");
+            }
         }
     }
 }
