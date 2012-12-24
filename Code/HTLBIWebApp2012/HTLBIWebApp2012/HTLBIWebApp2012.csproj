@@ -93,6 +93,7 @@
     <Content Include="Account\BILogin.aspx" />
     <Content Include="App\Analysis\Analysis.aspx" />
     <Content Include="App\Dashboard\wcPortletParams.ascx" />
+    <Content Include="App\Dashboard\wcTwoPane.ascx" />
     <Content Include="App\Dashboard\wcTwoPortlet_Grid.ascx" />
     <Content Include="App\Dashboard\wcThreePortlet_Grid.ascx" />
     <Content Include="App\Dashboard\wcFourPortlet_Grid.ascx" />
@@ -566,6 +567,13 @@
     <Compile Include="App\Dashboard\wcPortletParams.ascx.designer.cs">
       <DependentUpon>wcPortletParams.ascx</DependentUpon>
     </Compile>
+    <Compile Include="App\Dashboard\wcTwoPane.ascx.cs">
+      <DependentUpon>wcTwoPane.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcTwoPane.ascx.designer.cs">
+      <DependentUpon>wcTwoPane.ascx</DependentUpon>
+    </Compile>
     <Compile Include="App\Dashboard\wcTwoPortlet_Grid.ascx.cs">
       <DependentUpon>wcTwoPortlet_Grid.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -943,6 +951,9 @@
     <Compile Include="Codes\Utils\MySession.cs" />
     <Compile Include="Codes\Utils\ObjectClasses.cs" />
     <Compile Include="Codes\Utils\OLAPConnector.cs" />
+    <Compile Include="Codes\Utils\PortletControlBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Shared\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
