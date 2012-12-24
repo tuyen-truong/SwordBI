@@ -18,7 +18,7 @@ namespace HTLBIWebApp2012.App.Setting
     {
         #region Declares
         public PortletSetting MyPage { get { return this.Page as PortletSetting; } }
-        public string WHCode { get { return Lib.NTE(this.cboDataDW.Value); } }
+        public string WHCode{ get { return Lib.NTE(this.cboDataDW.Value); } }
         public string DSCode { get { return Lib.NTE(this.cboDatasource.Value); } }
         public bool IsCurrentActive
         {
@@ -81,6 +81,17 @@ namespace HTLBIWebApp2012.App.Setting
                 this.cboFuncs.Items.AddRange(InqMDX.GetSummatyFuncName());
                 this.cboOrderBy0.Items.AddRange(InqMDX.GetOrderByName());
                 this.cboOrderBy1.Items.AddRange(InqMDX.GetOrderByName());
+                //  set default value
+                String whcode = Get_Param(PageBase.PageArgs.WHCode);
+                if (!String.IsNullOrEmpty(whcode))
+                {
+                    DataWareHouse = whcode;
+                    String dscode = Get_Param(PageBase.PageArgs.DSCode);
+                    if (!String.IsNullOrEmpty(dscode))
+                    {
+                        this.DataSource = dscode;
+                    }
+                }
             }
             else
             {
@@ -414,6 +425,8 @@ namespace HTLBIWebApp2012.App.Setting
                     this.upp_SelectClause.Update();
                     this.upp_Filter.Update();
                     this.upp_SavingMsg.Update();
+                    // Focus
+                    this.txtDisplayName.Focus();
                 }
                 else if (btn.ID == this.btnIn_1.ID)
                 {

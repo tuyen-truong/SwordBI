@@ -60,7 +60,9 @@
 	                        <uc2:wcSubMenu ID="subMenu" runat="server" />
 	                    </div>
 	                    <div>	
-	                        <div id="contentpage"> <!-- id="contentpage" -->	                            
+	                        <div id="contentpage"> <!-- id="contentpage" -->
+                                <asp:ScriptManager ID="ScriptManager1" runat="server">
+                                </asp:ScriptManager>	                            
 	                            <asp:contentplaceholder id="bodyContent" runat="server">
                                 </asp:contentplaceholder>
 	                            <div class="clear"></div>

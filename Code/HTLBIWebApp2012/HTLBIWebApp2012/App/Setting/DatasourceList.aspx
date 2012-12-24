@@ -20,7 +20,7 @@
         <Columns>
             <dx:GridViewDataTextColumn FieldName="Name" VisibleIndex="0" Width="40%">
                 <DataItemTemplate>
-                    <asp:HyperLink runat="server" Text='<%# Eval("NameEN") %>' NavigateUrl='<%# Eval("ID", "~/App/Setting/DashboardEdit.aspx?dbid={0}") %>' ID="ctl"></asp:HyperLink>
+                    <asp:HyperLink runat="server" Text='<%# Eval("NameEN") %>' NavigateUrl='<%# Eval("Code", "~/App/Setting/DatasourceSetting.aspx?dscode={0}") + Eval("WHCode","&whcode={0}") %>' ID="ctl"></asp:HyperLink>
                 </DataItemTemplate>
                 <Settings AllowDragDrop="False" AllowSort="False" />
             </dx:GridViewDataTextColumn>

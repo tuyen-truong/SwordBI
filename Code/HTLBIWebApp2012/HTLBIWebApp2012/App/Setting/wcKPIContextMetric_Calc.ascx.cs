@@ -28,7 +28,32 @@ namespace HTLBIWebApp2012.App.Setting
                 if (value == null) GC.Collect();
             }
         }
-        public PortletSetting MyPage { get { return this.Page as PortletSetting; } }
+        public PortletSetting MyPage 
+        {
+            get
+            {
+                if (this.Page is PortletSetting)
+                {
+                    return this.Page as PortletSetting;
+                }
+                return null;
+            }
+        }
+        public String DSCode_Target
+        {
+            get
+            {
+                if (MyPage != null)
+                {
+                    return MyPage.My_wcKPISetting.DSCode_Target;
+                }
+                return ViewState["wcKPIContextMetric_Calc_DSCode"] as String;
+            }
+            set
+            {
+                ViewState["wcKPIContextMetric_Calc_DSCode"] = value;
+            }
+        }
         #endregion
 
         public override void Load_InitData()
@@ -85,7 +110,7 @@ namespace HTLBIWebApp2012.App.Setting
         private CalcFieldCtrlBase Add_CalcFieldControl(string typeStr, bool isReCreate)
         {            
             CalcFieldCtrlBase ctrl = null;
-            var ds = MyBI.Me.Get_DashboardSourceBy(this.MyPage.My_wcKPISetting.DSCode_Target);
+            var ds = MyBI.Me.Get_DashboardSourceBy(this.DSCode_Target);
             if (ds == null || ds.JsonObjMDX == null) return null;
             var dsField = ds.JsonObjMDX.Summaries.Select(p => new COMCodeNameObj(p.Field.ColName, p.Field.ColAliasVI)).ToList();
 

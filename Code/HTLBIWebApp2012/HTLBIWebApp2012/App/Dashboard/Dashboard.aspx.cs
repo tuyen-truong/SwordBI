@@ -82,13 +82,6 @@ namespace HTLBIWebApp2012.App.Dashboard
             this.OnChange += this_OnChange;
             //Tạo lại control....
             if (this.IsPostBack) this.Load_Dashboard(true, null);
-            
-            //Page.Controls.Add(new TwoPane1(TwoPane1.PaneType.Flow));
-            wcTwoPane wc = LoadControl("wcTwoPane.ascx") as wcTwoPane;
-            wc.CtrlMode = wcTwoPane.ControlMode.New;
-            wc.WcType = wcTwoPane.PaneType.Second;
-            wc.WHCode = "AR";
-            DashboardPlaceHolder.Controls.Add(wc);
         }
         protected override void OnLoadComplete(EventArgs e)
         {

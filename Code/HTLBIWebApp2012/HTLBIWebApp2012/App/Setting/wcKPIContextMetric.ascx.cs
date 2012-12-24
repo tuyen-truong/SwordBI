@@ -29,6 +29,21 @@ namespace HTLBIWebApp2012.App.Setting
             }
         }
         public PortletSetting MyPage { get { return this.Page as PortletSetting; } }
+        public String WHCode
+        {
+            get
+            {
+                if (this.MyPage == null)
+                {
+                    return ViewState["wcKPIContextMetric_WHCode"] as String;
+                }
+                return this.MyPage.WHCode;
+            }
+            set
+            {
+                ViewState["wcKPIContextMetric_WHCode"] = value;
+            }
+        }
         #endregion
 
         public override void Load_InitData()
@@ -105,7 +120,7 @@ namespace HTLBIWebApp2012.App.Setting
             if (string.IsNullOrEmpty(type)) type = "NORMAL";
             var guiID = Guid.NewGuid().ToString();
             FilterCtrlBase ctrl = null;
-            var bizCat = this.MyPage.WHCode;
+            var bizCat = this.WHCode;
             var tblFactNames = MyBI.Me.Get_DWTableName("FACT", bizCat);
             var ds = MyBI.Me.Get_DWColumn(bizCat);
             var dsField = new List<lsttbl_DWColumn>();

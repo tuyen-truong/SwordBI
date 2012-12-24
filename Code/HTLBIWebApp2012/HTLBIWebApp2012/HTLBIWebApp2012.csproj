@@ -92,7 +92,9 @@
   <ItemGroup>
     <Content Include="Account\BILogin.aspx" />
     <Content Include="App\Analysis\Analysis.aspx" />
+    <Content Include="App\Dashboard\wcFourPane.ascx" />
     <Content Include="App\Dashboard\wcPortletParams.ascx" />
+    <Content Include="App\Dashboard\wcThreePane.ascx" />
     <Content Include="App\Dashboard\wcTwoPane.ascx" />
     <Content Include="App\Dashboard\wcTwoPortlet_Grid.ascx" />
     <Content Include="App\Dashboard\wcThreePortlet_Grid.ascx" />
@@ -108,11 +110,14 @@
     <Content Include="App\Jwc\jwcDateEdit.ascx" />
     <Content Include="App\Report\Report.aspx" />
     <Content Include="App\Setting\AnalysisSetting.aspx" />
+    <Content Include="App\Setting\DatasourceSetting.aspx" />
     <Content Include="App\Setting\KpiList.aspx" />
     <Content Include="App\Setting\DashboardEdit.aspx" />
     <Content Include="App\Setting\DashboardSetting.aspx" />
     <Content Include="App\Setting\DatasourceList.aspx" />
+    <Content Include="App\Setting\KPISetting.aspx" />
     <Content Include="App\Setting\LayoutList.aspx" />
+    <Content Include="App\Setting\LayoutSetting.aspx" />
     <Content Include="App\Setting\PortletItems.aspx" />
     <Content Include="App\Setting\PortletSetting.aspx" />
     <Content Include="App\Setting\ReportSetting.aspx" />
@@ -560,12 +565,26 @@
     <Compile Include="App\Dashboard\Base\FourPortletCtrlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="App\Dashboard\wcFourPane.ascx.cs">
+      <DependentUpon>wcFourPane.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcFourPane.ascx.designer.cs">
+      <DependentUpon>wcFourPane.ascx</DependentUpon>
+    </Compile>
     <Compile Include="App\Dashboard\wcPortletParams.ascx.cs">
       <DependentUpon>wcPortletParams.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="App\Dashboard\wcPortletParams.ascx.designer.cs">
       <DependentUpon>wcPortletParams.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePane.ascx.cs">
+      <DependentUpon>wcThreePane.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePane.ascx.designer.cs">
+      <DependentUpon>wcThreePane.ascx</DependentUpon>
     </Compile>
     <Compile Include="App\Dashboard\wcTwoPane.ascx.cs">
       <DependentUpon>wcTwoPane.ascx</DependentUpon>
@@ -675,6 +694,13 @@
     <Compile Include="App\Setting\AnalysisSetting.aspx.designer.cs">
       <DependentUpon>AnalysisSetting.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App\Setting\DatasourceSetting.aspx.cs">
+      <DependentUpon>DatasourceSetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\DatasourceSetting.aspx.designer.cs">
+      <DependentUpon>DatasourceSetting.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App\Setting\KpiList.aspx.cs">
       <DependentUpon>KpiList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -703,12 +729,26 @@
     <Compile Include="App\Setting\DatasourceList.aspx.designer.cs">
       <DependentUpon>DatasourceList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App\Setting\KPISetting.aspx.cs">
+      <DependentUpon>KPISetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\KPISetting.aspx.designer.cs">
+      <DependentUpon>KPISetting.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App\Setting\LayoutList.aspx.cs">
       <DependentUpon>LayoutList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="App\Setting\LayoutList.aspx.designer.cs">
       <DependentUpon>LayoutList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\LayoutSetting.aspx.cs">
+      <DependentUpon>LayoutSetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\LayoutSetting.aspx.designer.cs">
+      <DependentUpon>LayoutSetting.aspx</DependentUpon>
     </Compile>
     <Compile Include="App\Setting\PortletItems.aspx.cs">
       <DependentUpon>PortletItems.aspx</DependentUpon>

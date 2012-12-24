@@ -20,7 +20,13 @@ namespace HTLBIWebApp2012.App.Setting
     public partial class wcLayoutSetting : PartPlugCtrlBase
     {
         #region Declares
-        public PortletSetting MyPage { get { return this.Page as PortletSetting; } }
+        public PortletSetting MyPage 
+        {
+            get
+            {
+                return this.Page as PortletSetting;
+            }
+        }
         /// <summary>
         /// Nếu trường hợp có chọn 'Layout' thì không lấy DatasourceID mới mà lấy DatasourceID từ 'Layout' đã lưu.
         /// <para>Ngược lại thì lấy DatasourceID theo một trong 2 bên Tab DatasourceSetting hoặc KPISetting.</para>
@@ -43,11 +49,25 @@ namespace HTLBIWebApp2012.App.Setting
                 return !string.IsNullOrEmpty(this.MyPage.KPICode) ? this.MyPage.KPICode : this.MyPage.DSCode;
             }
         }
-        public string LayoutCode { get { return Lib.NTE(this.cboLayout.Value); }
+        public string LayoutCode
+        {
+            get { return Lib.NTE(this.cboLayout.Value); }
             set
             {
                 this.cboLayout.Value = value;
                 cbo_ValueChanged(this.cboLayout, new EventArgs());
+            }
+        }
+        public String WHCode
+        {
+            protected get
+            {
+                return ViewState["wcLayoutSetting"] as String;
+            }
+            set
+            {
+                ViewState["wcLayoutSetting"] = value;
+                Helpers.SetDataSource(cboLayout, MyBI.Me.Get_Widget(WHCode), "Code", "Name");
             }
         }
         public string CtrlTypeStr { get { return Lib.NTE(this.cboCtrlType.Value); } }
@@ -89,7 +109,8 @@ namespace HTLBIWebApp2012.App.Setting
             {
                 // Tải lại source cho cboLayout(để nó không bị thiếu khi vừa thêm mới 1 KPI trong sự kiện của CallbackPanel)
                 // Vì cơ chế của CallbackPanel sẽ không để lại ViewState mỗi lần Render
-                if (!string.IsNullOrEmpty(this.MyPage.WHCode))
+                if (this.MyPage != null 
+                    && !string.IsNullOrEmpty(this.MyPage.WHCode))
                 {
                     var layoputs = MyBI.Me.Get_Widget(this.MyPage.WHCode).ToList();
                     Helpers.SetDataSource(this.cboLayout, layoputs, "Code", "Name", this.cboLayout.Value);
@@ -296,7 +317,7 @@ namespace HTLBIWebApp2012.App.Setting
                 var selObj = this.GetDatasource();
                 if (selObj == null) return;
                 var ctrl = this.Find_PropControl();
-                if (ctrl!= null) ctrl.Set_Source(selObj);
+                if (ctrl != null) ctrl.Set_Source(selObj);
                 if (cat == "KPI")
                 {
                     var kpi = selObj.JsonObjKPI;
@@ -331,7 +352,7 @@ namespace HTLBIWebApp2012.App.Setting
                     else if (layout.WidgetType.ToLower() == "gauge")
                     {
                         var obj = layout.JsonObj_Gauge;
-                        this.cboCtrlType.Value = obj.CtrlType;                        
+                        this.cboCtrlType.Value = obj.CtrlType;
                         this.cbo_ValueChanged(this.cboCtrlType, null);
                         this.cboCtrl.Value = string.Format("{0}-{1}", obj.CtrlType, obj.VisibleType);
                         this.cbo_ValueChanged(this.cboCtrl, null);
@@ -343,15 +364,18 @@ namespace HTLBIWebApp2012.App.Setting
                         this.cbo_ValueChanged(this.cboCtrlType, null);
                     }
                     // Raise Event OnChange.
-                    var curDS = MyBI.Me.Get_DashboardSourceBy(layout.DSCode);
-                    if (curDS != null)
+                    if (this.MyPage != null)
                     {
-                        if (curDS.SettingCat == GlobalVar.SettingCat_DS)
-                            this.MyPage.My_wcDSSetting.Raise_OnChange("LAYOUT", new HTLBIEventArgs(layout.DSCode));
-                        else if (curDS.SettingCat == GlobalVar.SettingCat_KPI)
-                            this.MyPage.My_wcKPISetting.Raise_OnChange("LAYOUT", new HTLBIEventArgs(layout.DSCode));
+                        var curDS = MyBI.Me.Get_DashboardSourceBy(layout.DSCode);
+                        if (curDS != null)
+                        {
+                            if (curDS.SettingCat == GlobalVar.SettingCat_DS)
+                                this.MyPage.My_wcDSSetting.Raise_OnChange("LAYOUT", new HTLBIEventArgs(layout.DSCode));
+                            else if (curDS.SettingCat == GlobalVar.SettingCat_KPI)
+                                this.MyPage.My_wcKPISetting.Raise_OnChange("LAYOUT", new HTLBIEventArgs(layout.DSCode));
+                        }
+                        this.MyPage.My_wcInteractionSetting.Raise_OnChange("LAYOUT", null);
                     }
-                    this.MyPage.My_wcInteractionSetting.Raise_OnChange("LAYOUT", null);
                 }
                 else if (cbo.ID == this.cboCtrlType.ID)
                 {

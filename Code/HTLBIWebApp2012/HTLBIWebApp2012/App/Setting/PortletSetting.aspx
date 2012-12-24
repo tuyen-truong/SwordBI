@@ -30,9 +30,7 @@
             tabCtrl_PortletSetting.SetActiveTab(tabCtrl_PortletSetting.GetTab(tab_index));
         }
     </script>
-
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
+    
     <dx:ASPxPageControl ID="tabCtrl_PortletSetting" ClientInstanceName="tabCtrl_PortletSetting"
         runat="server" ActiveTabIndex="3" Width="100%" Font-Names="Arial" 
         Font-Size="9pt" ClientIDMode="AutoID">

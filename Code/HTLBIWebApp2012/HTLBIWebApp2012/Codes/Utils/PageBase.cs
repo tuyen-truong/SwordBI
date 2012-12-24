@@ -17,6 +17,9 @@ namespace HTLBIWebApp2012
             public const string DashboardId = "dbid";
             public const string PortletId = "plid";
             public const string WidgetCode = "wgcode";
+            public const string DSCode = "dscode";
+            public const string KPICode = "kpicode";
+            public const string LayoutCode = "lc";
         }
 
         protected override void OnInit(EventArgs e)

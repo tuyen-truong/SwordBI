@@ -45,7 +45,7 @@ runat="server" Width="100%" oncallback="cbp_Callback">
     <PanelCollection>
         <dx:PanelContent ID="PanelContent2" runat="server" SupportsDisabledAttribute="True">
                 
-            <asp:UpdatePanel ID="upp_Header" runat="server">
+            <asp:UpdatePanel ID="upp_Header" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <table>
                         <tr>
@@ -95,7 +95,7 @@ runat="server" Width="100%" oncallback="cbp_Callback">
 <!--Content Of Select Clause-->
 <fieldset style="padding:3px">
     <legend>Query Information</legend>
-    <asp:UpdatePanel ID="upp_SelectClause" runat="server">
+    <asp:UpdatePanel ID="upp_SelectClause" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <table style="padding:0px; border-width:0px">
                 <tr>
@@ -235,7 +235,7 @@ runat="server" Width="100%" oncallback="cbp_Callback">
 <!--Filter Control-->
 <fieldset style="padding:3px">
     <legend>Filters</legend>
-    <asp:UpdatePanel ID="upp_Filter" runat="server">
+    <asp:UpdatePanel ID="upp_Filter" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div id="ctrlCollect" runat="server"></div>
             <dx:ASPxButton ID="btnAddFilter" runat="server" Text="Add filter" Width="70px" AutoPostBack="False"></dx:ASPxButton>
@@ -320,7 +320,7 @@ runat="server" Width="100%" oncallback="cbp_Callback">
                 }" />
                 <PanelCollection>
                     <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
-                        <asp:UpdatePanel ID="upp_SavingMsg" runat="server">
+                        <asp:UpdatePanel ID="upp_SavingMsg" runat="server" UpdateMode="Conditional">
                             <ContentTemplate>
                                 <dx:ASPxLabel ID="lblSavingMsg" runat="server" ></dx:ASPxLabel>
                             </ContentTemplate>

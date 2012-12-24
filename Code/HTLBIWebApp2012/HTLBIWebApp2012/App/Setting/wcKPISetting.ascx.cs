@@ -23,7 +23,17 @@ namespace HTLBIWebApp2012.App.Setting
         public Control My_upp_Measures { get { return this.upp_Measures; } }
         public Control My_upp_ContextMetrics { get { return this.upp_ContextMetrics; } }
 
-        public PortletSetting MyPage { get { return this.Page as PortletSetting; } }
+        public PortletSetting MyPage 
+        {
+            get 
+            {
+                if (this.Page is PortletSetting)
+                {
+                    return this.Page as PortletSetting;
+                }
+                return null;
+            }
+        }
         /// <summary>
         /// Nếu trường hợp có chọn KPI thì không lấy DatasourceID mới mà lấy DatasourceID từ KPI đã lưu.
         /// <para>Ngược lại thì lấy DatasourceID theo bên Tab DatasourceSettings.</para>
@@ -43,6 +53,17 @@ namespace HTLBIWebApp2012.App.Setting
             {
                 this.cboKPI.Value = value;
                 cbo_ValueChanged(this.cboKPI, new EventArgs());
+            }
+        }
+        public String WHCode
+        {
+            get
+            {
+                return this.MyPage != null ? this.MyPage.WHCode : ViewState["KPISetting_WHCode"] as String;
+            }
+            set
+            {
+                ViewState["KPISetting_WHCode"] = value;
             }
         }
         public bool IsCurrentActive
@@ -101,12 +122,22 @@ namespace HTLBIWebApp2012.App.Setting
                     var litem = new ListEditItem(item.Name, item.Code, img);
                     this.cboCtrlType.Items.Add(litem);
                 }
+                if (MyPage == null) // it is not a PortletSetting page
+                {
+                    String kpicode = Get_Param(PageBase.PageArgs.KPICode);
+                    String whCode = Get_Param(PageBase.PageArgs.WHCode);
+                    if (!String.IsNullOrEmpty(kpicode) && !String.IsNullOrEmpty(whCode))
+                    {
+                        Helpers.SetDataSource(cboKPI, MyBI.Me.Get_DashboardKPI_ByWH(whCode), "Code", "NameEN");
+                        this.KPICode = kpicode;
+                    }
+                }
             }
             else
             {
                 // Tải lại source cho cboKPI(để nó không bị thiếu khi vừa thêm mới 1 KPI trong sự kiện của CallbackPanel)
                 // Vì cơ chế của CallbackPanel sẽ không để lại ViewState mỗi lần Render
-                if (!string.IsNullOrEmpty(this.MyPage.WHCode))
+                if (MyPage != null && !string.IsNullOrEmpty(this.MyPage.WHCode))
                 {
                     var kpis = MyBI.Me.Get_DashboardKPI_ByWH(this.MyPage.WHCode).ToList();
                     Helpers.SetDataSource(this.cboKPI, kpis, "Code", "NameVI", this.cboKPI.Value);
@@ -307,7 +338,7 @@ namespace HTLBIWebApp2012.App.Setting
             if (string.IsNullOrEmpty(type)) type = "NORMAL";
             var guiID = Guid.NewGuid().ToString();
             FilterCtrlBase ctrl = null;
-            var whCode = this.MyPage.WHCode;
+            var whCode = this.WHCode;
             var tblFactNames = MyBI.Me.Get_DWTableName("FACT", whCode);
             var ds = MyBI.Me.Get_DWColumn(whCode);
             var dsField = new List<lsttbl_DWColumn>();
@@ -468,7 +499,7 @@ namespace HTLBIWebApp2012.App.Setting
             var cat = sender.ToString();
             if (cat == "WH")
             {
-                var whCode = this.MyPage.WHCode;
+                var whCode = this.WHCode;
                 if (!string.IsNullOrEmpty(whCode))
                 {
                     MySession.KPIDefine_CurEditing = null;
@@ -612,8 +643,11 @@ namespace HTLBIWebApp2012.App.Setting
                     this.lblSavingMsg.Text = "";
                     // Clear Plug control.
                     this.Clear_AllPartCtrl();
-                    if (string.IsNullOrEmpty(this.MyPage.DSCode))
+                    if (this.MyPage != null
+                        && string.IsNullOrEmpty(this.MyPage.DSCode))
+                    {
                         this.tabCtrl_PortletSetting.ActiveTabIndex = 0;
+                    }
                     // Raise Event OnChange.
                     this.Raise_OnChange(new { Cat = "KPI", Ctrl = this }, null);
                 }

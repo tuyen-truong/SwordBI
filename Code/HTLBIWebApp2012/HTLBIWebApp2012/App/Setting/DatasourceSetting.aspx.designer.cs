@@ -10,24 +10,15 @@
 namespace HTLBIWebApp2012.App.Setting {
     
     
-    public partial class LayoutList {
+    public partial class DatasourceSetting {
         
         /// <summary>
-        /// cboDataDW control.
+        /// DatasourcePlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cboDataDW;
-        
-        /// <summary>
-        /// gridLayoutList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxGridView.ASPxGridView gridLayoutList;
+        protected global::System.Web.UI.WebControls.PlaceHolder DatasourcePlaceHolder;
     }
 }
