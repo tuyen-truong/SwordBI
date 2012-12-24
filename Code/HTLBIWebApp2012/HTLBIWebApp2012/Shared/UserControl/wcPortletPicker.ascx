@@ -5,7 +5,7 @@
 
 <asp:PlaceHolder runat="server" ID="PortletPickerPlaceHolder">
 
-<div>
+<div style="padding-right: 30px">
     <dx:ASPxListBox runat="server" ID="m_portletCandidate" Width="100%"></dx:ASPxListBox>
     <dx:ASPxButton runat="server" ID="btnShowModal" AutoPostBack="false" Text="Add Portlet">
         <ClientSideEvents Click="function(s, e) { 

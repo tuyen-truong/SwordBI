@@ -6,7 +6,6 @@
 <%@ Register TagPrefix="wc" TagName="wcPortletPicket" Src="~/Shared/UserControl/wcPortletPicker.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManager ID="ScriptManager" runat="server" />
     <table style="margin: 10px;">
         <tr>
             <td>Display Name</td>
@@ -102,9 +101,7 @@
                     </table>
                 </td>
                 <td valign="top">
-                    <div>
-                        <wc:wcPortletPicket runat="server" ID="PortletPicker" />
-                    </div>
+                    <asp:PlaceHolder ID="DashboardSettingPlaceHolder" runat="server"></asp:PlaceHolder>
                 </td>
             </tr>
         </table>

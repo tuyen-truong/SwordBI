@@ -13,15 +13,6 @@ namespace HTLBIWebApp2012.App.Dashboard {
     public partial class Dashboard {
         
         /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
-        /// <summary>
         /// udp_Dashboard control.
         /// </summary>
         /// <remarks>

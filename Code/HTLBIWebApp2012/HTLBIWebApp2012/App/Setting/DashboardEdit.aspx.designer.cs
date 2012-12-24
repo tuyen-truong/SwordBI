@@ -13,15 +13,6 @@ namespace HTLBIWebApp2012.App.Setting {
     public partial class DashboardEdit {
         
         /// <summary>
-        /// ScriptManager control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager;
-        
-        /// <summary>
         /// txtDashboardName control.
         /// </summary>
         /// <remarks>
@@ -157,13 +148,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.Image Image7;
         
         /// <summary>
-        /// PortletPicker control.
+        /// DashboardSettingPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HTLBIWebApp2012.Shared.UserControl.wcPortletPicker PortletPicker;
+        protected global::System.Web.UI.WebControls.PlaceHolder DashboardSettingPlaceHolder;
         
         /// <summary>
         /// upPortlet control.

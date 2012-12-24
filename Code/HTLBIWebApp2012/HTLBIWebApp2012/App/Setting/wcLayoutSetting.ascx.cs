@@ -46,6 +46,7 @@ namespace HTLBIWebApp2012.App.Setting
         {
             get
             {
+                if (this.MyPage == null) { return String.Empty; }
                 return !string.IsNullOrEmpty(this.MyPage.KPICode) ? this.MyPage.KPICode : this.MyPage.DSCode;
             }
         }
@@ -62,6 +63,10 @@ namespace HTLBIWebApp2012.App.Setting
         {
             protected get
             {
+                if (this.MyPage != null)
+                {
+                    ViewState["wcLayoutSetting"] = this.MyPage.WHCode;
+                }
                 return ViewState["wcLayoutSetting"] as String;
             }
             set
@@ -296,7 +301,7 @@ namespace HTLBIWebApp2012.App.Setting
         protected void this_OnChange(object sender, EventArgs e)
         {
             var cat = sender.ToString();
-            var whCode = this.MyPage.WHCode;
+            var whCode = this.WHCode;//this.MyPage.WHCode;
             var dsCode = this.DSCode_OtherPriority;
             if (cat == "WH" && !string.IsNullOrEmpty(whCode))
             {
@@ -449,7 +454,7 @@ namespace HTLBIWebApp2012.App.Setting
                         Code = Lib.IfNOE(MySession.LayoutDefine_CurEditing, "wg_" + DateTime.Now.ToString("yyyyMMddHHmmss")),
                         Name = this.txtDisplayName.Text,
                         DSCode = objSett.DatasourceID,
-                        WHCode = this.MyPage.WHCode,
+                        WHCode = this.WHCode,// this.MyPage.WHCode,
                         WidgetType = this.CtrlTypeStr,
                         JsonStr = objSett.ToJsonStr()
                     };
@@ -464,7 +469,7 @@ namespace HTLBIWebApp2012.App.Setting
             {
                 if (!string.IsNullOrEmpty(MySession.LayoutDefine_CurEditing))
                 {
-                    var layoputs = MyBI.Me.Get_Widget(this.MyPage.WHCode).ToList();
+                    var layoputs = MyBI.Me.Get_Widget(this.WHCode).ToList();
                     Helpers.SetDataSource(this.cboLayout, layoputs, "Code", "Name", MySession.LayoutDefine_CurEditing);
                 }
             }

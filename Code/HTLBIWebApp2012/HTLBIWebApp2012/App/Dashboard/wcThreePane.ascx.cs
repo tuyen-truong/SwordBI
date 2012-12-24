@@ -54,7 +54,9 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblRow = new TableRow();
                         tblCell = new TableCell();
                         tblCell.RowSpan = 2;
+                        tblCell.VerticalAlign = VerticalAlign.Top;
                         tblCell.Controls.Add(picker1);
+                        tblRow.Cells.Add(tblCell);
                         tblCell = new TableCell();
                         tblCell.Controls.Add(picker2);
                         tblRow.Cells.Add(tblCell);
@@ -70,7 +72,9 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblRow = new TableRow();
                         tblCell = new TableCell();
                         tblCell.ColumnSpan = 2;
+                        picker1.Width = Unit.Percentage(100);
                         tblCell.Controls.Add(picker1);
+                        tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);
 
                         tblRow = new TableRow();
@@ -86,8 +90,10 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblRow = new TableRow();
                         tblCell = new TableCell();
                         tblCell.Controls.Add(picker1);
+                        tblRow.Cells.Add(tblCell);
                         tblCell = new TableCell();
                         tblCell.RowSpan = 2;
+                        tblCell.VerticalAlign = VerticalAlign.Top;
                         tblCell.Controls.Add(picker2);
                         tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);
@@ -102,14 +108,16 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblRow = new TableRow();
                         tblCell = new TableCell();
                         tblCell.Controls.Add(picker1);
+                        tblRow.Cells.Add(tblCell);
                         tblCell = new TableCell();
                         tblCell.Controls.Add(picker2);
+                        tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);
 
                         tblRow = new TableRow();
-                        tblRow.Cells.Add(tblCell);
                         tblCell = new TableCell();
                         tblCell.ColumnSpan = 2;
+                        picker3.Width = Unit.Percentage(100);
                         tblCell.Controls.Add(picker3);
                         tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);

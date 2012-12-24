@@ -33,8 +33,22 @@ namespace HTLBIWebApp2012.App.Dashboard
         {
             get
             {
-                _usingPortlets.Add(Lib.NTE(m_picker1.SelectedItem.Value));
-                _usingPortlets.Add(Lib.NTE(m_picker2.SelectedItem.Value));
+                if (m_picker1.SelectedItem != null)
+                {
+                    _usingPortlets.Add(Lib.NTE(m_picker1.SelectedItem.Value));
+                }
+                else
+                {
+                    _usingPortlets.Add(String.Empty);
+                }
+                if (m_picker2.SelectedItem != null)
+                {
+                    _usingPortlets.Add(Lib.NTE(m_picker2.SelectedItem.Value));
+                }
+                else
+                {
+                    _usingPortlets.Add(String.Empty);
+                }                
                 return _usingPortlets;
 
                 //if (ViewState["WcTwoPane_UsingPortlets"] == null)

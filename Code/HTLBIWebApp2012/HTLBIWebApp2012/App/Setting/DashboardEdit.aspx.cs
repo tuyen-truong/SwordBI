@@ -9,6 +9,7 @@ using HTLBIWebApp2012.Codes.BLL;
 using DevExpress.Web.ASPxEditors;
 using CECOM;
 using System.Collections;
+using HTLBIWebApp2012.App.Dashboard;
 
 namespace HTLBIWebApp2012.App.Setting
 {
@@ -31,6 +32,7 @@ namespace HTLBIWebApp2012.App.Setting
                 if (value == null) GC.Collect();
             }
         }
+        protected wcTwoPane TwoPane1;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -95,8 +97,11 @@ namespace HTLBIWebApp2012.App.Setting
                 ctrl_DashboardFilters.Controls.Clear();
                 Add_FilterControl(true);
             }
-            PortletPicker.WHCode = WHCode;
-            //PortletPicker.Visible = false;
+            TwoPane1 = LoadControl("~/App/Dashboard/wcTwoPane.ascx") as wcTwoPane;
+            //wcThreePane wc = LoadControl("~/App/Dashboard/wcThreePane.ascx") as wcThreePane;
+            TwoPane1.WHCode = WHCode;
+            TwoPane1.CtrlMode = wcTwoPane.ControlMode.New;
+            DashboardSettingPlaceHolder.Controls.Add(TwoPane1);
         }
 
         protected void btnAddDashboardFilter_Click(object sender, EventArgs e)
@@ -113,7 +118,6 @@ namespace HTLBIWebApp2012.App.Setting
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            ListEditItem item = PortletPicker.SelectedItem;
             DashboardDefine dbDefine = new DashboardDefine()
             {
                 DisplayName = txtDashboardName.Text
@@ -152,8 +156,9 @@ namespace HTLBIWebApp2012.App.Setting
             dbDefine.Filters = this.ctrl_DashboardFilters.Controls.OfType<wcInteractionFilter>()
                     .Select(p => p.Get_FilterInfo()).ToList();
             // portlets which are used
-            dbDefine.UsingPortlets = MySession.DashboardDefine_UsingPortlet
-                    .OfType<COMCodeNameObj>().Select(p => p.Code).ToList();
+            //dbDefine.UsingPortlets = MySession.DashboardDefine_UsingPortlet
+            //        .OfType<COMCodeNameObj>().Select(p => p.Code).ToList();
+            dbDefine.UsingPortlets = TwoPane1.UsingPortlets;
 
             lsttbl_Dashboard db = new lsttbl_Dashboard()
             {
