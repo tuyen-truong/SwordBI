@@ -14,7 +14,11 @@
     </table>
     <fieldset class="dashboard-layout-style">
         <legend>Layout Style</legend>
-        <table>
+        <table width="100%">
+            <colgroup>
+                <col width="50%" />
+                <col width="50%" />
+            </colgroup>
             <tr>
                 <td>
                     <table>
@@ -23,14 +27,14 @@
                                 Two Pane
                             </th>
                             <td valign="middle">
-                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_1" />
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_1" AutoPostBack="true" OnCheckedChanged="LayoutStyle_CheckedChanged" />
                             </td>
                             <td valign="middle">
                                 <asp:Image ID="Image6" ImageUrl="~/Images/TwoPane_1.jpg" runat="server"
                                     Width="72" Height="72" />
                             </td>
                             <td valign="middle">
-                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_2" />
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="TwoPane_2" AutoPostBack="true" OnCheckedChanged="LayoutStyle_CheckedChanged" />
                             </td>
                             <td valign="middle">
                                 <asp:Image ID="Image1" ImageUrl="~/Images/TwoPane_2.jpg" runat="server"
@@ -48,28 +52,28 @@
                         <tr>
                             <th style="vertical-align: middle; width: 150px">Three Pane</th>
                             <td valign="middle">
-                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_1" />
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_1" AutoPostBack="true" OnCheckedChanged="LayoutStyle_CheckedChanged" />
                             </td>
                             <td valign="middle">
                                 <asp:Image ID="Image2" ImageUrl="~/Images/ThreePane_1.jpg" runat="server"
                                     Width="72" Height="72" />
                             </td>
                             <td valign="middle">
-                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_2" />
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_2" AutoPostBack="true" OnCheckedChanged="LayoutStyle_CheckedChanged" />
                             </td>
                             <td valign="middle">
                                 <asp:Image ID="Image3" ImageUrl="~/Images/ThreePane_2.jpg" runat="server"
                                     Width="72" Height="72" />
                             </td>
                             <td valign="middle">
-                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_3" />
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_3" AutoPostBack="true" OnCheckedChanged="LayoutStyle_CheckedChanged" />
                             </td>
                             <td valign="middle">
                                 <asp:Image ID="Image4" ImageUrl="~/Images/ThreePane_3.jpg" runat="server"
                                     Width="72" Height="72" />
                             </td>
                             <td valign="middle">
-                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_4" />
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="ThreePane_4" AutoPostBack="true" OnCheckedChanged="LayoutStyle_CheckedChanged" />
                             </td>
                             <td valign="middle">
                                 <asp:Image ID="Image5" ImageUrl="~/Images/ThreePane_4.jpg" runat="server"
@@ -79,7 +83,7 @@
                         <tr style="padding-top: 50px;">
                             <th style="vertical-align: middle; width: 150px;">Four Pane</th>
                             <td valign="middle">
-                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="FourPane_1" />
+                                <asp:RadioButton GroupName="LayoutStyle" runat="server" ID="FourPane_1" AutoPostBack="true" OnCheckedChanged="LayoutStyle_CheckedChanged" />
                             </td>
                             <td valign="middle">
                                 <asp:Image ID="Image7" ImageUrl="~/Images/FourPane_1.jpg" runat="server"
@@ -101,7 +105,20 @@
                     </table>
                 </td>
                 <td valign="top">
-                    <asp:PlaceHolder ID="DashboardSettingPlaceHolder" runat="server"></asp:PlaceHolder>
+                    <asp:UpdatePanel ID="UPLayoutStyle" runat="server" UpdateMode="Conditional">
+                        <Triggers>
+                            <asp:PostBackTrigger ControlID="TwoPane_1" />
+                            <asp:PostBackTrigger ControlID="TwoPane_2" />
+                            <asp:PostBackTrigger ControlID="ThreePane_1" />
+                            <asp:PostBackTrigger ControlID="ThreePane_2" />
+                            <asp:PostBackTrigger ControlID="ThreePane_3" />
+                            <asp:PostBackTrigger ControlID="ThreePane_4" />
+                            <asp:PostBackTrigger ControlID="FourPane_1" />
+                        </Triggers>
+                        <ContentTemplate>
+                            <asp:PlaceHolder ID="DashboardSettingPlaceHolder" runat="server"></asp:PlaceHolder>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </td>
             </tr>
         </table>

@@ -11,12 +11,11 @@ namespace HTLBIWebApp2012.Shared.UserControl
 {
     public partial class wcPortletPicker : System.Web.UI.UserControl
     {
-        public Unit Width = Unit.Pixel(200);
-        public Unit Height = Unit.Pixel(250);
+        public Unit Width = Unit.Percentage(100);
+        public Unit Height = Unit.Percentage(100);
 
         protected void Page_Init()
         {
-            m_portletCandidate.Width = this.Width;
             //m_portletCandidate.Height = this.Height;
             //btnShowModal.Width = Unit.Pixel(100);
             //btnShowModal.Style.Add(HtmlTextWriterStyle.Position, "relative");
@@ -43,6 +42,13 @@ namespace HTLBIWebApp2012.Shared.UserControl
             Helpers.SetDataSource(AvailablePortlet, MyBI.Me.Get_Widget(WHCode), "Code", "Name");
             ClientScriptManager csm = Page.ClientScript;
             csm.RegisterStartupScript(this.GetType(), "BtnScript", "");
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+            m_portletCandidate.Width = this.Width;
+            //m_portletCandidate.Height = this.Height;
         }
 
         public string WHCode { get; set; }

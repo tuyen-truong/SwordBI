@@ -775,6 +775,13 @@ namespace HTLBIWebApp2012
     #region Control part base for defination: Filter, KPI, Property Controls
     public abstract class PartPlugCtrlBase : System.Web.UI.UserControl
     {
+        public enum ControlMode
+        {
+            New,
+            Edit,
+            View
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);

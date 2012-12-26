@@ -52,7 +52,10 @@ namespace HTLBIWebApp2012.App.Setting
         }
         public string LayoutCode
         {
-            get { return Lib.NTE(this.cboLayout.Value); }
+            get
+            {
+                return Lib.NTE(this.cboLayout.Value);
+            }
             set
             {
                 this.cboLayout.Value = value;

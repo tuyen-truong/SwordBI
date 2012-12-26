@@ -50,16 +50,11 @@ namespace HTLBIWebApp2012.App.Dashboard
                     _usingPortlets.Add(String.Empty);
                 }                
                 return _usingPortlets;
-
-                //if (ViewState["WcTwoPane_UsingPortlets"] == null)
-                //{
-                //    return new List<String>();
-                //}
-                //return ViewState["WcTwoPane_UsingPortlets"] as List<String>;
             }
             set
             {
-                ViewState["WcTwoPane_UsingPortlets"] = value;
+                _usingPortlets.AddRange(value);
+                ViewState["WcTwoPane_UsingPortlets"] = _usingPortlets;
             }
         }
 
@@ -73,6 +68,7 @@ namespace HTLBIWebApp2012.App.Dashboard
             TableCell tblCell;
 
             TblLayout = new Table();
+            TblLayout.Style.Add(HtmlTextWriterStyle.Width, "100%");
 
             if (CtrlMode == ControlMode.View)
             {
@@ -86,12 +82,14 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblRow = new TableRow();
                         // Cell 1
                         tblCell = new TableCell();
+                        tblCell.Width = Unit.Percentage(50);
                         m_picker1 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                         m_picker1.WHCode = WHCode;
                         tblCell.Controls.Add(m_picker1);
                         tblRow.Cells.Add(tblCell);
                         // Cell 2
                         tblCell = new TableCell();
+                        tblCell.Width = Unit.Percentage(50);
                         m_picker2 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                         m_picker2.WHCode = WHCode;
                         tblCell.Controls.Add(m_picker2);
@@ -101,17 +99,27 @@ namespace HTLBIWebApp2012.App.Dashboard
                     case PaneType.Second:
                         tblRow = new TableRow();
                         tblCell = new TableCell();
+                        tblCell.Width = Unit.Percentage(50);
                         m_picker1 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                         m_picker1.WHCode = WHCode;
                         tblCell.Controls.Add(m_picker1);
+                        tblRow.Cells.Add(tblCell);
+                        tblCell = new TableCell();
+                        tblCell.Width = Unit.Percentage(50);
+                        tblCell.Controls.Add(new LiteralControl("<br />"));
                         tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);
 
                         tblRow = new TableRow();
                         tblCell = new TableCell();
+                        tblCell.Width = Unit.Percentage(50);
                         m_picker2 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                         m_picker2.WHCode = WHCode;
                         tblCell.Controls.Add(m_picker2);
+                        tblRow.Cells.Add(tblCell);
+                        tblCell = new TableCell();
+                        tblCell.Width = Unit.Percentage(50);
+                        tblCell.Controls.Add(new LiteralControl("<br />"));
                         tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);
                         break;

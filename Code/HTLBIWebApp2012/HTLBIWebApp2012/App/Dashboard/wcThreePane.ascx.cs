@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using HTLBIWebApp2012.Shared.UserControl;
+using CECOM;
 
 namespace HTLBIWebApp2012.App.Dashboard
 {
@@ -27,6 +28,45 @@ namespace HTLBIWebApp2012.App.Dashboard
 
         public PaneType WcType = PaneType.First;
         public ControlMode CtrlMode = ControlMode.View;
+        public String WHCode { get; set; }
+        private List<String> _usingPortlets = new List<string>();
+        public List<String> UsingPortlets
+        {
+            get
+            {
+                if (picker1.SelectedItem != null)
+                {
+                    _usingPortlets.Add(Lib.NTE(picker1.SelectedItem.Value));
+                }
+                else
+                {
+                    _usingPortlets.Add(String.Empty);
+                }
+                if (picker2.SelectedItem != null)
+                {
+                    _usingPortlets.Add(Lib.NTE(picker2.SelectedItem.Value));
+                }
+                else
+                {
+                    _usingPortlets.Add(String.Empty);
+                }
+                if (picker3.SelectedItem != null)
+                {
+                    _usingPortlets.Add(Lib.NTE(picker3.SelectedItem.Value));
+                }
+                else
+                {
+                    _usingPortlets.Add(String.Empty);
+                }
+                return _usingPortlets;
+            }
+            set
+            {
+                _usingPortlets.AddRange(value);
+                ViewState["WcThreePane_UsingPortlets"] = _usingPortlets;
+
+            }
+        }
 
         protected wcPortletPicker picker1;
         protected wcPortletPicker picker2;
@@ -35,8 +75,12 @@ namespace HTLBIWebApp2012.App.Dashboard
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(WHCode)) { throw new Exception(String.Format("Invalid WHCode = {0}", WHCode)); }
+
             TableRow tblRow;
             TableCell tblCell;
+
+            TblLayout.Style.Add(HtmlTextWriterStyle.Width, "100%");
 
             if (CtrlMode == ControlMode.View)
             {
@@ -47,6 +91,10 @@ namespace HTLBIWebApp2012.App.Dashboard
                 picker1 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                 picker2 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                 picker3 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
+                
+                picker1.WHCode = this.WHCode;
+                picker2.WHCode = this.WHCode;
+                picker3.WHCode = this.WHCode;
 
                 switch(WcType)
                 {

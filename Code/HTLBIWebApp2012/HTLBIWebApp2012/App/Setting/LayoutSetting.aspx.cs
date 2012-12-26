@@ -9,20 +9,27 @@ namespace HTLBIWebApp2012.App.Setting
 {
     public partial class LayoutSetting : PageBase
     {
+        protected wcLayoutSetting CtrlLayoutSetting;
+
         protected void Page_Init(object sender, EventArgs e)
         {
-            wcLayoutSetting wc = LoadControl("wcLayoutSetting.ascx") as wcLayoutSetting;
-            if (!IsPostBack)
-            {
-                wc.WHCode = Get_Param(PageArgs.WHCode);
-                wc.LayoutCode = Get_Param(PageArgs.LayoutCode);
-            }
-            LayoutSettingHolder.Controls.Add(wc);
+            CtrlLayoutSetting = LoadControl("wcLayoutSetting.ascx") as wcLayoutSetting;
+            LayoutSettingHolder.Controls.Add(CtrlLayoutSetting);
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected override void OnLoadComplete(EventArgs e)
+        {
+            base.OnLoadComplete(e);
+            if (!IsPostBack)
+            {
+                CtrlLayoutSetting.WHCode = Get_Param(PageArgs.WHCode);
+                CtrlLayoutSetting.LayoutCode = Get_Param(PageArgs.LayoutCode);
+            }
         }
     }
 }
