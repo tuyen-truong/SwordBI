@@ -67,6 +67,8 @@ namespace HTLBIWebApp2012.Shared.UserControl
             }
         }
 
+        public ListEditItemCollection Items { get { return m_portletCandidate.Items; } }
+
         public static string PortletPickerScript
         {
             get

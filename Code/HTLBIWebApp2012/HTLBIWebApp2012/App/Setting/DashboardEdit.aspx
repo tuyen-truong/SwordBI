@@ -123,55 +123,6 @@
             </tr>
         </table>
     </fieldset>
-    <fieldset style="margin: 10px; width:450px">
-        <legend>Portlets</legend>
-        <asp:UpdatePanel ID="upPortlet" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <table style="margin: 5px">
-                    <colgroup>
-                        <col width="200px" />
-                        <col width="30px" />
-                        <col width="200px" />
-                    </colgroup>
-                    <tr>
-                        <td>Available Portlets</td>
-                        <td></td>
-                        <td>Using Porlets</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <dx:ASPxListBox ID="lbxAvailablePortlet" runat="server" ClientIDMode="AutoID" 
-                                ClientInstanceName="DashboardSetting_lbxAvailablePortlet" 
-                                CssFilePath="~/App_Themes/DevEx/{0}/styles.css" CssPostfix="DevEx" 
-                                Height="180px" SpriteCssFilePath="~/App_Themes/DevEx/{0}/sprite.css" 
-                                Width="100%">
-                                <LoadingPanelImage Url="~/App_Themes/DevEx/Editors/Loading.gif">
-                                </LoadingPanelImage>
-                                <LoadingPanelStyle ImageSpacing="5px">
-                                </LoadingPanelStyle>
-                            </dx:ASPxListBox>
-                        </td>
-                        <td>
-                            <dx:ASPxButton runat="server" ID="btnPortletAdd" Text=">" Width="30px" OnClick="BtnAddRemovePortlet_Click" />
-                            <dx:ASPxButton runat="server" ID="btnPortletRemove" Text="<" Width="30px" OnClick="BtnAddRemovePortlet_Click" />
-                        </td>
-                        <td>
-                            <dx:ASPxListBox ID="lbxUsingPortlet" runat="server" ClientIDMode="AutoID" 
-                                ClientInstanceName="DashboardSetting_lbxUsingPortlet" 
-                                CssFilePath="~/App_Themes/DevEx/{0}/styles.css" CssPostfix="DevEx" 
-                                Height="180px" SpriteCssFilePath="~/App_Themes/DevEx/{0}/sprite.css" 
-                                Width="100%">
-                                <LoadingPanelImage Url="~/App_Themes/DevEx/Editors/Loading.gif">
-                                </LoadingPanelImage>
-                                <LoadingPanelStyle ImageSpacing="5px">
-                                </LoadingPanelStyle>
-                            </dx:ASPxListBox>
-                        </td>
-                    </tr>
-                </table>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </fieldset>
     <fieldset class="dashboard-filter">
         <legend>Filters</legend>
         <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">

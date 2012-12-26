@@ -55,9 +55,6 @@ namespace HTLBIWebApp2012.App.Setting
                     // clean up filters
                     ctrl_DashboardFilters.Controls.Clear();
                     CtrlDashboardFilterIDs.Clear();
-                    // Available portlets
-                    IQueryable<lsttbl_Widget> availablePortlets = MyBI.Me.Get_Widget(WHCode);
-                    Helpers.SetDataSource(lbxAvailablePortlet, availablePortlets, "Code", "Name");
                 }
             }
             else
@@ -68,14 +65,10 @@ namespace HTLBIWebApp2012.App.Setting
                 if (!IsPostBack)
                 {
                     txtDashboardName.Text = Dashboard.JsonObj.DisplayName;
-                    // Available portlets
-                    IQueryable<lsttbl_Widget> availablePortlets = MyBI.Me.Get_Widget(WHCode);
-                    Helpers.SetDataSource(lbxAvailablePortlet, availablePortlets, "Code", "Name");
                     // Using portlets
                     List<COMCodeNameObj> usingPortlets = Dashboard.JsonObj.Get_UsingPortlets();
                     MySession.DashboardDefine_UsingPortlet.Clear();
                     MySession.DashboardDefine_UsingPortlet.AddRange(usingPortlets);
-                    Helpers.SetDataSource(lbxUsingPortlet, usingPortlets, "Code", "Name");
                     // Layout style
                     RadioButton radio = Helpers.FindControlRecur(Page, Dashboard.JsonObj.Template) as RadioButton;
                     if (radio != null)
@@ -100,6 +93,36 @@ namespace HTLBIWebApp2012.App.Setting
             if (IsPostBack)
             {
                 ctrl_DashboardFilters.Controls.Clear();
+                /*
+                if (TwoPane_1.Checked)
+                {
+                    LayoutStyle_CheckedChanged(TwoPane_1, new EventArgs());
+                }
+                else if (TwoPane_2.Checked)
+                {
+                    LayoutStyle_CheckedChanged(TwoPane_2, new EventArgs());
+                }
+                else if (ThreePane_1.Checked)
+                {
+                    LayoutStyle_CheckedChanged(ThreePane_1, new EventArgs());
+                }
+                else if (ThreePane_2.Checked)
+                {
+                    LayoutStyle_CheckedChanged(ThreePane_2, new EventArgs());
+                }
+                else if (ThreePane_3.Checked)
+                {
+                    LayoutStyle_CheckedChanged(ThreePane_3, new EventArgs());
+                }
+                else if (ThreePane_4.Checked)
+                {
+                    LayoutStyle_CheckedChanged(ThreePane_4, new EventArgs());
+                }
+                else
+                {
+                    LayoutStyle_CheckedChanged(FourPane_1, new EventArgs());
+                }
+                */
                 Add_FilterControl(true);
             }
         }
@@ -188,48 +211,7 @@ namespace HTLBIWebApp2012.App.Setting
         {
             Response.Redirect("DashboardSetting.aspx?whcode=" + WHCode);
         }
-
-        protected void BtnAddRemovePortlet_Click(object sender, EventArgs e)
-        {
-            ASPxButton btn = sender as ASPxButton;
-            if (btn.ID == btnPortletAdd.ID)
-            {
-                ListEditItem selectedItem =lbxAvailablePortlet.SelectedItem;
-                if (selectedItem == null)
-                {
-                    return;
-                }
-                string portletCode = Lib.NTE(selectedItem.Value);
-                COMCodeNameObj portletInfo = new COMCodeNameObj()
-                {
-                    Code = portletCode,
-                    Name = selectedItem.Text
-                };
-                ArrayList usingPortlets = MySession.DashboardDefine_UsingPortlet;
-                if (!usingPortlets.ToArray().Exists(pl => pl.GetStr("Code") == portletInfo.Code))
-                {
-                    // if not exist
-                    usingPortlets.Add(portletInfo);
-                    Helpers.SetDataSource(lbxUsingPortlet, usingPortlets, "Code", "Name");
-                }
-            }
-            else
-            {
-                // remove portlet
-                ListEditItem removeItem = lbxUsingPortlet.SelectedItem;
-                if (removeItem == null)
-                {
-                    return;
-                }
-                // remove item from listbox
-                lbxUsingPortlet.Items.Remove(removeItem);
-                // remove item from saved session
-                ArrayList usingPortlets = MySession.DashboardDefine_UsingPortlet;
-                COMCodeNameObj removeObj = usingPortlets.ToArray().FirstOrDefault(pl => pl.GetStr("Code") == Lib.NTE(removeItem.Value)) as COMCodeNameObj;
-                usingPortlets.Remove(removeObj);
-            }
-        }
-
+                
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             Response.Redirect("DashboardSetting.aspx?whcode=" + WHCode);
@@ -284,6 +266,7 @@ namespace HTLBIWebApp2012.App.Setting
                         TwoPane.WcType = wcTwoPane.PaneType.Second;
                     }
                     TwoPane.CtrlMode = wcTwoPane.ControlMode.New;
+                    TwoPane.UsingPortlets = Dashboard != null ? Dashboard.JsonObj.Get_UsingPortlets().Select(p => p.Code).ToList() : new List<String>();
                     DashboardSettingPlaceHolder.Controls.Add(TwoPane);
                     break;
                 case "ThreePane":

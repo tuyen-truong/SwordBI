@@ -101,6 +101,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                     case PaneType.First:
                         tblRow = new TableRow();
                         tblCell = new TableCell();
+                        tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.RowSpan = 2;
                         tblCell.VerticalAlign = VerticalAlign.Top;
                         tblCell.Controls.Add(picker1);
@@ -127,9 +128,11 @@ namespace HTLBIWebApp2012.App.Dashboard
 
                         tblRow = new TableRow();
                         tblCell = new TableCell();
+                        tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.Controls.Add(picker2);
                         tblRow.Cells.Add(tblCell);
                         tblCell = new TableCell();
+                        tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.Controls.Add(picker3);
                         tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);
@@ -137,9 +140,11 @@ namespace HTLBIWebApp2012.App.Dashboard
                     case PaneType.Third:
                         tblRow = new TableRow();
                         tblCell = new TableCell();
+                        tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.Controls.Add(picker1);
                         tblRow.Cells.Add(tblCell);
                         tblCell = new TableCell();
+                        tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.RowSpan = 2;
                         tblCell.VerticalAlign = VerticalAlign.Top;
                         tblCell.Controls.Add(picker2);
@@ -155,9 +160,11 @@ namespace HTLBIWebApp2012.App.Dashboard
                     case PaneType.Fourth:
                         tblRow = new TableRow();
                         tblCell = new TableCell();
+                        tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.Controls.Add(picker1);
                         tblRow.Cells.Add(tblCell);
                         tblCell = new TableCell();
+                        tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.Controls.Add(picker2);
                         tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);

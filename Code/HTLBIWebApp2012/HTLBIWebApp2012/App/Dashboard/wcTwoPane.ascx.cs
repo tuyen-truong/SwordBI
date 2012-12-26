@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using DevExpress.Web.ASPxEditors;
 using HTLBIWebApp2012.Shared.UserControl;
 using CECOM;
+using HTLBIWebApp2012.Codes.BLL;
+using HTLBIWebApp2012.Codes.Models;
 
 namespace HTLBIWebApp2012.App.Dashboard
 {
@@ -53,7 +55,7 @@ namespace HTLBIWebApp2012.App.Dashboard
             }
             set
             {
-                _usingPortlets.AddRange(value);
+                _usingPortlets = value;
                 ViewState["WcTwoPane_UsingPortlets"] = _usingPortlets;
             }
         }
@@ -62,13 +64,18 @@ namespace HTLBIWebApp2012.App.Dashboard
         protected wcPortletPicker m_picker1;
         protected wcPortletPicker m_picker2;
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
+
+            if (String.IsNullOrEmpty(WHCode)) { throw new Exception(String.Format("Invalid WHCode = {0}", WHCode)); }
+
             TableRow tblRow;
             TableCell tblCell;
 
             TblLayout = new Table();
             TblLayout.Style.Add(HtmlTextWriterStyle.Width, "100%");
+            IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
 
             if (CtrlMode == ControlMode.View)
             {
@@ -125,6 +132,19 @@ namespace HTLBIWebApp2012.App.Dashboard
                         break;
                     default:
                         throw new Exception("Invalid.");
+                }
+            }
+            if (_usingPortlets.Count >= 2)
+            {
+                lsttbl_Widget wg = portlets.Single(p => p.Code == _usingPortlets[0]);
+                if (wg != null)
+                {
+                    m_picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                }
+                wg = portlets.Single(p => p.Code == _usingPortlets[1]);
+                if (wg != null)
+                {
+                    m_picker2.Items.Add(new ListEditItem(wg.Name, wg.Code));
                 }
             }
             WcPlaceHolder.Controls.Add(TblLayout);

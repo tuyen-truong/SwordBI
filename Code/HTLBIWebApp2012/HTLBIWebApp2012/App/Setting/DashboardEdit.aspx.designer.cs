@@ -166,51 +166,6 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.PlaceHolder DashboardSettingPlaceHolder;
         
         /// <summary>
-        /// upPortlet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upPortlet;
-        
-        /// <summary>
-        /// lbxAvailablePortlet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxListBox lbxAvailablePortlet;
-        
-        /// <summary>
-        /// btnPortletAdd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnPortletAdd;
-        
-        /// <summary>
-        /// btnPortletRemove control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnPortletRemove;
-        
-        /// <summary>
-        /// lbxUsingPortlet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxListBox lbxUsingPortlet;
-        
-        /// <summary>
         /// UpdatePanel control.
         /// </summary>
         /// <remarks>

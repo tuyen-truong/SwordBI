@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using HTLBIWebApp2012.Shared.UserControl;
 using CECOM;
+using DevExpress.Web.ASPxEditors;
 
 namespace HTLBIWebApp2012.App.Dashboard
 {
@@ -83,25 +84,34 @@ namespace HTLBIWebApp2012.App.Dashboard
             }
             else
             {
-                picker1 = LoadControl("~/Shared/UserControl/wcFourPane.ascx") as wcPortletPicker;
-                picker2 = LoadControl("~/Shared/UserControl/wcFourPane.ascx") as wcPortletPicker;
-                picker3 = LoadControl("~/Shared/UserControl/wcFourPane.ascx") as wcPortletPicker;
-                picker4 = LoadControl("~/Shared/UserControl/wcFourPane.ascx") as wcPortletPicker;
+                picker1 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
+                picker1.WHCode = this.WHCode;
+                picker2 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
+                picker3 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
+                picker4 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
+                foreach(String portletID in this._usingPortlets)
+                {
+                    picker1.Items.Add(new ListEditItem(portletID, portletID));
+                }
 
                 tblRow = new TableRow();
                 tblCell = new TableCell();
+                tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                 tblCell.Controls.Add(picker1);
                 tblRow.Cells.Add(tblCell);
                 tblCell = new TableCell();
+                tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                 tblCell.Controls.Add(picker2);
                 tblRow.Cells.Add(tblCell);
                 TblLayout.Rows.Add(tblRow);
 
                 tblRow = new TableRow();
                 tblCell = new TableCell();
+                tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                 tblCell.Controls.Add(picker3);
                 tblRow.Cells.Add(tblCell);
                 tblCell = new TableCell();
+                tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                 tblCell.Controls.Add(picker4);
                 tblRow.Cells.Add(tblCell);
                 TblLayout.Rows.Add(tblRow);
