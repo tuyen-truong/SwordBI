@@ -14,6 +14,8 @@ namespace WebTest
             base.OnInit(e);
             radio1.Attributes.Add("ViewIndex", "0");
             radio2.Attributes.Add("ViewIndex", "1");
+            radio1.AutoPostBack = true;
+            radio2.AutoPostBack = true;
         }
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -16,12 +16,6 @@ namespace HTLBIWebApp2012.Shared.UserControl
 
         protected void Page_Init()
         {
-            //m_portletCandidate.Height = this.Height;
-            //btnShowModal.Width = Unit.Pixel(100);
-            //btnShowModal.Style.Add(HtmlTextWriterStyle.Position, "relative");
-            //btnShowModal.Style.Add("right", String.Format("-{0}", Unit.Pixel(Convert.ToInt32(m_portletCandidate.Width.Value) - Convert.ToInt32(btnShowModal.Width.Value) + 25)));
-            
-            
             String csname = "PortletPicker";
             Type cstype = this.GetType();
             ClientScriptManager csm = Page.ClientScript;
@@ -29,8 +23,6 @@ namespace HTLBIWebApp2012.Shared.UserControl
             {
                 csm.RegisterClientScriptBlock(cstype, csname, wcPortletPicker.PortletPickerScript);
             }
-            //csm.RegisterStartupScript()
-            m_portletCandidate.ClientInstanceName = m_portletCandidate.ClientID;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -48,7 +40,7 @@ namespace HTLBIWebApp2012.Shared.UserControl
         {
             base.OnPreRender(e);
             m_portletCandidate.Width = this.Width;
-            //m_portletCandidate.Height = this.Height;
+            m_portletCandidate.ClientInstanceName = m_portletCandidate.ClientID;
         }
 
         public string WHCode { get; set; }

@@ -35,6 +35,7 @@ namespace HTLBIWebApp2012.App.Dashboard
         {
             get
             {
+                _usingPortlets.Clear();
                 if (m_picker1.SelectedItem != null)
                 {
                     _usingPortlets.Add(Lib.NTE(m_picker1.SelectedItem.Value));
@@ -64,26 +65,65 @@ namespace HTLBIWebApp2012.App.Dashboard
         protected wcPortletPicker m_picker1;
         protected wcPortletPicker m_picker2;
 
+        protected override void OnInit(EventArgs e)
+        {
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
+            if (!IsPostBack)
+            {
+                IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
+                if (_usingPortlets.Count >= 2)
+                {
+                    m_picker1.Items.Clear();
+                    m_picker2.Items.Clear();
+                    lsttbl_Widget wg = portlets.Single(p => p.Code == _usingPortlets[0]);
+                    if (wg != null)
+                    {
+                        m_picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                    }
+                    wg = portlets.Single(p => p.Code == _usingPortlets[1]);
+                    if (wg != null)
+                    {
+                        m_picker2.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                    }
+                }
+            }
+        }
+
+        private void InitializeComponent()
+        {
             if (String.IsNullOrEmpty(WHCode)) { throw new Exception(String.Format("Invalid WHCode = {0}", WHCode)); }
+
+            WcPlaceHolder.Controls.Clear();
+            TwoPaneView.ActiveViewIndex = 0;
 
             TableRow tblRow;
             TableCell tblCell;
 
             TblLayout = new Table();
             TblLayout.Style.Add(HtmlTextWriterStyle.Width, "100%");
-            IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
 
             if (CtrlMode == ControlMode.View)
             {
-
+                switch(WcType)
+                {
+                    case PaneType.First:
+                        break;
+                    case PaneType.Second:
+                        break;
+                    default:
+                        throw new Exception("Invalid.");
+                }
             }
             else
             {
-                switch(WcType)
+                switch (WcType)
                 {
                     case PaneType.First:
                         tblRow = new TableRow();
@@ -132,19 +172,6 @@ namespace HTLBIWebApp2012.App.Dashboard
                         break;
                     default:
                         throw new Exception("Invalid.");
-                }
-            }
-            if (_usingPortlets.Count >= 2)
-            {
-                lsttbl_Widget wg = portlets.Single(p => p.Code == _usingPortlets[0]);
-                if (wg != null)
-                {
-                    m_picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
-                }
-                wg = portlets.Single(p => p.Code == _usingPortlets[1]);
-                if (wg != null)
-                {
-                    m_picker2.Items.Add(new ListEditItem(wg.Name, wg.Code));
                 }
             }
             WcPlaceHolder.Controls.Add(TblLayout);

@@ -23,7 +23,7 @@
                 <td>
                     <table>
                         <tr>
-                            <th style="vertical-align: middle; width: 150px;" class="normal">
+                            <th style="vertical-align: middle; width: 150px;">
                                 Two Pane
                             </th>
                             <td valign="middle">
@@ -109,11 +109,11 @@
                         <Triggers>
                             <asp:PostBackTrigger ControlID="TwoPane_1" />
                             <asp:PostBackTrigger ControlID="TwoPane_2" />
-                            <asp:PostBackTrigger ControlID="ThreePane_1" />
-                            <asp:PostBackTrigger ControlID="ThreePane_2" />
-                            <asp:PostBackTrigger ControlID="ThreePane_3" />
-                            <asp:PostBackTrigger ControlID="ThreePane_4" />
-                            <asp:PostBackTrigger ControlID="FourPane_1" />
+                            <asp:AsyncPostBackTrigger ControlID="ThreePane_1" />
+                            <asp:AsyncPostBackTrigger ControlID="ThreePane_2" />
+                            <asp:AsyncPostBackTrigger ControlID="ThreePane_3" />
+                            <asp:AsyncPostBackTrigger ControlID="ThreePane_4" />
+                            <asp:AsyncPostBackTrigger ControlID="FourPane_1" />
                         </Triggers>
                         <ContentTemplate>
                             <asp:PlaceHolder ID="DashboardSettingPlaceHolder" runat="server"></asp:PlaceHolder>
