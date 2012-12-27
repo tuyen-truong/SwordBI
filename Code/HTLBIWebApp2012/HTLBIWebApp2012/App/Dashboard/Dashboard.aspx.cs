@@ -22,10 +22,10 @@ namespace HTLBIWebApp2012.App.Dashboard
                 {
                     new KeyValuePair<string, string>("TwoPane_1", "TwoPortlet_Flow"),
                     new KeyValuePair<string, string>("TwoPane_2", "TwoPortlet_Grid"),
-                    new KeyValuePair<string, string>("ThreePane_1", "ThreePortlet_Flow"),
-                    new KeyValuePair<string, string>("ThreePane_2", "ThreePortlet_Grid"),
-                    new KeyValuePair<string, string>("ThreePane_3", "ThreePortlet_Flow"),
-                    new KeyValuePair<string, string>("ThreePane_4", "ThreePortlet_Grid"),
+                    new KeyValuePair<string, string>("ThreePane_1", "ThreePortlet_First"),
+                    new KeyValuePair<string, string>("ThreePane_2", "ThreePortlet_Second"),
+                    new KeyValuePair<string, string>("ThreePane_3", "ThreePortlet_Third"),
+                    new KeyValuePair<string, string>("ThreePane_4", "ThreePortlet_Fourth"),
                     new KeyValuePair<string, string>("FourPane_1", "FourPortlet_Flow"),
                   
                 };
@@ -101,123 +101,6 @@ namespace HTLBIWebApp2012.App.Dashboard
                 this.Load_Dashboard(false, Lib.NTE(myArg.Values));
             }
             catch { }
-        }
-    }
-
-    public class TwoPane : Control
-    {
-        public enum PaneType
-        {
-            Flow = 1,
-            Grid = 2
-        }
-
-        Table _tableLayout = new Table();
-
-        public TwoPane(PaneType pType):base()
-        {
-            switch(pType)
-            {
-                case PaneType.Flow:
-                    _tableLayout = CreateFlow();
-                    Controls.Add(_tableLayout);
-                    break;
-                case PaneType.Grid:
-                    _tableLayout = CreateGrid();
-                    Controls.Add(_tableLayout);
-                    break;
-                default:
-                    throw new Exception("Invalid.");
-            }
-        }
-
-        private Table CreateFlow()
-        {
-            Table tblLayout = new Table();
-            tblLayout.Style.Add(HtmlTextWriterStyle.Width, "100%");
-            TableRow tblRow = new TableRow();
-
-            tblRow = new TableRow();            
-            TableCell tblCell = new TableCell();
-            tblCell.Text = "Cell1";
-            tblRow.Cells.Add(tblCell);
-            tblCell = new TableCell();
-            tblCell.Text = "Cell2";
-            tblRow.Cells.Add(tblCell);
-            
-            tblLayout.Rows.Add(tblRow);
-            return tblLayout;
-        }
-
-        private Table CreateGrid()
-        {
-            Table tblLayout = new Table();
-            return tblLayout;
-        }
-    }
-
-    public class TwoPane1: Table
-    {
-        public enum PaneType
-        {
-            Flow = 1,
-            Grid = 2
-        }
-
-        public TwoPane1(PaneType pType)
-            : base()
-        {
-            TableRow rowHeader = AddRow();
-            HtmlGenericControl div = new HtmlGenericControl("div");
-            div.ID = "palParmams";
-            div.Attributes["class"] = "boxed";
-            HtmlGenericControl contentTitle = new HtmlGenericControl("center");
-            contentTitle.Attributes["class"] = "title";
-            contentTitle.InnerText = "Dashboard parameters";
-            div.Controls.Add(contentTitle);
-            HtmlGenericControl content = new HtmlGenericControl("div");
-            content.ID = "container_Dashboard_Param";
-            div.Controls.Add(content);
-            rowHeader.Controls.Add(div);
-            switch (pType)
-            {
-                case PaneType.Flow:
-                    
-                    break;
-                case PaneType.Grid:
-                    
-                    break;
-                default:
-                    throw new Exception("Invalid.");
-            }
-        }
-
-        TableRow AddRow()
-        {
-            TableRow tr = new TableRow();
-            this.Rows.Add(tr);
-            return new TableRow();
-        }
-
-        TableCell AddCell()
-        {
-            return new TableCell();
-        }
-    }
-
-    public class LayoutTable : HtmlTable
-    {
-        public LayoutTable(string cssClass)
-            : base()
-        {
-            CellPadding = 0;
-            CellSpacing = 0;
-            Border = 0;
-            if (string.IsNullOrEmpty(cssClass))
-            {
-                Width = "100%";
-                Style.Add("max-width", "1024px");
-            }
         }
     }
 }

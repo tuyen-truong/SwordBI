@@ -92,17 +92,19 @@
   <ItemGroup>
     <Content Include="Account\BILogin.aspx" />
     <Content Include="App\Analysis\Analysis.aspx" />
+    <Content Include="App\Dashboard\wcThreePortlet_Fourth.ascx" />
+    <Content Include="App\Dashboard\wcThreePortlet_Third.ascx" />
     <Content Include="App\Dashboard\wcFourPane.ascx" />
     <Content Include="App\Dashboard\wcPortletParams.ascx" />
     <Content Include="App\Dashboard\wcThreePane.ascx" />
     <Content Include="App\Dashboard\wcTwoPane.ascx" />
     <Content Include="App\Dashboard\wcTwoPortlet_Grid.ascx" />
-    <Content Include="App\Dashboard\wcThreePortlet_Grid.ascx" />
+    <Content Include="App\Dashboard\wcThreePortlet_Second.ascx" />
     <Content Include="App\Dashboard\wcFourPortlet_Grid.ascx" />
     <Content Include="App\Dashboard\Dashboard.aspx" />
     <Content Include="App\Dashboard\wcFourPortlet_Flow.ascx" />
     <Content Include="App\Dashboard\wcSwitchDashboard.ascx" />
-    <Content Include="App\Dashboard\wcThreePortlet_Flow.ascx" />
+    <Content Include="App\Dashboard\wcThreePortlet_First.ascx" />
     <Content Include="App\Dashboard\wcTwoPortlet_Flow.ascx" />
     <Content Include="App\Jwc\jwcComboBox.ascx" />
     <Content Include="App\Jwc\jwcComboBoxChecked.ascx" />
@@ -565,6 +567,20 @@
     <Compile Include="App\Dashboard\Base\FourPortletCtrlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="App\Dashboard\wcThreePortlet_Fourth.ascx.cs">
+      <DependentUpon>wcThreePortlet_Fourth.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePortlet_Fourth.ascx.designer.cs">
+      <DependentUpon>wcThreePortlet_Fourth.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePortlet_Third.ascx.cs">
+      <DependentUpon>wcThreePortlet_Third.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Dashboard\wcThreePortlet_Third.ascx.designer.cs">
+      <DependentUpon>wcThreePortlet_Third.ascx</DependentUpon>
+    </Compile>
     <Compile Include="App\Dashboard\wcFourPane.ascx.cs">
       <DependentUpon>wcFourPane.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -600,12 +616,12 @@
     <Compile Include="App\Dashboard\wcTwoPortlet_Grid.ascx.designer.cs">
       <DependentUpon>wcTwoPortlet_Grid.ascx</DependentUpon>
     </Compile>
-    <Compile Include="App\Dashboard\wcThreePortlet_Grid.ascx.cs">
-      <DependentUpon>wcThreePortlet_Grid.ascx</DependentUpon>
+    <Compile Include="App\Dashboard\wcThreePortlet_Second.ascx.cs">
+      <DependentUpon>wcThreePortlet_Second.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="App\Dashboard\wcThreePortlet_Grid.ascx.designer.cs">
-      <DependentUpon>wcThreePortlet_Grid.ascx</DependentUpon>
+    <Compile Include="App\Dashboard\wcThreePortlet_Second.ascx.designer.cs">
+      <DependentUpon>wcThreePortlet_Second.ascx</DependentUpon>
     </Compile>
     <Compile Include="App\Dashboard\wcFourPortlet_Grid.ascx.cs">
       <DependentUpon>wcFourPortlet_Grid.ascx</DependentUpon>
@@ -635,12 +651,12 @@
     <Compile Include="App\Dashboard\wcSwitchDashboard.ascx.designer.cs">
       <DependentUpon>wcSwitchDashboard.ascx</DependentUpon>
     </Compile>
-    <Compile Include="App\Dashboard\wcThreePortlet_Flow.ascx.cs">
-      <DependentUpon>wcThreePortlet_Flow.ascx</DependentUpon>
+    <Compile Include="App\Dashboard\wcThreePortlet_First.ascx.cs">
+      <DependentUpon>wcThreePortlet_First.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="App\Dashboard\wcThreePortlet_Flow.ascx.designer.cs">
-      <DependentUpon>wcThreePortlet_Flow.ascx</DependentUpon>
+    <Compile Include="App\Dashboard\wcThreePortlet_First.ascx.designer.cs">
+      <DependentUpon>wcThreePortlet_First.ascx</DependentUpon>
     </Compile>
     <Compile Include="App\Dashboard\wcTwoPortlet_Flow.ascx.cs">
       <DependentUpon>wcTwoPortlet_Flow.ascx</DependentUpon>

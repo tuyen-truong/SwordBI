@@ -9,5 +9,5 @@ using HTLBIWebApp2012.App.Dashboard.Base;
 
 namespace HTLBIWebApp2012.App.Dashboard
 {
-    public partial class wcThreePortlet_Flow : ThreePortletCtrlBase { }
+    public partial class wcThreePortlet_Second : ThreePortletCtrlBase { }
 }

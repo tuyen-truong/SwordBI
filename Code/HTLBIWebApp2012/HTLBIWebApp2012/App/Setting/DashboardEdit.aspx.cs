@@ -93,7 +93,7 @@ namespace HTLBIWebApp2012.App.Setting
             if (IsPostBack)
             {
                 ctrl_DashboardFilters.Controls.Clear();
-                /*
+                
                 if (TwoPane_1.Checked)
                 {
                     LayoutStyle_CheckedChanged(TwoPane_1, new EventArgs());
@@ -122,7 +122,7 @@ namespace HTLBIWebApp2012.App.Setting
                 {
                     LayoutStyle_CheckedChanged(FourPane_1, new EventArgs());
                 }
-                */
+                
                 Add_FilterControl(true);
             }
         }

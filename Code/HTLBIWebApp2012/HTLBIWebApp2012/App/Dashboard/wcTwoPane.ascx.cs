@@ -100,8 +100,7 @@ namespace HTLBIWebApp2012.App.Dashboard
         {
             if (String.IsNullOrEmpty(WHCode)) { throw new Exception(String.Format("Invalid WHCode = {0}", WHCode)); }
 
-            WcPlaceHolder.Controls.Clear();
-            TwoPaneView.ActiveViewIndex = 0;
+            WcPlaceHolder.Controls.Clear();;
 
             TableRow tblRow;
             TableCell tblCell;

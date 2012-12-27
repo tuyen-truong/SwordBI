@@ -10,7 +10,7 @@
 namespace HTLBIWebApp2012.App.Dashboard {
     
     
-    public partial class wcThreePortlet_Grid {
+    public partial class wcThreePortlet_Fourth {
         
         /// <summary>
         /// container_Dashboard_Param control.

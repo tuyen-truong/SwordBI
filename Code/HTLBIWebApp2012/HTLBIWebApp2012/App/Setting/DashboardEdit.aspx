@@ -107,8 +107,8 @@
                 <td valign="top">
                     <asp:UpdatePanel ID="UPLayoutStyle" runat="server" UpdateMode="Conditional">
                         <Triggers>
-                            <asp:PostBackTrigger ControlID="TwoPane_1" />
-                            <asp:PostBackTrigger ControlID="TwoPane_2" />
+                            <asp:AsyncPostBackTrigger ControlID="TwoPane_1" />
+                            <asp:AsyncPostBackTrigger ControlID="TwoPane_2" />
                             <asp:AsyncPostBackTrigger ControlID="ThreePane_1" />
                             <asp:AsyncPostBackTrigger ControlID="ThreePane_2" />
                             <asp:AsyncPostBackTrigger ControlID="ThreePane_3" />

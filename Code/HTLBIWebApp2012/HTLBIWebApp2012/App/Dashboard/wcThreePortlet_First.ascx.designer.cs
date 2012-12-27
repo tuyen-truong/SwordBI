@@ -10,7 +10,7 @@
 namespace HTLBIWebApp2012.App.Dashboard {
     
     
-    public partial class wcThreePortlet_Flow {
+    public partial class wcThreePortlet_First {
         
         /// <summary>
         /// container_Dashboard_Param control.
