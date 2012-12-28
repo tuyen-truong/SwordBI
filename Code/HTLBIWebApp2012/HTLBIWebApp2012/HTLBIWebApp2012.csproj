@@ -118,8 +118,6 @@
     <Content Include="App\Setting\DashboardSetting.aspx" />
     <Content Include="App\Setting\DatasourceList.aspx" />
     <Content Include="App\Setting\KPISetting.aspx" />
-    <Content Include="App\Setting\LayoutList.aspx" />
-    <Content Include="App\Setting\LayoutSetting.aspx" />
     <Content Include="App\Setting\PortletItems.aspx" />
     <Content Include="App\Setting\PortletSetting.aspx" />
     <Content Include="App\Setting\ReportSetting.aspx" />
@@ -751,20 +749,6 @@
     </Compile>
     <Compile Include="App\Setting\KPISetting.aspx.designer.cs">
       <DependentUpon>KPISetting.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="App\Setting\LayoutList.aspx.cs">
-      <DependentUpon>LayoutList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App\Setting\LayoutList.aspx.designer.cs">
-      <DependentUpon>LayoutList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="App\Setting\LayoutSetting.aspx.cs">
-      <DependentUpon>LayoutSetting.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="App\Setting\LayoutSetting.aspx.designer.cs">
-      <DependentUpon>LayoutSetting.aspx</DependentUpon>
     </Compile>
     <Compile Include="App\Setting\PortletItems.aspx.cs">
       <DependentUpon>PortletItems.aspx</DependentUpon>

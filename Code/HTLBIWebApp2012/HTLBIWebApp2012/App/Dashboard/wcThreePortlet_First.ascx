@@ -14,7 +14,7 @@
 <div id="palDashboards" class="box-4zone-container" style="margin-top: 5px;">
     <table width="100%">
         <tr>
-            <td rowspan="2">
+            <td rowspan="2" valign="top">
                 <div id="portlet1" class="boxed">
                     <center class="title">
                         <asp:ImageButton runat="server" ID="imgBtnSetting_portlet1" ImageUrl="~/Content/Images/setting_16.png"
@@ -57,7 +57,7 @@
             <td>
                 <div id="portlet3_bufferLeft" class="boxed box-bottomleft" style="visibility: hidden">
                 </div>
-                <div id="portlet3" class="boxed box-bottomright">
+                <div id="portlet3" class="boxed">
                     <center class="title">
                         <asp:ImageButton runat="server" ID="imgBtnSetting_portlet3" ImageUrl="~/Content/Images/setting_16.png"
                             ToolTip="Setting." ImageAlign="Right" OnClientClick="Set_ProcessState('0');"

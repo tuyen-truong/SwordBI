@@ -36,7 +36,6 @@ namespace HTLBIWebApp2012.App.Setting
             // Set Navigation Url
             DataSource.NavigateUrl = String.Format("DatasourceList.aspx?whcode={0}", WHCode);
             KpiList.NavigateUrl = String.Format("KpiList.aspx?whcode={0}", WHCode);
-            LayoutList.NavigateUrl = String.Format("LayoutList.aspx?whcode={0}", WHCode);
         }
 
         /// <summary>
@@ -54,6 +53,12 @@ namespace HTLBIWebApp2012.App.Setting
         /// </summary>     
         private void SetAddNewUrl()
         {
+            if (String.IsNullOrEmpty(WHCode))
+            {
+                lnkAddNew.Enabled = false;
+                return;
+            }
+            lnkAddNew.Enabled = true;
             lnkAddNew.NavigateUrl = String.Format("DashboardEdit.aspx?whcode={0}", WHCode);
         }
     }

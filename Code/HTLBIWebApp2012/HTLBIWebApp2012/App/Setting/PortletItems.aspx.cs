@@ -39,7 +39,6 @@ namespace HTLBIWebApp2012.App.Setting
             // Set Navigation Url
             DataSource.NavigateUrl = String.Format("DatasourceList.aspx?whcode={0}", WHCode);
             KpiList.NavigateUrl = String.Format("KpiList.aspx?whcode={0}", WHCode);
-            LayoutList.NavigateUrl = String.Format("LayoutList.aspx?whcode={0}", WHCode);
             // Set new url
             lnkAddNew.NavigateUrl = String.Format("PorletSetting.aspx?whcode={0}", WHCode);
         }

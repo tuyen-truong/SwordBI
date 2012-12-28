@@ -67,27 +67,21 @@ namespace HTLBIWebApp2012.App.Dashboard
 
         protected override void OnInit(EventArgs e)
         {
-            InitializeComponent();
             base.OnInit(e);
-        }
-
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-
+            InitializeComponent();
             if (!IsPostBack)
             {
                 IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
-                if (_usingPortlets.Count >= 2)
+                if (portlets.Count() > 0 && _usingPortlets.Count >= 2)
                 {
                     m_picker1.Items.Clear();
                     m_picker2.Items.Clear();
-                    lsttbl_Widget wg = portlets.Single(p => p.Code == _usingPortlets[0]);
+                    lsttbl_Widget wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[0]) && p.Code == _usingPortlets[0]);
                     if (wg != null)
                     {
                         m_picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
                     }
-                    wg = portlets.Single(p => p.Code == _usingPortlets[1]);
+                    wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[1]) && p.Code == _usingPortlets[1]);
                     if (wg != null)
                     {
                         m_picker2.Items.Add(new ListEditItem(wg.Name, wg.Code));
@@ -96,11 +90,16 @@ namespace HTLBIWebApp2012.App.Dashboard
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
+
         private void InitializeComponent()
         {
             if (String.IsNullOrEmpty(WHCode)) { throw new Exception(String.Format("Invalid WHCode = {0}", WHCode)); }
 
-            WcPlaceHolder.Controls.Clear();;
+            WcPlaceHolder.Controls.Clear();
 
             TableRow tblRow;
             TableCell tblCell;
@@ -113,9 +112,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                 switch(WcType)
                 {
                     case PaneType.First:
-                        break;
                     case PaneType.Second:
-                        break;
                     default:
                         throw new Exception("Invalid.");
                 }

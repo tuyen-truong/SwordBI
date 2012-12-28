@@ -22,6 +22,15 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtDashboardName;
         
         /// <summary>
+        /// UPLayoutStyle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UPLayoutStyle;
+        
+        /// <summary>
         /// TwoPane_1 control.
         /// </summary>
         /// <remarks>
@@ -146,15 +155,6 @@ namespace HTLBIWebApp2012.App.Setting {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Image7;
-        
-        /// <summary>
-        /// UPLayoutStyle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UPLayoutStyle;
         
         /// <summary>
         /// DashboardSettingPlaceHolder control.

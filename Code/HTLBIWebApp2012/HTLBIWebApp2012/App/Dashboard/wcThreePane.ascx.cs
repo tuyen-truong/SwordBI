@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using HTLBIWebApp2012.Shared.UserControl;
 using CECOM;
+using HTLBIWebApp2012.Codes.Models;
+using HTLBIWebApp2012.Codes.BLL;
+using DevExpress.Web.ASPxEditors;
 
 namespace HTLBIWebApp2012.App.Dashboard
 {
@@ -34,6 +37,7 @@ namespace HTLBIWebApp2012.App.Dashboard
         {
             get
             {
+                _usingPortlets = new List<string>();
                 if (picker1.SelectedItem != null)
                 {
                     _usingPortlets.Add(Lib.NTE(picker1.SelectedItem.Value));
@@ -62,7 +66,7 @@ namespace HTLBIWebApp2012.App.Dashboard
             }
             set
             {
-                _usingPortlets.AddRange(value);
+                _usingPortlets = value;
                 ViewState["WcThreePane_UsingPortlets"] = _usingPortlets;
 
             }
@@ -73,7 +77,39 @@ namespace HTLBIWebApp2012.App.Dashboard
         protected wcPortletPicker picker3;
         protected Table TblLayout = new Table();
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            InitializeComponent();
+
+            if (!IsPostBack)
+            {
+                IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
+                if (portlets.Count() > 0 && _usingPortlets.Count >= 3)
+                {
+                    picker1.Items.Clear();
+                    picker2.Items.Clear();
+                    picker3.Items.Clear();
+                    lsttbl_Widget wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[0]) && p.Code == _usingPortlets[0]);
+                    if (wg != null)
+                    {
+                        picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                    }
+                    wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[1]) && p.Code == _usingPortlets[1]);
+                    if (wg != null)
+                    {
+                        picker2.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                    }
+                    wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[2]) && p.Code == _usingPortlets[2]);
+                    if (wg != null)
+                    {
+                        picker3.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                    }
+                }
+            }
+        }
+
+        void InitializeComponent()
         {
             if (String.IsNullOrEmpty(WHCode)) { throw new Exception(String.Format("Invalid WHCode = {0}", WHCode)); }
 
@@ -84,19 +120,19 @@ namespace HTLBIWebApp2012.App.Dashboard
 
             if (CtrlMode == ControlMode.View)
             {
-
+                throw new Exception("Under constructor.");
             }
             else
             {
                 picker1 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                 picker2 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                 picker3 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
-                
+
                 picker1.WHCode = this.WHCode;
                 picker2.WHCode = this.WHCode;
                 picker3.WHCode = this.WHCode;
 
-                switch(WcType)
+                switch (WcType)
                 {
                     case PaneType.First:
                         tblRow = new TableRow();

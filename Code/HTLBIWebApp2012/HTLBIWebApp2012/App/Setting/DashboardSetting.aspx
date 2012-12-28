@@ -18,11 +18,6 @@
                 <dx:ASPxHyperLink runat="server" ID="KpiList" ClientInstanceName="KpiList"
                     Text="KPIs" NavigateUrl="~/App/Setting/KpiList.aspx" />
             </li>
-            <li>&nbsp;|&nbsp;</li>
-            <li>
-                <dx:ASPxHyperLink runat="server" ID="LayoutList" ClientInstanceName="LayoutList"
-                    Text="Layouts" NavigateUrl="~/App/Setting/LayoutList.aspx" />
-            </li>
         </ul>
     </div>
     <br />

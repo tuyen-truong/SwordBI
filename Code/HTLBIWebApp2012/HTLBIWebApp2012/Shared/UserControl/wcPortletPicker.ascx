@@ -46,6 +46,16 @@
                                                 if( CandidatePortlet ) {
                                                     CandidatePortlet.ClearItems();
                                                     CandidatePortlet.AddItem(selecteditem.text, selecteditem.value);
+                                                    var el = document.getElementById('selectedPortlet');
+                                                    if (el) {
+                                                        if (el.value.length == 0) {
+                                                            el.value = selecteditem.value;
+                                                        }
+                                                        else {
+                                                            el.value += ',';
+                                                            el.value += selecteditem.value;
+                                                        }
+                                                    }
                                                 }
                                             }
                                             window[popupname].Hide(); }" />

@@ -33,6 +33,18 @@ namespace HTLBIWebApp2012.App.Setting
             }
         }
 
+        String Layout
+        {
+            get
+            {
+                return ViewState["Dashboard_Layout"] as String;
+            }
+            set
+            {
+                ViewState["Dashboard_Layout"] = value;
+            }
+        }
+        
         protected wcTwoPane TwoPane;
         protected wcThreePane ThreePane;
         protected wcFourPane FourPane;
@@ -52,6 +64,7 @@ namespace HTLBIWebApp2012.App.Setting
                     // clean up control value
                     txtDashboardName.Text = "";
                     TwoPane_1.Checked = true;
+                    Layout_Initialize(TwoPane_1.ID);
                     // clean up filters
                     ctrl_DashboardFilters.Controls.Clear();
                     CtrlDashboardFilterIDs.Clear();
@@ -74,7 +87,7 @@ namespace HTLBIWebApp2012.App.Setting
                     if (radio != null)
                     {
                         radio.Checked = true;
-                        LayoutStyle_CheckedChanged(radio, new EventArgs());
+                        Layout_Initialize(radio.ID);
                     }
 
                     // Add Filter.
@@ -92,39 +105,15 @@ namespace HTLBIWebApp2012.App.Setting
             }
             if (IsPostBack)
             {
-                ctrl_DashboardFilters.Controls.Clear();
-                
-                if (TwoPane_1.Checked)
-                {
-                    LayoutStyle_CheckedChanged(TwoPane_1, new EventArgs());
-                }
-                else if (TwoPane_2.Checked)
-                {
-                    LayoutStyle_CheckedChanged(TwoPane_2, new EventArgs());
-                }
-                else if (ThreePane_1.Checked)
-                {
-                    LayoutStyle_CheckedChanged(ThreePane_1, new EventArgs());
-                }
-                else if (ThreePane_2.Checked)
-                {
-                    LayoutStyle_CheckedChanged(ThreePane_2, new EventArgs());
-                }
-                else if (ThreePane_3.Checked)
-                {
-                    LayoutStyle_CheckedChanged(ThreePane_3, new EventArgs());
-                }
-                else if (ThreePane_4.Checked)
-                {
-                    LayoutStyle_CheckedChanged(ThreePane_4, new EventArgs());
-                }
-                else
-                {
-                    LayoutStyle_CheckedChanged(FourPane_1, new EventArgs());
-                }
-                
+                ctrl_DashboardFilters.Controls.Clear();                
                 Add_FilterControl(true);
+
+                if (!String.IsNullOrEmpty(Layout))
+                {
+                    Layout_Initialize(Layout);
+                }
             }
+            Page.ClientScript.RegisterHiddenField("selectedPortlet", "");
         }
 
         protected void btnAddDashboardFilter_Click(object sender, EventArgs e)
@@ -182,7 +171,7 @@ namespace HTLBIWebApp2012.App.Setting
             {
                 // default case
                 dbDefine.Template = "TwoPane_1";
-                _usingPortlets.AddRange(FourPane.UsingPortlets);
+                _usingPortlets.AddRange(TwoPane.UsingPortlets);
             }
             // filters
             dbDefine.Filters = this.ctrl_DashboardFilters.Controls.OfType<wcInteractionFilter>()
@@ -249,10 +238,21 @@ namespace HTLBIWebApp2012.App.Setting
         {
             RadioButton radio = sender as RadioButton;
             if (radio == null) { return; }
-            String ID = radio.ID;
-            String[] IDs = ID.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
+            Layout_Initialize(radio.ID);
+        }
+
+        /// <summary>
+        /// Initialize a control to setting up dashboard layout
+        /// </summary>
+        /// <param name="strTemplateName">It should be on of the following names TwoPane_1, TwoPane_2, ThreePane_1, ..., ThreePane_4, FourPane_1</param>
+        void Layout_Initialize(String strTemplateName)
+        {
+            DashboardSettingPlaceHolder.Controls.Clear();
+            
+
+            String[] IDs = strTemplateName.Split(new char[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
             if (IDs.Length < 2) { return; }
-            switch(IDs[0])
+            switch (IDs[0])
             {
                 case "TwoPane":
                     TwoPane = LoadControl(String.Format("~/App/Dashboard/wcTwoPane.ascx")) as wcTwoPane;
@@ -266,7 +266,7 @@ namespace HTLBIWebApp2012.App.Setting
                         TwoPane.WcType = wcTwoPane.PaneType.Second;
                     }
                     TwoPane.CtrlMode = wcTwoPane.ControlMode.New;
-                    TwoPane.UsingPortlets = Dashboard != null ? Dashboard.JsonObj.Get_UsingPortlets().Select(p => p.Code).ToList() : new List<String>();
+                    TwoPane.UsingPortlets = Dashboard != null ? Dashboard.JsonObj.UsingPortlets : new List<String>();
                     DashboardSettingPlaceHolder.Controls.Add(TwoPane);
                     break;
                 case "ThreePane":
@@ -291,18 +291,21 @@ namespace HTLBIWebApp2012.App.Setting
                     }
                     ThreePane.CtrlMode = wcThreePane.ControlMode.New;
                     ThreePane.WHCode = this.WHCode;
+                    ThreePane.UsingPortlets = Dashboard != null ? Dashboard.JsonObj.UsingPortlets : new List<String>();
                     DashboardSettingPlaceHolder.Controls.Add(ThreePane);
                     break;
                 case "FourPane":
                     FourPane = LoadControl(String.Format("~/App/Dashboard/wcFourPane.ascx")) as wcFourPane;
                     FourPane.CtrlMode = PartPlugCtrlBase.ControlMode.New;
                     FourPane.WHCode = this.WHCode;
+                    FourPane.UsingPortlets = Dashboard != null ? Dashboard.JsonObj.UsingPortlets : new List<String>();
                     DashboardSettingPlaceHolder.Controls.Add(FourPane);
                     break;
                 default:
                     DashboardSettingPlaceHolder.Controls.Add(new LiteralControl("Under Constructor!!!"));
                     break;
             }
+            Layout = strTemplateName;
         }
     }
 }
