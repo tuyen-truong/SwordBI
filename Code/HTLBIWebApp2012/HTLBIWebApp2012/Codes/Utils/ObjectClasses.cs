@@ -4061,7 +4061,25 @@ namespace HTLBIWebApp2012
 
             public lsttbl_DashboardSource DataSource
             {
-                get { return MyBI.Me.Get_DashboardSourceBy(DSCode); }
+                get
+                {
+                    lsttbl_DashboardSource ds = new lsttbl_DashboardSource();
+                    switch (WidgetType)
+                    {
+                        case WidgetTypeName.Chart:
+                            ds = JsonObj_Chart.Get_BIDatasource();
+                            break;
+                        case WidgetTypeName.Guage:
+                            ds = JsonObj_Gauge.Get_BIDatasource();
+                            break;
+                        case WidgetTypeName.Grid:
+                            ds = JsonObj_Grid.Get_BIDatasource();
+                            break;
+                        default:
+                            throw new Exception("Invalid widget type.");
+                    }
+                    return ds;
+                }
             }
 
             /// <summary>

@@ -48,6 +48,7 @@ namespace HTLBIWebApp2012.App.Setting
         protected wcTwoPane TwoPane;
         protected wcThreePane ThreePane;
         protected wcFourPane FourPane;
+        protected List<String> m_selectedPortlets = new List<string>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -111,6 +112,18 @@ namespace HTLBIWebApp2012.App.Setting
                 if (!String.IsNullOrEmpty(Layout))
                 {
                     Layout_Initialize(Layout);
+                    if (TwoPane != null)
+                    {
+                        m_selectedPortlets = TwoPane.UsingPortlets;
+                    }
+                    if (ThreePane != null)
+                    {
+                        m_selectedPortlets = ThreePane.UsingPortlets;
+                    }
+                    if (FourPane != null)
+                    {
+                        m_selectedPortlets = FourPane.UsingPortlets;
+                    }
                 }
             }
             Page.ClientScript.RegisterHiddenField("selectedPortlet", "");
@@ -266,7 +279,15 @@ namespace HTLBIWebApp2012.App.Setting
                         TwoPane.WcType = wcTwoPane.PaneType.Second;
                     }
                     TwoPane.CtrlMode = wcTwoPane.ControlMode.New;
-                    TwoPane.UsingPortlets = Dashboard != null ? Dashboard.JsonObj.UsingPortlets : new List<String>();
+                    //TwoPane.UsingPortlets = Dashboard != null ? Dashboard.JsonObj.UsingPortlets : new List<String>();
+                    if (IsPostBack)
+                    {
+                        TwoPane.UsingPortlets = m_selectedPortlets;
+                    }
+                    else
+                    {
+                        TwoPane.UsingPortlets = Dashboard != null ? Dashboard.JsonObj.UsingPortlets : new List<String>();
+                    }
                     DashboardSettingPlaceHolder.Controls.Add(TwoPane);
                     break;
                 case "ThreePane":

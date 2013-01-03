@@ -19,7 +19,7 @@ namespace HTLBIWebApp2012.Shared.UserControl
             String csname = "PortletPicker";
             Type cstype = this.GetType();
             ClientScriptManager csm = Page.ClientScript;
-            if (!csm.IsClientScriptBlockRegistered(csname))
+            if (!csm.IsClientScriptBlockRegistered(cstype, csname))
             {
                 csm.RegisterClientScriptBlock(cstype, csname, wcPortletPicker.PortletPickerScript);
             }

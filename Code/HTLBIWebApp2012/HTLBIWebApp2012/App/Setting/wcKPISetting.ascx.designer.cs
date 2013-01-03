@@ -49,6 +49,24 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtKPIDisplayName;
         
         /// <summary>
+        /// TrDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow TrDataSource;
+        
+        /// <summary>
+        /// cboDatasource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cboDatasource;
+        
+        /// <summary>
         /// cboKPI control.
         /// </summary>
         /// <remarks>

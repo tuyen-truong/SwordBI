@@ -43,7 +43,24 @@ namespace HTLBIWebApp2012.App.Setting
             get
             {
                 var curKPI = this.Get_KPI();
-                return (curKPI != null) ? curKPI.ParentCode : this.MyPage.DSCode;
+                if (curKPI != null)
+                {
+                    return curKPI.ParentCode;
+                }
+                if (this.MyPage != null)
+                {
+                    return this.MyPage.DSCode;
+                }
+                if (this.Page is KPISetting)
+                {
+                    return Lib.NTE(this.cboDatasource.Value);
+                }
+                return null;
+            }
+            protected set
+            {
+                ViewState["KPISetting_DSCode"] = value;
+                this.Page.ClientScript.RegisterHiddenField("KPISetting_DSCode", value);
             }
         }
         public string KPICode
@@ -111,6 +128,18 @@ namespace HTLBIWebApp2012.App.Setting
         {
             this.OnChange += this_OnChange;
             this.Register_JavaScript();
+            string[] urlSegments = Request.Url.Segments;
+            string curUrl = urlSegments[urlSegments.Count() - 1];
+            string redirectUrl = string.Empty;
+            if (curUrl.ToUpper().Equals("KPISETTING.ASPX"))
+            {
+                redirectUrl = ResolveUrl(string.Format("~/App/Setting/KpiList.aspx?whcode={0}", this.WHCode));
+            }
+            else
+            {
+                redirectUrl = ResolveUrl(string.Format("~/App/Setting/PortletItems.aspx?whcode={0}", this.WHCode));
+            }
+            btnCancel.ClientSideEvents.Click = @"function (s, e) { location.href = """ + redirectUrl + @"""; }";
             if (!this.IsPostBack)
             {
                 // Control Type...
@@ -137,11 +166,8 @@ namespace HTLBIWebApp2012.App.Setting
             {
                 // Tải lại source cho cboKPI(để nó không bị thiếu khi vừa thêm mới 1 KPI trong sự kiện của CallbackPanel)
                 // Vì cơ chế của CallbackPanel sẽ không để lại ViewState mỗi lần Render
-                if (MyPage != null && !string.IsNullOrEmpty(this.MyPage.WHCode))
-                {
-                    var kpis = MyBI.Me.Get_DashboardKPI_ByWH(this.MyPage.WHCode).ToList();
-                    Helpers.SetDataSource(this.cboKPI, kpis, "Code", "NameVI", this.cboKPI.Value);
-                }
+                var kpis = MyBI.Me.Get_DashboardKPI_ByWH(this.WHCode).ToList();
+                Helpers.SetDataSource(this.cboKPI, kpis, "Code", "NameVI", this.cboKPI.Value);
                 // Tạo lại control....
                 this.Add_PartControl(null, true);
                 this.Add_FilterControl(null, true);
@@ -301,37 +327,50 @@ namespace HTLBIWebApp2012.App.Setting
                     DisplayName = this.txtKPIDisplayName.Text,
                     DatasourceID = this.DSCode_Target,
                     CtrlTypeDefault = Lib.IsNOE(cboCtrlType.Value) ? "" : Lib.NTE(this.cboCtrlType.Value),
-                    VisibleTypeDefault = Lib.IsNOE(cboCtrl.Value)? "" : Lib.NTE(cboCtrl.Value).Split('-', StringSplitOptions.RemoveEmptyEntries).LastOrDefault(),
+                    VisibleTypeDefault = Lib.IsNOE(cboCtrl.Value) ? "" : Lib.NTE(cboCtrl.Value).Split('-', StringSplitOptions.RemoveEmptyEntries).LastOrDefault(),
                     MaxValue = double.Parse(this.txtMaxValue.Text),
                     MinValue = double.Parse(this.txtMinValue.Text)
                 };
                 // Lấy thông tin Dimension.
-                foreach (KPIPartCtrlBase ctrl in this.ctrl_Dimensions.Controls)
+                foreach (Control ctrl in this.ctrl_Dimensions.Controls)
                 {
-                    if (ctrl == null) continue;
-                    ret.AddDimension(ctrl.Get_KPIPartInfo());
+                    if (ctrl is KPIPartCtrlBase)
+                    {
+                        ret.AddDimension((ctrl as KPIPartCtrlBase).Get_KPIPartInfo());
+                    }
                 }
                 // Lấy thông tin Measure.
-                foreach (KPIPartCtrlBase ctrl in this.ctrl_Measures.Controls)
+                foreach (Control ctrl in this.ctrl_Measures.Controls)
                 {
-                    if (ctrl == null) continue;
-                    ret.AddMeasure(ctrl.Get_KPIPartInfo());
+                    if (ctrl is KPIPartCtrlBase)
+                    {
+                        ret.AddMeasure((ctrl as KPIPartCtrlBase).Get_KPIPartInfo());
+                    }
                 }
                 // Lấy thông tin ContextMetric.
-                foreach (KPIPartCtrlBase ctrl in this.ctrl_ContextMetric.Controls)
+                foreach (Control ctrl in this.ctrl_ContextMetric.Controls)
                 {
-                    if (ctrl == null) continue;
-                    ret.AddContext(ctrl.Get_KPIPartInfo());
+                    if (ctrl is KPIPartCtrlBase)
+                    {
+                        ret.AddContext((ctrl as KPIPartCtrlBase).Get_KPIPartInfo());
+                    }
                 }
                 // Lấy thông tin Filter KPI.
-                foreach (FilterCtrlBase ctrl in this.ctrl_KPIFilters.Controls)
+                foreach (Control ctrl in this.ctrl_KPIFilters.Controls)
                 {
-                    if (ctrl == null) continue;
-                    ret.AddFilter(ctrl.Get_FilterInfo());
+                    if (ctrl is FilterCtrlBase)
+                    {
+                        ret.AddFilter((ctrl as FilterCtrlBase).Get_FilterInfo());
+                    }
                 }
                 return ret;
             }
+#if DEBUG
+            catch (Exception ex) { throw ex; }
+#else
             catch { return null; }
+#endif
+
         }
         private FilterCtrlBase Add_FilterControl(string type, bool isReCreate)
         {
@@ -567,6 +606,7 @@ namespace HTLBIWebApp2012.App.Setting
                     MySession.KPIDefine_CurEditing = item.Code;
                     this.txtKPIDisplayName.Text = item.NameVI;
                     var kpi = item.JsonObjKPI;
+                    DSCode_Target = kpi.DatasourceID;
 
                     // Clear part control
                     this.Clear_AllPartCtrl();
@@ -632,6 +672,12 @@ namespace HTLBIWebApp2012.App.Setting
             try
             {
                 var btn = sender as ASPxButton;
+                if (!String.IsNullOrEmpty(MySession.KPIDefine_CurEditing))
+                {
+                    this.cboKPI.Enabled = true;
+                    this.cboKPI.Value = MySession.KPIDefine_CurEditing;
+                    this.TrDataSource.Visible = false;
+                }
                 if (btn.ID == this.btnNewKPI.ID)
                 {
                     MySession.KPIDefine_CurEditing = null;
@@ -648,6 +694,14 @@ namespace HTLBIWebApp2012.App.Setting
                     {
                         this.tabCtrl_PortletSetting.ActiveTabIndex = 0;
                     }
+                    if (this.Page is KPISetting)
+                    {
+                        this.cboKPI.Enabled = false;
+                        // Allow select data source
+                        this.TrDataSource.Visible = true;
+                        Helpers.SetDataSource(this.cboDatasource, MyBI.Me.Get_DashboardSource(this.WHCode), "Code", "NameVI");
+                    }
+
                     // Raise Event OnChange.
                     this.Raise_OnChange(new { Cat = "KPI", Ctrl = this }, null);
                 }
@@ -656,7 +710,14 @@ namespace HTLBIWebApp2012.App.Setting
                 else if (btn.ID == this.btnAddMeasure.ID)
                     this.Add_PartControl("measure", false);
             }
-            catch { }
+#if DEBUG
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+#else
+            catch{}
+#endif
         }
         protected void cbp_Callback(object sender, DevExpress.Web.ASPxClasses.CallbackEventArgsBase e)
         {
@@ -687,7 +748,7 @@ namespace HTLBIWebApp2012.App.Setting
                                 JsonStr = objSett.ToJsonStr(),
                                 NameVI = this.txtKPIDisplayName.Text,
                                 NameEN = this.txtKPIDisplayName.Text,
-                                WHCode = this.MyPage.WHCode,
+                                WHCode = this.WHCode,
                                 SettingCat = GlobalVar.SettingCat_KPI
                             };
                             MyBI.Me.Save_DashboardSource(obj);
@@ -702,8 +763,10 @@ namespace HTLBIWebApp2012.App.Setting
                 {
                     if (!string.IsNullOrEmpty(MySession.KPIDefine_CurEditing))
                     {
-                        var kpis = MyBI.Me.Get_DashboardKPI_ByWH(this.MyPage.WHCode).ToList();
+                        var kpis = MyBI.Me.Get_DashboardKPI_ByWH(this.WHCode).ToList();
                         Helpers.SetDataSource(this.cboKPI, kpis, "Code", "NameVI", MySession.KPIDefine_CurEditing);
+                        this.cboKPI.Enabled = true;
+                        this.TrDataSource.Visible = false;
                     }
                 }
             }
