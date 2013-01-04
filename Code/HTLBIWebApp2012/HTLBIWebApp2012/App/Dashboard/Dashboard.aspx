@@ -4,6 +4,10 @@
 <%@ Register assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxPanel" tagprefix="dx" %>
 <%@ Register src="wcSwitchDashboard.ascx" tagname="wcSwitchDashboard" tagprefix="uc1" %>
 
+<asp:Content ContentPlaceHolderID="SubHeadContent" runat="server">
+<link href="~/Content/CSS/Dashboard.css" type="text/css" rel="Stylesheet" />
+</asp:Content>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">    
     <asp:UpdatePanel ID="udp_Dashboard" runat="server">
         <ContentTemplate>

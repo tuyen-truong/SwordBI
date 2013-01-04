@@ -37,18 +37,29 @@ namespace HTLBIWebApp2012.App.Setting
         public void Set_FilterInfo(InteractionFilter info)
         {
             if (info == null) return;
-            if (info.Control == "CheckedComboBox" || info.Control == "TreeListBox" || 
-                info.Control == "Calendar_Prev")
-                this.chkEnableRange.ClientVisible = false;
+            if (info.Control == "CheckedComboBox"
+                || info.Control == "TreeListBox"
+                || info.Control == "Calendar_Prev")
+            {
+                this.chkEnableRange.Visible = false;
+            }
             else
-                this.chkEnableRange.ClientVisible = true;
+            {
+                this.chkEnableRange.Visible = true;
+            }
 
-            if (info.Control == "Calendar_Year" || info.Control == "Calendar_Quarter" ||
-                info.Control == "Calendar_Period" || info.Control == "Calendar_Day" || 
-                info.Control == "Calendar_Prev")
-                this.cbbSourceField.ClientVisible = false;
+            if (info.Control == "Calendar_Year"
+                || info.Control == "Calendar_Quarter"
+                || info.Control == "Calendar_Period"
+                || info.Control == "Calendar_Day"
+                || info.Control == "Calendar_Prev")
+            {
+                this.cbbSourceField.Visible = false;
+            }
             else
-                this.cbbSourceField.ClientVisible = true;
+            {
+                this.cbbSourceField.Visible = true;
+            }
             //this.ID = info.Name;            
             this.cbbControl.Value = info.Control;
             this.cbbSourceField.Value = info.SourceField;
@@ -70,15 +81,29 @@ namespace HTLBIWebApp2012.App.Setting
                 {
                     if (selVal == "CheckedComboBox" || selVal == "TreeListBox" ||
                         selVal == "Calendar_Prev")
-                        this.chkEnableRange.ClientVisible = false;
+                    {
+                        //this.chkEnableRange.ClientVisible = false;
+                        this.chkEnableRange.Visible = false;
+                    }
                     else
-                        this.chkEnableRange.ClientVisible = true;
-                    if (selVal == "Calendar_Year" || selVal == "Calendar_Quarter" ||
-                        selVal == "Calendar_Period" || selVal == "Calendar_Day" ||
-                        selVal == "Calendar_Prev")
-                        this.cbbSourceField.ClientVisible = false;
-                    else                        
-                        this.cbbSourceField.ClientVisible = true;
+                    {
+                        //this.chkEnableRange.ClientVisible = true;
+                        this.chkEnableRange.Visible = true;
+                    }
+                    if (selVal == "Calendar_Year"
+                        || selVal == "Calendar_Quarter"
+                        || selVal == "Calendar_Period"
+                        || selVal == "Calendar_Day"
+                        || selVal == "Calendar_Prev")
+                    {
+                        //this.cbbSourceField.ClientVisible = false;
+                        this.cbbSourceField.Visible = false;
+                    }
+                    else
+                    {
+                        //this.cbbSourceField.ClientVisible = true;
+                        this.cbbSourceField.Visible = true;
+                    }
                 }
                 if (string.IsNullOrEmpty(this.txtCaption.Text))
                     this.txtCaption.Text = this.cbbSourceField.Text;

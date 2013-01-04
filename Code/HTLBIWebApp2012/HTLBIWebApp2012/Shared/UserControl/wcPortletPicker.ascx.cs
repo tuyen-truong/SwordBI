@@ -6,13 +6,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using HTLBIWebApp2012.Codes.BLL;
 using DevExpress.Web.ASPxEditors;
+using System.Web.UI.HtmlControls;
 
 namespace HTLBIWebApp2012.Shared.UserControl
 {
     public partial class wcPortletPicker : System.Web.UI.UserControl
     {
         public Unit Width = Unit.Percentage(100);
-        public Unit Height = Unit.Percentage(100);
+        public Unit Height = Unit.Pixel(100);
 
         protected void Page_Init()
         {
@@ -38,8 +39,15 @@ namespace HTLBIWebApp2012.Shared.UserControl
 
         protected override void OnPreRender(EventArgs e)
         {
-            base.OnPreRender(e);
             m_portletCandidate.Width = this.Width;
+            m_portletCandidate.Height = this.Height;
+            
+            btnShowModal.Style.Add(HtmlTextWriterStyle.Position, "relative");
+            btnShowModal.Style.Add("float", "right");
+            btnShowModal.Style.Add("right", "-20px");
+            btnShowModal.Style.Add("top", string.Format("-{0}px", this.Height.Value + 10));
+
+            base.OnPreRender(e);
             m_portletCandidate.ClientInstanceName = m_portletCandidate.ClientID;
         }
 
@@ -60,6 +68,12 @@ namespace HTLBIWebApp2012.Shared.UserControl
         }
 
         public ListEditItemCollection Items { get { return m_portletCandidate.Items; } }
+
+        public int SelectedIndex
+        {
+            get { return this.m_portletCandidate.SelectedIndex; }
+            set { this.m_portletCandidate.SelectedIndex = value; }
+        }
 
         public static string PortletPickerScript
         {

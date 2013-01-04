@@ -77,7 +77,6 @@ namespace HTLBIWebApp2012.App.Dashboard
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            Page.Header.Controls.Add(new LiteralControl(@"<link href=""" + ResolveUrl("~/Content/CSS/Dashboard.css") + @"""  rel=""stylesheet"" type=""text/css"" />"));
             Title = "Dashboards";
             this.OnChange += this_OnChange;
             //Tạo lại control....

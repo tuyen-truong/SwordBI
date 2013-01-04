@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Shared/FullMaster.Master" AutoEventWireup="true" CodeBehind="GeneralMaster.Master.cs" Inherits="HTLBIWebApp2012.Shared.GeneralMaster" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="headContent" runat="server">
+<asp:ContentPlaceHolder ID="SubHeadContent" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="bodyContent" runat="server">
     <!--CENTER-->

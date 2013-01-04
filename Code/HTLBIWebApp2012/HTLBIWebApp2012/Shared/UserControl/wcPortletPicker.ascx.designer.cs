@@ -13,15 +13,6 @@ namespace HTLBIWebApp2012.Shared.UserControl {
     public partial class wcPortletPicker {
         
         /// <summary>
-        /// PortletPickerPlaceHolder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder PortletPickerPlaceHolder;
-        
-        /// <summary>
         /// m_portletCandidate control.
         /// </summary>
         /// <remarks>

@@ -38,29 +38,32 @@ namespace HTLBIWebApp2012.App.Dashboard
             get
             {
                 _usingPortlets = new List<string>();
-                if (picker1.SelectedItem != null)
+                if (this.ChildControlsCreated)
                 {
-                    _usingPortlets.Add(Lib.NTE(picker1.SelectedItem.Value));
-                }
-                else
-                {
-                    _usingPortlets.Add(String.Empty);
-                }
-                if (picker2.SelectedItem != null)
-                {
-                    _usingPortlets.Add(Lib.NTE(picker2.SelectedItem.Value));
-                }
-                else
-                {
-                    _usingPortlets.Add(String.Empty);
-                }
-                if (picker3.SelectedItem != null)
-                {
-                    _usingPortlets.Add(Lib.NTE(picker3.SelectedItem.Value));
-                }
-                else
-                {
-                    _usingPortlets.Add(String.Empty);
+                    if (picker1.SelectedItem != null)
+                    {
+                        _usingPortlets.Add(Lib.NTE(picker1.SelectedItem.Value));
+                    }
+                    else
+                    {
+                        _usingPortlets.Add(String.Empty);
+                    }
+                    if (picker2.SelectedItem != null)
+                    {
+                        _usingPortlets.Add(Lib.NTE(picker2.SelectedItem.Value));
+                    }
+                    else
+                    {
+                        _usingPortlets.Add(String.Empty);
+                    }
+                    if (picker3.SelectedItem != null)
+                    {
+                        _usingPortlets.Add(Lib.NTE(picker3.SelectedItem.Value));
+                    }
+                    else
+                    {
+                        _usingPortlets.Add(String.Empty);
+                    }
                 }
                 return _usingPortlets;
             }
@@ -82,28 +85,61 @@ namespace HTLBIWebApp2012.App.Dashboard
             base.OnInit(e);
             InitializeComponent();
 
-            if (!IsPostBack)
+            //if (!IsPostBack)
+            //{
+            //    IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
+            //    if (portlets.Count() > 0 && _usingPortlets.Count >= 3)
+            //    {
+            //        picker1.Items.Clear();
+            //        picker2.Items.Clear();
+            //        picker3.Items.Clear();
+            //        lsttbl_Widget wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[0]) && p.Code == _usingPortlets[0]);
+            //        if (wg != null)
+            //        {
+            //            picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
+            //        }
+            //        wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[1]) && p.Code == _usingPortlets[1]);
+            //        if (wg != null)
+            //        {
+            //            picker2.Items.Add(new ListEditItem(wg.Name, wg.Code));
+            //        }
+            //        wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[2]) && p.Code == _usingPortlets[2]);
+            //        if (wg != null)
+            //        {
+            //            picker3.Items.Add(new ListEditItem(wg.Name, wg.Code));
+            //        }
+            //    }
+            //}
+            IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
+            if (portlets.Count() > 0)
             {
-                IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
-                if (portlets.Count() > 0 && _usingPortlets.Count >= 3)
+                picker1.Items.Clear();
+                picker2.Items.Clear();
+                picker3.Items.Clear();
+                lsttbl_Widget wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[0]) && p.Code == _usingPortlets[0]);
+                if (wg != null)
                 {
-                    picker1.Items.Clear();
-                    picker2.Items.Clear();
-                    picker3.Items.Clear();
-                    lsttbl_Widget wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[0]) && p.Code == _usingPortlets[0]);
-                    if (wg != null)
-                    {
-                        picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
-                    }
-                    wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[1]) && p.Code == _usingPortlets[1]);
+                    picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                    picker1.SelectedIndex = 0;
+                }
+                if (_usingPortlets.Count > 1
+                    && !string.IsNullOrEmpty(_usingPortlets[1]))
+                {
+                    wg = portlets.Single(p => p.Code == _usingPortlets[1]);
                     if (wg != null)
                     {
                         picker2.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                        picker2.SelectedIndex = 0;
                     }
-                    wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[2]) && p.Code == _usingPortlets[2]);
+                }
+                if (_usingPortlets.Count > 2
+                    && !string.IsNullOrEmpty(_usingPortlets[2]))
+                {
+                    wg = portlets.Single(p => p.Code == _usingPortlets[2]);
                     if (wg != null)
                     {
                         picker3.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                        picker3.SelectedIndex = 0;
                     }
                 }
             }
@@ -140,6 +176,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.RowSpan = 2;
                         tblCell.VerticalAlign = VerticalAlign.Top;
+                        picker1.Height = Unit.Pixel(225);
                         tblCell.Controls.Add(picker1);
                         tblRow.Cells.Add(tblCell);
                         tblCell = new TableCell();
@@ -183,6 +220,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblCell.Style.Add(HtmlTextWriterStyle.Width, Unit.Percentage(50).ToString());
                         tblCell.RowSpan = 2;
                         tblCell.VerticalAlign = VerticalAlign.Top;
+                        picker2.Height = Unit.Pixel(225);
                         tblCell.Controls.Add(picker2);
                         tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);
@@ -218,6 +256,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                 }
             }
             WcPlaceHolder.Controls.Add(TblLayout);
+            this.ChildControlsCreated = true;
         }
     }
 }

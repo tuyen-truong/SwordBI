@@ -17,11 +17,11 @@
             </td>
         </tr>
     </table>
-    <fieldset class="dashboard-layout-style">
+    <fieldset style="margin:10px !important;">
         <legend>Layout Style</legend>
         <asp:UpdatePanel ID="UPLayoutStyle" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                <table width="100%">
+                <table width="100%" style="height: 260px">
                     <colgroup>
                         <col width="50%" />
                         <col width="50%" />
@@ -30,7 +30,7 @@
                         <td valign="top">
                             <table>
                                 <tr>
-                                    <th style="vertical-align: middle; width: 150px;">
+                                    <th style="vertical-align: middle; width: 150px; font-weight:normal;">
                                         Two Pane
                                     </th>
                                     <td valign="middle">
@@ -63,7 +63,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th style="vertical-align: middle; width: 150px">
+                                    <th style="vertical-align: middle; width: 150px; font-weight:normal;">
                                         Three Pane
                                     </th>
                                     <td valign="middle">
@@ -100,7 +100,7 @@
                                     </td>
                                 </tr>
                                 <tr style="padding-top: 50px;">
-                                    <th style="vertical-align: middle; width: 150px;">
+                                    <th style="vertical-align: middle; width: 150px; font-weight:normal;">
                                         Four Pane
                                     </th>
                                     <td valign="middle">
@@ -134,7 +134,7 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </fieldset>
-    <fieldset class="dashboard-filter">
+    <fieldset style="margin:10px !important;">
         <legend>Filters</legend>
         <asp:UpdatePanel ID="UpdatePanel" runat="server" UpdateMode="Conditional">
             <ContentTemplate>

@@ -36,22 +36,25 @@ namespace HTLBIWebApp2012.App.Dashboard
             get
             {
                 _usingPortlets.Clear();
-                if (m_picker1.SelectedItem != null)
+                if (this.ChildControlsCreated)
                 {
-                    _usingPortlets.Add(Lib.NTE(m_picker1.SelectedItem.Value));
+                    if (m_picker1.SelectedItem != null)
+                    {
+                        _usingPortlets.Add(Lib.NTE(m_picker1.SelectedItem.Value));
+                    }
+                    else
+                    {
+                        _usingPortlets.Add(String.Empty);
+                    }
+                    if (m_picker2.SelectedItem != null)
+                    {
+                        _usingPortlets.Add(Lib.NTE(m_picker2.SelectedItem.Value));
+                    }
+                    else
+                    {
+                        _usingPortlets.Add(String.Empty);
+                    }
                 }
-                else
-                {
-                    _usingPortlets.Add(String.Empty);
-                }
-                if (m_picker2.SelectedItem != null)
-                {
-                    _usingPortlets.Add(Lib.NTE(m_picker2.SelectedItem.Value));
-                }
-                else
-                {
-                    _usingPortlets.Add(String.Empty);
-                }                
                 return _usingPortlets;
             }
             set
@@ -69,6 +72,7 @@ namespace HTLBIWebApp2012.App.Dashboard
         {
             base.OnInit(e);
             InitializeComponent();
+            /*
             if (!IsPostBack)
             {
                 IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
@@ -88,11 +92,25 @@ namespace HTLBIWebApp2012.App.Dashboard
                     }
                 }
             }
-        }
-
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
+            */
+            IQueryable<lsttbl_Widget> portlets = MyBI.Me.Get_Widget(this.WHCode).Where(wg => _usingPortlets.Contains(wg.Code));
+            if (portlets.Count() > 0 && _usingPortlets.Count >= 2)
+            {
+                m_picker1.Items.Clear();
+                m_picker2.Items.Clear();
+                lsttbl_Widget wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[0]) && p.Code == _usingPortlets[0]);
+                if (wg != null)
+                {
+                    m_picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                    m_picker1.SelectedIndex = 0;
+                }
+                wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[1]) && p.Code == _usingPortlets[1]);
+                if (wg != null)
+                {
+                    m_picker2.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                    m_picker2.SelectedIndex = 0;
+                }
+            }
         }
 
         private void InitializeComponent()
@@ -128,6 +146,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblCell.Width = Unit.Percentage(50);
                         m_picker1 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                         m_picker1.WHCode = WHCode;
+                        m_picker1.Height = Unit.Pixel(225);
                         tblCell.Controls.Add(m_picker1);
                         tblRow.Cells.Add(tblCell);
                         // Cell 2
@@ -135,6 +154,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                         tblCell.Width = Unit.Percentage(50);
                         m_picker2 = LoadControl("~/Shared/UserControl/wcPortletPicker.ascx") as wcPortletPicker;
                         m_picker2.WHCode = WHCode;
+                        m_picker2.Height = Unit.Pixel(225);
                         tblCell.Controls.Add(m_picker2);
                         tblRow.Cells.Add(tblCell);
                         TblLayout.Rows.Add(tblRow);
@@ -171,6 +191,7 @@ namespace HTLBIWebApp2012.App.Dashboard
                 }
             }
             WcPlaceHolder.Controls.Add(TblLayout);
+            this.ChildControlsCreated = true;
         }
     }
 }

@@ -6,7 +6,6 @@
 <%@ Register Assembly="DevExpress.Web.ASPxGridView.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    </asp:ScriptManager>
     <div id="divNavigation" style="margin-top: 10px; margin-left: 10px">
         <ul class="menu">
             <li>

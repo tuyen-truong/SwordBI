@@ -3,8 +3,6 @@
 <%@ Register assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxPanel" tagprefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 
-<asp:PlaceHolder runat="server" ID="PortletPickerPlaceHolder">
-
 <div style="padding-right: 30px">
     <dx:ASPxListBox runat="server" ID="m_portletCandidate" Width="100%"></dx:ASPxListBox>
     <dx:ASPxButton runat="server" ID="btnShowModal" AutoPostBack="false" Text="Add Portlet">
@@ -46,6 +44,7 @@
                                                 if( CandidatePortlet ) {
                                                     CandidatePortlet.ClearItems();
                                                     CandidatePortlet.AddItem(selecteditem.text, selecteditem.value);
+                                                    CandidatePortlet.SetSelectedIndex(0);
                                                 }
                                             }
                                             window[popupname].Hide(); }" />
@@ -59,4 +58,3 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
-</asp:PlaceHolder>

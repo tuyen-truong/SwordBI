@@ -280,7 +280,7 @@ ul.menu li
 #divDashboardList, #divPortletList{margin:10px 10px 0; max-width:1024px;}
 
 #divNavigation{margin-left:10px; margin-top:10px}
-fieldset{padding:5px 10px 5px; margin:10px; max-width:1024px;}
+fieldset{padding:5px; max-width:1024px;}
 div fieldset{margin: 0 !important;}
 
 input[type="checkbox"]
