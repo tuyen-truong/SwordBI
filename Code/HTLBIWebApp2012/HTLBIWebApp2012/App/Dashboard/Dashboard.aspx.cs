@@ -74,6 +74,16 @@ namespace HTLBIWebApp2012.App.Dashboard
             return ctrl;
         }
 
+        protected override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            HtmlGenericControl css;
+            css = new HtmlGenericControl("link");
+            css.Attributes.Add("type", "text/css");
+            css.Attributes.Add("rel", "StyleSheet");
+            css.Attributes.Add("href", ResolveUrl("~/Content/CSS/Dashboard.css"));
+            Page.Header.Controls.Add(css);
+        }
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
