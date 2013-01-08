@@ -92,6 +92,9 @@
   <ItemGroup>
     <Content Include="Account\BILogin.aspx" />
     <Content Include="App\Analysis\Analysis.aspx" />
+    <Content Include="App\Analysis\wcACCube.ascx" />
+    <Content Include="App\Analysis\wcICCube.ascx" />
+    <Content Include="App\Analysis\wcSaleCube.ascx" />
     <Content Include="App\Dashboard\wcThreePortlet_Fourth.ascx" />
     <Content Include="App\Dashboard\wcThreePortlet_Third.ascx" />
     <Content Include="App\Dashboard\wcFourPane.ascx" />
@@ -528,6 +531,27 @@
     </Compile>
     <Compile Include="App\Analysis\Analysis.aspx.designer.cs">
       <DependentUpon>Analysis.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Analysis\wcACCube.ascx.cs">
+      <DependentUpon>wcACCube.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Analysis\wcACCube.ascx.designer.cs">
+      <DependentUpon>wcACCube.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Analysis\wcICCube.ascx.cs">
+      <DependentUpon>wcICCube.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Analysis\wcICCube.ascx.designer.cs">
+      <DependentUpon>wcICCube.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Analysis\wcSaleCube.ascx.cs">
+      <DependentUpon>wcSaleCube.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Analysis\wcSaleCube.ascx.designer.cs">
+      <DependentUpon>wcSaleCube.ascx</DependentUpon>
     </Compile>
     <Compile Include="App\Dashboard\Base\OnePortletCtrlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -981,6 +1005,16 @@
     <Compile Include="App\Setting\wcPropGrid.ascx.designer.cs">
       <DependentUpon>wcPropGrid.ascx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\BI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BI.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\BI.vi-VN.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BI.vi-VN.resx</DependentUpon>
+    </Compile>
     <Compile Include="Codes\BLL\MySys.cs" />
     <Compile Include="Codes\Utils\ControlBaseClasses.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -1259,6 +1293,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_GlobalResources\BI.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>BI.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\BI.vi-VN.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>BI.vi-VN.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -58,42 +58,6 @@ namespace HTLBIWebApp2012.App.Dashboard {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl container_Pl1;
         
         /// <summary>
-        /// imgBtnSetting_portlet2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBtnSetting_portlet2;
-        
-        /// <summary>
-        /// lblTitle_portlet2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblTitle_portlet2;
-        
-        /// <summary>
-        /// container_Pl2_Param control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl container_Pl2_Param;
-        
-        /// <summary>
-        /// container_Pl2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl container_Pl2;
-        
-        /// <summary>
         /// imgBtnSetting_portlet3 control.
         /// </summary>
         /// <remarks>
@@ -128,5 +92,41 @@ namespace HTLBIWebApp2012.App.Dashboard {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl container_Pl3;
+        
+        /// <summary>
+        /// imgBtnSetting_portlet2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgBtnSetting_portlet2;
+        
+        /// <summary>
+        /// lblTitle_portlet2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblTitle_portlet2;
+        
+        /// <summary>
+        /// container_Pl2_Param control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl container_Pl2_Param;
+        
+        /// <summary>
+        /// container_Pl2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl container_Pl2;
     }
 }

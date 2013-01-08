@@ -243,3 +243,25 @@ table.tableHeader th
     */    
 }
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/***** Dashboar Layout *****/
+.container{width:100%;padding-top:4px;}
+.container .left, .container .right 
+{
+    width:50%;
+    padding-top:4px;
+    float:left;
+}
+.container .top, .container .bottom
+{
+    clear:both;
+    width:100%;
+}
+.left .boxed
+{
+    padding-right: 2px;
+}
+.right .boxed
+{
+    padding-left: 2px;
+}

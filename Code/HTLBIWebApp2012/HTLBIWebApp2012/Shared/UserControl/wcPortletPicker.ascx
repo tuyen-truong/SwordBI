@@ -14,7 +14,7 @@
     </dx:ASPxButton>
 </div>
 <dx:ASPxPopupControl runat="server" ID="PopupPicker" CloseAction="CloseButton" Modal="true"
-    PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter"
+    PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" Width="450px"
     HeaderText="Available Portlets" AllowDragging="true" EnableAnimation="false" EnableViewState="false">
     <ClientSideEvents PopUp="function(s, e){}" />
     <ContentStyle>
@@ -27,7 +27,7 @@
                     <dx:PanelContent runat="server">
                         <table width="100%">
                             <tr>
-                                <td><dx:ASPxListBox runat="server" ID="AvailablePortlet" Width="100%"></dx:ASPxListBox></td>
+                                <td><dx:ASPxListBox runat="server" ID="AvailablePortlet" Width="100%" Height="300px" ></dx:ASPxListBox></td>
                             </tr>
                             <tr>
                                 <td>

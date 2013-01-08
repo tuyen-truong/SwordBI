@@ -16,6 +16,8 @@ namespace WebTest
             radio2.Attributes.Add("ViewIndex", "1");
             radio1.AutoPostBack = true;
             radio2.AutoPostBack = true;
+            Control wc = LoadControl("/UserControls/WebUserControl1.ascx");
+            PlaceHolder1.Controls.Add(wc);
         }
         protected void Page_Load(object sender, EventArgs e)
         {

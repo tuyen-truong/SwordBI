@@ -46,16 +46,17 @@
             <h1 style="margin-bottom: 0;">
                 Main Title of Web Page</h1>
         </div>
-        <div id="menu" style="background-color: #FFD700; width: 100px; float: left;">
+        <div id="menu" style="background-color: #FFD700; width: 50%; float: left;">
             <b>Menu</b><br>
             HTML<br>
             CSS<br>
             JavaScript</div>
-        <div id="content" style="background-color: #EEEEEE; height: 200px; width: 400px;
-            float: left;">
-            Content goes here</div>
-        <div style="background-color: #EEDDFF;height: 200px;width:250px;">right</div>
+        <div id="content" style="background-color: #EEEEEE; height: 200px; width: 50%;float: left;">
+            Content goes here
+            <div style="background-color: #EEDDFF; padding-left:5px">right</div>
+        </div>
         <div id="footer" style="background-color: #FFA500; clear: both; text-align: center;">
             Copyright � W3Schools.com</div>
     </div>
+    <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
 </asp:Content>

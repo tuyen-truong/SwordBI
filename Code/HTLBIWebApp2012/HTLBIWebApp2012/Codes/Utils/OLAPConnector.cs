@@ -21,6 +21,7 @@ namespace HTLBIWebApp2012
                             "<a href=\"" + ProviderDownloadUrl + "\" target=\"_blank\">" + ProviderDownloadUrl + "</a>.",
     ExceptionErrorString = "Unfortunately, an unexpected exception was raised when trying to connect to the OLAP datasource:";
 
+        public const string OLAPConnectionString = "HTLBI2012_OLAPConnectionString";
         /// <summary>
         /// Thử kết nối đến database Olap
         /// </summary>

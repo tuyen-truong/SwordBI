@@ -64,6 +64,8 @@ namespace HTLBIWebApp2012
                 new COMCatCodeNameObj("gauge", "LinearVertical", "Linear Vertical"),
                 new COMCatCodeNameObj("grid", "GridView", "Grid View")
             };
+
+        public const string PopupGridPageSize = "popupGrid_PageSize";
         #endregion Declares
 
         public static DevExpress.Web.ASPxMenu.MenuItem CreateMenuObject(string caption, string name, string url)
@@ -685,6 +687,19 @@ namespace HTLBIWebApp2012
                 }
             }
             return null;
+        }
+
+        public static void SetChartType(WebChartControl webChart, string chartTypeName)
+        {
+            webChart.SeriesTemplate.ChangeView((ViewType)Enum.Parse(typeof(ViewType), chartTypeName));
+        }
+        public static void SetChartType(WebChartControl webChart, string chartTypeName, bool noTemplate)
+        {
+            if (noTemplate)
+                foreach (Series sr in webChart.Series)
+                    sr.ChangeView((ViewType)Enum.Parse(typeof(ViewType), chartTypeName));
+            else
+                SetChartType(webChart, chartTypeName);
         }
     }
 }
