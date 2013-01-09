@@ -114,11 +114,15 @@ namespace HTLBIWebApp2012.App.Dashboard
                 picker2.Items.Clear();
                 picker3.Items.Clear();
                 picker4.Items.Clear();
-                lsttbl_Widget wg = portlets.Single(p => !string.IsNullOrEmpty(_usingPortlets[0]) && p.Code == _usingPortlets[0]);
-                if (wg != null)
+                lsttbl_Widget wg = null;
+                if (!string.IsNullOrEmpty(_usingPortlets[0]))
                 {
-                    picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
-                    picker1.SelectedIndex = 0;
+                    wg = portlets.Single(p => p.Code == _usingPortlets[0]);
+                    if (wg != null)
+                    {
+                        picker1.Items.Add(new ListEditItem(wg.Name, wg.Code));
+                        picker1.SelectedIndex = 0;
+                    }
                 }
                 if (_usingPortlets.Count > 1
                     && !string.IsNullOrEmpty(_usingPortlets[1]))
