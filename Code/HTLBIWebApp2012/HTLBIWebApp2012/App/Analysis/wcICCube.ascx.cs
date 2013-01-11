@@ -24,7 +24,7 @@ namespace HTLBIWebApp2012.App.Analysis
                 if (!string.IsNullOrEmpty(errReturn))
                 {
                     Control errorPanel = OLAPConnector.CreateErrorPanel(errReturn);
-                    //pivotGrid.Parent.Controls.AddAt(0, errorPanel);
+                    ErrorMsgPlaceHolder.Controls.AddAt(0, errorPanel);
                 }
                 //////////////////////////////////////
                 // Init cbbChartType

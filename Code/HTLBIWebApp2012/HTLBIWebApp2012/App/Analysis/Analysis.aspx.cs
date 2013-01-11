@@ -12,6 +12,18 @@ namespace HTLBIWebApp2012.App.Analysis
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
+            ClientScriptManager csm = Page.ClientScript;
+            Type csType = this.Page.GetType();
+            String csKey = "BIResources";
+            if (!csm.IsClientScriptBlockRegistered(csType, csKey))
+            {
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append("<script type=\"text/javascript\">");
+                sb.AppendFormat("var Milion_CurrencySymbol = '{0}';", Resources.BI.Milion_CurrencySymbol);
+                sb.Append("</script>");
+                csm.RegisterClientScriptBlock(csType, csKey, sb.ToString());
+            }
+
             Control wc;
             switch(Get_Param_SubMenuCode())
             {

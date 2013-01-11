@@ -74,8 +74,8 @@
             var dimName = e.hitInfo.seriesPoint.argument;
             var measName = GetValueString(e.additionalHitObject.series.name);
             var measValue = "";
-            if (measName.indexOf("<%=Resources.BI.Milion_CurrencySymbol %>") != -1)
-                measValue = e.additionalHitObject.values[0] + " <%=Resources.BI.Milion_CurrencySymbol %>";
+            if (measName.indexOf(Milion_CurrencySymbol) != -1)
+                measValue = e.additionalHitObject.values[0] + Milion_CurrencySymbol;
             else
                 measValue = e.additionalHitObject.values[0];
 
@@ -87,6 +87,7 @@
     }
 //--></script>
 
+<asp:PlaceHolder ID="ErrorMsgPlaceHolder" runat="server"></asp:PlaceHolder>
 <dx:ASPxPivotGrid ID="pivotGrid" runat="server" CustomizationFieldsLeft="600"
     CustomizationFieldsTop="400" ClientInstanceName="pivotGrid" Width="100%" 
     oncustomcallback="pivotGrid_CustomCallback">

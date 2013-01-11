@@ -78,6 +78,8 @@ namespace HTLBIWebApp2012
             Image errorIcon = new Image();
             errorIcon.ImageUrl = "~/Images/Error.gif";
             errorIcon.AlternateText = "Error";
+            //errorIcon.Attributes["style"] = "width:32px;height:32px;";
+            table.Rows[0].Cells[0].VerticalAlign = VerticalAlign.Top;
             table.Rows[0].Cells[0].Controls.Add(errorIcon);
             table.Rows[0].Cells[1].Text = errorMessage;
             return panel;

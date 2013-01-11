@@ -22,11 +22,11 @@ namespace HTLBIWebApp2012.App.Analysis
                 //this.field.Caption = string.Format("{0}{1}", this.fieldDoanhSo.Caption, Resources.BI.Milion_CurrencySymbol);
                 //////////////////////////////////////
                 // Init OlapConnectionString
-                string errReturn = OLAPConnector.TryConnect(this.pivotGrid, OLAPConnector.OLAPConnectionString, "SOCube");
+                string errReturn = OLAPConnector.TryConnect(this.pivotGrid, OLAPConnector.OLAPConnectionString, "ARCube");
                 if (!string.IsNullOrEmpty(errReturn))
                 {
-                    Control errorPanel = OLAPConnector.CreateErrorPanel(errReturn);                
-                    //pivotGrid.Parent.Controls.Add(errorPanel);
+                    Control errorPanel = OLAPConnector.CreateErrorPanel(errReturn);
+                    ErrorMsgPlaceHolder.Controls.Add(errorPanel);
                 }
                 //////////////////////////////////////
                 // Init cbbChartType

@@ -13,6 +13,15 @@ namespace HTLBIWebApp2012.App.Analysis {
     public partial class wcICCube {
         
         /// <summary>
+        /// ErrorMsgPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder ErrorMsgPlaceHolder;
+        
+        /// <summary>
         /// pivotGrid control.
         /// </summary>
         /// <remarks>
