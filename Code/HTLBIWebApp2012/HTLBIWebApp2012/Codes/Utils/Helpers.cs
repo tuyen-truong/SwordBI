@@ -408,8 +408,8 @@ namespace HTLBIWebApp2012
                 case 0:
                     pivotGrid.OptionsView.ShowFilterHeaders = true;
                     pivotGrid.OptionsView.ShowHorizontalScrollBar = true;
-                    pivotGrid.OptionsChartDataSource.ShowColumnGrandTotals = false;
-                    pivotGrid.OptionsChartDataSource.ShowRowGrandTotals = false;
+                    pivotGrid.OptionsChartDataSource.ProvideColumnGrandTotals = false;
+                    pivotGrid.OptionsChartDataSource.ProvideRowCustomTotals = false;
                     pivotGrid.Styles.CellStyle.Cursor = "pointer";
                     //pivotGrid.OptionsLoadingPanel.Text = Resources.BI.loadingText;
                     //pivotGrid.ToolTip = Resources.BI.toolTip_PivotGrid;
@@ -558,8 +558,10 @@ namespace HTLBIWebApp2012
                     if (arrDest != null && arrSource != null)
                     {
                         var olapcolName = arrSource.LastOrDefault();
-                        var colName = arrDest.LastOrDefault().Replace(" ", "");
-                        if (olapcolName.Equals(colName))
+                        var colName = arrDest.LastOrDefault();
+                        var colNameNoWhiteSpace = colName.Replace(" ", "");
+                        if (olapcolName.Equals(colName)
+                            || olapcolName.Equals(colNameNoWhiteSpace))
                         {
                             return new OlapColumnInfo(pivot.Fields[i].Caption
                                                     , pivot.Fields[i].CellFormat
