@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using CECOM;
-using System.Web.Security;
-using HTLBIWebApp2012.Codes.BLL;
 using System.IO;
+using System.Linq;
+using System.Web.UI;
+using HTLBIWebApp2012.Codes.BLL;
 
 namespace HTLBIWebApp2012.Shared.UserControl
 {

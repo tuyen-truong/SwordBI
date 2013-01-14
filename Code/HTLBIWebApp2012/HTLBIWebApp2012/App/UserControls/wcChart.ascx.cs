@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Drawing;
-using DevExpress.XtraCharts;
-using DevExpress.XtraCharts.Web;
 using CECOM;
+using DevExpress.XtraCharts;
 
 namespace HTLBIWebApp2012.App.UserControls
 {

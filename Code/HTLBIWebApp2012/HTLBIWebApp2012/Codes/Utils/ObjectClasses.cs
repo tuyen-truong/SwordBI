@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
 using System.Linq;
-using System.Web;
-using System.Web.Security;
-using Newtonsoft.Json;
-using DevExpress.XtraCharts;
 using CECOM;
 using DevExpress.Utils;
-using HTLBIWebApp2012.Codes.Models;
-using HTLBIWebApp2012.Codes.BLL;
-using System.Drawing;
+using DevExpress.XtraCharts;
 using DevExpress.XtraGauges.Core.Drawing;
-using System.Web.UI.WebControls;
-using System.Data;
+using HTLBIWebApp2012.Codes.BLL;
+using HTLBIWebApp2012.Codes.Models;
 
 namespace HTLBIWebApp2012
 {

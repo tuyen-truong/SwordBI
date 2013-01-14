@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Drawing;
-using DevExpress.Web.ASPxEditors;
-using DevExpress.Web.ASPxCallbackPanel;
-using DevExpress.Web.ASPxGridView;
-using DevExpress.XtraCharts;
-using CECOM;
+using DevExpress.Web.ASPxTabControl;
 using HTLBIWebApp2012.Codes.BLL;
 using HTLBIWebApp2012.Codes.Models;
-using HTLBIWebApp2012.App.UserControls;
-using DevExpress.Web.ASPxTabControl;
-using System.Web.Services;
 
 namespace HTLBIWebApp2012.App.Setting
 {

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI.WebControls;
-using DevExpress.Web.ASPxRoundPanel;
-using System.Web.UI;
-using DevExpress.Web.ASPxPivotGrid;
+﻿using System.Configuration;
 using System.Text;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using DevExpress.Web.ASPxPivotGrid;
+using DevExpress.Web.ASPxRoundPanel;
 using DevExpress.XtraPivotGrid.Data;
-using System.Configuration;
 
 namespace HTLBIWebApp2012
 {

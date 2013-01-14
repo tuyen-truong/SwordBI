@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using DevExpress.Web.ASPxGauges.Gauges.Circular;
-using DevExpress.Web.ASPxGauges.Base;
-using DevExpress.Web.ASPxGauges.Gauges;
-using DevExpress.Web.ASPxGauges.Gauges.Linear;
-using DevExpress.XtraGauges.Core.Model;
-using DevExpress.XtraGauges.Core.Drawing;
-using System.Drawing;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using DevExpress.Web.ASPxGauges;
-using DevExpress.XtraCharts.Web;
-using DevExpress.XtraCharts;
 using System.Data;
 using System.Data.Common;
-using DevExpress.XtraGauges.Core.Base;
+using System.Drawing;
+using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using CECOM;
+using DevExpress.Web.ASPxGauges;
+using DevExpress.Web.ASPxGauges.Base;
+using DevExpress.Web.ASPxGauges.Gauges;
+using DevExpress.Web.ASPxGauges.Gauges.Circular;
+using DevExpress.Web.ASPxGauges.Gauges.Linear;
+using DevExpress.XtraCharts;
+using DevExpress.XtraCharts.Web;
+using DevExpress.XtraGauges.Core.Base;
+using DevExpress.XtraGauges.Core.Drawing;
+using DevExpress.XtraGauges.Core.Model;
 namespace HTLBIWebApp2012
 {
     public static class ASPxGaugeControlEx

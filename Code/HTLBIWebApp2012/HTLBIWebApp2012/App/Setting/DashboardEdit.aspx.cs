@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using HTLBIWebApp2012.Codes.Models;
-using HTLBIWebApp2012.Codes.BLL;
-using DevExpress.Web.ASPxEditors;
 using CECOM;
-using System.Collections;
 using HTLBIWebApp2012.App.Dashboard;
+using HTLBIWebApp2012.Codes.BLL;
+using HTLBIWebApp2012.Codes.Models;
 
 namespace HTLBIWebApp2012.App.Setting
 {

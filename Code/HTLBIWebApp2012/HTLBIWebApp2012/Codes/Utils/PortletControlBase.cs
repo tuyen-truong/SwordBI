@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using DevExpress.Web.ASPxPopupControl;
 using System.Web.UI.WebControls;
+using DevExpress.Web.ASPxPopupControl;
 
 namespace HTLBIWebApp2012.Codes.Utils
 {

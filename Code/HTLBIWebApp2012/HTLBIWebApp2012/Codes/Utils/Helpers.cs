@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI.WebControls;
-using DevExpress.Web.ASPxRoundPanel;
-using System.Web.UI;
-using DevExpress.Web.ASPxPivotGrid;
-using System.Text;
-using DevExpress.XtraPivotGrid.Data;
 using System.Configuration;
-using Newtonsoft.Json;
-using CECOM;
-using System.Web.UI.HtmlControls;
-using DevExpress.Web.ASPxGridView;
-using DevExpress.XtraCharts.Web;
-using DevExpress.XtraCharts;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using CECOM;
 using DevExpress.Utils;
 using DevExpress.Web.ASPxEditors;
-using System.IO;
-using System.Web.Security;
+using DevExpress.Web.ASPxGridView;
+using DevExpress.Web.ASPxPivotGrid;
+using DevExpress.XtraCharts;
+using DevExpress.XtraCharts.Web;
+using Newtonsoft.Json;
 
 namespace HTLBIWebApp2012
 {

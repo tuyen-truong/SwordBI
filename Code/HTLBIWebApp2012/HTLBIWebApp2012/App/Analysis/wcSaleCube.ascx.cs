@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DevExpress.XtraCharts;
-using DevExpress.Web.ASPxGridView;
 using CECOM;
 using DevExpress.Utils;
+using DevExpress.Web.ASPxGridView;
+using DevExpress.XtraCharts;
 
 namespace HTLBIWebApp2012.App.Analysis
 {
