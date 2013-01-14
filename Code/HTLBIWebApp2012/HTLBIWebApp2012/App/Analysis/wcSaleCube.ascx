@@ -91,7 +91,7 @@
 <asp:PlaceHolder ID="ErrorMsgPlaceHolder" runat="server"></asp:PlaceHolder>
 <dx:ASPxPivotGrid ID="pivotGrid" runat="server" CustomizationFieldsLeft="600" CustomizationFieldsTop="400" 
     ClientInstanceName="pivotGrid" Width="100%" 
-        oncustomcallback="pivotGrid_CustomCallback" >
+        oncustomcallback="pivotGrid_CustomCallback" ClientIDMode="AutoID" >
     <ClientSideEvents Init="function(s, e) { WebChart.PerformCallback(&quot;pivotGridChanged&quot;);}" />
     <Fields>
         <dx:PivotGridField ID="fieldQuantity" Area="DataArea" AreaIndex="0" 
@@ -100,14 +100,14 @@
             CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
             GrandTotalCellFormat-FormatType="Numeric">
         </dx:PivotGridField>
-        <dx:PivotGridField ID="fieldGrossProfit" Area="DataArea" AreaIndex="1" 
-            Caption="Gross Profit" FieldName="[Measures].[Gross Profit]"
+        <dx:PivotGridField ID="fieldGrosProfit" Area="DataArea" AreaIndex="1" 
+            Caption="Gross Profit" FieldName="[Measures].[Gros Profit]"
             CellFormat-FormatString="#,##0"
             CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
             GrandTotalCellFormat-FormatType="Numeric">                
         </dx:PivotGridField>
-        <dx:PivotGridField ID="fieldVatSum" Area="DataArea" AreaIndex="2" 
-            Caption="Vat Sum" FieldName="[Measures].[Vat Sum]"
+        <dx:PivotGridField ID="fieldGrosProfitFC" Area="DataArea" AreaIndex="2" 
+            Caption="Gross Profit FC" FieldName="[Measures].[Gros Profit FC]"
             CellFormat-FormatString="#,##0"
             CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
             GrandTotalCellFormat-FormatType="Numeric">                
@@ -118,65 +118,52 @@
             CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
             GrandTotalCellFormat-FormatType="Numeric">                
         </dx:PivotGridField>        
-        <dx:PivotGridField ID="fieldTotalExpns" Area="DataArea" AreaIndex="4" 
-            Caption="Total Expns" FieldName="[Measures].[Total Expns]"
+        <dx:PivotGridField ID="fieldLineTotal" Area="DataArea" AreaIndex="4" 
+            Caption="Line Total" FieldName="[Measures].[Line Total]"
             CellFormat-FormatString="#,##0"
             CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
             GrandTotalCellFormat-FormatType="Numeric">                
         </dx:PivotGridField> 
-        <dx:PivotGridField ID="fieldGrossProfit_Perc" Area="DataArea" AreaIndex="5" 
-            Caption="Gross Profit %" FieldName="[Measures].[Gross Profit %]"
-            CellFormat-FormatString="#,##0"
-            CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
-            GrandTotalCellFormat-FormatType="Numeric">                
-        </dx:PivotGridField>
-        <dx:PivotGridField ID="fieldSales" Area="DataArea" AreaIndex="6" 
-            Caption="Sales" FieldName="[Measures].[Sales]"
-            CellFormat-FormatString="#,##0"
-            CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
-            GrandTotalCellFormat-FormatType="Numeric">                
-        </dx:PivotGridField> 
-        
         <dx:PivotGridField ID="fieldItemGroupName" Area="RowArea" AreaIndex="0" 
-            Caption="Item Group" FieldName="[SO_Item].[Itms Grp Nam].[Itms Grp Nam]">
+            Caption="Item Group" 
+            FieldName="[ARDimItem].[ItemGroupName].[ItemGroupName]">                
         </dx:PivotGridField>
         <dx:PivotGridField ID="fieldItemName" Area="RowArea" AreaIndex="1" 
-            Caption="Item Name" FieldName="[SO_Item].[Item].[Item]">
-        </dx:PivotGridField>               
+            Caption="Item Name" FieldName="[ARDimItem].[ItemName].[ItemName]">                
+        </dx:PivotGridField> 
         
         <dx:PivotGridField ID="fieldYear" Area="ColumnArea" AreaIndex="0" 
-            Caption="Year" FieldName="[SO_Date].[Year].[Year]">
+            Caption="Year" FieldName="[ARDimTime].[Year].[Year]">
         </dx:PivotGridField>                       
-        <dx:PivotGridField ID="fieldMonth" Area="ColumnArea" AreaIndex="1" 
-            Caption="Month" FieldName="[SO_Date].[Month].[Month]">
+        <dx:PivotGridField ID="fieldQuarter" Area="ColumnArea" AreaIndex="1" 
+            Caption="Quarter" FieldName="[ARDimTime].[Quarter].[Quarter]">
         </dx:PivotGridField>                       
-        <dx:PivotGridField ID="fieldDate" Area="ColumnArea" AreaIndex="2" 
-            Caption="Date" FieldName="[SO_Date].[Date].[Date]">
+        <dx:PivotGridField ID="fieldPeriod" Area="ColumnArea" AreaIndex="2" 
+            Caption="Period" FieldName="[ARDimTime].[Period].[Period]">
         </dx:PivotGridField>                       
         
         <dx:PivotGridField ID="fieldPartnerGroupName" AreaIndex="0" 
-            Caption="Partner Group" FieldName="[SO_BizPartner].[Group Name].[Group Name]">
+            Caption="Customer Group" 
+            FieldName="[ARDimCustomer].[Customer Group Name].[Customer Group Name]">
         </dx:PivotGridField>
         <dx:PivotGridField ID="fieldPartnerCardName" AreaIndex="1" 
-            Caption="Partner Name" FieldName="[SO_BizPartner].[Card Name].[Card Name]">
+            Caption="Customer Name" 
+            FieldName="[ARDimCustomer].[Customer Contact Person].[Customer Contact Person]">
         </dx:PivotGridField>
-        <dx:PivotGridField ID="fieldInvType" AreaIndex="2" 
-            Caption="Inv Type" 
-            FieldName="[SO_InvType].[Inv Type].[Inv Type]">
+        <dx:PivotGridField ID="fieldCustomerType" AreaIndex="2" 
+            Caption="Customer Type" 
+            FieldName="[ARDimCustomer].[Customer Type].[Customer Type]">
         </dx:PivotGridField>
-        <dx:PivotGridField ID="fieldInvoice" AreaIndex="3" 
-            Caption="Invoice" 
-            FieldName="[SO_Invoice].[Invoice].[Invoice]">
-        </dx:PivotGridField>
-        <dx:PivotGridField ID="fieldProject" AreaIndex="4" 
+        <dx:PivotGridField ID="fieldProjectName" AreaIndex="3" 
             Caption="Project" 
-            FieldName="[SO_Project].[Project].[Project]">
-        </dx:PivotGridField>                
-        <dx:PivotGridField ID="fieldSaleperson" AreaIndex="5" 
+            FieldName="[ARDimProject].[ProjectName].[ProjectName]">
+        </dx:PivotGridField>
+        <dx:PivotGridField ID="fieldSalePersonName" AreaIndex="4" 
             Caption="Saleperson" 
-            FieldName="[SO_Saleperson].[Saleperson].[Saleperson]">
-        </dx:PivotGridField>                    
+            FieldName="[ARDimSalePerson].[SalePersonName].[SalePersonName]">
+        </dx:PivotGridField>                
     </Fields>
+    <OptionsChartDataSource FieldValuesProvideMode="DisplayText" />
 </dx:ASPxPivotGrid>
 <table>
     <tr>  

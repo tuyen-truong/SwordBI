@@ -17,15 +17,6 @@ namespace HTLBIWebApp2012.App.Analysis
             // Được thực thi khi lần đầu tiên được load hoặc khi Page ReInit
             if (!Page.IsPostBack)
             {
-                //this.field.Caption = string.Format("{0}{1}", this.fieldDoanhSo.Caption, Resources.BI.Milion_CurrencySymbol);
-                //////////////////////////////////////
-                // Init OlapConnectionString
-                string errReturn = OLAPConnector.TryConnect(this.pivotGrid, OLAPConnector.OLAPConnectionString, "ARCube");
-                if (!string.IsNullOrEmpty(errReturn))
-                {
-                    Control errorPanel = OLAPConnector.CreateErrorPanel(errReturn);
-                    ErrorMsgPlaceHolder.Controls.Add(errorPanel);
-                }
                 //////////////////////////////////////
                 // Init cbbChartType
                 Helpers.InitChartTypeComboBox(cbbChartType, ViewType.Bar);
@@ -54,7 +45,18 @@ namespace HTLBIWebApp2012.App.Analysis
                 //////////////////////////////////////
             }
         }
-
+        protected override void OnPreRender(EventArgs e)
+        {
+            //////////////////////////////////////
+            // Init OlapConnectionString
+            string errReturn = OLAPConnector.TryConnect(this.pivotGrid, OLAPConnector.OLAPConnectionString, "ARCube");
+            if (!string.IsNullOrEmpty(errReturn))
+            {
+                Control errorPanel = OLAPConnector.CreateErrorPanel(errReturn);
+                ErrorMsgPlaceHolder.Controls.Add(errorPanel);
+            }
+            base.OnPreRender(e);
+        }
         #region Member Methods
         private void Bind_gvDrillDown()
         {

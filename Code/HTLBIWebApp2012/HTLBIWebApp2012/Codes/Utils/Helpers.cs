@@ -558,7 +558,7 @@ namespace HTLBIWebApp2012
                     if (arrDest != null && arrSource != null)
                     {
                         var olapcolName = arrSource.LastOrDefault();
-                        var colName = arrDest.LastOrDefault();
+                        var colName = arrDest.LastOrDefault().Replace(" ", "");
                         if (olapcolName.Equals(colName))
                         {
                             return new OlapColumnInfo(pivot.Fields[i].Caption

@@ -51,6 +51,7 @@ namespace HTLBIWebApp2012
                 //        //Server.Transfer(string.Format("~/{0}", rightPart));
                 //        Response.Redirect(string.Format("{0}/{1}", leftPart, rightPart));
                 //}
+                string errReturn = OLAPConnector.TryConnect(this.ASPxPivotGrid1, OLAPConnector.OLAPConnectionString, "ARCube");
             }
             catch (Exception ex) { /*Response.Write(ex.Message);*/ }
         }

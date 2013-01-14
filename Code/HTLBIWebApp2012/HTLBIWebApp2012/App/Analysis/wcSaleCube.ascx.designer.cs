@@ -40,22 +40,22 @@ namespace HTLBIWebApp2012.App.Analysis {
         protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldQuantity;
         
         /// <summary>
-        /// fieldGrossProfit control.
+        /// fieldGrosProfit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldGrossProfit;
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldGrosProfit;
         
         /// <summary>
-        /// fieldVatSum control.
+        /// fieldGrosProfitFC control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldVatSum;
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldGrosProfitFC;
         
         /// <summary>
         /// fieldDocTotal control.
@@ -67,31 +67,13 @@ namespace HTLBIWebApp2012.App.Analysis {
         protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldDocTotal;
         
         /// <summary>
-        /// fieldTotalExpns control.
+        /// fieldLineTotal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldTotalExpns;
-        
-        /// <summary>
-        /// fieldGrossProfit_Perc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldGrossProfit_Perc;
-        
-        /// <summary>
-        /// fieldSales control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldSales;
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldLineTotal;
         
         /// <summary>
         /// fieldItemGroupName control.
@@ -121,22 +103,22 @@ namespace HTLBIWebApp2012.App.Analysis {
         protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldYear;
         
         /// <summary>
-        /// fieldMonth control.
+        /// fieldQuarter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldMonth;
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldQuarter;
         
         /// <summary>
-        /// fieldDate control.
+        /// fieldPeriod control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldDate;
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldPeriod;
         
         /// <summary>
         /// fieldPartnerGroupName control.
@@ -157,40 +139,31 @@ namespace HTLBIWebApp2012.App.Analysis {
         protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldPartnerCardName;
         
         /// <summary>
-        /// fieldInvType control.
+        /// fieldCustomerType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldInvType;
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldCustomerType;
         
         /// <summary>
-        /// fieldInvoice control.
+        /// fieldProjectName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldInvoice;
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldProjectName;
         
         /// <summary>
-        /// fieldProject control.
+        /// fieldSalePersonName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldProject;
-        
-        /// <summary>
-        /// fieldSaleperson control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldSaleperson;
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldSalePersonName;
         
         /// <summary>
         /// lblChartType control.
