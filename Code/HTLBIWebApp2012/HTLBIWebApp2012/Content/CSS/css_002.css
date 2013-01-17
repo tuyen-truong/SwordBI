@@ -25,12 +25,10 @@ body#admin #adminWrap, body#admin #dashboard {
 	font: bold 24px arial, helvetica, sans-serif;
 	padding: 20px 0 22px 5px;
 	line-height: 26px;
-	text-shadow: Yellow 3px 3px 3px;
-	/*text-shadow: #1e2d48 1px 1px 3px;*/
+	text-shadow: #1e2d48 1px 1px 3px;
 }
 #header h1 a {
-	/*color: #abd;*/
-	color:Yellow;
+	color: #abd;
 	text-decoration: none;
 }
 #header h1.image {

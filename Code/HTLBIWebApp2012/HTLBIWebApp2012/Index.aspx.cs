@@ -1,4 +1,7 @@
 ﻿using System;
+using DevExpress.Web.ASPxEditors;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace HTLBIWebApp2012
 {
@@ -51,9 +54,57 @@ namespace HTLBIWebApp2012
                 //        //Server.Transfer(string.Format("~/{0}", rightPart));
                 //        Response.Redirect(string.Format("{0}/{1}", leftPart, rightPart));
                 //}
-                string errReturn = OLAPConnector.TryConnect(this.ASPxPivotGrid1, OLAPConnector.OLAPConnectionString, "ARCube");
+                //string errReturn = OLAPConnector.TryConnect(this.ASPxPivotGrid1, OLAPConnector.OLAPConnectionString, "ARCube");
             }
             catch (Exception ex) { /*Response.Write(ex.Message);*/ }
+            
+
+           //DisableDefaultButton(this.Page);
+        }
+        protected override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            //ASPxTextBox t = new ASPxTextBox();
+            TextBox t = new TextBox();
+            t.AutoPostBack = false;
+            PlaceHolder1.Controls.Add(t);
+
+            ASPxButton bt = new ASPxButton();
+            bt.ID = "btTest";
+            bt.Text = "ASPxButton";
+            bt.Click += new EventHandler(EventHandler1);
+            bt.UseSubmitBehavior = false;
+
+            PlaceHolder1.Controls.Add(bt);
+
+            Button bt1 = new Button();
+            bt1.Text = "Button";
+            bt1.UseSubmitBehavior = false;
+            bt1.Click += new EventHandler(EventHandler1);
+            PlaceHolder1.Controls.Add(bt1);
+        }
+
+        void DisableDefaultButton(Control c)
+        {
+            if (c.Controls.Count == 0) { return; }
+            foreach (Control c1 in c.Controls)
+            {
+                if (c1 is Button
+                    || c1 is ASPxButton)
+                {
+                    if (c1 is Button) { (c1 as Button).UseSubmitBehavior = false; }
+                    if (c1 is ASPxButton) { (c1 as ASPxButton).UseSubmitBehavior = false; }
+                }
+                else
+                {
+                    DisableDefaultButton(c1);
+                }
+            }
+        }
+
+        protected void EventHandler1(object sender, EventArgs e)
+        {
+            string str = string.Empty;
         }
     }
 }

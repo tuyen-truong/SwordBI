@@ -58,15 +58,6 @@ namespace HTLBIWebApp2012.App.Analysis {
         protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldGrosProfitFC;
         
         /// <summary>
-        /// fieldDocTotal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldDocTotal;
-        
-        /// <summary>
         /// fieldLineTotal control.
         /// </summary>
         /// <remarks>
@@ -74,6 +65,15 @@ namespace HTLBIWebApp2012.App.Analysis {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldLineTotal;
+        
+        /// <summary>
+        /// fieldDocTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPivotGrid.PivotGridField fieldDocTotal;
         
         /// <summary>
         /// fieldItemGroupName control.

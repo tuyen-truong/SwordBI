@@ -111,19 +111,20 @@
             CellFormat-FormatString="#,##0"
             CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
             GrandTotalCellFormat-FormatType="Numeric">                
-        </dx:PivotGridField>
-        <dx:PivotGridField ID="fieldDocTotal" Area="DataArea" AreaIndex="3" 
-            Caption="Doc Total" FieldName="[Measures].[Doc Total]"
-            CellFormat-FormatString="#,##0"
-            CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
-            GrandTotalCellFormat-FormatType="Numeric">                
         </dx:PivotGridField>        
-        <dx:PivotGridField ID="fieldLineTotal" Area="DataArea" AreaIndex="4" 
+        <dx:PivotGridField ID="fieldLineTotal" Area="DataArea" AreaIndex="3" 
             Caption="Line Total" FieldName="[Measures].[Line Total]"
             CellFormat-FormatString="#,##0"
             CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
             GrandTotalCellFormat-FormatType="Numeric">                
-        </dx:PivotGridField> 
+        </dx:PivotGridField>
+        <dx:PivotGridField ID="fieldDocTotal" Area="DataArea" AreaIndex="4" 
+            Caption="Doc Total" FieldName="[Measures].[Doc Total]"
+            CellFormat-FormatString="#,##0"
+            CellFormat-FormatType="Numeric" GrandTotalCellFormat-FormatString="#,##0"
+            GrandTotalCellFormat-FormatType="Numeric">                
+        </dx:PivotGridField>
+         
         <dx:PivotGridField ID="fieldItemGroupName" Area="RowArea" AreaIndex="0" 
             Caption="Item Group" 
             FieldName="[ARDimItem].[ItemGroupName].[ItemGroupName]">                
@@ -165,6 +166,7 @@
     </Fields>
     <OptionsChartDataSource FieldValuesProvideMode="DisplayText" />
 </dx:ASPxPivotGrid>
+<br />
 <table>
     <tr>  
         <td align="right"><dx:ASPxLabel ID="lblChartType" runat="server" Text="<%$ Resources:BI, lblChartType %>" Font-Bold="true" /></td>

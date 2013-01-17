@@ -43,7 +43,7 @@
                     <div class="shadowMidLeft">
                         <div class="navheader">
                             <div id="header">
-                                <h1><a href="http://www.htlvn.com">HTL Business Analysis </a></h1>
+                                <h1><a href="http://www.swordbi.com">Sword BI</a></h1>
 		                        <div id="primaryNavs">
 		                            <uc1:wcMainMenu ID="mainMenu" runat="server" />
 		                        </div>
@@ -70,7 +70,7 @@
                                 </asp:contentplaceholder>                                
                                 <hr style="background-color:Aqua" />
                                 <div id="copyRight1">
-                                    <center><h4>©<%=DateTime.Now.Year.ToString()%> Htlvn.com. All Rights Reserved.</h4></center>
+                                    <center><h5>©<%=DateTime.Now.Year.ToString()%> SwordBI.com. All Rights Reserved.</h5></center>
                                 </div>
 	                        </div>
 	                    </div>
@@ -80,7 +80,7 @@
             <div class="shadowBottomLeft">
                 <div class="shadowMidLeft"></div>
             </div>
-        </div>               
+        </div>
         <%--Script Đánh dấu trên menu được chọn và Disable chức năng Link của nó--%>
         <%--Hiện tại đã được chuyển vào wcMainMenu--%>        
    </form>

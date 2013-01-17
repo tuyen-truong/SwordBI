@@ -69,51 +69,52 @@ namespace HTLBIWebApp2012.App.Setting
         #endregion
 
         #region Members
-        public override void Load_InitData()
-        {
-            this.OnChange += this_OnChange;
-            //////////////////////////////////// Tab-DS
-            this.Register_JavaScript();
-            if (!this.IsPostBack)
-            {                
-                Helpers.SetDataSource(this.cboDataDW, MyBI.Me.GetDW(), "Value", "Text");
-                this.cboFuncs.Items.AddRange(InqMDX.GetSummatyFuncName());
-                this.cboOrderBy0.Items.AddRange(InqMDX.GetOrderByName());
-                this.cboOrderBy1.Items.AddRange(InqMDX.GetOrderByName());
-                //  set default value
-                String whcode = Get_Param(PageBase.PageArgs.WHCode);
-                if (!String.IsNullOrEmpty(whcode))
-                {
-                    DataWareHouse = whcode;
-                    String dscode = Get_Param(PageBase.PageArgs.DSCode);
-                    if (!String.IsNullOrEmpty(dscode))
-                    {
-                        this.DataSource = dscode;
-                    }
-                }
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(this.WHCode))
-                {
-                    // Tải lại source cho cboDatasource(để nó không bị thiếu khi vừa thêm mới 1 Datasource trong sự kiện của CallbackPanel)
-                    // Vì cơ chế của CallbackPanel sẽ không để lại ViewState mỗi lần Render
-                    var ds = MyBI.Me.Get_DashboardSource(this.WHCode, GlobalVar.SettingCat_DS).ToList();
-                    Helpers.SetDataSource(this.cboDatasource, ds, "Code", "NameVI", this.cboDatasource.Value);
+		public override void Load_InitData()
+		{
+			this.OnChange += this_OnChange;
+			//////////////////////////////////// Tab-DS
+			this.Register_JavaScript();
+			if (!this.IsPostBack)
+			{
+				Helpers.SetDataSource(this.cboDataDW, MyBI.Me.GetDW(), "Value", "Text");
+				this.cboFuncs.Items.AddRange(InqMDX.GetSummatyFuncName());
+				this.cboOrderBy0.Items.AddRange(InqMDX.GetOrderByName());
+				this.cboOrderBy1.Items.AddRange(InqMDX.GetOrderByName());
+				//  set default value
+				String whcode = Get_Param(PageBase.PageArgs.WHCode);
+				if (!String.IsNullOrEmpty(whcode))
+				{
+					DataWareHouse = whcode;
+					String dscode = Get_Param(PageBase.PageArgs.DSCode);
+					if (!String.IsNullOrEmpty(dscode))
+					{
+						this.DataSource = dscode;
+					}
+				}
+			}
+			else
+			{
+				if (!string.IsNullOrEmpty(this.WHCode))
+				{
+					// Tải lại source cho cboDatasource(để nó không bị thiếu khi vừa thêm mới 1 Datasource trong sự kiện của CallbackPanel)
+					// Vì cơ chế của CallbackPanel sẽ không để lại ViewState mỗi lần Render
+					var ds = MyBI.Me.Get_DashboardSource(this.WHCode, GlobalVar.SettingCat_DS).ToList();
+					Helpers.SetDataSource(this.cboDatasource, ds, "Code", "NameVI", this.cboDatasource.Value);
 
-                    var tblFactNames = MyBI.Me.Get_DWTableName("FACT", this.WHCode);
-                    var cols = MyBI.Me.Get_DWColumn(this.WHCode);
-                    var dsField = cols.Where(p => p.Visible && p.DataType != "NUM").ToList();
-                    var dsMetric = cols.Where(p => p.Visible && tblFactNames.Contains(p.TblName_Virtual) && p.DataType == "NUM").ToList();
-                    Helpers.SetDataSource(this.lbxField, dsField, "KeyField", "ColAliasVI");
-                    Helpers.SetDataSource(this.lbxMetricField, dsMetric, "KeyField", "ColAliasVI");
-                    Helpers.SetDataSource(this.lbxFieldSelected, MySession.DSDefine_SelFieldInfo, "KeyField", "ColAliasVI");
-                    Helpers.SetDataSource(this.lbxMetricFieldSelected, MySession.DSDefine_SelSumInfo, "Field.KeyField", "FieldAlias");
-                }
-                this.ReGen_CtrlOnPostPack();
-            }
-        }
-        public void ReGen_CtrlOnPostPack()
+					var tblFactNames = MyBI.Me.Get_DWTableName("FACT", this.WHCode);
+					var cols = MyBI.Me.Get_DWColumn(this.WHCode);
+					var dsField = cols.Where(p => p.Visible && p.DataType != "NUM").ToList();
+					var dsMetric = cols.Where(p => p.Visible && tblFactNames.Contains(p.TblName_Virtual) && p.DataType == "NUM").ToList();
+					Helpers.SetDataSource(this.lbxField, dsField, "KeyField", "ColAliasVI");
+					Helpers.SetDataSource(this.lbxMetricField, dsMetric, "KeyField", "ColAliasVI");
+					Helpers.SetDataSource(this.lbxFieldSelected, MySession.DSDefine_SelFieldInfo, "KeyField", "ColAliasVI");
+					Helpers.SetDataSource(this.lbxMetricFieldSelected, MySession.DSDefine_SelSumInfo, "Field.KeyField", "FieldAlias");
+				}
+				this.ReGen_CtrlOnPostPack();
+			}
+		}
+        
+		public void ReGen_CtrlOnPostPack()
         {
             this.Add_FilterControl(null, true);
         }
@@ -121,12 +122,27 @@ namespace HTLBIWebApp2012.App.Setting
         {
             try
             {
-                //////////////////////////////////// Tab-DS
+				string strScript = @"window.onload = function () {
+									if (typeof (load) === 'function') { load(); }
+
+									var els = document.getElementsByTagName('input');
+									if (els && els.length > 0) {
+										var i = 0;
+										for (; i < els.length; i++) {
+											if (els[i].type == 'text') {
+												els[i].onkeydown = function (event) {
+													return (event.keyCode != 13);
+												}
+											}
+										}
+									}
+								}";
+				//////////////////////////////////// Tab-DS
                 this.RegisterStartupScript(this.upp_SelectClause,
                     "$(document).ready(function () {" +
                         "$(\".numericInput\").autoNumeric({ aSep: ',', aDec: '.', mDec: '0', vMax: '999999999999999999' });" +
                         "$(\".numericInput\").css(\"text-align\", \"right\");" +
-                    "});"
+                    "});" + strScript
                 );
             }
             catch { }
