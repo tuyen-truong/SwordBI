@@ -92,5 +92,10 @@ namespace HTLBIWebApp2012.Shared.UserControl
 ";
             }
         }
+
+		protected void btnNew_Click(object sender, EventArgs e)
+		{
+			Response.Redirect(String.Format("~/App/Setting/PortletSetting.aspx?whcode={0}", WHCode));
+		}
     }
 }

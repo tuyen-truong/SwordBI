@@ -144,4 +144,10 @@
   <data name="Analysis_SalePageTitle" xml:space="preserve">
     <value>Sales Cube</value>
   </data>
+  <data name="Button_btnNew" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Button_btnSelect" xml:space="preserve">
+    <value>Select</value>
+  </data>
 </root>

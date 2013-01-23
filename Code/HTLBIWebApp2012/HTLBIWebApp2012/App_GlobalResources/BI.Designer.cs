@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources
-{
-
-
+namespace Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -93,6 +93,24 @@ namespace Resources
         internal static string Appearance {
             get {
                 return ResourceManager.GetString("Appearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string Button_btnNew {
+            get {
+                return ResourceManager.GetString("Button_btnNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        internal static string Button_btnSelect {
+            get {
+                return ResourceManager.GetString("Button_btnSelect", resourceCulture);
             }
         }
         

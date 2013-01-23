@@ -31,7 +31,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <dx:ASPxButton runat="server" ID="btnOK" Text="OK" AutoPostBack="false">
+                                    <span style="float:left">
+									<dx:ASPxButton runat="server" ID="btnOK" Text="<%$ Resources:BI, Button_btnSelect %>" AutoPostBack="false" Width="100px">
                                         <ClientSideEvents Click="function(s, e) {
                                             var popupname = s.name.replace('_Panel1_btnOK', '');
                                             var AvailablePortlet = window[popupname + '_Panel1_AvailablePortlet'];
@@ -49,6 +50,12 @@
                                             }
                                             window[popupname].Hide(); }" />
                                     </dx:ASPxButton>
+									</span>
+									<span style="float:left;margin-left:4px;">
+										<dx:ASPxButton ID="btnNew" runat="server" 
+										Text="<%$ Resources:BI, Button_btnNew %>" Width="100px" 
+										OnClick="btnNew_Click"  />
+									</span>
                                 </td>
                             </tr>
                         </table>
