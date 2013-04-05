@@ -2375,9 +2375,9 @@ namespace HTLBIWebApp2012
             if (!this.IsValid()) return "";
             if (string.IsNullOrWhiteSpace(this.OrderName))
                 //return string.Format("[{0}].[{1}].CHILDREN", this.TblName, this.ColName);
-                return string.Format("[{0}].[{1}].MEMBERS", this.TblName, this.ColName);
+                return string.Format("[{0}].[{1}].Levels(0).MEMBERS", this.TblName, this.ColName);
             //return string.Format("ORDER([{0}].[{1}].CHILDREN,[{0}].[{1}].CURRENTMEMBER.NAME,{2})", this.TblName, this.ColName, this.OrderName);
-            return string.Format("ORDER([{0}].[{1}].MEMBERS,[{0}].[{1}].CURRENTMEMBER.NAME,{2})", this.TblName, this.ColName, this.OrderName);
+            return string.Format("ORDER([{0}].[{1}].Levels(0).MEMBERS,[{0}].[{1}].CURRENTMEMBER.NAME,{2})", this.TblName, this.ColName, this.OrderName);
         }
         /// <summary>
         /// Trả về tên field theo cú pháp của MDX ([TableName].[ColumnName].CHILDREN). 
@@ -2718,7 +2718,7 @@ namespace HTLBIWebApp2012
                         strFilter = strFilter + string.Format("{0}{1}", item.ToMDX(), logicCombine);
                     }
                     strFilter = strFilter.Remove(strFilter.Length - logicCombine.Length);
-                    strFilter = string.Format("FILTER([{0}].[{1}].MEMBERS, {2})", field.TblName, field.ColName, strFilter);
+                    strFilter = string.Format("FILTER([{0}].[{1}].Levels(0).MEMBERS, {2})", field.TblName, field.ColName, strFilter);
                     //strFilter = string.Format("FILTER([{0}].[{1}].CHILDREN, {2})", field.TblName, field.ColName, strFilter);
                     var cat = "";
                     if (string.IsNullOrEmpty(subffixMember))

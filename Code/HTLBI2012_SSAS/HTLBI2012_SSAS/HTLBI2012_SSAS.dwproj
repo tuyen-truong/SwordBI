@@ -50,8 +50,8 @@
   </Dimensions>
   <DataSources>
     <ProjectItem>
-      <Name>SwordBI_DW.ds</Name>
-      <FullPath>SwordBI_DW.ds</FullPath>
+      <Name>HTLBI2012 DW.ds</Name>
+      <FullPath>HTLBI2012 DW.ds</FullPath>
     </ProjectItem>
   </DataSources>
   <DataSourceViews>
@@ -66,16 +66,16 @@
       <Options>
         <ConnectionMappings>
           <ConfigurationSetting>
-            <Id>HTLBI2012_DW</Id>
-            <Name>HTLBI2012_DW</Name>
-            <Value xsi:type="xsd:string">Provider=SQLNCLI10.1;Data Source=CBVN-PC044;Persist Security Info=True;Password=;User ID=;Initial Catalog=SwordBI_DW</Value>
+            <Id>HTLBI2012 DW</Id>
+            <Name>HTLBI2012 DW</Name>
+            <Value xsi:type="xsd:string">Provider=SQLNCLI10.1;Data Source=CBVN-PC046;Integrated Security=SSPI;Initial Catalog=HTLBI2012_DW</Value>
           </ConfigurationSetting>
         </ConnectionMappings>
         <ConnectionSecurityMappings>
           <ConfigurationSetting>
-            <Id>HTLBI2012_DW</Id>
-            <Name>HTLBI2012_DW</Name>
-            <Value xsi:type="xsd:int">1</Value>
+            <Id>HTLBI2012 DW</Id>
+            <Name>HTLBI2012 DW</Name>
+            <Value xsi:type="xsd:int">0</Value>
           </ConfigurationSetting>
         </ConnectionSecurityMappings>
       </Options>

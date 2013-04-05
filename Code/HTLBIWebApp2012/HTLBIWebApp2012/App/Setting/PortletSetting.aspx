@@ -32,7 +32,7 @@
     </script>
     
     <dx:ASPxPageControl ID="tabCtrl_PortletSetting" ClientInstanceName="tabCtrl_PortletSetting"
-        runat="server" ActiveTabIndex="3" Width="100%" Font-Names="Arial" 
+        runat="server" ActiveTabIndex="0" Width="100%" Font-Names="Arial" 
         Font-Size="9pt" ClientIDMode="AutoID">
 	    <Border BorderStyle="None" />
 	    <ContentStyle><Paddings Padding="5px" /></ContentStyle>

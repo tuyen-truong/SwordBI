@@ -57,7 +57,7 @@ namespace HTLBIWebApp2012
         }
         public static string DbOLAP_ConnectionStr_Tiny
         {
-            get { return DbOLAP_ConnectionStr.Replace(";Cube Name={0}", ""); }
+            get { return DbOLAP_ConnectionStr.Replace(";cube name={0}", ""); }
         }
 
         public static int PopupGrid_PageSize
