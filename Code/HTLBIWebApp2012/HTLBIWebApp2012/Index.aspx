@@ -45,7 +45,7 @@
 	</script>
 	<div id="pagecontent">
 		<dx:ASPxPivotGrid ID="ASPxPivotGrid1" runat="server" ClientIDMode="AutoID" 
-			OLAPConnectionString="provider=MSOLAP.4;data source=.;initial catalog=HTLBI2012_SSAS;cube name=ARCube;user id=;password=">
+			OLAPConnectionString="">
 			<Fields>
 				<dx:PivotGridField ID="fieldQuantity1" Area="DataArea" AreaIndex="0" 
 					Caption="Quantity" FieldName="[Measures].[Quantity]">
