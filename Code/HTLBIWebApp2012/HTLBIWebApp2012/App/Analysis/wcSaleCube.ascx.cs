@@ -49,7 +49,7 @@ namespace HTLBIWebApp2012.App.Analysis
         {
             //////////////////////////////////////
             // Init OlapConnectionString
-            string errReturn = OLAPConnector.TryConnect(this.pivotGrid, OLAPConnector.OLAPConnectionString, "ARCube");
+            string errReturn = OLAPConnector.TryConnect(this.pivotGrid, OLAPConnector.OLAPConnectionString, "ARCube2");
             if (!string.IsNullOrEmpty(errReturn))
             {
                 Control errorPanel = OLAPConnector.CreateErrorPanel(errReturn);

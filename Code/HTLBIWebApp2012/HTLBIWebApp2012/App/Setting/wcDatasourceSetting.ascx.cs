@@ -284,7 +284,7 @@ namespace HTLBIWebApp2012.App.Setting
                 }
                 var ret = new InqDefineSourceMDX(fields, summaries, filters);
                 ret.PreffixDimTable = this.WHCode;
-                ret.OlapCubeName = string.Format("[{0}Cube]", ret.PreffixDimTable);
+                ret.OlapCubeName = string.Format("[{0}Cube2]", ret.PreffixDimTable);
                 return ret;
             }
             catch { return new InqDefineSourceMDX(); }
@@ -570,7 +570,8 @@ namespace HTLBIWebApp2012.App.Setting
             try
             {
                 var inq = this.Get_DefineSource();
-                foreach (var f in inq.Fields.OrderBy(P => P.Level))
+                /*
+				foreach (var f in inq.Fields.OrderBy(P => P.Level))
                 {
                     var col = new GridViewDataTextColumn();
                     col.Name = f.KeyField;
@@ -591,9 +592,13 @@ namespace HTLBIWebApp2012.App.Setting
                     this.Format_GridColumn(col, ValueFormat.Numeric);
                     this.gvPreViewData.Columns.Add(col);
                 }
-                var ds = Lib.Db.ExecuteMDX(GlobalVar.DbOLAP_ConnectionStr_Tiny, inq.ToMDX());
+				*/
+				//var ds = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).ExecuteReader(inq.ToMDX());
+				//var ds = Lib.Db.ExecuteMDX(GlobalVar.DbOLAP_ConnectionStr_Tiny, inq.ToMDX());
                 //var ds = Lib.Db.ExecuteMDX(GlobalVar.DbOLAP_ConnectionStr_Tiny, "WITH MEMBER [Measures].[QuantitySUM1] AS COALESCEEMPTY([Measures].[Quantity],0) SELECT {[ARDimItem].[ItemGroupName].MEMBERS * [ARDimItem].[ItemName].MEMBERS} ON ROWS,{[Measures].[QuantitySUM1]} ON COLUMNS FROM [ARCube]");
-
+				//this.gvPreViewData.Columns.Clear();
+				Microsoft.AnalysisServices.AdomdClient.CellSet cs = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).ExecuteQuery(inq.ToMDX());
+				var ds = Helpers.BuildDataTable(cs);
                 this.gvPreViewData.DataSource = ds;
                 this.gvPreViewData.DataBind();
             }

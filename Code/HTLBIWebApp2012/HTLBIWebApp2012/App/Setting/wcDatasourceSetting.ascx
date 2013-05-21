@@ -370,21 +370,13 @@ runat="server" Width="100%" oncallback="cbp_Callback">
 						<ContentCollection>
 							<dx:ContentControl ID="ContentControl1" runat="server">				
 								<dx:ASPxGridView ID="gvPreViewData" ClientInstanceName="DS_gvPreViewData" runat="server"
-									AutoGenerateColumns="false" Font-Names="Arial" Font-Size="9pt" Width="100%"
+									AutoGenerateColumns="true" Font-Names="Arial" Font-Size="9pt" Width="100%"
 									OnCustomCallback="gvPreViewData_CustomCallback"
 									OnPageIndexChanged="gvPreViewData_PageIndexChanged" 
 									OnCustomUnboundColumnData="gvPreViewData_CustomUnboundColumnData">
 									<ClientSideEvents EndCallback="function(){
 										frmPreView.Show();
 									}"></ClientSideEvents>
-									<Columns>
-										<dx:GridViewDataTextColumn Caption="#" FieldName="#" Name="colLine" PropertiesTextEdit-DisplayFormatString="#,##0"
-											ShowInCustomizationForm="True" VisibleIndex="0" UnboundType="Integer">
-											<PropertiesTextEdit DisplayFormatString="#,##0"></PropertiesTextEdit>
-											<HeaderStyle HorizontalAlign="Center"></HeaderStyle>
-											<CellStyle HorizontalAlign="Center"></CellStyle>
-										</dx:GridViewDataTextColumn>
-									</Columns>
 									<SettingsBehavior AllowSort="false" />
 									<SettingsPager PageSize="20"></SettingsPager>                                        
 									<ClientSideEvents EndCallback="function(){

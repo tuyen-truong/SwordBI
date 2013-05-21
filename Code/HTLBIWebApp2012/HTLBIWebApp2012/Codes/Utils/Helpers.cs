@@ -16,6 +16,8 @@ using DevExpress.Web.ASPxPivotGrid;
 using DevExpress.XtraCharts;
 using DevExpress.XtraCharts.Web;
 using Newtonsoft.Json;
+using System.Data;
+using Microsoft.AnalysisServices.AdomdClient;
 
 namespace HTLBIWebApp2012
 {
@@ -699,5 +701,105 @@ namespace HTLBIWebApp2012
             else
                 SetChartType(webChart, chartTypeName);
         }
+
+		public static DataTable BuildDataTable(CellSet cs)
+		{
+			DataTable dt = new DataTable();
+			if (cs.Axes.Count == 2)
+			{
+				Microsoft.AnalysisServices.AdomdClient.Axis axis0 = cs.Axes[0];
+				Microsoft.AnalysisServices.AdomdClient.Axis axis1 = cs.Axes[1];
+
+				Position p;
+				
+				//if (axis1.Positions.Count > 0)
+				//{
+				//    p = axis1.Positions[0];
+				//    if (p.Members.Count > 0)
+				//    {
+				//        foreach(Member m in p.Members)
+				//        {
+				//            DataColumn dataCol = new DataColumn(m.UniqueName);
+				//            dt.Columns.Add(dataCol);
+				//        }
+				//    }
+				//    //foreach(Position p in )
+				//}
+				//if (axis0.Positions.Count > 0)
+				//{
+				//    p = axis0.Positions[0];
+				//    if (p.Members.Count > 0)
+				//    {
+				//        foreach (Member m in p.Members)
+				//        {
+				//            DataColumn dataCol = new DataColumn(m.UniqueName);
+				//            dt.Columns.Add(dataCol);
+				//        }
+				//    }
+				//}
+				BuildDataTableInner(dt, axis1);
+				BuildDataTableInner(dt, axis0);
+
+				var values = new object[dt.Columns.Count];
+				int index = 0;
+				BuildDataTableInner1(values, axis1, ref index);
+				//BuildDataTableInner1(values, axis0, ref index);
+				foreach (Cell c in cs.Cells)
+				{
+					values.SetValue(c.Value, index++);
+				}
+
+				dt.Rows.Add(values);
+			}
+			return dt;
+		}
+
+		private static void BuildDataTableInner(DataTable dt, Microsoft.AnalysisServices.AdomdClient.Axis axis)
+		{
+			//if (axis.Positions.Count > 0)
+			//{
+			//    Position p = axis.Positions[0];
+			//    if (p.Members.Count > 0)
+			//    {
+			//        foreach (Member m in p.Members)
+			//        {
+			//            DataColumn dataCol = new DataColumn(m.UniqueName);
+			//            dt.Columns.Add(dataCol);
+			//        }
+			//    }
+			//}
+
+			foreach (Position p in axis.Positions)
+			{
+				foreach (Member m in p.Members)
+				{
+					DataColumn dataCol = new DataColumn(m.UniqueName);
+					dt.Columns.Add(dataCol);
+				}
+			}
+		}
+
+		private static void BuildDataTableInner1(object[] itemArray, Microsoft.AnalysisServices.AdomdClient.Axis axis, ref int index)
+		{
+			//itemArray.SetValue()
+			//if (axis.Positions.Count > 0)
+			//{
+			//    Position p = axis.Positions[0];
+			//    if (p.Members.Count > 0)
+			//    {
+			//        foreach (Member m in p.Members)
+			//        {
+			//            itemArray.SetValue(m.Caption, index++);
+			//        }
+			//    }
+			//}
+			foreach (Position p in axis.Positions)
+			{
+				foreach (Member m in p.Members)
+				{
+					itemArray.SetValue(m.Caption, index++);
+				}
+			}
+		}
     }
 }

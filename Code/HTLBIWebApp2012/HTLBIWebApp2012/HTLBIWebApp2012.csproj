@@ -67,6 +67,9 @@
     <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGauges.v10.2.Core, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGauges.v10.2.Presets, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.AnalysisServices.AdomdClient, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Microsoft.NET\ADOMD.NET\100\Microsoft.AnalysisServices.AdomdClient.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\CE\SourceCode\CECOM.Vol11\CECOM\bin\Debug\Newtonsoft.Json.dll</HintPath>
@@ -1023,6 +1026,8 @@
     <Compile Include="Codes\Utils\DemoData.cs" />
     <Compile Include="Codes\Utils\Extensions.cs" />
     <Compile Include="Codes\Utils\Helpers.cs" />
+    <Compile Include="Codes\Utils\Mdx.cs" />
+    <Compile Include="Codes\Utils\MdxExecuter.cs" />
     <Compile Include="Codes\Utils\MySession.cs" />
     <Compile Include="Codes\Utils\ObjectClasses.cs" />
     <Compile Include="Codes\Utils\OLAPConnector.cs" />
