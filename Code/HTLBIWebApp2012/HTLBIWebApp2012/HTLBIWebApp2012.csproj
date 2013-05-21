@@ -304,7 +304,6 @@
     <Content Include="Content\Images\ViFlag.gif" />
     <Content Include="Content\Images\vnFlag.png" />
     <Content Include="Content\Images\wand-small.png" />
-    <Content Include="Default.aspx" />
     <Content Include="Images\Appearance\Chameleon.png" />
     <Content Include="Images\Appearance\Dark Flat.png" />
     <Content Include="Images\Appearance\Dark.png" />
@@ -1033,13 +1032,6 @@
     <Compile Include="Codes\Utils\OLAPConnector.cs" />
     <Compile Include="Codes\Utils\PortletControlBase.cs">
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Shared\About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>

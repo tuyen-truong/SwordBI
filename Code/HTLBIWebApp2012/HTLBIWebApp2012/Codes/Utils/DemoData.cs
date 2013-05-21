@@ -64,7 +64,7 @@ namespace HTLBIWebApp2012
         public static InqDefineSourceMDX Get_InqDefineSourceMDX()
         {
             var iqr = new InqDefineSourceMDX("bcd");
-            iqr.OlapCubeName = "[ARCube]";
+            iqr.OlapCubeName = "[ARCube2]";
             iqr.PreffixDimTable = "AR";
             iqr.Top = new InqTopMDX(3, "Quantity");
             // Select
