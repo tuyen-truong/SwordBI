@@ -120,5 +120,47 @@ namespace HTLBIWebApp2012
 		{
 			return 0;
 		}
+
+		public DataSet Execute(String query)
+		{
+			String sessionId = String.Empty;
+			return Execute(query, ref sessionId);
+		}
+
+		public DataSet Execute(String query, ref String sessionId)
+		{
+			if (!String.IsNullOrWhiteSpace(_connectionString))
+			{
+				using (AdomdConnection _connect = new AdomdConnection(_connectionString))
+				{
+					try
+					{
+						using (AdomdDataAdapter adapter = new AdomdDataAdapter(query, _connect))
+						{
+							DataSet ds = new DataSet();
+							adapter.Fill(ds);
+							foreach (DataTable tbl in ds.Tables)
+							{
+								foreach (DataColumn dc in tbl.Columns)
+								{
+									dc.ColumnName = Helpers.GetDimFieldShortName(dc.ColumnName);
+								}
+							}
+
+							return ds;
+						}
+					}
+					catch (Exception ex)
+					{
+						if (_connect.State == ConnectionState.Open)
+						{
+							_connect.Close();
+						}
+						throw ex;
+					}
+				}
+			}
+			return null;
+		}
 	}
 }

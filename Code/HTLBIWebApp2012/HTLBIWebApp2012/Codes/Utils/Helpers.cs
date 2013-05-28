@@ -801,5 +801,126 @@ namespace HTLBIWebApp2012
 				}
 			}
 		}
+
+		public static String GetCubeName(String _connectionString)
+		{
+			String cubeName = String.Empty;
+			using (AdomdConnection _connection = new AdomdConnection(_connectionString))
+			{
+				try
+				{
+					_connection.Open();
+					foreach (CubeDef cube in _connection.Cubes)
+					{
+						if (cube.Type == CubeType.Cube)
+						{
+							cubeName = cube.Name;
+							break;
+						}
+					}
+				}
+				catch (Exception ex)
+				{
+					if (_connection.State == ConnectionState.Open)
+					{
+						_connection.Close();
+					}
+					throw ex;
+				}
+			}
+			return cubeName;
+		}
+
+		public static String GetDimFieldShortName(String longName)
+		{
+			Dictionary<String, String> list = new Dictionary<string, string>()
+				{
+					// Customer Dimension
+					{"[ARDimCustomer].[Customer Code].[Customer Code].[MEMBER_CAPTION]", "Customer Code"},
+					{"[ARDimCustomer].[Customer Address].[Customer Address].[MEMBER_CAPTION]", "Customer Address"},
+					{"[ARDimCustomer].[Customer Contact Person].[Customer Contact Person].[MEMBER_CAPTION]", "Customer Contact Person"},
+					{"[ARDimCustomer].[Customer Fax].[Customer Fax].[MEMBER_CAPTION]", "Customer Fax"},
+					{"[ARDimCustomer].[Customer Group Code].[Customer Group Code].[MEMBER_CAPTION]", "Customer Group Cod"},
+					{"[ARDimCustomer].[Customer Group Name].[Customer Group Name].[MEMBER_CAPTION]", "Customer Group Name"},
+					{"[ARDimCustomer].[Customer Group Type].[Customer Group Type].[MEMBER_CAPTION]", "Customer Group Type"},
+					{"[ARDimCustomer].[Customer Mail Addres].[Customer Mail Addres].[MEMBER_CAPTION]", "Customer Mail Addres"},
+					{"[ARDimCustomer].[Customer Mail Zip Code].[Customer Mail Zip Code].[MEMBER_CAPTION]", "Customer Mail Zip Code"},
+					{"[ARDimCustomer].[Customer Phone1].[Customer Phone1].[MEMBER_CAPTION]", "Customer Phone1"},
+					{"[ARDimCustomer].[Customer Phone2].[Customer Phone2].[MEMBER_CAPTION]", "Customer Phone2"},
+					{"[ARDimCustomer].[Customer Type].[Customer Type].[MEMBER_CAPTION]", "Customer Type"},
+					{"[ARDimCustomer].[Customer Zip Code].[Customer Zip Code].[MEMBER_CAPTION]", "Customer Zip Code"},
+					// Item Dimension
+					{"[ARDimItem].[FirmCode].[FirmCode].[MEMBER_CAPTION]", "FirmCode"},
+					{"[ARDimItem].[FirmName].[FirmName].[MEMBER_CAPTION]", "FirmName"},
+					{"[ARDimItem].[ItemCatCode].[ItemCatCode].[MEMBER_CAPTION]", "ItemCatCode"},
+					{"[ARDimItem].[ItemCatName].[ItemCatName].[MEMBER_CAPTION]", "ItemCatName"},
+					{"[ARDimItem].[ItemCode].[ItemCode].[MEMBER_CAPTION]", "ItemCode"},
+					{"[ARDimItem].[ItemFrgnName].[ItemFrgnName].[MEMBER_CAPTION]", "ItemFrgnName"},
+					{"[ARDimItem].[ItemGroupCode].[ItemGroupCode].[MEMBER_CAPTION]", "ItemGroupCode"},
+					{"[ARDimItem].[ItemGroupName].[ItemGroupName].[MEMBER_CAPTION]", "ItemGroupName"},
+					{"[ARDimItem].[ItemModelCode].[ItemModelCode].[MEMBER_CAPTION]", "ItemModelCode"},
+					{"[ARDimItem].[ItemModelName].[ItemModelName].[MEMBER_CAPTION]", "ItemModelName"},
+					{"[ARDimItem].[ItemName].[ItemName].[MEMBER_CAPTION]", "ItemName"},
+					{"[ARDimItem].[ItemTypeCode].[ItemTypeCode].[MEMBER_CAPTION]", "ItemTypeCode"},
+					{"[ARDimItem].[ItemTypeName].[ItemTypeName].[MEMBER_CAPTION]", "ItemTypeName"},
+					{"[ARDimItem].[Hierarchy_ItemCat].[MEMBER_CAPTION]", "Hierarchy_ItemCat"},
+					{"[ARDimItem].[Hierarchy_ItemCat].[ItemCatCode].[MEMBER_CAPTION]", "ItemCatCode"},
+					{"[ARDimItem].[Hierarchy_ItemCat].[ItemCode].[MEMBER_CAPTION]", "ItemCode"},
+					{"[ARDimItem].[Hierarchy_ItemGroup].[MEMBER_CAPTION]", "Hierarchy_ItemGroup"},
+					{"[ARDimItem].[Hierarchy_ItemGroup].[ItemGroupCode].[MEMBER_CAPTION]", "ItemGroupCode"},
+					{"[ARDimItem].[Hierarchy_ItemGroup].[ItemCode].[MEMBER_CAPTION]", "ItemCode"},
+					{"[ARDimItem].[Hierarchy_ItemModel].[MEMBER_CAPTION]", "Hierarchy_ItemModel"},
+					{"[ARDimItem].[Hierarchy_ItemModel].[ItemModelCode].[MEMBER_CAPTION]", "ItemModelCode"},
+					{"[ARDimItem].[Hierarchy_ItemModel].[ItemCode].[MEMBER_CAPTION]", "ItemCode"},
+					{"[ARDimItem].[Hierarchy_ItemType].[MEMBER_CAPTION]", "Hierarchy_ItemType"},
+					{"[ARDimItem].[Hierarchy_ItemType].[ItemTypeCode].[MEMBER_CAPTION]", "ItemTypeCode"},
+					{"[ARDimItem].[Hierarchy_ItemType].[ItemCode].[MEMBER_CAPTION]", "ItemCode"},
+					// Location Dimension
+					{"[ARDimLocation].[LocationCode].[MEMBER_CAPTION]", "LocationCode"},
+					{"[ARDimLocation].[LocationCode].[LocationCode].[MEMBER_CAPTION]", "LocationCode"},
+					{"[ARDimLocation].[LocationName].[MEMBER_CAPTION]", "LocationName"},
+					{"[ARDimLocation].[LocationName].[LocationName].[MEMBER_CAPTION]", "LocationName"},
+					// Project Dimension
+					{"[ARDimProject].[ProjectCode].[MEMBER_CAPTION]", "ProjectCode"},
+					{"[ARDimProject].[ProjectCode].[ProjectCode].[MEMBER_CAPTION]", "ProjectCode"},
+					{"[ARDimProject].[ProjectName].[MEMBER_CAPTION]", "ProjectName"},
+					{"[ARDimProject].[ProjectName].[ProjectName].[MEMBER_CAPTION]", "ProjectName"},
+					// Sale Dimension
+					{"[ARDimSalePerson].[SalePersonCode].[MEMBER_CAPTION]", "SalePersonCode"},
+					{"[ARDimSalePerson].[SalePersonCode].[SalePersonCode].[MEMBER_CAPTION]", "SalePersonCode"},
+					{"[ARDimSalePerson].[SalePersonName].[MEMBER_CAPTION]", "SalePersonName"},
+					{"[ARDimSalePerson].[SalePersonName].[SalePersonName].[MEMBER_CAPTION]", "SalePersonName"},
+					// Time Dimension
+					{"[ARDimTime].[DateKey].[MEMBER_CAPTION]", "DateKey"},
+					{"[ARDimTime].[DateKey].[DateKey].[MEMBER_CAPTION]", "DateKey"},
+					{"[ARDimTime].[Period].[MEMBER_CAPTION]", "Period"},
+					{"[ARDimTime].[Period].[Period].[MEMBER_CAPTION]", "Period"},
+					{"[ARDimTime].[Quarter].[MEMBER_CAPTION]", "Quarter"},
+					{"[ARDimTime].[Quarter].[Quarter].[MEMBER_CAPTION]", "Quarter"},
+					{"[ARDimTime].[Year].[MEMBER_CAPTION]", "Year"},
+					{"[ARDimTime].[Year].[Year].[MEMBER_CAPTION]", "Year"},
+					{"[ARDimTime].[Hierarchy_Year].[MEMBER_CAPTION]", "Hierarchy_Year"},
+					{"[ARDimTime].[Hierarchy_Year].[Year].[MEMBER_CAPTION]", "Year"},
+					{"[ARDimTime].[Hierarchy_Year].[Quarter].[MEMBER_CAPTION]", "Quarter"},
+					{"[ARDimTime].[Hierarchy_Year].[Period].[MEMBER_CAPTION]", "Period"},
+					{"[ARDimTime].[Hierarchy_Year].[DateKey].[MEMBER_CAPTION]", "DateKey"},
+					// Vender Dimension
+					{"[ARDimVendor].[VendorCode].[MEMBER_CAPTION]", "VendorCode"},
+					{"[ARDimVendor].[VendorCode].[VendorCode].[MEMBER_CAPTION]", "VendorCode"},
+					{"[ARDimVendor].[VendorName].[MEMBER_CAPTION]", "VendorName"},
+					{"[ARDimVendor].[VendorName].[VendorName].[MEMBER_CAPTION]", "VendorName"}
+				};
+			String shortName = longName;
+			foreach (KeyValuePair<String, String> entry in list)
+			{
+				if (longName == entry.Key)
+				{
+					shortName = entry.Value;
+					break;
+				}
+			}
+
+			return shortName;
+		}
     }
 }

@@ -284,7 +284,7 @@ namespace HTLBIWebApp2012.App.Setting
                 }
                 var ret = new InqDefineSourceMDX(fields, summaries, filters);
                 ret.PreffixDimTable = this.WHCode;
-                ret.OlapCubeName = string.Format("[{0}Cube2]", ret.PreffixDimTable);
+                ret.OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny);// string.Format("[{0}Cube2]", ret.PreffixDimTable);
                 return ret;
             }
             catch { return new InqDefineSourceMDX(); }
@@ -570,37 +570,10 @@ namespace HTLBIWebApp2012.App.Setting
             try
             {
                 var inq = this.Get_DefineSource();
-                /*
-				foreach (var f in inq.Fields.OrderBy(P => P.Level))
-                {
-                    var col = new GridViewDataTextColumn();
-                    col.Name = f.KeyField;
-                    col.Caption = f.ColAliasVI;
-                    col.FieldName = f.ColName;
-                    if (new[] { "DateKey", "Period", "Quarter", "Year" }.Contains(f.ColName))
-                        this.Format_GridColumn(col, ValueFormat.DateTime);
-                    else
-                        this.Format_GridColumn(col, ValueFormat.Normal);
-                    this.gvPreViewData.Columns.Add(col);
-                }
-                foreach (var f in inq.Summaries)
-                {
-                    var col = new GridViewDataTextColumn();
-                    col.Name = f.Field.KeyField;
-                    col.Caption = f.FieldAlias;
-                    col.FieldName = f.Get_SummaryKeyField();
-                    this.Format_GridColumn(col, ValueFormat.Numeric);
-                    this.gvPreViewData.Columns.Add(col);
-                }
-				*/
-				//var ds = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).ExecuteReader(inq.ToMDX());
-				//var ds = Lib.Db.ExecuteMDX(GlobalVar.DbOLAP_ConnectionStr_Tiny, inq.ToMDX());
-                //var ds = Lib.Db.ExecuteMDX(GlobalVar.DbOLAP_ConnectionStr_Tiny, "WITH MEMBER [Measures].[QuantitySUM1] AS COALESCEEMPTY([Measures].[Quantity],0) SELECT {[ARDimItem].[ItemGroupName].MEMBERS * [ARDimItem].[ItemName].MEMBERS} ON ROWS,{[Measures].[QuantitySUM1]} ON COLUMNS FROM [ARCube]");
-				//this.gvPreViewData.Columns.Clear();
-				Microsoft.AnalysisServices.AdomdClient.CellSet cs = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).ExecuteQuery(inq.ToMDX());
-				var ds = Helpers.BuildDataTable(cs);
-                this.gvPreViewData.DataSource = ds;
-                this.gvPreViewData.DataBind();
+				var ds = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).Execute(inq.ToMDX());
+				this.gvPreViewData.DataSource = ds;
+				this.gvPreViewData.DataBind();
+				
             }
             catch { }
         }
