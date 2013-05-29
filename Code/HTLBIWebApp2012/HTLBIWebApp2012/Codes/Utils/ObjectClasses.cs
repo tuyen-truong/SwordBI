@@ -2729,7 +2729,7 @@ namespace HTLBIWebApp2012
 						strFilter = strFilter + string.Format("{0}{1}", item.ToMDX(), logicCombine);
 					}
 					strFilter = strFilter.Remove(strFilter.Length - logicCombine.Length);
-					strFilter = string.Format("FILTER([{0}].[{1}].Levels(0).MEMBERS, {2})", field.TblName, field.ColName, strFilter);
+					strFilter = string.Format("FILTER([{0}].[{1}].[{1}].MEMBERS, {2})", field.TblName, field.ColName, strFilter);
 					//strFilter = string.Format("FILTER([{0}].[{1}].CHILDREN, {2})", field.TblName, field.ColName, strFilter);
 					var cat = "";
 					if (string.IsNullOrEmpty(subffixMember))
@@ -3363,6 +3363,7 @@ namespace HTLBIWebApp2012
 		/// </summary>
 		public virtual string ToMDX(bool isWrapText)
 		{
+			/*
 			StringBuilder sb = new StringBuilder();
 			sb.Append("SELECT ");
 			try
@@ -3389,7 +3390,8 @@ namespace HTLBIWebApp2012
 			{
 				throw ex;
 			}
-			return sb.ToString();
+			//return sb.ToString();
+			*/
 
 			var wrapLine = isWrapText ? Environment.NewLine : "";
 			var wrapTab = isWrapText ? "\t" : "";
@@ -3398,7 +3400,7 @@ namespace HTLBIWebApp2012
 			var sqlStr = "";
 			var withMemberStr = "WITH ";
 			var selectStr = "SELECT ";
-			var fromStr = " FROM " + this.OlapCubeName;
+			var fromStr = String.Format(" FROM [{0}]", this.OlapCubeName.Trim(new char[] { '[', ']' }));
 			string whereStr = "", onROWSStr = "", onCOLUMNSStr = "";
 			try
 			{

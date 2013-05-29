@@ -570,7 +570,7 @@ namespace HTLBIWebApp2012.App.Setting
             try
             {
                 var inq = this.Get_DefineSource();
-				var ds = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).Execute(inq.ToMDX());
+				var ds = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).ExecuteDataSet(inq.ToMDX());
 				this.gvPreViewData.DataSource = ds;
 				this.gvPreViewData.DataBind();
 				

@@ -121,13 +121,13 @@ namespace HTLBIWebApp2012
 			return 0;
 		}
 
-		public DataSet Execute(String query)
+		public DataSet ExecuteDataSet(String query)
 		{
 			String sessionId = String.Empty;
-			return Execute(query, ref sessionId);
+			return ExecuteDataSet(query, ref sessionId);
 		}
 
-		public DataSet Execute(String query, ref String sessionId)
+		public DataSet ExecuteDataSet(String query, ref String sessionId)
 		{
 			if (!String.IsNullOrWhiteSpace(_connectionString))
 			{
