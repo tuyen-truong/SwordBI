@@ -311,27 +311,27 @@ namespace HTLBIWebApp2012.App.Setting
 		}
 		internal class FieldInfo
 		{
-			private String _uniqueName = String.Empty;
+			private String m_UniqueName = String.Empty;
 			public String UniqueName
 			{
 				get
 				{
-					return this._uniqueName;
+					return this.m_UniqueName;
 				}
 			}
-			private String _caption = String.Empty;
+			private String m_Caption = String.Empty;
 			public String Caption
 			{
 				get
 				{
-					return this._caption;
+					return this.m_Caption;
 				}
 			}
 
 			public FieldInfo(string uniqueName, string caption)
 			{
-				this._uniqueName = uniqueName;
-				this._caption = caption;
+				this.m_UniqueName = uniqueName;
+				this.m_Caption = caption;
 			}
 		}
 		private List<FieldInfo> LoadFields()
