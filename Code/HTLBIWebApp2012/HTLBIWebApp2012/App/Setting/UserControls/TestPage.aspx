@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestPage.aspx.cs" Inherits="HTLBIWebApp2012.App.Setting.UserControls.TestPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestPage.aspx.cs" Inherits="HTLBIWebApp2012.App.Setting.UserControls.TestPage" EnableViewState="true" %>
 
 <%@ Register TagName="ucDatasourceSetting" TagPrefix="uc" Src="~/App/Setting/UserControls/ucDatasourceSetting.ascx" %>
 

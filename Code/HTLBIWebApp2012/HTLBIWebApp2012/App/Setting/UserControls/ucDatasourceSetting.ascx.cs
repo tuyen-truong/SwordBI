@@ -34,17 +34,46 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 			set { cbDataSource.SelectedItem.Value = value; }
 		}
 
+		protected override void OnInit(EventArgs e)
+		{
+			base.OnInit(e);
+			Page.RegisterRequiresControlState(this);
+		}
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			Helpers.SetDataSource(lbFields, LoadFields(), "UniqueName", "Caption");
+			LoadFields();
+			Helpers.SetDataSource(lbFields, DimFieldCollection, "UniqueName", "Caption");
 
 			btnNewDataSource.Click += new EventHandler(btnNewDataSource_Click);
 			btnFieldAdd.Click+= new EventHandler(FieldAdd_Click);
 			btnFieldRemove.Click += new EventHandler(FieldRemove_Click);
 		}
 
+		protected override object SaveControlState()
+		{
+			object[] controlState = new object[3];
+			controlState[0] = base.SaveControlState();
+			controlState[1] = new Olap.DimensionFieldInfoCollection(lbSelectedFields.Items);
+			//controlState[2] = filterContainer.Controls;
+			return controlState;
+		}
+
+		protected override void LoadControlState(object savedState)
+		{
+			object[] controlState = (object[])savedState;
+			base.LoadControlState(controlState[0]);
+			Olap.DimensionFieldInfoCollection list = (Olap.DimensionFieldInfoCollection)controlState[1];
+			Helpers.SetDataSource(lbSelectedFields, list, "UniqueName", "Caption");
+			//ControlCollection ctls = (ControlCollection)controlState[2];
+			//foreach (Control ctl in ctls)
+			//{
+			//    filterContainer.Controls.Add(ctl);
+			//}
+		}
+
 		protected void btnNewDataSource_Click(object sender, EventArgs e)
 		{
+			lbSelectedFields.Items.Clear();
 			if (NewButtonClicked != null)
 			{
 				NewButtonClicked(sender, e);
@@ -53,18 +82,13 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 
 		protected void FieldAdd_Click(object sender, EventArgs e)
 		{
-			List<FieldInfo> selectedItems = new List<FieldInfo>();
-			ListEditItemCollection items = lbFields.Items;
-			//SelectedItemCollection items = lbFields.SelectedItems;
-			foreach (ListEditItem it in items)
+			Olap.DimensionFieldInfoCollection selectedItems = new Olap.DimensionFieldInfoCollection(lbSelectedFields.Items);
+			ListEditItem item = lbFields.SelectedItem;
+			if (selectedItems.Find(item.Value.ToString()) == null)
 			{
-				//if (it.Selected)
-				//{
-				//    selectedItems.Add(new FieldInfo(it.Value.ToString(), it.Text));
-				//}
-				selectedItems.Add(new FieldInfo(it.Value.ToString(), it.GetValue("Caption").ToString()));
+				selectedItems.Add(new Olap.DimensionFieldInfo(item));
+				Helpers.SetDataSource(lbSelectedFields, selectedItems, "UniqueName", "Caption");
 			}
-			Helpers.SetDataSource(lbSelectedFields, selectedItems, "UniqueName", "Caption");
 			if (FieldAddButtonClicked != null)
 			{
 				FieldAddButtonClicked(sender, e);
@@ -73,55 +97,42 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 
 		protected void FieldRemove_Click(object sender, EventArgs e)
 		{
+			Olap.DimensionFieldInfoCollection selectedItems = new Olap.DimensionFieldInfoCollection(lbSelectedFields.Items);
+			ListEditItem item = lbSelectedFields.SelectedItem;
+			if (item != null
+				&& item.GetValue("UniqueName") != null)
+			{
+				selectedItems.Remove(item.GetValue("UniqueName").ToString());
+				Helpers.SetDataSource(lbSelectedFields, selectedItems, "UniqueName", "Caption");
+				lbSelectedFields.SelectedIndex = -1;
+			}
 			if (FieldRemoveButtonClicked != null)
 			{
 				FieldRemoveButtonClicked(sender, e);
 			}
 		}
 
-		internal class FieldInfo
+		protected void popFilterMenu_Click(object sender, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
 		{
-			private String m_UniqueName = String.Empty;
-			public String UniqueName
-			{
-				get
-				{
-					return this.m_UniqueName;
-				}
-			}
-			private String m_Caption = String.Empty;
-			public String Caption
-			{
-				get
-				{
-					return this.m_Caption;
-				}
-			}
-			private String m_Sort = String.Empty;
-			public String Sort
-			{
-				get
-				{
-					return m_Sort;
-				}
-				set
-				{
-					m_Sort = value;
-				}
-			}
-
-			public FieldInfo(string uniqueName, string caption)
-			{
-				this.m_UniqueName = uniqueName;
-				this.m_Caption = caption;
-			}
+			Control ctl = LoadControl("~/App/Setting/wcNormalFilter.ascx");
+			filterContainer.Controls.Add(ctl);
 		}
-		private List<FieldInfo> LoadFields()
+
+		private Olap.DimensionFieldInfoCollection m_DimFieldCollection = new Olap.DimensionFieldInfoCollection();
+		public Olap.DimensionFieldInfoCollection DimFieldCollection
 		{
-			//String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings[OLAPConnector.OLAPConnectionString].ConnectionString;
+			get { return m_DimFieldCollection; }
+		}
+
+		private Olap.MeasureFieldInfoCollection m_MeasureFieldCollection = new Olap.MeasureFieldInfoCollection();
+		public Olap.MeasureFieldInfoCollection MeasureFieldCollection
+		{
+			get { return m_MeasureFieldCollection; }
+		}
+
+		private void LoadFields()
+		{
 			String connectionString = "Data source=(local);Initial Catalog=SWordBI_SSAS";
-			//Dictionary<String, String> fields = new Dictionary<String, String>();
-			List<FieldInfo> fields = new List<FieldInfo>();
 			using (AdomdConnection conn = new AdomdConnection(connectionString))
 			{
 				conn.Open();
@@ -134,20 +145,29 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 						break;
 					}
 				}
-				if (cubeDef == null) { return fields; }
+				if (cubeDef == null)
+				{
+					m_DimFieldCollection.Clear();
+					m_MeasureFieldCollection.Clear();
+					return;
+				}
 				DimensionCollection dimCollection = cubeDef.Dimensions;
 				foreach (Dimension dim in dimCollection)
 				{
-					HierarchyCollection hierarchyColl = dim.AttributeHierarchies;
-					foreach (Hierarchy h in hierarchyColl)
+					if (dim.DimensionType == DimensionTypeEnum.Measure) { continue; }
+					HierarchyCollection hierarchyColl = dim.Hierarchies;
+					foreach (Hierarchy hier in hierarchyColl)
 					{
-						//fields.Add(h.UniqueName, h.Caption);
-						fields.Add(new FieldInfo(h.UniqueName, h.Caption));
+						m_DimFieldCollection.Add(new Olap.DimensionFieldInfo(hier));
 
 					}
 				}
+				MeasureCollection measureCollection = cubeDef.Measures;
+				foreach (Measure m in measureCollection)
+				{
+					m_MeasureFieldCollection.Add(new Olap.MeasureFieldInfo(m));
+				}
 			}
-			return fields;
 		}
 	}
 }
