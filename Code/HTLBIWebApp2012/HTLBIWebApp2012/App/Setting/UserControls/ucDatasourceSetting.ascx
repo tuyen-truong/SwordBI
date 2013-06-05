@@ -165,8 +165,8 @@
 </fieldset>
 <fieldset style="min-width:1024px">
 <legend>Filters</legend>
-<asp:Panel ID="filterContainer" runat="server"></asp:Panel>
-<dx:ASPxButton ID="btnAddFilter" runat="server" Text="Add Filter" Width="80px" AutoPostBack="false"></dx:ASPxButton>
+<asp:Panel ID="filterContainer" runat="server" style="margin-left:-3px"></asp:Panel>
+<dx:ASPxButton ID="btnAddFilter" runat="server" Text="Add Filter" Width="90px" AutoPostBack="false"></dx:ASPxButton>
 <dx:ASPxPopupMenu ID="popFilterMenu" runat="server" PopupElementID="btnAddFilter" PopupAction="LeftMouseClick" OnItemClick="popFilterMenu_Click">
 <Items>
 	<dx:MenuItem Text="Normal" Name="NORMAL"></dx:MenuItem>
