@@ -10,33 +10,51 @@
 namespace HTLBIWebApp2012.App.Setting.UserControls {
     
     
-    public partial class TestPage {
+    public partial class ucNormalFilter {
         
         /// <summary>
-        /// form1 control.
+        /// cbbKeyField control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cbbKeyField;
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// cbbOperator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cbbOperator;
         
         /// <summary>
-        /// uc1 control.
+        /// txtValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HTLBIWebApp2012.App.Setting.ucDatasourceSetting uc1;
+        protected global::System.Web.UI.WebControls.TextBox txtValue;
+        
+        /// <summary>
+        /// cbbAndOr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cbbAndOr;
+        
+        /// <summary>
+        /// btnDelFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnDelFilter;
     }
 }

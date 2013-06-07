@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HTLBIWebApp2012.App.Setting.UserControls {
+namespace HTLBIWebApp2012.App.Setting {
     
     
     public partial class ucDatasourceSetting {
@@ -49,22 +49,22 @@ namespace HTLBIWebApp2012.App.Setting.UserControls {
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btnNewDataSource;
         
         /// <summary>
-        /// ASPxTextBox1 control.
+        /// txtFieldDispName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox ASPxTextBox1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtFieldDispName;
         
         /// <summary>
-        /// ASPxComboBox1 control.
+        /// cbFieldSort control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cbFieldSort;
         
         /// <summary>
         /// lbFields control.
@@ -103,31 +103,31 @@ namespace HTLBIWebApp2012.App.Setting.UserControls {
         protected global::DevExpress.Web.ASPxEditors.ASPxListBox lbSelectedFields;
         
         /// <summary>
-        /// ASPxTextBox2 control.
+        /// txtMetricDispName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox ASPxTextBox2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtMetricDispName;
         
         /// <summary>
-        /// ASPxComboBox3 control.
+        /// cbFuncs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox3;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cbFuncs;
         
         /// <summary>
-        /// ASPxComboBox2 control.
+        /// cbMetricSort control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cbMetricSort;
         
         /// <summary>
         /// lbMetricFields control.
@@ -139,22 +139,22 @@ namespace HTLBIWebApp2012.App.Setting.UserControls {
         protected global::DevExpress.Web.ASPxEditors.ASPxListBox lbMetricFields;
         
         /// <summary>
-        /// ASPxButton1 control.
+        /// btnMeasureFieldAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton ASPxButton1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnMeasureFieldAdd;
         
         /// <summary>
-        /// ASPxButton2 control.
+        /// btnMeasureFieldRemove control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton ASPxButton2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnMeasureFieldRemove;
         
         /// <summary>
         /// lbSelectedMetricFields control.

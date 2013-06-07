@@ -13,7 +13,7 @@
 	<asp:ScriptManager ID="ScriptManager1" runat="server">
 	</asp:ScriptManager>
 	<div>
-		<uc:ucDatasourceSetting runat="server" ID="uc1" OnNewButtionClicked="uc1_click" OnFieldAddButtonClicked="uc1_click" />
+		<uc:ucDatasourceSetting runat="server" ID="uc1" />
 	</div>
 	</form>
 </body>

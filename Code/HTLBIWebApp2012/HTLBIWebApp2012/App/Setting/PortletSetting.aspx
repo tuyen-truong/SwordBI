@@ -18,6 +18,7 @@
 <%@ Register src="wcLayoutSetting.ascx" tagname="wcLayoutSetting" tagprefix="uc4" %>
 
 <%@ Register src="wcInteractionSetting.ascx" tagname="wcInteractionSetting" tagprefix="uc5" %>
+<%@ Register Src="~/App/Setting/UserControls/ucDatasourceSetting.ascx" TagName="ucDatasourceSetting" TagPrefix="uc6" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script language="javascript" type="text/javascript">
@@ -67,6 +68,7 @@
 			    <ContentCollection>
 				    <dx:ContentControl ID="ContentControl2" runat="server">
 				        <uc2:wcDatasourceSetting ID="wcDatasourceSetting1" runat="server" />
+						<uc6:ucDatasourceSetting ID="ucDatasourceSetting1" runat="server" />
 				    </dx:ContentControl>
 			    </ContentCollection>
 		    </dx:TabPage>

@@ -2213,6 +2213,41 @@ namespace HTLBIWebApp2012
 	/// </summary>
 	public abstract class InqMDX
 	{
+		private String m_Caption = String.Empty;
+		public virtual String Caption
+		{
+			get { return m_Caption; }
+			set { m_Caption = value; }
+		}
+
+		private String m_Description = String.Empty;
+		public virtual String Description
+		{
+			get { return m_Description; }
+			set { m_Description = value; }
+		}
+
+		private String m_Name = String.Empty;
+		public virtual String Name
+		{
+			get { return m_Name; }
+			set { m_Name = value; }
+		}
+
+		private String m_UniqueName = String.Empty;
+		public virtual String UniqueName
+		{
+			get { return m_UniqueName; }
+			set { m_UniqueName = value; }
+		}
+
+		private String m_Sort = String.Empty;
+		public virtual String Sort
+		{
+			get { return m_Sort; }
+			set { m_Sort = value; }
+		}
+
 		public int ID { get; set; }
 
 		/// <summary>
@@ -2310,6 +2345,18 @@ namespace HTLBIWebApp2012
 		public string DataType { get; set; }
 		public string OrderName { get; set; }
 		public int Level { get; set; }
+
+		public override string Caption
+		{
+			get
+			{
+				return this.ColName;
+			}
+			set
+			{
+				base.Caption = value;
+			}
+		}
 
 		public InqFieldInfoMDX() { }
 		public InqFieldInfoMDX(string tblName, string colName)
@@ -4075,6 +4122,7 @@ namespace HTLBIWebApp2012
 					return KPIDefineSource.FromJsonStr(this.JsonStr);
 				}
 			}
+
 			public lsttbl_DashboardSource(string code, string jsonStr, string nameVI, string nameEN, string nameFormatVI, string nameFormatEN)
 			{
 				this.Code = code;

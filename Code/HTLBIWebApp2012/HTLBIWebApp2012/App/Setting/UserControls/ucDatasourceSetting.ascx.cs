@@ -7,8 +7,9 @@ using System.Web.UI.WebControls;
 using Microsoft.AnalysisServices.AdomdClient;
 using HTLBIWebApp2012.Codes.Utils;
 using DevExpress.Web.ASPxEditors;
+using HTLBIWebApp2012.Codes.BLL;
 
-namespace HTLBIWebApp2012.App.Setting.UserControls
+namespace HTLBIWebApp2012.App.Setting
 {
 	public partial class ucDatasourceSetting : System.Web.UI.UserControl
 	{
@@ -34,16 +35,33 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 			set { cbDataSource.SelectedItem.Value = value; }
 		}
 
+		protected FilterControlInfoCollection m_Filters = new FilterControlInfoCollection();
+		
 		protected override void OnInit(EventArgs e)
 		{
 			base.OnInit(e);
 			Page.RegisterRequiresControlState(this);
 		}
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			// Data Warehouse
+			if (!IsPostBack)
+			{
+				Helpers.SetDataSource(cbDataWarehouse, MyBI.Me.GetDW(), "Value", "Text");
+				cbFieldSort.Items.AddRange(InqMDX.GetOrderByName());
+				cbMetricSort.Items.AddRange(InqMDX.GetOrderByName());
+				cbFuncs.Items.AddRange(InqMDX.GetSummatyFuncName());
+			}
+			// Data source
+			//MyBI.Me.Get_DashboardSource("");
+			// Query Information
 			LoadFields();
 			Helpers.SetDataSource(lbFields, DimFieldCollection, "UniqueName", "Caption");
-
+			Helpers.SetDataSource(lbMetricFields, MeasureFieldCollection, "UniqueName", "Caption");
+			// Filters
+			// TODO: Load saved filters
+			// Events initialize
 			btnNewDataSource.Click += new EventHandler(btnNewDataSource_Click);
 			btnFieldAdd.Click+= new EventHandler(FieldAdd_Click);
 			btnFieldRemove.Click += new EventHandler(FieldRemove_Click);
@@ -51,10 +69,11 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 
 		protected override object SaveControlState()
 		{
-			object[] controlState = new object[3];
+			object[] controlState = new object[4];
 			controlState[0] = base.SaveControlState();
 			controlState[1] = new Olap.DimensionFieldInfoCollection(lbSelectedFields.Items);
-			//controlState[2] = filterContainer.Controls;
+			controlState[2] = new Olap.MeasureFieldInfoCollection(lbSelectedMetricFields.Items);
+			controlState[3] = m_Filters;
 			return controlState;
 		}
 
@@ -62,18 +81,26 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 		{
 			object[] controlState = (object[])savedState;
 			base.LoadControlState(controlState[0]);
+			// Fields
 			Olap.DimensionFieldInfoCollection list = (Olap.DimensionFieldInfoCollection)controlState[1];
 			Helpers.SetDataSource(lbSelectedFields, list, "UniqueName", "Caption");
-			//ControlCollection ctls = (ControlCollection)controlState[2];
-			//foreach (Control ctl in ctls)
-			//{
-			//    filterContainer.Controls.Add(ctl);
-			//}
+			// Metrics
+			Olap.MeasureFieldInfoCollection list1 = (Olap.MeasureFieldInfoCollection)controlState[2];
+			Helpers.SetDataSource(lbSelectedMetricFields, list1, "UniqueName", "Caption");
+			// Filters
+			m_Filters = (FilterControlInfoCollection)controlState[3];
+			foreach (FilterControlInfo ctlFilter in m_Filters.Collection)
+			{
+				FilterCtrlBase ctl = GenerateFilterControl(ctlFilter.Type, ctlFilter.ID);
+				ctl.ID = ctlFilter.ID;
+				filterContainer.Controls.Add(ctl);
+			}
 		}
 
 		protected void btnNewDataSource_Click(object sender, EventArgs e)
 		{
-			lbSelectedFields.Items.Clear();
+			Cleanup();
+
 			if (NewButtonClicked != null)
 			{
 				NewButtonClicked(sender, e);
@@ -84,7 +111,8 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 		{
 			Olap.DimensionFieldInfoCollection selectedItems = new Olap.DimensionFieldInfoCollection(lbSelectedFields.Items);
 			ListEditItem item = lbFields.SelectedItem;
-			if (selectedItems.Find(item.Value.ToString()) == null)
+			if (item != null
+				&& selectedItems.Find(item.Value.ToString()) == null)
 			{
 				selectedItems.Add(new Olap.DimensionFieldInfo(item));
 				Helpers.SetDataSource(lbSelectedFields, selectedItems, "UniqueName", "Caption");
@@ -112,10 +140,119 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 			}
 		}
 
+		protected void MeasureFieldAdd_Click(object sende, EventArgs e)
+		{
+			Olap.MeasureFieldInfoCollection selectedItems = new Olap.MeasureFieldInfoCollection(lbSelectedMetricFields.Items);
+			ListEditItem item = lbMetricFields.SelectedItem;
+			if (item != null
+				&& selectedItems.Find(item.Value.ToString()) == null)
+			{
+				selectedItems.Add(new Olap.MeasureFieldInfo(item));
+				Helpers.SetDataSource(lbSelectedMetricFields, selectedItems, "UniqueName", "Caption");
+			}
+		}
+
+		protected void MeasureFieldRemove_Click(object sende, EventArgs e)
+		{
+			Olap.MeasureFieldInfoCollection selectedItems = new Olap.MeasureFieldInfoCollection(lbSelectedMetricFields.Items);
+			ListEditItem item = lbSelectedMetricFields.SelectedItem;
+			if (item != null
+				&& item.GetValue("UniqueName") != null)
+			{
+				selectedItems.Remove(item.GetValue("UniqueName").ToString());
+				Helpers.SetDataSource(lbSelectedMetricFields, selectedItems, "UniqueName", "Caption");
+				lbSelectedFields.SelectedIndex = -1;
+			}
+		}
+
 		protected void popFilterMenu_Click(object sender, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
 		{
-			Control ctl = LoadControl("~/App/Setting/wcNormalFilter.ascx");
+			String filterType = e.Item.Name;
+			FilterCtrlBase ctl = GenerateFilterControl(filterType, String.Empty);
+			m_Filters.Add(new FilterControlInfo(ctl) { Type = filterType });
+
+		}
+
+		protected FilterCtrlBase GenerateFilterControl(String filterType, String id)
+		{
+			if (string.IsNullOrWhiteSpace(filterType))
+			{
+				filterType = "NORMAL";
+			}
+			FilterCtrlBase ctl;
+			if (filterType == "NUM")
+			{
+				ctl = LoadControl("~/App/Setting/wcNumFilter.ascx") as wcNumFilter;
+			}
+			else if (filterType == "DATE")
+			{
+				ctl = LoadControl("~/App/Setting/wcTimeFilter.ascx") as wcTimeFilter;
+			}
+			else
+			{
+				ctl = LoadControl("~/App/Setting/wcNormalFilter.ascx") as wcNormalFilter;
+			}
+			if (String.IsNullOrWhiteSpace(id))
+			{
+				id = Guid.NewGuid().ToString();
+			}
+			ctl.ID = id;
+			ctl.OnRemove += new EventHandler(FilterRemove_Click);
 			filterContainer.Controls.Add(ctl);
+			return ctl;
+		}
+
+		protected void FilterRemove_Click(object sender, EventArgs e)
+		{
+			String removedID = (sender.GetVal("Parent") as Control).ID;
+			filterContainer.Controls.RemoveAll(c => c.ID == removedID);
+			m_Filters.Remove(removedID);
+		}
+
+		protected void cbDataWarehouse_ValueChanged(object sender, EventArgs e)
+		{
+			ASPxComboBox cb = (ASPxComboBox)sender;
+			object selectedItemValue = cb.SelectedItem != null ? cb.SelectedItem.Value : null;
+			if (selectedItemValue != null)
+			{
+				String whCode = selectedItemValue.ToString();
+				var datasource = MyBI.Me.Get_DashboardSource(whCode, GlobalVar.SettingCat_DS);
+				Helpers.SetDataSource(cbDataSource, datasource, "Code", "NameEN");
+				cbDataSource.SelectedIndex = 0;
+				cbDataSource_ValueChanged(cbDataSource, EventArgs.Empty);
+			}
+		}
+
+		protected void cbDataSource_ValueChanged(object sender, EventArgs e)
+		{
+			Cleanup();
+
+			// re-init information
+			ASPxComboBox cb = (ASPxComboBox)sender;
+			object selectedItemValue = cb.SelectedItem != null ? cb.SelectedItem.Value : null;
+			if (selectedItemValue != null)
+			{
+				String dsCode = selectedItemValue.ToString();
+				var datasource = MyBI.Me.Get_DashboardSourceBy(dsCode);
+				if (datasource != null)
+				{
+					txtDataSourceName.Text = datasource.NameEN;
+
+					var inq = datasource.JsonObjMDX;
+					Helpers.SetDataSource(lbSelectedFields, inq.Fields, "UniqueName", "Caption");
+				}
+			}
+		}
+
+		void Cleanup()
+		{
+			txtDataSourceName.Text = String.Empty;
+			lbSelectedMetricFields.Items.Clear();
+			lbSelectedFields.Items.Clear();
+			filterContainer.Controls.Clear();
+			cbFieldSort.SelectedIndex = 0;
+			cbMetricSort.SelectedIndex = 0;
+			cbFuncs.SelectedIndex = 0;
 		}
 
 		private Olap.DimensionFieldInfoCollection m_DimFieldCollection = new Olap.DimensionFieldInfoCollection();
@@ -167,6 +304,60 @@ namespace HTLBIWebApp2012.App.Setting.UserControls
 				{
 					m_MeasureFieldCollection.Add(new Olap.MeasureFieldInfo(m));
 				}
+			}
+		}
+
+		[Serializable()]
+		public class FilterControlInfo
+		{
+			private String m_ID = String.Empty;
+			public String ID
+			{
+				get { return m_ID; }
+				set { m_ID = value; }
+			}
+
+			private String m_Type = String.Empty;
+			public String Type
+			{
+				get { return m_Type; }
+				set { m_Type = value; }
+			}
+
+			public FilterControlInfo(Control ctl)
+			{
+				m_ID = ctl.ID;
+				m_Type = ctl.GetType().Name;
+			}
+		}
+
+		[Serializable()]
+		public class FilterControlInfoCollection
+		{
+			private List<FilterControlInfo> m_list = new List<FilterControlInfo>();
+			public List<FilterControlInfo> Collection
+			{
+				get { return m_list; }
+			}
+
+			public FilterControlInfoCollection() { }
+
+			public void Add(FilterControlInfo ctrlInfo)
+			{
+				if (m_list.Find(item => item.ID == ctrlInfo.ID) == null)
+				{
+					m_list.Add(ctrlInfo);
+				}
+			}
+
+			public void Remove(String id)
+			{
+				m_list.RemoveAll(c => c.ID == id);
+			}
+
+			public void Clear()
+			{
+				m_list.Clear();
 			}
 		}
 	}

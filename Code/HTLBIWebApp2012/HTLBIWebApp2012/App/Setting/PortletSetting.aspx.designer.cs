@@ -40,6 +40,15 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::HTLBIWebApp2012.App.Setting.wcDatasourceSetting wcDatasourceSetting1;
         
         /// <summary>
+        /// ucDatasourceSetting1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::HTLBIWebApp2012.App.Setting.ucDatasourceSetting ucDatasourceSetting1;
+        
+        /// <summary>
         /// ContentControl1 control.
         /// </summary>
         /// <remarks>

@@ -58,6 +58,8 @@ namespace HTLBIWebApp2012.Olap
 			set { m_Sort = value; }
 		}
 
+		public DimensionFieldInfo() { }
+
 		public DimensionFieldInfo(Hierarchy hierarchy)
 		{
 			Caption = hierarchy.Caption;
@@ -102,6 +104,20 @@ namespace HTLBIWebApp2012.Olap
 	[Serializable()]
 	public sealed class MeasureFieldInfo : OlapInfoBase
 	{
+		private String m_Sort = String.Empty;
+		public String Sort
+		{
+			get { return m_Sort; }
+			set { m_Sort = value; }
+		}
+
+		private String m_Calc = String.Empty;
+		public String Calc
+		{
+			get { return m_Calc; }
+			set { m_Calc = value; }
+		}
+
 		public MeasureFieldInfo(ListEditItem item)
 		{
 			Caption = ToStr(item.GetValue("Caption"), String.Empty);
@@ -119,6 +135,7 @@ namespace HTLBIWebApp2012.Olap
 		}
 	}
 
+	[Serializable()]
 	public class MeasureFieldInfoCollection : List<MeasureFieldInfo>
 	{
 		public MeasureFieldInfoCollection() { }
@@ -133,6 +150,11 @@ namespace HTLBIWebApp2012.Olap
 		public MeasureFieldInfo Find(String uniqueName)
 		{
 			return base.Find(item => item.UniqueName == uniqueName);
+		}
+
+		public bool Remove(String uniqueName)
+		{
+			return base.Remove(this.Find(uniqueName));
 		}
 	}
 }

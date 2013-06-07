@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucDatasourceSetting.ascx.cs" Inherits="HTLBIWebApp2012.App.Setting.UserControls.ucDatasourceSetting" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucDatasourceSetting.ascx.cs" Inherits="HTLBIWebApp2012.App.Setting.ucDatasourceSetting" %>
 <%@ Register Assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
 	Namespace="DevExpress.Web.ASPxMenu" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
@@ -34,7 +34,7 @@
 	<tr>
 		<th>Data Warehouse</th>
 		<td style="width:250px">
-			<dx:ASPxComboBox ID="cbDataWarehouse" runat="server" Width="100%">
+			<dx:ASPxComboBox ID="cbDataWarehouse" runat="server" Width="100%" AutoPostBack="true" OnValueChanged="cbDataWarehouse_ValueChanged">
 			</dx:ASPxComboBox>
 		</td>
 		<td>&nbsp;</td>
@@ -42,7 +42,7 @@
 	<tr>
 		<th>Data Source</th>
 		<td style="width:250px">
-			<dx:ASPxComboBox ID="cbDataSource" runat="server" Width="100%">
+			<dx:ASPxComboBox ID="cbDataSource" runat="server" Width="100%" AutoPostBack="true" OnValueChanged="cbDataSource_ValueChanged">
 			</dx:ASPxComboBox>
 		</td>
 		<td style="padding-left:3px">
@@ -67,11 +67,11 @@
 			<table cellpadding="0" cellspacing="0" style="float:right; margin-bottom:3px">
 				<tr>
 					<td>
-						<dx:ASPxTextBox ID="ASPxTextBox1" runat="server" Width="250px">
+						<dx:ASPxTextBox ID="txtFieldDispName" runat="server" Width="250px">
 						</dx:ASPxTextBox>
 					</td>
 					<td style="width:80px; padding-left:3px">
-						<dx:ASPxComboBox ID="ASPxComboBox1" runat="server" Width="80px">
+						<dx:ASPxComboBox ID="cbFieldSort" runat="server" Width="80px">
 						</dx:ASPxComboBox>
 					</td>
 				</tr>
@@ -115,15 +115,15 @@
 			<table cellpadding="0" cellspacing="0" style="float:right; margin-bottom:3px">
 				<tr>
 					<td>
-						<dx:ASPxTextBox ID="ASPxTextBox2" runat="server" Width="250px">
+						<dx:ASPxTextBox ID="txtMetricDispName" runat="server" Width="250px">
 						</dx:ASPxTextBox>
 					</td>
 					<td style="width:80px; padding-left:3px">
-						<dx:ASPxComboBox ID="ASPxComboBox3" runat="server" Width="80px">
+						<dx:ASPxComboBox ID="cbFuncs" runat="server" Width="80px">
 						</dx:ASPxComboBox>
 					</td>
 					<td style="width:80px; padding-left:3px">
-						<dx:ASPxComboBox ID="ASPxComboBox2" runat="server" Width="80px">
+						<dx:ASPxComboBox ID="cbMetricSort" runat="server" Width="80px">
 						</dx:ASPxComboBox>
 					</td>
 				</tr>
@@ -133,7 +133,7 @@
 	<tr>
 		<td>
 			<dx:ASPxListBox ID="lbMetricFields" runat="server" ClientIDMode="AutoID" Width="100%" 
-				Height="212px">
+				Height="120px">
 				<Columns>
 					<dx:ListBoxColumn Caption="Field Name" FieldName="Caption" />
 					<dx:ListBoxColumn Caption="Display Name" FieldName="Caption" />
@@ -142,16 +142,16 @@
 		</td>
 		<td style="width:70px;">
 			<div style="margin:5px 5px;">
-				<dx:ASPxButton ID="ASPxButton1" runat="server" Text=">" Width="60px">
+				<dx:ASPxButton ID="btnMeasureFieldAdd" runat="server" Text=">" Width="60px" OnClick="MeasureFieldAdd_Click">
 				</dx:ASPxButton>
 				<span style="line-height:3px">&nbsp;</span>
-				<dx:ASPxButton ID="ASPxButton2" runat="server" Text="<" Width="60px">
+				<dx:ASPxButton ID="btnMeasureFieldRemove" runat="server" Text="<" Width="60px" OnClick="MeasureFieldRemove_Click">
 				</dx:ASPxButton>
 			</div>
 		</td>
 		<td>
 			<dx:ASPxListBox ID="lbSelectedMetricFields" runat="server" ClientIDMode="AutoID" 
-				Width="100%" Height="212px">
+				Width="100%" Height="120px">
 				<Columns>
 					<dx:ListBoxColumn Caption="Field Name" FieldName="Caption" />
 					<dx:ListBoxColumn Caption="Display Name" FieldName="Caption" />

@@ -60,6 +60,7 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v10.2.Web, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,6 +82,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -130,6 +132,7 @@
     <Content Include="App\Setting\Setting.aspx" />
     <Content Include="App\Setting\UserControls\TestPage.aspx" />
     <Content Include="App\Setting\UserControls\ucDatasourceSetting.ascx" />
+    <Content Include="App\Setting\UserControls\ucNormalFilter.ascx" />
     <Content Include="App\Setting\wcDashboardSetting.ascx" />
     <Content Include="App\Setting\wcInteractionFieldHierarchy.ascx" />
     <Content Include="App\Setting\wcInteractionFilter.ascx" />
@@ -822,6 +825,13 @@
     <Compile Include="App\Setting\UserControls\ucDatasourceSetting.ascx.designer.cs">
       <DependentUpon>ucDatasourceSetting.ascx</DependentUpon>
     </Compile>
+    <Compile Include="App\Setting\UserControls\ucNormalFilter.ascx.cs">
+      <DependentUpon>ucNormalFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\UserControls\ucNormalFilter.ascx.designer.cs">
+      <DependentUpon>ucNormalFilter.ascx</DependentUpon>
+    </Compile>
     <Compile Include="App\Setting\wcDashboardSetting.ascx.cs">
       <DependentUpon>wcDashboardSetting.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1330,6 +1340,9 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>BI.vi-VN.designer.cs</LastGenOutput>
     </Content>
+    <EmbeddedResource Include="App\Setting\UserControls\ucNormalFilter.ascx.resx">
+      <DependentUpon>ucNormalFilter.ascx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
