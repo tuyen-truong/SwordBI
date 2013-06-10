@@ -99,7 +99,6 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void btnNewDataSource_Click(object sender, EventArgs e)
 		{
-			cbDataWarehouse.SelectedIndex = -1;
 			cbDataSource.SelectedIndex = -1;
 			Cleanup();
 
@@ -243,10 +242,14 @@ namespace HTLBIWebApp2012.App.Setting
 				if (datasource != null)
 				{
 					txtDataSourceName.Text = datasource.NameEN;
+					if (datasource.WHCode != Lib.NTE(cbDataWarehouse.Value))
+					{
+						cbDataWarehouse.Value = datasource.WHCode;
+					}
 
 					var inq = datasource.JsonObjMDX;
-					Olap.DimensionFieldInfoCollection fields = new Olap.DimensionFieldInfoCollection(inq.Fields);
 					Helpers.SetDataSource(lbSelectedFields, inq.Fields, "UniqueName", "Caption");
+					//Helpers.SetDataSource(lbSelectedMetricFields, inq.Summaries, "UniqueName", "Caption");
 				}
 			}
 		}
