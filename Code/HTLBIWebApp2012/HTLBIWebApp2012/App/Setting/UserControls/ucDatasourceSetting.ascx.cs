@@ -8,6 +8,8 @@ using Microsoft.AnalysisServices.AdomdClient;
 using HTLBIWebApp2012.Codes.Utils;
 using DevExpress.Web.ASPxEditors;
 using HTLBIWebApp2012.Codes.BLL;
+using HTLBIWebApp2012.Codes.Models;
+using CECOM;
 
 namespace HTLBIWebApp2012.App.Setting
 {
@@ -54,7 +56,7 @@ namespace HTLBIWebApp2012.App.Setting
 				cbFuncs.Items.AddRange(InqMDX.GetSummatyFuncName());
 			}
 			// Data source
-			//MyBI.Me.Get_DashboardSource("");
+			MyBI.Me.Get_DashboardSource("");
 			// Query Information
 			LoadFields();
 			Helpers.SetDataSource(lbFields, DimFieldCollection, "UniqueName", "Caption");
@@ -91,14 +93,14 @@ namespace HTLBIWebApp2012.App.Setting
 			m_Filters = (FilterControlInfoCollection)controlState[3];
 			foreach (FilterControlInfo ctlFilter in m_Filters.Collection)
 			{
-				FilterCtrlBase ctl = GenerateFilterControl(ctlFilter.Type, ctlFilter.ID);
-				ctl.ID = ctlFilter.ID;
-				filterContainer.Controls.Add(ctl);
+				GenerateFilterControl(ctlFilter.Type, ctlFilter.ID);
 			}
 		}
 
 		protected void btnNewDataSource_Click(object sender, EventArgs e)
 		{
+			cbDataWarehouse.SelectedIndex = -1;
+			cbDataSource.SelectedIndex = -1;
 			Cleanup();
 
 			if (NewButtonClicked != null)
@@ -196,6 +198,10 @@ namespace HTLBIWebApp2012.App.Setting
 			{
 				id = Guid.NewGuid().ToString();
 			}
+			else
+			{
+				ctl.Mode = PartPlugCtrlBase.ControlMode.Edit;
+			}
 			ctl.ID = id;
 			ctl.OnRemove += new EventHandler(FilterRemove_Click);
 			filterContainer.Controls.Add(ctl);
@@ -239,8 +245,67 @@ namespace HTLBIWebApp2012.App.Setting
 					txtDataSourceName.Text = datasource.NameEN;
 
 					var inq = datasource.JsonObjMDX;
+					Olap.DimensionFieldInfoCollection fields = new Olap.DimensionFieldInfoCollection(inq.Fields);
 					Helpers.SetDataSource(lbSelectedFields, inq.Fields, "UniqueName", "Caption");
 				}
+			}
+		}
+
+		protected void lbSelectedFields_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ASPxListBox _sender = (ASPxListBox)sender;
+
+			txtFieldDispName.Text = _sender.SelectedItem.GetValue("DisplayName").ToString();
+			cbFieldSort.Value = _sender.SelectedItem.GetValue("Sort");
+		}
+
+		protected void cbFieldSort_ValueChanged(object sender, EventArgs e)
+		{
+			ASPxComboBox _sender = (ASPxComboBox)sender;
+
+			ListEditItem selectedItem = lbSelectedFields.SelectedItem;
+			selectedItem.SetValue("Sort", _sender.SelectedItem.Value);
+		}
+
+		protected void txtFieldDispName_ValueChanged(object sender, EventArgs e)
+		{
+			ASPxTextBox _sender = (ASPxTextBox)sender;
+			ListEditItem selectedItem = lbSelectedFields.SelectedItem;
+			selectedItem.SetValue("DisplayName", _sender.Text.Trim());
+		}
+
+		protected void txtMetricDispName_ValueChanged(object sender, EventArgs e)
+		{
+			ASPxTextBox _sender = (ASPxTextBox)sender;
+			ListEditItem selectedItem = lbSelectedMetricFields.SelectedItem;
+			selectedItem.SetValue("DisplayName", _sender.Text.Trim());
+		}
+
+		protected void cbFuncs_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ASPxComboBox _sender = (ASPxComboBox)sender;
+
+			ListEditItem selectedItem = lbSelectedMetricFields.SelectedItem;
+			selectedItem.SetValue("Calc", _sender.SelectedItem.Value);
+		}
+
+		protected void cbMetricSort_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ASPxComboBox _sender = (ASPxComboBox)sender;
+
+			ListEditItem selectedItem = lbSelectedMetricFields.SelectedItem;
+			selectedItem.SetValue("Sort", _sender.SelectedItem.Value);
+		}
+
+		protected void lbSelectedMetricFields_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ASPxListBox _sender = (ASPxListBox)sender;
+			ListEditItem selectedItem = lbSelectedMetricFields.SelectedItem;
+			if (selectedItem != null)
+			{
+				txtMetricDispName.Text = selectedItem.GetValue("DisplayName").ToString();
+				cbFuncs.Value = selectedItem.GetValue("Calc").ToString();
+				cbMetricSort.Value = selectedItem.GetValue("Sort").ToString();
 			}
 		}
 
@@ -249,7 +314,10 @@ namespace HTLBIWebApp2012.App.Setting
 			txtDataSourceName.Text = String.Empty;
 			lbSelectedMetricFields.Items.Clear();
 			lbSelectedFields.Items.Clear();
+			// filters
 			filterContainer.Controls.Clear();
+			m_Filters.Clear();
+			// Sort
 			cbFieldSort.SelectedIndex = 0;
 			cbMetricSort.SelectedIndex = 0;
 			cbFuncs.SelectedIndex = 0;
@@ -269,7 +337,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		private void LoadFields()
 		{
-			String connectionString = "Data source=(local);Initial Catalog=SWordBI_SSAS";
+			String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["OLAPConnection"].ConnectionString;
 			using (AdomdConnection conn = new AdomdConnection(connectionString))
 			{
 				conn.Open();
@@ -324,6 +392,13 @@ namespace HTLBIWebApp2012.App.Setting
 				set { m_Type = value; }
 			}
 
+			private String m_SelectedValue = String.Empty;
+			public String SelectedValue
+			{
+				get { return m_SelectedValue; }
+				set { m_SelectedValue = value; }
+			}
+
 			public FilterControlInfo(Control ctl)
 			{
 				m_ID = ctl.ID;
@@ -360,5 +435,56 @@ namespace HTLBIWebApp2012.App.Setting
 				m_list.Clear();
 			}
 		}
+
+		protected void btnSave_Click(object sender, EventArgs e)
+		{
+			ASPxButton _sender = (ASPxButton)sender;
+			List<InqFieldInfoMDX> fields = new List<InqFieldInfoMDX>();
+			ListEditItemCollection items = lbSelectedFields.Items;
+			int numOfItems = items.Count;
+			for (int index = 0; index < numOfItems; index++)
+			{
+				ListEditItem item = items[index];
+				InqFieldInfoMDX fld = new InqFieldInfoMDX(item);
+				fields.Add(fld);
+			}
+
+			List<InqSummaryInfoMDX> summaries = new List<InqSummaryInfoMDX>();
+			ListEditItemCollection metricFields = lbSelectedMetricFields.Items;
+			foreach (ListEditItem item in metricFields)
+			{
+				summaries.Add(new InqSummaryInfoMDX(item));
+			}
+			List<InqFilterInfoMDX> filters = new List<InqFilterInfoMDX>();
+			foreach (FilterCtrlBase ctrl in filterContainer.Controls)
+			{
+				var filter = ctrl.Get_FilterInfo();
+				if (filter == null) continue;
+				// Set lại hàm tính toán trên field filter giống với hàm của field đó trong Summaries
+				if (filter.HasHavingKey())
+				{
+					var objSummary = summaries.FirstOrDefault(p => p.Field.KeyField == filter.HavingKey.Field.KeyField);
+					if (objSummary != null)
+						filter.HavingKey.FuncName = objSummary.FuncName;
+				}
+				filters.Add(filter);
+			}
+			var ret = new InqDefineSourceMDX(fields, summaries, filters);
+			ret.PreffixDimTable = "AR";
+			ret.OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny);
+
+			lsttbl_DashboardSource objDs = new lsttbl_DashboardSource()
+			{
+				Code = Lib.IfNOE(MySession.DSDefine_CurEditing, "ds_" + DateTime.Now.ToString("yyyyMMddHHmmss")),
+				NameVI = txtDataSourceName.Text,
+				NameEN = txtDataSourceName.Text,
+				JsonStr = ret.ToJsonStr(),
+				WHCode = Lib.NTE(cbDataWarehouse.Value),
+				SettingCat = GlobalVar.SettingCat_DS 
+			};
+			MyBI.Me.Save_DashboardSource(objDs);
+			MySession.DSDefine_CurEditing = objDs.Code;
+		}
+
 	}
 }

@@ -67,11 +67,13 @@
 			<table cellpadding="0" cellspacing="0" style="float:right; margin-bottom:3px">
 				<tr>
 					<td>
-						<dx:ASPxTextBox ID="txtFieldDispName" runat="server" Width="250px">
+						<dx:ASPxTextBox ID="txtFieldDispName" runat="server" Width="250px" 
+							onvaluechanged="txtFieldDispName_ValueChanged" AutoPostBack="true">
 						</dx:ASPxTextBox>
 					</td>
 					<td style="width:80px; padding-left:3px">
-						<dx:ASPxComboBox ID="cbFieldSort" runat="server" Width="80px">
+						<dx:ASPxComboBox ID="cbFieldSort" runat="server" Width="80px" 
+							AutoPostBack="true" onvaluechanged="cbFieldSort_ValueChanged">
 						</dx:ASPxComboBox>
 					</td>
 				</tr>
@@ -99,10 +101,11 @@
 		</td>
 		<td>
 			<dx:ASPxListBox ID="lbSelectedFields" runat="server" ClientIDMode="AutoID" 
-				Width="100%" Height="212px">
+				Width="100%" Height="212px" 
+				onselectedindexchanged="lbSelectedFields_SelectedIndexChanged" AutoPostBack="true">
 				<Columns>
 					<dx:ListBoxColumn Caption="Field Name" FieldName="Caption" />
-					<dx:ListBoxColumn Caption="Display Name" FieldName="Caption" />
+					<dx:ListBoxColumn Caption="Display Name" FieldName="DisplayName" />
 					<dx:ListBoxColumn Caption="Sort" FieldName="Sort" Width="30px" />
 				</Columns>
 			</dx:ASPxListBox>
@@ -115,15 +118,18 @@
 			<table cellpadding="0" cellspacing="0" style="float:right; margin-bottom:3px">
 				<tr>
 					<td>
-						<dx:ASPxTextBox ID="txtMetricDispName" runat="server" Width="250px">
+						<dx:ASPxTextBox ID="txtMetricDispName" runat="server" Width="250px" 
+							AutoPostBack="True" onvaluechanged="txtMetricDispName_ValueChanged">
 						</dx:ASPxTextBox>
 					</td>
 					<td style="width:80px; padding-left:3px">
-						<dx:ASPxComboBox ID="cbFuncs" runat="server" Width="80px">
+						<dx:ASPxComboBox ID="cbFuncs" runat="server" Width="80px" AutoPostBack="True" 
+							onselectedindexchanged="cbFuncs_SelectedIndexChanged">
 						</dx:ASPxComboBox>
 					</td>
 					<td style="width:80px; padding-left:3px">
-						<dx:ASPxComboBox ID="cbMetricSort" runat="server" Width="80px">
+						<dx:ASPxComboBox ID="cbMetricSort" runat="server" Width="80px" 
+							AutoPostBack="True" onselectedindexchanged="cbMetricSort_SelectedIndexChanged">
 						</dx:ASPxComboBox>
 					</td>
 				</tr>
@@ -151,10 +157,11 @@
 		</td>
 		<td>
 			<dx:ASPxListBox ID="lbSelectedMetricFields" runat="server" ClientIDMode="AutoID" 
-				Width="100%" Height="120px">
+				Width="100%" Height="120px" AutoPostBack="True" 
+				onselectedindexchanged="lbSelectedMetricFields_SelectedIndexChanged">
 				<Columns>
 					<dx:ListBoxColumn Caption="Field Name" FieldName="Caption" />
-					<dx:ListBoxColumn Caption="Display Name" FieldName="Caption" />
+					<dx:ListBoxColumn Caption="Display Name" FieldName="DisplayName" />
 					<dx:ListBoxColumn Caption="Calc" FieldName="Calc" />
 					<dx:ListBoxColumn Caption="Sort" FieldName="Sort" Width="40px" />
 				</Columns>
@@ -175,3 +182,13 @@
 </Items>
 </dx:ASPxPopupMenu>
 </fieldset>
+
+<table cellpadding="0" cellspacing="0" style="margin-left:2px; margin-top:3px">
+	<tr>
+		<td>
+			<dx:ASPxButton ID="btnSave" runat="server" Text="Save" Width="80px" 
+				onclick="btnSave_Click">
+			</dx:ASPxButton>
+		</td>
+	</tr>
+</table>

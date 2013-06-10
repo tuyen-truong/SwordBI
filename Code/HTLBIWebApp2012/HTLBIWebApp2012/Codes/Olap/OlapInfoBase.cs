@@ -38,6 +38,20 @@ namespace HTLBIWebApp2012.Olap
 			set { m_UniqueName = value; }
 		}
 
+		private String m_DisplayName = String.Empty;
+		public virtual String DisplayName
+		{
+			get
+			{
+				if (String.IsNullOrWhiteSpace(m_DisplayName))
+				{
+					m_DisplayName = m_Caption;
+				}
+				return m_DisplayName;
+			}
+			set { m_DisplayName = value; }
+		}
+
 		protected String ToStr(object obj, String strDefaultValue)
 		{
 			if (obj is string)
@@ -75,6 +89,7 @@ namespace HTLBIWebApp2012.Olap
 			Description = ToStr(item.GetValue("Description"), String.Empty);
 			UniqueName = ToStr(item.GetValue("UniqueName"), String.Empty);
 			Sort = ToStr(item.GetValue("Sort"), String.Empty);
+			DisplayName = ToStr(item.GetValue("DisplayName"), String.Empty);
 		}
 	}
 
@@ -87,6 +102,18 @@ namespace HTLBIWebApp2012.Olap
 			foreach(ListEditItem item in items)
 			{
 				Add(new DimensionFieldInfo(item));
+			}
+		}
+
+		public DimensionFieldInfoCollection(List<InqFieldInfoMDX> fields)
+		{
+			foreach (InqFieldInfoMDX fld in fields)
+			{
+				DimensionFieldInfo fldInfo = new DimensionFieldInfo();
+				fldInfo.Caption = fld.ColName;
+				fldInfo.DisplayName = fld.ColName;
+				fldInfo.UniqueName = Guid.NewGuid().ToString();
+				Add(fldInfo);
 			}
 		}
 
@@ -124,6 +151,9 @@ namespace HTLBIWebApp2012.Olap
 			Name = ToStr(item.GetValue("Name"), String.Empty);
 			Description = ToStr(item.GetValue("Description"), String.Empty);
 			UniqueName = ToStr(item.GetValue("UniqueName"), String.Empty);
+			DisplayName = ToStr(item.GetValue("DisplayName"), String.Empty);
+			Sort = ToStr(item.GetValue("Sort"), String.Empty);
+			Calc = ToStr(item.GetValue("Calc"), String.Empty);
 		}
 
 		public MeasureFieldInfo(Measure measure)

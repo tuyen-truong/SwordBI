@@ -10,6 +10,7 @@ using DevExpress.XtraGauges.Core.Drawing;
 using HTLBIWebApp2012.Codes.BLL;
 using HTLBIWebApp2012.Codes.Models;
 using System.Text;
+using DevExpress.Web.ASPxEditors;
 
 namespace HTLBIWebApp2012
 {
@@ -2213,6 +2214,7 @@ namespace HTLBIWebApp2012
 	/// </summary>
 	public abstract class InqMDX
 	{
+		/*
 		private String m_Caption = String.Empty;
 		public virtual String Caption
 		{
@@ -2248,6 +2250,20 @@ namespace HTLBIWebApp2012
 			set { m_Sort = value; }
 		}
 
+		private String m_DisplayName = String.Empty;
+		public virtual String DisplayName
+		{
+			get
+			{
+				if (String.IsNullOrWhiteSpace(m_DisplayName))
+				{
+					m_DisplayName = m_Caption;
+				}
+				return m_DisplayName;
+			}
+			set { m_DisplayName = value; }
+		}
+		*/
 		public int ID { get; set; }
 
 		/// <summary>
@@ -2336,6 +2352,64 @@ namespace HTLBIWebApp2012
 	/// </summary>
 	public class InqFieldInfoMDX : InqMDX
 	{
+		private String m_Caption = String.Empty;
+		public String Caption
+		{
+			get { return m_Caption; }
+			set { m_Caption = value; }
+		}
+		private String m_Name = String.Empty;
+		public String Name
+		{
+			get { return m_Name; }
+			set 
+			{
+				m_Name = value;
+				if (String.IsNullOrWhiteSpace(m_Caption))
+				{
+					m_Caption = m_Name;
+				}
+				if (String.IsNullOrWhiteSpace(m_DisplayName))
+				{
+					m_DisplayName = m_Name;
+				}
+			}
+		}
+		private String m_DisplayName = String.Empty;
+		public String DisplayName
+		{
+			get { return m_DisplayName; }
+			set { m_DisplayName = value; }
+		}
+		private String m_UniqueName = String.Empty;
+		public String UniqueName
+		{
+			get { return m_UniqueName; }
+			set { m_UniqueName = value; }
+		}
+		private String m_Sort = String.Empty;
+		public String Sort
+		{
+			get { return m_Sort; }
+			set { m_Sort = value; }
+		}
+		private String m_Description = String.Empty;
+		public String Description
+		{
+			get { return m_Description; }
+			set { m_Description = value; }
+		}
+
+		public InqFieldInfoMDX(ListEditItem item)
+		{
+			m_Caption = Lib.NTE(item.GetValue("Caption"));
+			m_Name = Lib.NTE(item.GetValue("Name"));
+			m_DisplayName = Lib.NTE(item.GetValue("DisplayName"));
+			m_UniqueName = Lib.NTE(item.GetValue("UniqueName"));
+			m_Description = Lib.NTE(item.GetValue("Description"));
+			m_Sort = Lib.NTE(item.GetValue("Sort"));
+		}
+
 		public string KeyField { get { return string.Format("{0}_{1}", this.TblName, this.ColName); } }
 		public bool Visible { get; set; }
 		public string TblName { get; set; }
@@ -2345,18 +2419,6 @@ namespace HTLBIWebApp2012
 		public string DataType { get; set; }
 		public string OrderName { get; set; }
 		public int Level { get; set; }
-
-		public override string Caption
-		{
-			get
-			{
-				return this.ColName;
-			}
-			set
-			{
-				base.Caption = value;
-			}
-		}
 
 		public InqFieldInfoMDX() { }
 		public InqFieldInfoMDX(string tblName, string colName)
@@ -2570,6 +2632,11 @@ namespace HTLBIWebApp2012
 			this.FuncName = funcName;
 			this.Field = field;
 			this.FieldAlias = alias;
+		}
+		public InqSummaryInfoMDX(ListEditItem item)
+		{
+			Field = new InqFieldInfoMDX(item);
+			FuncName = Lib.NTE(item.GetValue("Calc"));
 		}
 		public InqSummaryInfoMDX Copy()
 		{

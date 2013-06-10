@@ -2,6 +2,8 @@
 using System.Linq;
 using CECOM;
 using HTLBIWebApp2012.Codes.Models;
+using Microsoft.AnalysisServices.AdomdClient;
+using System;
 
 namespace HTLBIWebApp2012.App.Setting
 {
@@ -15,6 +17,7 @@ namespace HTLBIWebApp2012.App.Setting
             this.cbbOperator.SelectedIndex = 0;
             this.cbbAndOr.Items.AddRange(InqMDX.GetLogicCombine());
             this.cbbAndOr.SelectedIndex = 0;
+			base.Load_InitData();
         }
         public override InqFilterInfoMDX Get_FilterInfo()
         {
