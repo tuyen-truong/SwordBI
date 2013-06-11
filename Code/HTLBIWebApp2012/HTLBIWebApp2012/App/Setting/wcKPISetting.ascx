@@ -350,7 +350,7 @@
 </fieldset>
 <!--Dimensions, Measures and Filters, Contextual Metrics-->
 <dx:ASPxPageControl ID="tabCtrl_PortletSetting" ClientInstanceName="tabCtrl_PortletSetting"
-	runat="server" ActiveTabIndex="0" Width="100%" Font-Names="Arial" Font-Size="9pt"
+	runat="server" ActiveTabIndex="2" Width="100%" Font-Names="Arial" Font-Size="9pt"
 	ClientIDMode="AutoID">
 	<Border BorderStyle="None" />
 	<ContentStyle>
