@@ -13,8 +13,16 @@ using CECOM;
 
 namespace HTLBIWebApp2012.App.Setting
 {
-	public partial class ucDatasourceSetting : System.Web.UI.UserControl
+	public partial class ucDatasourceSetting : UserControlBase
 	{
+		public PortletSetting MyPage
+		{
+			get
+			{
+				return Page as PortletSetting;
+			}
+		}
+
 		public event EventHandler NewButtonClicked;
 		public event EventHandler FieldAddButtonClicked;
 		public event EventHandler FieldRemoveButtonClicked;
@@ -25,25 +33,39 @@ namespace HTLBIWebApp2012.App.Setting
 			set { txtDataSourceName.Text = value; }
 		}
 
+		private String m_WHCode = String.Empty;
+		public String WHCode
+		{
+			get { return m_WHCode; }
+			set { m_WHCode = value; }
+		}
+		private String m_DSCode = String.Empty;
+		public String DSCode
+		{
+			get { return m_DSCode; }
+			set { m_DSCode = value; }
+		}
 		public object DataWarehouse
 		{
-			get { return cbDataWarehouse.SelectedItem.Value; }
-			set { cbDataWarehouse.SelectedItem.Value = value; }
+			get { return cbDataWarehouse.Value; }
+			set
+			{
+				cbDataWarehouse.Value = value;
+				cbDataWarehouse_ValueChanged(cbDataWarehouse, EventArgs.Empty);
+			}
 		}
 
 		public object DataSource
 		{
-			get { return cbDataSource.SelectedItem.Value;  }
-			set { cbDataSource.SelectedItem.Value = value; }
+			get { return cbDataSource.Value;  }
+			set
+			{
+				cbDataSource.Value = value;
+				cbDataSource_ValueChanged(cbDataSource, EventArgs.Empty);
+			}
 		}
 
 		protected FilterControlInfoCollection m_Filters = new FilterControlInfoCollection();
-		
-		protected override void OnInit(EventArgs e)
-		{
-			base.OnInit(e);
-			Page.RegisterRequiresControlState(this);
-		}
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -55,14 +77,10 @@ namespace HTLBIWebApp2012.App.Setting
 				cbMetricSort.Items.AddRange(InqMDX.GetOrderByName());
 				cbFuncs.Items.AddRange(InqMDX.GetSummatyFuncName());
 			}
-			// Data source
-			MyBI.Me.Get_DashboardSource("");
 			// Query Information
 			LoadFields();
 			Helpers.SetDataSource(lbFields, DimFieldCollection, "UniqueName", "Caption");
 			Helpers.SetDataSource(lbMetricFields, MeasureFieldCollection, "UniqueName", "Caption");
-			// Filters
-			// TODO: Load saved filters
 			// Events initialize
 			btnNewDataSource.Click += new EventHandler(btnNewDataSource_Click);
 			btnFieldAdd.Click+= new EventHandler(FieldAdd_Click);
@@ -171,7 +189,6 @@ namespace HTLBIWebApp2012.App.Setting
 			String filterType = e.Item.Name;
 			FilterCtrlBase ctl = GenerateFilterControl(filterType, String.Empty);
 			m_Filters.Add(new FilterControlInfo(ctl) { Type = filterType });
-
 		}
 
 		protected FilterCtrlBase GenerateFilterControl(String filterType, String id)
@@ -220,11 +237,16 @@ namespace HTLBIWebApp2012.App.Setting
 			object selectedItemValue = cb.SelectedItem != null ? cb.SelectedItem.Value : null;
 			if (selectedItemValue != null)
 			{
-				String whCode = selectedItemValue.ToString();
-				var datasource = MyBI.Me.Get_DashboardSource(whCode, GlobalVar.SettingCat_DS);
+				m_WHCode = selectedItemValue.ToString();
+				var datasource = MyBI.Me.Get_DashboardSource(m_WHCode, GlobalVar.SettingCat_DS);
 				Helpers.SetDataSource(cbDataSource, datasource, "Code", "NameEN");
 				cbDataSource.SelectedIndex = 0;
 				cbDataSource_ValueChanged(cbDataSource, EventArgs.Empty);
+				if (MyPage != null)
+				{
+					MyPage.My_wcKPISetting.Raise_OnChange("WH", EventArgs.Empty);
+					MyPage.My_wcLayoutSetting.Raise_OnChange("WH", EventArgs.Empty);
+				}
 			}
 		}
 
@@ -237,8 +259,8 @@ namespace HTLBIWebApp2012.App.Setting
 			object selectedItemValue = cb.SelectedItem != null ? cb.SelectedItem.Value : null;
 			if (selectedItemValue != null)
 			{
-				String dsCode = selectedItemValue.ToString();
-				var datasource = MyBI.Me.Get_DashboardSourceBy(dsCode);
+				m_DSCode = selectedItemValue.ToString();
+				lsttbl_DashboardSource datasource = MyBI.Me.Get_DashboardSourceBy(m_DSCode);
 				if (datasource != null)
 				{
 					txtDataSourceName.Text = datasource.NameEN;
@@ -247,9 +269,15 @@ namespace HTLBIWebApp2012.App.Setting
 						cbDataWarehouse.Value = datasource.WHCode;
 					}
 
-					var inq = datasource.JsonObjMDX;
+					InqDefineSourceMDX inq = datasource.JsonObjMDX;
 					Helpers.SetDataSource(lbSelectedFields, inq.Fields, "UniqueName", "Caption");
-					//Helpers.SetDataSource(lbSelectedMetricFields, inq.Summaries, "UniqueName", "Caption");
+					Helpers.SetDataSource(lbSelectedMetricFields, inq.Summaries, "UniqueName", "Caption");
+					foreach (InqFilterInfoMDX filter in inq.Filters)
+					{
+						FilterCtrlBase ctrl = GenerateFilterControl(filter.FilterType, String.Empty);
+						ctrl.Set_Info(filter);
+						m_Filters.Add(new FilterControlInfo(ctrl) { Type = filter.FilterType });
+					}
 				}
 			}
 		}
@@ -312,7 +340,7 @@ namespace HTLBIWebApp2012.App.Setting
 			}
 		}
 
-		void Cleanup()
+		protected void Cleanup()
 		{
 			txtDataSourceName.Text = String.Empty;
 			lbSelectedMetricFields.Items.Clear();
@@ -324,6 +352,11 @@ namespace HTLBIWebApp2012.App.Setting
 			cbFieldSort.SelectedIndex = 0;
 			cbMetricSort.SelectedIndex = 0;
 			cbFuncs.SelectedIndex = 0;
+		}
+
+		public void Raise_OnChange(object sende, EventArgs e)
+		{
+
 		}
 
 		private Olap.DimensionFieldInfoCollection m_DimFieldCollection = new Olap.DimensionFieldInfoCollection();

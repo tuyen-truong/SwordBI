@@ -31,10 +31,23 @@ namespace HTLBIWebApp2012.App.Setting
 				ret.WhereKey = new InqFieldInfoMDX(item.TblName_Virtual, item.ColName, item.DataType);
 				ret.Logic = Lib.NTE(this.cbbAndOr.Value);
 				ret.Operator = this.cbbOperator.Text;
-				if (item.ColName == "Year") ret.Value = this.txtValue.Date.Year;
-				else if (item.ColName == "Quarter") ret.Value = this.txtValue.Date.Day;
-				else if (item.ColName == "Period") ret.Value = this.txtValue.Date.ToString("yyyyMM");
-				else ret.Value = this.txtValue.Date.ToString("yyyy/MM/dd");
+				if (item.ColName == "Year")
+				{
+					ret.Value = this.txtValue.Date.Year;
+				}
+				else if (item.ColName == "Quarter")
+				{
+					ret.Value = this.txtValue.Date.Day;
+				}
+				else if (item.ColName == "Period")
+				{
+					ret.Value = this.txtValue.Date.ToString("yyyyMM");
+				}
+				else
+				{
+					ret.Value = this.txtValue.Date.ToString("yyyy/MM/dd");
+				}
+				ret.FilterType = "DATE";
 				return ret;
 			}
 			catch { return null; }

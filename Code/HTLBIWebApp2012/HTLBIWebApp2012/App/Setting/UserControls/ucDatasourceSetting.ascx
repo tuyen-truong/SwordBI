@@ -1,5 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucDatasourceSetting.ascx.cs" Inherits="HTLBIWebApp2012.App.Setting.ucDatasourceSetting" %>
 <%@ Register Assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+	Namespace="DevExpress.Web.ASPxCallback" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+	Namespace="DevExpress.Web.ASPxLoadingPanel" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
 	Namespace="DevExpress.Web.ASPxMenu" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
 	Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
@@ -7,18 +11,20 @@
 <style type="text/css">
 .ds-defination th
 {
-	 font-weight:normal;
+	 font-weight:normal !important;
 	 text-align: left;
 	 width: 150px;
 	 white-space:nowrap;
-	 padding-bottom: 5px;
+	 padding-bottom: 5px !important;
 }
-.uc-title
+th.uc-title
 {
 	font-weight:bold !important;
-	font-size: 90%;
+	font-size: 90% !important;
 }
 </style>
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<ContentTemplate>
 <table cellpadding="0" cellspacing="0" class="ds-defination">
 	<tr>
 		<th colspan="3" class="uc-title">DATASOURCE DEFINATION</th>
@@ -183,12 +189,46 @@
 </dx:ASPxPopupMenu>
 </fieldset>
 
-<table cellpadding="0" cellspacing="0" style="margin-left:2px; margin-top:3px">
+<table cellpadding="0" cellspacing="0" style="margin-top:3px">
 	<tr>
 		<td>
+			<dx:ASPxButton ID="btnPreview" runat="server" Text="Preview" Width="80px" AutoPostBack="false">
+			<ClientSideEvents Click="function(s, e) {Callback.PerformCallback(); LoadingPanel1.Show();}" />
+			</dx:ASPxButton>
+		</td>
+		<td style="padding-left: 3px;padding-right: 3px;">
 			<dx:ASPxButton ID="btnSave" runat="server" Text="Save" Width="80px" 
 				onclick="btnSave_Click">
 			</dx:ASPxButton>
 		</td>
+		<td>
+			<dx:ASPxButton ID="btnCancel" runat="server" Text="Cancel" Width="80px" >
+			</dx:ASPxButton>
+		</td>
 	</tr>
 </table>
+</ContentTemplate>
+</asp:UpdatePanel>
+<dx:ASPxLoadingPanel runat="server" ID="LoadingPanel1">
+</dx:ASPxLoadingPanel>
+<script type="text/javascript">
+	var prm = Sys.WebForms.PageRequestManager.getInstance();
+	prm.add_initializeRequest(InitializeRequest);
+	prm.add_endRequest(EndRequest);
+	var loadingPanel = <%=LoadingPanel1.ClientID %>;
+	function InitializeRequest(sender, args) {
+		if (prm.get_isInAsyncPostBack()) {
+			args.set_cancel(true);
+		}
+		if (loadingPanel)
+		{
+			loadingPanel.Show();
+		}
+	}
+	function EndRequest(sender, args) {
+		if (loadingPanel)
+		{
+			loadingPanel.Hide();
+		}
+	}
+</script>

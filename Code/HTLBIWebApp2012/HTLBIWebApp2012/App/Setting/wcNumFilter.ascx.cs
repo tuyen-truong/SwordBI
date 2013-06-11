@@ -36,6 +36,7 @@ namespace HTLBIWebApp2012.App.Setting
                     ret.Value = this.txtValue.Text;
                 else
                     ret.Value = Lib.GetStringDigit(this.txtValue.Text);
+				ret.FilterType = "NUM";
                 return ret;
             }
             catch { return null; }

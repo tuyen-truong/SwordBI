@@ -13,6 +13,15 @@ namespace HTLBIWebApp2012.App.Setting {
     public partial class ucDatasourceSetting {
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// txtDataSourceName control.
         /// </summary>
         /// <remarks>
@@ -193,6 +202,15 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxMenu.ASPxPopupMenu popFilterMenu;
         
         /// <summary>
+        /// btnPreview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnPreview;
+        
+        /// <summary>
         /// btnSave control.
         /// </summary>
         /// <remarks>
@@ -200,5 +218,23 @@ namespace HTLBIWebApp2012.App.Setting {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btnSave;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnCancel;
+        
+        /// <summary>
+        /// LoadingPanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLoadingPanel.ASPxLoadingPanel LoadingPanel1;
     }
 }

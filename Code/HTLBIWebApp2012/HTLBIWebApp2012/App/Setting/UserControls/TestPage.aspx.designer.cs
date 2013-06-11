@@ -37,6 +37,6 @@ namespace HTLBIWebApp2012.App.Setting.UserControls {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HTLBIWebApp2012.App.Setting.ucDatasourceSetting uc1;
+        protected global::HTLBIWebApp2012.App.Setting.ucKPISetting uc1;
     }
 }

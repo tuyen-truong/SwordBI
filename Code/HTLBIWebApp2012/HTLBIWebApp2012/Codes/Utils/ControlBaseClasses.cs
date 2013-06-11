@@ -769,6 +769,15 @@ namespace HTLBIWebApp2012
 	#endregion
 
 	#region Control part base for defination: Filter, KPI, Property Controls
+	public abstract class UserControlBase : System.Web.UI.UserControl
+	{
+		protected override void OnInit(EventArgs e)
+		{
+			base.OnInit(e);
+			Page.RegisterRequiresControlState(this);
+		}
+	}
+
 	public abstract class PartPlugCtrlBase : System.Web.UI.UserControl
 	{
 		public enum ControlMode
@@ -986,6 +995,11 @@ namespace HTLBIWebApp2012
 	public abstract class KPIPartCtrlBase : PartPlugCtrlBase
 	{
 		public enum Parts{ Dimension, Measure, ContextMetric}
+		public virtual String PartType
+		{
+			get;
+			set;
+		}
 		public virtual void Set_Info(KPIField info)
 		{
 		}

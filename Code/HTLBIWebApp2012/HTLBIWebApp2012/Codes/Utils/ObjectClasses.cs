@@ -2584,6 +2584,86 @@ namespace HTLBIWebApp2012
 	/// </summary>
 	public class InqSummaryInfoMDX : InqMDX
 	{
+		private String m_Caption = String.Empty;
+		public String Caption
+		{
+			get
+			{
+				if (Field != null)
+				{
+					m_Caption = Field.Caption;
+				}
+				return m_Caption;
+			}
+		}
+		private String m_DisplayName = String.Empty;
+		public String DisplayName
+		{
+			get
+			{
+				if (Field != null)
+				{
+					m_DisplayName = Field.DisplayName;
+				}
+				return m_DisplayName;
+			}
+		}
+		private String m_Name = String.Empty;
+		public String Name
+		{
+			get
+			{
+				if (Field != null)
+				{
+					m_Name = Field.Name;
+				}
+				return m_Name;
+			}
+		}
+		private String m_UniqueName = String.Empty;
+		public String UniqueName
+		{
+			get
+			{
+				if (Field != null)
+				{
+					m_UniqueName = Field.UniqueName;
+				}
+				return m_UniqueName;
+			}
+		}
+		private String m_Description = String.Empty;
+		public String Description
+		{
+			get
+			{
+				if (Field != null)
+				{
+					m_Description = Field.Description;
+				}
+				return m_Description;
+			}
+		}
+		private String m_Sort = String.Empty;
+		public String Sort
+		{
+			get
+			{
+				if (Field != null)
+				{
+					m_Sort = Field.Sort;
+				}
+				return m_Sort;
+			}
+		}
+		private String m_Calc = String.Empty;
+		public String Calc
+		{
+			get { return m_Calc; }
+			set { m_Calc = value; }
+		}
+
+
 		/// <summary>
 		/// Tên 1 trong các hàm thống kê (SUM, COUNT, AVG ...)
 		/// </summary>
@@ -2687,18 +2767,8 @@ namespace HTLBIWebApp2012
 		public virtual string ToMDX()
 		{
 			if (!this.IsValid()) return "";
-			//var linkChar = " * ";
-			//var dependSet = string.IsNullOrEmpty(this.TimeFilterPrev) ? "" : string.Format("{0}.PREVMEMBER{1}", this.TimeFilterPrev, linkChar);
-			//var subffixMember = string.Format("For_{0}", this.Get_SummaryKeyField());
-			//var lstInnerFilterParse = InqFilterInfoMDX.GetSyntaxMDX(this.InnerFilters, subffixMember);
-			//foreach (var item in lstInnerFilterParse)
-			//    dependSet = dependSet + item.Prop1 + linkChar;
-			//if (dependSet.EndsWith(linkChar))
-			//    dependSet = dependSet.Remove(dependSet.Length - linkChar.Length);
-			//return string.Format("COALESCEEMPTY({0}({1},[Measures].[{2}]),0)", FuncName, dependSet, Field.ColName);
-
-			//return string.Format("COALESCEEMPTY([Measures].[{0}],0)", Field.ColName);
-			return String.Format("[Measures].[{0}]", Field.ColName);
+			//return String.Format("[Measures].[{0}]", Name);
+			return m_UniqueName;
 		}
 		/// <summary>
 		/// Trả về một biểu thức tính toán trên field theo cú pháp MDX.
@@ -2718,9 +2788,10 @@ namespace HTLBIWebApp2012
 		/// </summary>
 		public override bool IsValid()
 		{
-			return !string.IsNullOrWhiteSpace(this.FuncName) &&
-					GetSummatyFuncName().Contains(this.FuncName) &&
-					this.Field != null && this.Field.IsValid(false);
+			return !string.IsNullOrWhiteSpace(this.FuncName)
+					&& GetSummatyFuncName().Contains(this.FuncName)
+					&& this.Field != null
+					&& this.Field.IsValid(false);
 		}
 		/// <summary>
 		/// Làm cho các thông tin của đối tượng trở nên hợp thức hóa theo kiểu No-Bug (không đảm bảo nghiệp vụ).
@@ -2741,12 +2812,22 @@ namespace HTLBIWebApp2012
 				(string.IsNullOrEmpty(this.FuncName) || string.IsNullOrEmpty(myObj.FuncName) || this.FuncName.Equals(myObj.FuncName)) &&
 				(string.IsNullOrEmpty(this.TimeFilterPrev) || string.IsNullOrEmpty(myObj.TimeFilterPrev) || this.TimeFilterPrev.Equals(myObj.TimeFilterPrev));
 		}
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
 	}
 	/// <summary>
 	/// Định nghĩa các thông tin của một đối tượng filter trong mệnh dề WHERE hoặc HAVING.
 	/// </summary>
 	public class InqFilterInfoMDX : InqMDX
 	{
+		private String m_FilterType = "NORMAL";
+		public String FilterType
+		{
+			get { return m_FilterType; }
+			set { m_FilterType = value; }
+		}
 		/// <summary>
 		/// Khóa để filter ở mệnh đề 'WHERE' của câu lệnh SQL
 		/// </summary>

@@ -31,6 +31,7 @@ namespace HTLBIWebApp2012.App.Setting
 				ret.Logic = Lib.NTE(this.cbbAndOr.Value);
 				ret.Operator = this.cbbOperator.Text;
 				ret.Value = this.txtValue.Text;
+				ret.FilterType = "NORMAL";
 				return ret;
 			}
 			catch { return null; }

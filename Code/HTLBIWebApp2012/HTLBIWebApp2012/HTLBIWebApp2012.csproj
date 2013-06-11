@@ -132,6 +132,7 @@
     <Content Include="App\Setting\Setting.aspx" />
     <Content Include="App\Setting\UserControls\TestPage.aspx" />
     <Content Include="App\Setting\UserControls\ucDatasourceSetting.ascx" />
+    <Content Include="App\Setting\UserControls\ucKPISetting.ascx" />
     <Content Include="App\Setting\UserControls\ucNormalFilter.ascx" />
     <Content Include="App\Setting\wcDashboardSetting.ascx" />
     <Content Include="App\Setting\wcInteractionFieldHierarchy.ascx" />
@@ -824,6 +825,13 @@
     </Compile>
     <Compile Include="App\Setting\UserControls\ucDatasourceSetting.ascx.designer.cs">
       <DependentUpon>ucDatasourceSetting.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\Setting\UserControls\ucKPISetting.ascx.cs">
+      <DependentUpon>ucKPISetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Setting\UserControls\ucKPISetting.ascx.designer.cs">
+      <DependentUpon>ucKPISetting.ascx</DependentUpon>
     </Compile>
     <Compile Include="App\Setting\UserControls\ucNormalFilter.ascx.cs">
       <DependentUpon>ucNormalFilter.ascx</DependentUpon>

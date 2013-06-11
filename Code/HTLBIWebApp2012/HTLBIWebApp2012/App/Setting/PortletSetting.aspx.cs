@@ -10,7 +10,7 @@ namespace HTLBIWebApp2012.App.Setting
 {
 	public partial class PortletSetting : PageBase
 	{
-		public wcDatasourceSetting My_wcDSSetting { get { return this.wcDatasourceSetting1; } }
+		public ucDatasourceSetting My_wcDSSetting { get { return this.ucDatasourceSetting1; } }
 		public wcKPISetting My_wcKPISetting { get { return this.wcKPISetting1; } }
 		public wcLayoutSetting My_wcLayoutSetting { get { return this.wcLayoutSetting1; } }
 		public wcInteractionSetting My_wcInteractionSetting { get { return this.wcInteractionSetting1; } }
@@ -22,11 +22,11 @@ namespace HTLBIWebApp2012.App.Setting
 		/// <summary>
 		/// Mã DataWarehouse được tham khảo từ TabPage_DatasourceSetting
 		/// </summary>
-		public string WHCode { get { return this.wcDatasourceSetting1.WHCode; } }
+		public string WHCode { get { return this.ucDatasourceSetting1.WHCode; } }
 		/// <summary>
 		/// Mã Datasource được tham khảo từ TabPage_DatasourceSetting
 		/// </summary>
-		public string DSCode { get { return this.wcDatasourceSetting1.DSCode; } }
+		public string DSCode { get { return this.ucDatasourceSetting1.DSCode; } }
 		/// <summary>
 		/// Mã KPI được tham khảo từ TabPage_KPISetting
 		/// </summary>
@@ -73,9 +73,9 @@ namespace HTLBIWebApp2012.App.Setting
 					lsttbl_Widget widget = MyBI.Me.Get_Widget_ByCode(WidgetCode);
 					if (widget == null) { return; }
 					// Data source
-					My_wcDSSetting.DataWareHouse = widget.WHCode;
+					My_wcDSSetting.DataWarehouse = widget.WHCode;
 					My_wcDSSetting.DataSource = widget.DataSourceCode;
-					My_wcDSSetting.DataSourceName = widget.DSName;
+					My_wcDSSetting.Name = widget.DSName;
 					// KPI Setting
 					My_wcKPISetting.KPICode = widget.KPICode;
 					// Layout Setting
