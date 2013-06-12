@@ -526,14 +526,14 @@
 	AllowResize="true" Font-Size="9pt" HeaderText="Preview KPI" Modal="True" PopupHorizontalAlign="WindowCenter"
 	PopupVerticalAlign="WindowCenter" AllowDragging="true" ShowFooter="true" Width="900px"
 	Height="100%" ShowLoadingPanel="true">
-	<FooterTemplate>
-		<div style="float: right; padding: 5px 5px 5px 5px">
-			<dx:ASPxButton ID="btnClose" runat="server" Text="Close" Width="70px" AutoPostBack="False">
-				<ClientSideEvents Click="function(s, e) {
-					KPI_frmPreView.Hide();
-				}" />
-			</dx:ASPxButton>
-		</div>
+		<FooterTemplate>
+			<div style="float: right; padding: 5px 5px 5px 5px">
+				<dx:ASPxButton ID="btnClose" runat="server" Text="Close" Width="70px" AutoPostBack="False">
+					<ClientSideEvents Click="function(s, e) {
+						KPI_frmPreView.Hide();
+					}" />
+				</dx:ASPxButton>
+			</div>
 	</FooterTemplate>
 	<ContentStyle>
 		<Paddings Padding="5px" />
@@ -541,7 +541,7 @@
 	</ContentStyle>
 	<ContentCollection>
 		<dx:PopupControlContentControl ID="popupPreView" runat="server">
-			<dx:ASPxPageControl ID="tabCtrl_PreView" runat="server" ActiveTabIndex="1" Width="100%"
+			<dx:ASPxPageControl ID="tabCtrl_PreView" runat="server" ActiveTabIndex="0" Width="100%"
 				Font-Names="Arial" Font-Size="9pt" ClientInstanceName="KPI_tabCtrl_PreView">
 				<Border BorderStyle="None" />
 				<ContentStyle>
@@ -575,6 +575,9 @@
 										</dx:GridViewDataTextColumn>
 									</Columns>
 									<SettingsBehavior AllowSort="false" />
+
+<SettingsBehavior AllowSort="False"></SettingsBehavior>
+
 									<SettingsPager PageSize="20">
 									</SettingsPager>
 								</dx:ASPxGridView>

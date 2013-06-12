@@ -75,7 +75,7 @@
 						<asp:TextBox ID="txtMinValue" runat="server" AutoPostBack="true" Width="80px" CssClass="numericInput" Text="0" />
 					</td>
 					<td>
-						<dx:ASPxCheckBox ID="ASPxCheckBox1" runat="server" Text="No min value">
+						<dx:ASPxCheckBox ID="chkNoMinValue" runat="server" Text="No min value">
 						</dx:ASPxCheckBox>
 					</td>
 					<td style="width: 10px">&nbsp;</td>
@@ -84,7 +84,7 @@
 						<asp:TextBox ID="txtMaxValue" runat="server" AutoPostBack="true" Width="80px" CssClass="numericInput" Text="1000" />
 					</td>
 					<td>
-						<dx:ASPxCheckBox ID="ASPxCheckBox2" runat="server" Text="No max value">
+						<dx:ASPxCheckBox ID="chkNoMaxValue" runat="server" Text="No max value">
 						</dx:ASPxCheckBox>
 					</td>
 				</tr>
@@ -94,7 +94,7 @@
 	</tr>
 </table>
 </fieldset>
-<dx:ASPxPageControl ID="tabKPISetting" runat="server" ActiveTabIndex="0" 
+<dx:ASPxPageControl ID="tabKPISetting" runat="server" ActiveTabIndex="1" 
 	Width="1024px">
 <Border BorderStyle="None" />
 <ContentStyle>
@@ -124,7 +124,7 @@
 <ContentCollection>
 	<dx:ContentControl ID="ContentControl2" runat="server">
 		<asp:Panel ID="measureContainer" runat="server"></asp:Panel>
-		<dx:ASPxButton ID="ASPxButton1" runat="server" Text="Add measures" 
+		<dx:ASPxButton ID="btnAddMeasure" runat="server" Text="Add measures" 
 			Width="120px" OnClick="btnAddMeasure_Click" />
 		<hr />		
 		<asp:Panel ID="kpiFilterContainer" runat="server"></asp:Panel>
@@ -150,9 +150,9 @@
 </TabStyle>
 <ContentCollection>
 	<dx:ContentControl ID="ContentControl3" runat="server">
-		<asp:Panel ID="Panel1" runat="server"></asp:Panel>
+		<asp:Panel ID="kpiContextMetricContainer" runat="server"></asp:Panel>
 		<dx:ASPxButton ID="btnAddContextMetric" runat="server" Text="Add contextual metric" 
-			Width="145px" AutoPostBack="false" />	
+			Width="160px" AutoPostBack="false" />	
 		<dx:ASPxPopupMenu ID="popMenAddCalcField" runat="server" PopupElementID="btnAddContextMetric"
 			OnItemClick="popMenAddCalcField_ItemClick" PopupAction="LeftMouseClick">
 			<Items>

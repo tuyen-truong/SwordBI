@@ -265,9 +265,15 @@ namespace HTLBIWebApp2012.App.Setting
 					break;
 				case "measure":
 					ctrl = LoadControl("~/App/Setting/wcKPIMeasure.ascx") as KPIPartCtrlBase;
+					container = measureContainer;
 					break;
-				case "context":
-					ctrl = this.LoadControl("wcKPIContextMetric.ascx") as KPIPartCtrlBase;
+				case "context-normal":
+					ctrl = this.LoadControl("~/App/Setting/wcKPIContextMetric.ascx") as KPIPartCtrlBase;
+					container = kpiContextMetricContainer;
+					break;
+				case "context-calc":
+					ctrl = this.LoadControl("~/App/Setting/wcKPIContextMetric_Calc.ascx") as KPIPartCtrlBase;
+					container = kpiContextMetricContainer;
 					break;
 				default:
 					break;
@@ -285,17 +291,19 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void btnAddMeasure_Click(object sender, EventArgs e)
 		{
-
+			KPIPartCtrlBase ctrl = AddKPIPartControl("measure", string.Empty);
+			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 		}
 
 		protected void popMenAddFilter_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
 		{
-
+			 // TODO: Add filter control
 		}
 
 		protected void popMenAddCalcField_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
 		{
-
+			KPIPartCtrlBase ctrl = AddKPIPartControl(String.Format("context-{0}", e.Item.Name).ToLower(), string.Empty);
+			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 		}
 
 		protected void gridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)

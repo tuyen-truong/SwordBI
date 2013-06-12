@@ -67,13 +67,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.TextBox txtMinValue;
         
         /// <summary>
-        /// ASPxCheckBox1 control.
+        /// chkNoMinValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxCheckBox ASPxCheckBox1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxCheckBox chkNoMinValue;
         
         /// <summary>
         /// txtMaxValue control.
@@ -85,13 +85,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.TextBox txtMaxValue;
         
         /// <summary>
-        /// ASPxCheckBox2 control.
+        /// chkNoMaxValue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxCheckBox ASPxCheckBox2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxCheckBox chkNoMaxValue;
         
         /// <summary>
         /// tabKPISetting control.
@@ -148,13 +148,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::System.Web.UI.WebControls.Panel measureContainer;
         
         /// <summary>
-        /// ASPxButton1 control.
+        /// btnAddMeasure control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton ASPxButton1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btnAddMeasure;
         
         /// <summary>
         /// kpiFilterContainer control.
@@ -193,13 +193,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxClasses.ContentControl ContentControl3;
         
         /// <summary>
-        /// Panel1 control.
+        /// kpiContextMetricContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel kpiContextMetricContainer;
         
         /// <summary>
         /// btnAddContextMetric control.
