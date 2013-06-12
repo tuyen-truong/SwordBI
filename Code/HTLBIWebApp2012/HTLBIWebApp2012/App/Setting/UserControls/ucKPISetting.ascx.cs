@@ -275,7 +275,18 @@ namespace HTLBIWebApp2012.App.Setting
 					ctrl = this.LoadControl("~/App/Setting/wcKPIContextMetric_Calc.ascx") as KPIPartCtrlBase;
 					container = kpiContextMetricContainer;
 					break;
-				default:
+				case "filter-normal":
+					ctrl = this.LoadControl("~/App/Setting/wcNormalFilter.ascx") as KPIPartCtrlBase;
+					ctrl.PartType = "filter-normal";
+					container = kpiFilterContainer;
+					break;
+				case "filter-num":
+					ctrl = this.LoadControl("~/App/Setting/wcNumFilter.ascx") as KPIPartCtrlBase;
+					ctrl.PartType = "filter-num";
+					break;
+				default: // date
+					ctrl = this.LoadControl("~/App/Setting/wcTimeFilter.ascx") as KPIPartCtrlBase;
+					ctrl.PartType = "filter-date";
 					break;
 			}
 			if (string.IsNullOrWhiteSpace(id))
@@ -297,7 +308,8 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void popMenAddFilter_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
 		{
-			 // TODO: Add filter control
+			KPIPartCtrlBase ctrl = AddKPIPartControl(String.Format("filter-{0}", e.Item.Name).ToLower(), string.Empty);
+			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 		}
 
 		protected void popMenAddCalcField_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
