@@ -522,5 +522,20 @@ namespace HTLBIWebApp2012.App.Setting
 			MySession.DSDefine_CurEditing = objDs.Code;
 		}
 
+		protected void dsGridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
+		{
+
+		}
+
+		protected void dsGridPreviewData_CustomUnboundColumnData(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDataEventArgs e)
+		{
+
+		}
+
+		protected void dsGridPreviewData_PageIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
 	}
 }

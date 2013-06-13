@@ -846,16 +846,16 @@ namespace HTLBIWebApp2012
 		public static List<COMCodeNameObj> Get_Control()
 		{
 			return new List<COMCodeNameObj>()
-            {
-                new COMCodeNameObj( "ComboBox", "Combo Box" ),
-                new COMCodeNameObj( "CheckedComboBox", "Checked Combo Box" ),                
-                new COMCodeNameObj( "TreeListBox", "Tree List Box" ),                
-                new COMCodeNameObj( "Calendar_Year", "Calendar - Year" ),
-                new COMCodeNameObj( "Calendar_Quarter", "Calendar - Quarter" ),
-                new COMCodeNameObj( "Calendar_Period", "Calendar - Period" ),
-                new COMCodeNameObj( "Calendar_Day", "Calendar - Day" ),
-                new COMCodeNameObj( "Calendar_Prev", "Calendar - Previous Time" )
-            };
+			{
+				new COMCodeNameObj( "ComboBox", "Combo Box" ),
+				new COMCodeNameObj( "CheckedComboBox", "Checked Combo Box" ),                
+				new COMCodeNameObj( "TreeListBox", "Tree List Box" ),                
+				new COMCodeNameObj( "Calendar_Year", "Calendar - Year" ),
+				new COMCodeNameObj( "Calendar_Quarter", "Calendar - Quarter" ),
+				new COMCodeNameObj( "Calendar_Period", "Calendar - Period" ),
+				new COMCodeNameObj( "Calendar_Day", "Calendar - Day" ),
+				new COMCodeNameObj( "Calendar_Prev", "Calendar - Previous Time" )
+			};
 		}
 	}
 	public class InteractionDefine
@@ -947,23 +947,23 @@ namespace HTLBIWebApp2012
 		public static List<COMCodeNameObj> Get_Template()
 		{
 			return new List<COMCodeNameObj>()
-            {
-                /*
-                new COMCodeNameObj( "TwoPortlet_Flow", "Two Portlet Flow" ),
-                new COMCodeNameObj( "TwoPortlet_Grid", "Two Portlet Grid" ),
-                new COMCodeNameObj( "ThreePortlet_Flow", "Three Portlet Flow" ),
-                new COMCodeNameObj( "ThreePortlet_Grid", "Three Portlet Grid" ),
-                new COMCodeNameObj( "FourPortlet_Flow", "Four Portlet Flow" ),
-                new COMCodeNameObj( "FourPortlet_Grid", "Four Portlet Grid" )
-                */
-                new COMCodeNameObj( "TwoPane_1", "Two Portlet Flow" ),
-                new COMCodeNameObj( "TwoPane_2", "Two Portlet Grid" ),
-                new COMCodeNameObj( "ThreePane_1", "Three Portlet 1" ), // one left, 2 right
-                new COMCodeNameObj( "ThreePane_2", "Three Portlet 2" ), // 2 left, one right
-                new COMCodeNameObj( "ThreePane_3", "Three Portlet 3" ), // one over, 2 below
-                new COMCodeNameObj( "ThreePane_4", "Three Portlet 4" ), // 2 over, 1 below
-                new COMCodeNameObj( "FourPane_1", "Four Portlet Grid" )
-            };
+			{
+				/*
+				new COMCodeNameObj( "TwoPortlet_Flow", "Two Portlet Flow" ),
+				new COMCodeNameObj( "TwoPortlet_Grid", "Two Portlet Grid" ),
+				new COMCodeNameObj( "ThreePortlet_Flow", "Three Portlet Flow" ),
+				new COMCodeNameObj( "ThreePortlet_Grid", "Three Portlet Grid" ),
+				new COMCodeNameObj( "FourPortlet_Flow", "Four Portlet Flow" ),
+				new COMCodeNameObj( "FourPortlet_Grid", "Four Portlet Grid" )
+				*/
+				new COMCodeNameObj( "TwoPane_1", "Two Portlet Flow" ),
+				new COMCodeNameObj( "TwoPane_2", "Two Portlet Grid" ),
+				new COMCodeNameObj( "ThreePane_1", "Three Portlet 1" ), // one left, 2 right
+				new COMCodeNameObj( "ThreePane_2", "Three Portlet 2" ), // 2 left, one right
+				new COMCodeNameObj( "ThreePane_3", "Three Portlet 3" ), // one over, 2 below
+				new COMCodeNameObj( "ThreePane_4", "Three Portlet 4" ), // 2 over, 1 below
+				new COMCodeNameObj( "FourPane_1", "Four Portlet Grid" )
+			};
 		}
 	}
 	#endregion
@@ -3553,12 +3553,14 @@ namespace HTLBIWebApp2012
 			return ret == "HAVING " ? "" : ret;
 		}
 
+		private StringBuilder m_With = new StringBuilder();
+
 		/// <summary>
 		/// Chuyển các đối tượng do người dùng thiết lập về câu lệnh MDX để thực thi
 		/// </summary>
 		public virtual string ToMDX(bool isWrapText)
 		{
-			/*
+			
 			StringBuilder sb = new StringBuilder();
 			sb.Append("SELECT ");
 			try
@@ -3585,8 +3587,8 @@ namespace HTLBIWebApp2012
 			{
 				throw ex;
 			}
-			//return sb.ToString();
-			*/
+			return sb.ToString();
+			
 
 			var wrapLine = isWrapText ? Environment.NewLine : "";
 			var wrapTab = isWrapText ? "\t" : "";
@@ -3767,9 +3769,16 @@ namespace HTLBIWebApp2012
 
 		private String GetFields()
 		{
+			if (m_With.Length == 0)
+			{
+				m_With.AppendLine("WITH");
+			}
+
 			StringBuilder sb = new StringBuilder();
 			foreach (InqFieldInfoMDX fld in this.Fields)
 			{
+				m_With.AppendFormat("SET [{0}] AS {1}.[{2}]", fld.DisplayName, fld.UniqueName, fld.Name);
+
 				if (sb.Length == 0)
 				{
 					sb.Append("{");
