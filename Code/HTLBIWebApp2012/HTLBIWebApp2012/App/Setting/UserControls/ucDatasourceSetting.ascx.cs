@@ -65,6 +65,68 @@ namespace HTLBIWebApp2012.App.Setting
 			}
 		}
 
+		protected List<InqFieldInfoMDX> m_SelectedFields = new List<InqFieldInfoMDX>();
+		protected List<InqFieldInfoMDX> SelectedFields
+		{
+			get
+			{
+				ListEditItemCollection items = lbSelectedFields.Items;
+				if (items.Count > 0)
+				{
+					int numOfItems = items.Count;
+					for (int index = 0; index < numOfItems; index++)
+					{
+						ListEditItem item = items[index];
+						InqFieldInfoMDX fld = new InqFieldInfoMDX(item);
+						m_SelectedFields.Add(fld);
+					}
+				}
+				return m_SelectedFields;
+			}
+		}
+
+		protected List<InqSummaryInfoMDX> m_SelectedMetrics = new List<InqSummaryInfoMDX>();
+		protected List<InqSummaryInfoMDX> SelectedMetrics
+		{
+			get
+			{
+				ListEditItemCollection items = lbSelectedMetricFields.Items;
+				if (items.Count > 0)
+				{
+					int numOfItems = items.Count;
+					for (int index = 0; index < numOfItems; index++)
+					{
+						ListEditItem item = items[index];
+						InqSummaryInfoMDX fld = new InqSummaryInfoMDX(item);
+						m_SelectedMetrics.Add(fld);
+					}
+				}
+				return m_SelectedMetrics;
+			}
+		}
+
+		protected List<InqFilterInfoMDX> m_SelectedFilters = new List<InqFilterInfoMDX>();
+		protected List<InqFilterInfoMDX> SelectedFilters
+		{
+			get
+			{
+				foreach (FilterCtrlBase ctrl in filterContainer.Controls)
+				{
+					var filter = ctrl.Get_FilterInfo();
+					if (filter == null) continue;
+					// Set lại hàm tính toán trên field filter giống với hàm của field đó trong Summaries
+					if (filter.HasHavingKey())
+					{
+						var objSummary = SelectedMetrics.FirstOrDefault(p => p.Field.KeyField == filter.HavingKey.Field.KeyField);
+						if (objSummary != null)
+							filter.HavingKey.FuncName = objSummary.FuncName;
+					}
+					m_SelectedFilters.Add(filter);
+				}
+				return m_SelectedFilters;
+			}
+		}
+
 		protected FilterControlInfoCollection m_Filters = new FilterControlInfoCollection();
 
 		protected void Page_Load(object sender, EventArgs e)
@@ -474,40 +536,11 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
-			ASPxButton _sender = (ASPxButton)sender;
-			List<InqFieldInfoMDX> fields = new List<InqFieldInfoMDX>();
-			ListEditItemCollection items = lbSelectedFields.Items;
-			int numOfItems = items.Count;
-			for (int index = 0; index < numOfItems; index++)
+			var ret = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
 			{
-				ListEditItem item = items[index];
-				InqFieldInfoMDX fld = new InqFieldInfoMDX(item);
-				fields.Add(fld);
-			}
-
-			List<InqSummaryInfoMDX> summaries = new List<InqSummaryInfoMDX>();
-			ListEditItemCollection metricFields = lbSelectedMetricFields.Items;
-			foreach (ListEditItem item in metricFields)
-			{
-				summaries.Add(new InqSummaryInfoMDX(item));
-			}
-			List<InqFilterInfoMDX> filters = new List<InqFilterInfoMDX>();
-			foreach (FilterCtrlBase ctrl in filterContainer.Controls)
-			{
-				var filter = ctrl.Get_FilterInfo();
-				if (filter == null) continue;
-				// Set lại hàm tính toán trên field filter giống với hàm của field đó trong Summaries
-				if (filter.HasHavingKey())
-				{
-					var objSummary = summaries.FirstOrDefault(p => p.Field.KeyField == filter.HavingKey.Field.KeyField);
-					if (objSummary != null)
-						filter.HavingKey.FuncName = objSummary.FuncName;
-				}
-				filters.Add(filter);
-			}
-			var ret = new InqDefineSourceMDX(fields, summaries, filters);
-			ret.PreffixDimTable = "AR";
-			ret.OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny);
+				PreffixDimTable = "AR",
+				OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny)
+			};
 
 			lsttbl_DashboardSource objDs = new lsttbl_DashboardSource()
 			{
@@ -524,7 +557,15 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void dsGridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
 		{
+			var inq = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
+			{
+				PreffixDimTable = "AR",
+				OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny)
+			};
 
+			var ds = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).ExecuteDataSet(inq.ToMDX());
+			dsGridPreviewData.DataSource = ds;
+			dsGridPreviewData.DataBind();
 		}
 
 		protected void dsGridPreviewData_CustomUnboundColumnData(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDataEventArgs e)

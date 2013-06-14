@@ -3560,7 +3560,7 @@ namespace HTLBIWebApp2012
 		/// </summary>
 		public virtual string ToMDX(bool isWrapText)
 		{
-			
+			/*
 			StringBuilder sb = new StringBuilder();
 			sb.Append("SELECT ");
 			try
@@ -3588,7 +3588,7 @@ namespace HTLBIWebApp2012
 				throw ex;
 			}
 			return sb.ToString();
-			
+			*/
 
 			var wrapLine = isWrapText ? Environment.NewLine : "";
 			var wrapTab = isWrapText ? "\t" : "";
@@ -3602,7 +3602,7 @@ namespace HTLBIWebApp2012
 			try
 			{
 				////////////////////////////////////////////// Auto correct other informations...
-				this.AutoValidAllBeforeBuildToMDX();
+				//this.AutoValidAllBeforeBuildToMDX();
 				this.Reset_SummariesID();
 
 				//////////////////////////////////////////////SELECT... (Bắt buộc)

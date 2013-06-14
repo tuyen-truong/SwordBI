@@ -204,7 +204,7 @@ th.uc-title
 	<tr>
 		<td>
 			<dx:ASPxButton ID="btnPreview" runat="server" Text="Preview" Width="80px" AutoPostBack="false">
-			<ClientSideEvents Click="function(s, e) { frmDSPreview.Show(); }" />
+			<ClientSideEvents Click="function(s, e) { dsGridPreviewData.PerformCallback(); dsTabPreviewMDX.PerformCallback(); frmDSPreview.Show(); }" />
 			</dx:ASPxButton>
 		</td>
 		<td style="padding-left: 3px;padding-right: 3px;">
