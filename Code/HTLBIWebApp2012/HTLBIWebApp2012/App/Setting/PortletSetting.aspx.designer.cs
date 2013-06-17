@@ -55,7 +55,7 @@ namespace HTLBIWebApp2012.App.Setting {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HTLBIWebApp2012.App.Setting.wcKPISetting wcKPISetting1;
+        protected global::HTLBIWebApp2012.App.Setting.ucKPISetting wcKPISetting1;
         
         /// <summary>
         /// ContentControl3 control.

@@ -20,11 +20,17 @@ namespace HTLBIWebApp2012.App.Setting
 				return Page as PortletSetting;
 			}
 		}
-		private String m_DSCode = "ds_20120704154325";// String.Empty;
+		private String m_DSCode = String.Empty;
 		public String DSCode
 		{
 			get { return m_DSCode; }
-			set { m_DSCode = value; }
+			set
+			{
+				m_DSCode = value;
+				cbKPI.Items.Clear();
+				var kpis = MyBI.Me.Get_DashboardKPI_ByDS(m_DSCode).ToList();
+				Helpers.SetDataSource(cbKPI, kpis, "Code", "NameVI");
+			}
 		}
 		private String m_KPICode = String.Empty;
 		public String KPICode
@@ -115,11 +121,12 @@ namespace HTLBIWebApp2012.App.Setting
 		protected void cbKPI_ValueChanged(object sender, EventArgs e)
 		{
 			ASPxComboBox _sender = (ASPxComboBox)sender;
-			if (Kpi == null) return;
+			lsttbl_DashboardSource _Kpi = Kpi;
+			if (_Kpi == null) return;
 
-			MySession.KPIDefine_CurEditing = Kpi.Code;
-			txtKPIDisplayName.Text = Kpi.NameVI;
-			var kpi = Kpi.JsonObjKPI;
+			MySession.KPIDefine_CurEditing = _Kpi.Code;
+			txtKPIDisplayName.Text = _Kpi.NameVI;
+			var kpi = _Kpi.JsonObjKPI;
 			// Set value to control
 			if (!string.IsNullOrEmpty(kpi.CtrlTypeDefault) && !string.IsNullOrEmpty(kpi.VisibleTypeDefault))
 			{
@@ -331,6 +338,23 @@ namespace HTLBIWebApp2012.App.Setting
 		protected void gridPreviewData_CustomUnboundColumnData(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDataEventArgs e)
 		{
 
+		}
+
+		public string DSCode_Target { get; set; }
+
+		internal void Raise_OnChange(string p, EventArgs eventArgs)
+		{
+			//cbKPI.Items.Clear();
+			//cbKPI.Value = null;
+			//cbKPI.Text = String.Empty;
+
+			//List<lsttbl_DashboardSource> KpiCollection = MyBI.Me.Get_DashboardKPI_ByDS(m_DSCode).ToList();
+			//Helpers.SetDataSource(cbKPI, KpiCollection, "Code", "NameVI");
+			//if (cbKPI.Items.Count > 0)
+			//{
+			//    cbKPI.SelectedIndex = 0;
+			//    cbKPI_ValueChanged(cbKPI, EventArgs.Empty);
+			//}
 		}
 	}
 }

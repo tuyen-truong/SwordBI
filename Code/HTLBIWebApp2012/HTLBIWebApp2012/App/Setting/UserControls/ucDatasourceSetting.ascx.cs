@@ -57,7 +57,10 @@ namespace HTLBIWebApp2012.App.Setting
 
 		public object DataSource
 		{
-			get { return cbDataSource.Value;  }
+			get
+			{
+				return cbDataSource.Value; 
+			}
 			set
 			{
 				cbDataSource.Value = value;
@@ -182,6 +185,8 @@ namespace HTLBIWebApp2012.App.Setting
 			cbDataSource.SelectedIndex = -1;
 			Cleanup();
 
+			MySession.DSDefine_CurEditing = null;
+
 			if (NewButtonClicked != null)
 			{
 				NewButtonClicked(sender, e);
@@ -295,6 +300,8 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void cbDataWarehouse_ValueChanged(object sender, EventArgs e)
 		{
+			MySession.DSDefine_CurEditing = null;
+
 			ASPxComboBox cb = (ASPxComboBox)sender;
 			object selectedItemValue = cb.SelectedItem != null ? cb.SelectedItem.Value : null;
 			if (selectedItemValue != null)
@@ -325,6 +332,8 @@ namespace HTLBIWebApp2012.App.Setting
 				lsttbl_DashboardSource datasource = MyBI.Me.Get_DashboardSourceBy(m_DSCode);
 				if (datasource != null)
 				{
+					MySession.DSDefine_CurEditing = datasource.Code;
+
 					txtDataSourceName.Text = datasource.NameEN;
 					if (datasource.WHCode != Lib.NTE(cbDataWarehouse.Value))
 					{
@@ -341,6 +350,17 @@ namespace HTLBIWebApp2012.App.Setting
 						m_Filters.Add(new FilterControlInfo(ctrl) { Type = filter.FilterType });
 					}
 				}
+			}
+			else
+			{
+				m_DSCode = String.Empty;
+			}
+
+			// refress kpi tab
+			if (!IsPostBack && MyPage != null)
+			{
+				MyPage.My_wcKPISetting.DSCode = m_DSCode;
+				//MyPage.My_wcKPISetting.Raise_OnChange(String.Empty, EventArgs.Empty);
 			}
 		}
 
@@ -552,7 +572,19 @@ namespace HTLBIWebApp2012.App.Setting
 				SettingCat = GlobalVar.SettingCat_DS 
 			};
 			MyBI.Me.Save_DashboardSource(objDs);
-			MySession.DSDefine_CurEditing = objDs.Code;
+			if (objDs.Code == MySession.DSDefine_CurEditing)
+			{
+				cbDataSource.Text = txtDataSourceName.Text;
+			}
+			else
+			{
+				MySession.DSDefine_CurEditing = objDs.Code;
+				// Reload Data Source
+				m_WHCode = cbDataWarehouse.Value.ToString();
+				var dsItems = MyBI.Me.Get_DashboardSource(m_WHCode, GlobalVar.SettingCat_DS);
+				Helpers.SetDataSource(cbDataSource, dsItems, "Code", "NameEN");
+				cbDataSource.Value = MySession.DSDefine_CurEditing;
+			}
 		}
 
 		protected void dsGridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)

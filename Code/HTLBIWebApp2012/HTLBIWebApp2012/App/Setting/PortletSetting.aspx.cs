@@ -10,10 +10,34 @@ namespace HTLBIWebApp2012.App.Setting
 {
 	public partial class PortletSetting : PageBase
 	{
-		public ucDatasourceSetting My_wcDSSetting { get { return this.ucDatasourceSetting1; } }
-		public wcKPISetting My_wcKPISetting { get { return this.wcKPISetting1; } }
-		public wcLayoutSetting My_wcLayoutSetting { get { return this.wcLayoutSetting1; } }
-		public wcInteractionSetting My_wcInteractionSetting { get { return this.wcInteractionSetting1; } }
+		public ucDatasourceSetting My_wcDSSetting
+		{
+			get
+			{
+				return this.ucDatasourceSetting1;
+			}
+		}
+		public ucKPISetting My_wcKPISetting
+		{
+			get
+			{
+				return this.wcKPISetting1;
+			}
+		}
+		public wcLayoutSetting My_wcLayoutSetting
+		{
+			get
+			{
+				return this.wcLayoutSetting1;
+			}
+		}
+		public wcInteractionSetting My_wcInteractionSetting
+		{
+			get
+			{
+				return this.wcInteractionSetting1;
+			}
+		}
 
 		/// <summary>
 		/// Đối tượng TabPage hiện hành nào đang được Active.
@@ -36,52 +60,58 @@ namespace HTLBIWebApp2012.App.Setting
 		/// </summary>
 		public string LayoutCode { get { return this.My_wcLayoutSetting.LayoutCode; } }
 
-		/// <summary>
-		/// Forward sự kiện OnChange cho control 'My_wcKPISetting'
-		/// </summary>
-		//protected void wcControlInTab_Changed(object sender, EventArgs args)
-		//{
-		//    if (sender is string) return;
+		protected String WidgetCode { get; set; }
 
-		//    var ctrl = sender.GetVal("Ctrl") as Control;
-		//    var cat = sender.GetStr("Cat");
-		//    if (ctrl.ID == this.My_wcDSSetting.ID)
-		//    {
-		//        this.My_wcKPISetting.Raise_OnChange(cat, args);
-		//        this.My_wcLayoutSetting.Raise_OnChange(cat, args);
-		//    }
-		//    else if (ctrl.ID == this.My_wcKPISetting.ID)
-		//    {
-		//        this.My_wcLayoutSetting.Raise_OnChange(cat, args);
-		//    }
-		//}
+		protected override object SaveControlState()
+		{
+			object[] controlState = new object[2];
+			controlState[0] = base.SaveControlState();
+			controlState[1] = WidgetCode;
+			return controlState;
+		}
 
-		private String WidgetCode { get; set; }
-		
+		protected override void LoadControlState(object savedState)
+		{
+			object[] controlState = (object[])savedState;
+			base.LoadControlState(controlState[0]);
+			WidgetCode = (String)controlState[1];
+		}
+
+		protected override void OnInit(EventArgs e)
+		{
+			base.OnInit(e);
+			Page.RegisterRequiresControlState(this);
+		}
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			Page.Title = "Portlet Setting";
-		}
-
-		protected void Page_PreRender(object sender, EventArgs e)
-		{
 			if (!IsPostBack)
 			{
 				WidgetCode = Get_Param(PageArgs.WidgetCode);
-				if (!String.IsNullOrEmpty(WidgetCode))
+			}			
+		}
+
+		protected override void OnPreRender(EventArgs e)
+		{
+			if (!IsPostBack
+				&& !String.IsNullOrWhiteSpace(WidgetCode))
+			{
+				lsttbl_Widget widget = MyBI.Me.Get_Widget_ByCode(WidgetCode);
+				if (widget == null)
 				{
-					lsttbl_Widget widget = MyBI.Me.Get_Widget_ByCode(WidgetCode);
-					if (widget == null) { return; }
-					// Data source
-					My_wcDSSetting.DataWarehouse = widget.WHCode;
-					My_wcDSSetting.DataSource = widget.DataSourceCode;
-					My_wcDSSetting.Name = widget.DSName;
-					// KPI Setting
-					My_wcKPISetting.KPICode = widget.KPICode;
-					// Layout Setting
-					My_wcLayoutSetting.LayoutCode = widget.Code;
+					MySession.DSDefine_CurEditing = "";
+					return;
 				}
+				// Data source
+				My_wcDSSetting.DataWarehouse = widget.WHCode;
+				// KPI Setting
+				My_wcKPISetting.DSCode = widget.DSCode;
+				//My_wcKPISetting.KPICode = widget.KPICode;
+				//// Layout Setting
+				//My_wcLayoutSetting.LayoutCode = widget.Code;
 			}
+			base.OnPreRender(e);
 		}
 	}
 }
