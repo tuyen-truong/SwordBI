@@ -24,6 +24,8 @@
 <%@ Register Src="wcInteractionSetting.ascx" TagName="wcInteractionSetting" TagPrefix="uc5" %>
 <%@ Register Src="~/App/Setting/UserControls/ucDatasourceSetting.ascx" TagName="ucDatasourceSetting"
 	TagPrefix="uc2" %>
+<%@ Register Src="~/App/Setting/UserControls/ucKPISetting.ascx" TagName="ucKPISetting"
+	TagPrefix="uc2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 	<script language="javascript" type="text/javascript">
 		$(document).ready(function () {
@@ -81,7 +83,7 @@
 				</TabStyle>
 				<ContentCollection>
 					<dx:ContentControl ID="ContentControl1" runat="server">
-						<uc3:wcKPISetting ID="wcKPISetting1" runat="server" />
+						<uc2:ucKPISetting ID="ucKPISetting1" runat="server" />
 					</dx:ContentControl>
 				</ContentCollection>
 			</dx:TabPage>

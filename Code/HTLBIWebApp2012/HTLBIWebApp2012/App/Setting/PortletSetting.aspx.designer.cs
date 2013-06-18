@@ -49,13 +49,13 @@ namespace HTLBIWebApp2012.App.Setting {
         protected global::DevExpress.Web.ASPxClasses.ContentControl ContentControl1;
         
         /// <summary>
-        /// wcKPISetting1 control.
+        /// ucKPISetting1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HTLBIWebApp2012.App.Setting.wcKPISetting wcKPISetting1;
+        protected global::HTLBIWebApp2012.App.Setting.ucKPISetting ucKPISetting1;
         
         /// <summary>
         /// ContentControl3 control.

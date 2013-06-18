@@ -14,7 +14,8 @@
 	<asp:ScriptManager ID="ScriptManager1" runat="server">
 	</asp:ScriptManager>
 	<div>
-		<uc:ucDatasourceSetting runat="server" ID="uc1" />
+		
+        <uc:ucKPISetting runat="server" ID="uc2" />
 	</div>
 	</form>
 </body>
