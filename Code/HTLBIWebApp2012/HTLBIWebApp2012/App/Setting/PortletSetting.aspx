@@ -36,51 +36,33 @@
 		function Portlet_SetActiveTab(tab_index) {
 			tabCtrl_PortletSetting.SetActiveTab(tabCtrl_PortletSetting.GetTab(tab_index));
 		}
-
-		function Get_CurDSCode() {
-			if (cbDataSource) {
-				var dsCode = cbDataSource.GetValue();
-				return ((dsCode == null || dsCode.toString().length == 0) ? "" : dsCode.toString());
-			}
-			return "";
-		}
-
-		function Get_CurKPICode() {
-			if (cbKPI) {
-				var kpiCode = cbKPI.GetValue();
-				return ((kpiCode == null || kpiCode.toString().length == 0) ? "" : kpiCode.toString());
-			}
-			return "";
-		}
-
-		function Get_CurLayoutCount() {
-			return 1;
-		}
-
-		function TabActiveChanging(s, e) {			
-			if (e.tab.name == 'tabPage_LayoutSetting') {
-				var dsCode = Get_CurDSCode();
-				var kpiCode = Get_CurKPICode();
-				var layoutCount = Get_CurLayoutCount();
-				if (dsCode.length == 0 && kpiCode.length == 0 && layoutCount == 0) {
-					alert('Please select a datasource or KPI on tabpage [Data source] or [KPIs].');
-					e.cancel = true;
-				}
-			}
-			else if (e.tab.name == 'tabPage_InteractionSetting') {
-				var layoutCode = Get_CurLayoutCode();
-				if (layoutCode.length == 0) {
-					alert('Please select a layout.');
-					e.cancel = true;
-				}
-			}
-		}
 	</script>
 	<dx:ASPxPageControl ID="tabCtrl_PortletSetting" ClientInstanceName="tabCtrl_PortletSetting"
 		runat="server" ActiveTabIndex="0" Width="100%" Font-Names="Arial" Font-Size="9pt"
 		ClientIDMode="AutoID">
 		<Border BorderStyle="None" />
-		<ClientSideEvents Init="function(s, e) { Portlet_SetActiveTab(0); }" ActiveTabChanging="TabActiveChanging" />
+		<ClientSideEvents Init="function(s, e) { Portlet_SetActiveTab(0); }" ActiveTabChanging="function(s, e) {
+			if(e.tab.name == 'tabPage_LayoutSetting')
+			{
+				var dsCode = Get_CurDSCode();
+				var kpiCode = Get_CurKPICode();
+				var layoutCount = Get_CurLayoutCount();
+				if(dsCode.length==0 && kpiCode.length==0 && layoutCount==0)
+				{
+					alert('Please select a datasource or KPI on tabpage [Data source] or [KPIs].');
+					e.cancel = true;
+				}
+			}
+			else if(e.tab.name == 'tabPage_InteractionSetting')
+			{
+				var layoutCode = Get_CurLayoutCode();
+				if(layoutCode.length==0)
+				{
+					alert('Please select a layout.');
+					e.cancel = true;
+				}
+			}
+		}" />
 		<Paddings Padding="0px" />
 		<TabPages>
 			<dx:TabPage Name="tabPage_DatasourceSetting" Text="Data source" ToolTip="Data source defination.">
@@ -101,7 +83,7 @@
 				</TabStyle>
 				<ContentCollection>
 					<dx:ContentControl ID="ContentControl1" runat="server">
-						<uc2:ucKPISetting ID="wcKPISetting1" runat="server" />
+						<uc2:ucKPISetting ID="ucKPISetting1" runat="server" />
 					</dx:ContentControl>
 				</ContentCollection>
 			</dx:TabPage>
@@ -128,6 +110,28 @@
 				</ContentCollection>
 			</dx:TabPage>
 		</TabPages>
+		<ClientSideEvents ActiveTabChanging="function(s, e) {
+			if(e.tab.name == &#39;tabPage_LayoutSetting&#39;)
+			{
+				var dsCode = Get_CurDSCode();
+				var kpiCode = Get_CurKPICode();
+				var layoutCount = Get_CurLayoutCount();
+				if(dsCode.length==0 &amp;&amp; kpiCode.length==0 &amp;&amp; layoutCount==0)
+				{
+					alert(&#39;Please select a datasource or KPI on tabpage [Data source] or [KPIs].&#39;);
+					e.cancel = true;
+				}
+			}
+			else if(e.tab.name == &#39;tabPage_InteractionSetting&#39;)
+			{
+				var layoutCode = Get_CurLayoutCode();
+				if(layoutCode.length==0)
+				{
+					alert(&#39;Please select a layout.&#39;);
+					e.cancel = true;
+				}
+			}
+		}" Init="function(s, e) { Portlet_SetActiveTab(0); }"></ClientSideEvents>
 		<Paddings Padding="0px"></Paddings>
 		<TabStyle HorizontalAlign="Center" VerticalAlign="Middle">
 			<Paddings Padding="0px" />

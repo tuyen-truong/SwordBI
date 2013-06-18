@@ -31,12 +31,12 @@ namespace HTLBIWebApp2012.App.Setting.UserControls {
         protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
-        /// uc1 control.
+        /// uc2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::HTLBIWebApp2012.App.Setting.ucDatasourceSetting uc1;
+        protected global::HTLBIWebApp2012.App.Setting.ucKPISetting uc2;
     }
 }
