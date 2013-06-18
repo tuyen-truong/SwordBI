@@ -36,7 +36,28 @@
 		function Portlet_SetActiveTab(tab_index) {
 			tabCtrl_PortletSetting.SetActiveTab(tabCtrl_PortletSetting.GetTab(tab_index));
 		}
-		function TabActiveChanged(s, e) {
+
+		function Get_CurDSCode() {
+			if (cbDataSource) {
+				var dsCode = cbDataSource.GetValue();
+				return ((dsCode == null || dsCode.toString().length == 0) ? "" : dsCode.toString());
+			}
+			return "";
+		}
+
+		function Get_CurKPICode() {
+			if (cbKPI) {
+				var kpiCode = cbKPI.GetValue();
+				return ((kpiCode == null || kpiCode.toString().length == 0) ? "" : kpiCode.toString());
+			}
+			return "";
+		}
+
+		function Get_CurLayoutCount() {
+			return 1;
+		}
+
+		function TabActiveChanging(s, e) {			
 			if (e.tab.name == 'tabPage_LayoutSetting') {
 				var dsCode = Get_CurDSCode();
 				var kpiCode = Get_CurKPICode();
@@ -59,7 +80,7 @@
 		runat="server" ActiveTabIndex="0" Width="100%" Font-Names="Arial" Font-Size="9pt"
 		ClientIDMode="AutoID">
 		<Border BorderStyle="None" />
-		<ClientSideEvents Init="function(s, e) { Portlet_SetActiveTab(0); }" ActiveTabChanging="TabActiveChanged" />
+		<ClientSideEvents Init="function(s, e) { Portlet_SetActiveTab(0); }" ActiveTabChanging="TabActiveChanging" />
 		<Paddings Padding="0px" />
 		<TabPages>
 			<dx:TabPage Name="tabPage_DatasourceSetting" Text="Data source" ToolTip="Data source defination.">

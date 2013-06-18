@@ -134,13 +134,15 @@ namespace HTLBIWebApp2012.App.Setting
 				cbCtrlType_ValueChanged(cbCtrlType, EventArgs.Empty);
 				cbCtrl.Value = string.Format("{0}-{1}", kpi.CtrlTypeDefault, kpi.VisibleTypeDefault);
 			}
-			/*
+			
 			// Add new Part controls of KPI is selected
 			foreach (var part in kpi.Dimensions)
 			{
-				var myCtrl = this.Add_PartControl("dimension", false);
-				myCtrl.Set_Info(part);
+				KPIPartCtrlBase ctrl = AddKPIPartControl("dimension", String.Empty);
+				ctrl.Set_Info(part);
+				m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 			}
+			 /** 
 			foreach (var part in kpi.Measures)
 			{
 				var myCtrl = this.Add_PartControl("measure", false);

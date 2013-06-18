@@ -106,7 +106,7 @@ namespace HTLBIWebApp2012.App.Setting
 				// Data source
 				My_wcDSSetting.DataWarehouse = widget.WHCode;
 				// KPI Setting
-				My_wcKPISetting.DSCode = widget.DSCode;
+				My_wcKPISetting.DSCode = widget.DataSourceCode;//.DSCode;
 				//My_wcKPISetting.KPICode = widget.KPICode;
 				//// Layout Setting
 				//My_wcLayoutSetting.LayoutCode = widget.Code;

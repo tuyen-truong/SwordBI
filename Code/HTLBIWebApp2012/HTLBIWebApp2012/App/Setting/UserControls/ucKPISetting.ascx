@@ -39,7 +39,7 @@
 	<tr>
 		<th style="font-weight:normal;text-align:left;">KPIs</th>
 		<td valign="top">
-			<dx:ASPxComboBox ID="cbKPI" runat="server" Width="100%" AutoPostBack="true"
+			<dx:ASPxComboBox ID="cbKPI" runat="server" Width="100%" AutoPostBack="true"	ClientInstanceName="cbKPI"
 				onvaluechanged="cbKPI_ValueChanged">
 			</dx:ASPxComboBox>
 		</td>
