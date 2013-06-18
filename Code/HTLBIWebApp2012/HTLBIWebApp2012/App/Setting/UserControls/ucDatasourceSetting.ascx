@@ -43,7 +43,7 @@ th.uc-title
 	<tr>
 		<th>Display Name</th>
 		<td>
-			<dx:ASPxTextBox ID="txtDataSourceName" runat="server" Width="100%">
+			<dx:ASPxTextBox ID="txtDataSourceName" runat="server" Width="100%" ClientInstanceName="txtDataSourceName">
 			</dx:ASPxTextBox>
 		</td>
 		<td>&nbsp;</td>
@@ -51,7 +51,7 @@ th.uc-title
 	<tr>
 		<th>Data Warehouse</th>
 		<td style="width:250px">
-			<dx:ASPxComboBox ID="cbDataWarehouse" runat="server" Width="100%" AutoPostBack="true" OnValueChanged="cbDataWarehouse_ValueChanged">
+			<dx:ASPxComboBox ID="cbDataWarehouse" runat="server" Width="100%" AutoPostBack="true" OnValueChanged="cbDataWarehouse_ValueChanged" ClientInstanceName="cbDataWarehource">
 			</dx:ASPxComboBox>
 		</td>
 		<td>&nbsp;</td>
@@ -59,7 +59,7 @@ th.uc-title
 	<tr>
 		<th>Data Source</th>
 		<td style="width:250px">
-			<dx:ASPxComboBox ID="cbDataSource" runat="server" Width="100%" AutoPostBack="true" OnValueChanged="cbDataSource_ValueChanged">
+			<dx:ASPxComboBox ID="cbDataSource" runat="server" Width="100%" AutoPostBack="true" OnValueChanged="cbDataSource_ValueChanged" ClientInstanceName="cbDataSource">
 			</dx:ASPxComboBox>
 		</td>
 		<td style="padding-left:3px">
@@ -117,7 +117,7 @@ th.uc-title
 			</div>
 		</td>
 		<td>
-			<dx:ASPxListBox ID="lbSelectedFields" runat="server" ClientIDMode="AutoID" 
+			<dx:ASPxListBox ID="lbSelectedFields" runat="server" ClientInstanceName="lbSelectedFields" 
 				Width="100%" Height="212px" 
 				onselectedindexchanged="lbSelectedFields_SelectedIndexChanged" AutoPostBack="true">
 				<Columns>
@@ -173,7 +173,7 @@ th.uc-title
 			</div>
 		</td>
 		<td>
-			<dx:ASPxListBox ID="lbSelectedMetricFields" runat="server" ClientIDMode="AutoID" 
+			<dx:ASPxListBox ID="lbSelectedMetricFields" runat="server" ClientInstanceName="lbSelectedMetricFields" 
 				Width="100%" Height="120px" AutoPostBack="True" 
 				onselectedindexchanged="lbSelectedMetricFields_SelectedIndexChanged">
 				<Columns>
@@ -203,13 +203,77 @@ th.uc-title
 <table cellpadding="0" cellspacing="0" style="margin-top:3px">
 	<tr>
 		<td>
-			<dx:ASPxButton ID="btnPreview" runat="server" Text="Preview" Width="80px" AutoPostBack="false">
-			<ClientSideEvents Click="function(s, e) { frmDSPreview.Show(); }" />
+			<dx:ASPxButton ID="btnPreview" runat="server" Text="Preview" Width="80px" 
+				AutoPostBack="False" ClientIDMode="AutoID">
+			<ClientSideEvents Click="function(s, e) {
+	var errMsg = '';
+	var newline = '\n\r';
+
+	var selectedFieldCount = lbSelectedFields.GetItemCount();
+	var selectedMetricFieldCount = lbSelectedMetricFields.GetItemCount();
+
+	if (selectedFieldCount == 0) //there are no selected fields
+	{
+		errMsg = 'Please select at least a field.';
+	}
+	if (selectedMetricFieldCount == 0)
+	{
+		errMsg += newline;
+		errMsg += 'The' + cbDataWarehouse.GetValue() + ' Fact data unavailable.';
+	}
+	if (errMsg.length &gt; 0)
+	{
+		alert(errMsg);
+		txtDataSourceName.Focus();
+		e.proccessOnServer = false;
+	}
+	else
+	{
+		dsGridPreviewData.PerformCallback();
+		dsTabPreviewMDX.PerformCallback();
+		frmDSPreview.Show();
+	}
+}" />
 			</dx:ASPxButton>
 		</td>
 		<td style="padding-left: 3px;padding-right: 3px;">
 			<dx:ASPxButton ID="btnSave" runat="server" Text="Save" Width="80px" 
-				onclick="btnSave_Click">
+				onclick="btnSave_Click" ClientIDMode="AutoID">
+				<ClientSideEvents Click="function(s, e) {
+	var errMsg = '';
+	var newline = '\n\r';
+
+	var displayName = txtDataSourceName.GetValue();
+	var selectedFieldCount = lbSelectedFields.GetItemCount();
+	var selectedMetricFieldCount = lbSelectedMetricFields.GetItemCount();
+
+	if (displayName == null
+		|| displayName.toString().length == 0)
+	{
+		errMsg = 'Please enter for your datasouse display name.';
+	}
+	if (selectedFieldCount == 0) //there are no selected fields
+	{
+		errMsg += newline;
+		errMsg += 'Please select at least a field.';
+	}
+	if (selectedMetricFieldCount == 0)
+	{
+		errMsg += newline;
+		errMsg += 'The' + cbDataWarehouse.GetValue() + ' Fact data unavailable.';
+	}
+	if (errMsg.length &gt; 0)
+	{
+		alert(errMsg);
+		txtDataSourceName.Focus();
+		// to prevent postback event
+		e.processOnServer = false;
+	}
+	else
+	{
+		
+	}
+}" />
 			</dx:ASPxButton>
 		</td>
 		<td>

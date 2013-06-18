@@ -57,11 +57,76 @@ namespace HTLBIWebApp2012.App.Setting
 
 		public object DataSource
 		{
-			get { return cbDataSource.Value;  }
+			get
+			{
+				return cbDataSource.Value; 
+			}
 			set
 			{
 				cbDataSource.Value = value;
 				cbDataSource_ValueChanged(cbDataSource, EventArgs.Empty);
+			}
+		}
+
+		protected List<InqFieldInfoMDX> m_SelectedFields = new List<InqFieldInfoMDX>();
+		protected List<InqFieldInfoMDX> SelectedFields
+		{
+			get
+			{
+				ListEditItemCollection items = lbSelectedFields.Items;
+				if (items.Count > 0)
+				{
+					int numOfItems = items.Count;
+					for (int index = 0; index < numOfItems; index++)
+					{
+						ListEditItem item = items[index];
+						InqFieldInfoMDX fld = new InqFieldInfoMDX(item);
+						m_SelectedFields.Add(fld);
+					}
+				}
+				return m_SelectedFields;
+			}
+		}
+
+		protected List<InqSummaryInfoMDX> m_SelectedMetrics = new List<InqSummaryInfoMDX>();
+		protected List<InqSummaryInfoMDX> SelectedMetrics
+		{
+			get
+			{
+				ListEditItemCollection items = lbSelectedMetricFields.Items;
+				if (items.Count > 0)
+				{
+					int numOfItems = items.Count;
+					for (int index = 0; index < numOfItems; index++)
+					{
+						ListEditItem item = items[index];
+						InqSummaryInfoMDX fld = new InqSummaryInfoMDX(item);
+						m_SelectedMetrics.Add(fld);
+					}
+				}
+				return m_SelectedMetrics;
+			}
+		}
+
+		protected List<InqFilterInfoMDX> m_SelectedFilters = new List<InqFilterInfoMDX>();
+		protected List<InqFilterInfoMDX> SelectedFilters
+		{
+			get
+			{
+				foreach (FilterCtrlBase ctrl in filterContainer.Controls)
+				{
+					var filter = ctrl.Get_FilterInfo();
+					if (filter == null) continue;
+					// Set lại hàm tính toán trên field filter giống với hàm của field đó trong Summaries
+					if (filter.HasHavingKey())
+					{
+						var objSummary = SelectedMetrics.FirstOrDefault(p => p.Field.KeyField == filter.HavingKey.Field.KeyField);
+						if (objSummary != null)
+							filter.HavingKey.FuncName = objSummary.FuncName;
+					}
+					m_SelectedFilters.Add(filter);
+				}
+				return m_SelectedFilters;
 			}
 		}
 
@@ -119,6 +184,8 @@ namespace HTLBIWebApp2012.App.Setting
 		{
 			cbDataSource.SelectedIndex = -1;
 			Cleanup();
+
+			MySession.DSDefine_CurEditing = null;
 
 			if (NewButtonClicked != null)
 			{
@@ -233,6 +300,8 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void cbDataWarehouse_ValueChanged(object sender, EventArgs e)
 		{
+			MySession.DSDefine_CurEditing = null;
+
 			ASPxComboBox cb = (ASPxComboBox)sender;
 			object selectedItemValue = cb.SelectedItem != null ? cb.SelectedItem.Value : null;
 			if (selectedItemValue != null)
@@ -263,6 +332,8 @@ namespace HTLBIWebApp2012.App.Setting
 				lsttbl_DashboardSource datasource = MyBI.Me.Get_DashboardSourceBy(m_DSCode);
 				if (datasource != null)
 				{
+					MySession.DSDefine_CurEditing = datasource.Code;
+
 					txtDataSourceName.Text = datasource.NameEN;
 					if (datasource.WHCode != Lib.NTE(cbDataWarehouse.Value))
 					{
@@ -279,6 +350,17 @@ namespace HTLBIWebApp2012.App.Setting
 						m_Filters.Add(new FilterControlInfo(ctrl) { Type = filter.FilterType });
 					}
 				}
+			}
+			else
+			{
+				m_DSCode = String.Empty;
+			}
+
+			// refress kpi tab
+			if (!IsPostBack && MyPage != null)
+			{
+				MyPage.My_wcKPISetting.DSCode = m_DSCode;
+				//MyPage.My_wcKPISetting.Raise_OnChange(String.Empty, EventArgs.Empty);
 			}
 		}
 
@@ -474,40 +556,11 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
-			ASPxButton _sender = (ASPxButton)sender;
-			List<InqFieldInfoMDX> fields = new List<InqFieldInfoMDX>();
-			ListEditItemCollection items = lbSelectedFields.Items;
-			int numOfItems = items.Count;
-			for (int index = 0; index < numOfItems; index++)
+			var ret = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
 			{
-				ListEditItem item = items[index];
-				InqFieldInfoMDX fld = new InqFieldInfoMDX(item);
-				fields.Add(fld);
-			}
-
-			List<InqSummaryInfoMDX> summaries = new List<InqSummaryInfoMDX>();
-			ListEditItemCollection metricFields = lbSelectedMetricFields.Items;
-			foreach (ListEditItem item in metricFields)
-			{
-				summaries.Add(new InqSummaryInfoMDX(item));
-			}
-			List<InqFilterInfoMDX> filters = new List<InqFilterInfoMDX>();
-			foreach (FilterCtrlBase ctrl in filterContainer.Controls)
-			{
-				var filter = ctrl.Get_FilterInfo();
-				if (filter == null) continue;
-				// Set lại hàm tính toán trên field filter giống với hàm của field đó trong Summaries
-				if (filter.HasHavingKey())
-				{
-					var objSummary = summaries.FirstOrDefault(p => p.Field.KeyField == filter.HavingKey.Field.KeyField);
-					if (objSummary != null)
-						filter.HavingKey.FuncName = objSummary.FuncName;
-				}
-				filters.Add(filter);
-			}
-			var ret = new InqDefineSourceMDX(fields, summaries, filters);
-			ret.PreffixDimTable = "AR";
-			ret.OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny);
+				PreffixDimTable = "AR",
+				OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny)
+			};
 
 			lsttbl_DashboardSource objDs = new lsttbl_DashboardSource()
 			{
@@ -519,12 +572,32 @@ namespace HTLBIWebApp2012.App.Setting
 				SettingCat = GlobalVar.SettingCat_DS 
 			};
 			MyBI.Me.Save_DashboardSource(objDs);
-			MySession.DSDefine_CurEditing = objDs.Code;
+			if (objDs.Code == MySession.DSDefine_CurEditing)
+			{
+				cbDataSource.Text = txtDataSourceName.Text;
+			}
+			else
+			{
+				MySession.DSDefine_CurEditing = objDs.Code;
+				// Reload Data Source
+				m_WHCode = cbDataWarehouse.Value.ToString();
+				var dsItems = MyBI.Me.Get_DashboardSource(m_WHCode, GlobalVar.SettingCat_DS);
+				Helpers.SetDataSource(cbDataSource, dsItems, "Code", "NameEN");
+				cbDataSource.Value = MySession.DSDefine_CurEditing;
+			}
 		}
 
 		protected void dsGridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
 		{
+			var inq = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
+			{
+				PreffixDimTable = "AR",
+				OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny)
+			};
 
+			var ds = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).ExecuteDataSet(inq.ToMDX());
+			dsGridPreviewData.DataSource = ds;
+			dsGridPreviewData.DataBind();
 		}
 
 		protected void dsGridPreviewData_CustomUnboundColumnData(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDataEventArgs e)

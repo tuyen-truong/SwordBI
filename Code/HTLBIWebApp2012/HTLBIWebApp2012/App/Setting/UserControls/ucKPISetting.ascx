@@ -29,7 +29,7 @@
 	</colgroup>
 	<tr>
 		<th style="font-weight:normal;text-align:left;">Display Name</th>
-		<td>
+		<td style="padding-bottom: 3px">
 			<dx:ASPxTextBox ID="txtKPIDisplayName" runat="server" Width="100%">
 			</dx:ASPxTextBox>
 		</td>
@@ -38,12 +38,12 @@
 	</tr>
 	<tr>
 		<th style="font-weight:normal;text-align:left;">KPIs</th>
-		<td>
-			<dx:ASPxComboBox ID="cbKPI" runat="server" Width="100%" AutoPostBack="true"
+		<td valign="top">
+			<dx:ASPxComboBox ID="cbKPI" runat="server" Width="100%" AutoPostBack="true"	ClientInstanceName="cbKPI"
 				onvaluechanged="cbKPI_ValueChanged">
 			</dx:ASPxComboBox>
 		</td>
-		<td>
+		<td style="padding-left:3px; padding-bottom:3px">
 			<dx:ASPxButton ID="btnNew" runat="server" Text="New" Width="60px" 
 				onclick="btnNew_Click">
 			</dx:ASPxButton>

@@ -2361,7 +2361,15 @@ namespace HTLBIWebApp2012
 		private String m_Name = String.Empty;
 		public String Name
 		{
-			get { return m_Name; }
+			get
+			{
+				if (String.IsNullOrWhiteSpace(m_Name))
+				{
+					//m_Name = this.ColName;
+					this.Name = this.ColName;
+				}
+				return m_Name;
+			}
 			set 
 			{
 				m_Name = value;
@@ -2384,7 +2392,14 @@ namespace HTLBIWebApp2012
 		private String m_UniqueName = String.Empty;
 		public String UniqueName
 		{
-			get { return m_UniqueName; }
+			get
+			{
+				if (String.IsNullOrWhiteSpace(m_UniqueName))
+				{
+					m_UniqueName = this.KeyField;
+				}
+				return m_UniqueName;
+			}
 			set { m_UniqueName = value; }
 		}
 		private String m_Sort = String.Empty;
@@ -2410,7 +2425,13 @@ namespace HTLBIWebApp2012
 			m_Sort = Lib.NTE(item.GetValue("Sort"));
 		}
 
-		public string KeyField { get { return string.Format("{0}_{1}", this.TblName, this.ColName); } }
+		public string KeyField
+		{
+			get
+			{
+				return string.Format("[{0}].[{1}]", this.TblName, this.ColName); 
+			}
+		}
 		public bool Visible { get; set; }
 		public string TblName { get; set; }
 		public string ColName { get; set; }
@@ -3560,7 +3581,7 @@ namespace HTLBIWebApp2012
 		/// </summary>
 		public virtual string ToMDX(bool isWrapText)
 		{
-			
+			/*
 			StringBuilder sb = new StringBuilder();
 			sb.Append("SELECT ");
 			try
@@ -3588,7 +3609,7 @@ namespace HTLBIWebApp2012
 				throw ex;
 			}
 			return sb.ToString();
-			
+			*/
 
 			var wrapLine = isWrapText ? Environment.NewLine : "";
 			var wrapTab = isWrapText ? "\t" : "";
@@ -3602,7 +3623,7 @@ namespace HTLBIWebApp2012
 			try
 			{
 				////////////////////////////////////////////// Auto correct other informations...
-				this.AutoValidAllBeforeBuildToMDX();
+				//this.AutoValidAllBeforeBuildToMDX();
 				this.Reset_SummariesID();
 
 				//////////////////////////////////////////////SELECT... (Bắt buộc)

@@ -378,10 +378,10 @@ namespace HTLBIWebApp2012.App.Setting
 							}
 							else if (curDS.SettingCat == GlobalVar.SettingCat_KPI)
 							{
-								this.MyPage.My_wcKPISetting.Raise_OnChange("LAYOUT", new HTLBIEventArgs(layout.DSCode));
+								//this.MyPage.My_wcKPISetting.Raise_OnChange("LAYOUT", new HTLBIEventArgs(layout.DSCode));
 							}
 						}
-						this.MyPage.My_wcInteractionSetting.Raise_OnChange("LAYOUT", null);
+						//this.MyPage.My_wcInteractionSetting.Raise_OnChange("LAYOUT", null);
 					}
 				}
 				else if (cbo.ID == this.cboCtrlType.ID)
