@@ -10,7 +10,7 @@ namespace HTLBIWebApp2012.App.Setting
 {
 	public partial class PortletSetting : PageBase
 	{
-		public ucDatasourceSetting My_wcDSSetting
+		public ucDatasourceSetting DataSourceSetting
 		{
 			get
 			{
@@ -90,19 +90,23 @@ namespace HTLBIWebApp2012.App.Setting
 			{
 				WidgetCode = Get_Param(PageArgs.WidgetCode);
 			}
+            //wcKPISetting1.ValueChanged += new EventHandler(wcKPISetting1_ValueChanged);
+            ucDatasourceSetting1.ValueChanged += new EventHandler(ucDatasourceSetting1_ValueChanged);
 		}
 		protected void wcKPISetting1_ValueChanged(object sender, EventArgs e)
 		{
 			String a = String.Empty;
 			ucKPISetting kpi = (ucKPISetting)sender;
 			
-			kpi.SetSource(My_wcDSSetting.DSCode);
+			//kpi.SetSource(My_wcDSSetting.DSCode);
 			
 		}
-		protected void ucDatasourceSetting1_DataSourceChanged(object sender, EventArgs e)
+        protected void ucDatasourceSetting1_ValueChanged(object sender, EventArgs e)
 		{
 			String a = String.Empty;
-			My_wcKPISetting.DSCode = My_wcDSSetting.DSCode;
+			My_wcKPISetting.DSCode = DataSourceSetting.DSCode;
+            //My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
+            My_wcKPISetting.DisplayName.Text = DateTime.Now.ToLongTimeString();
 		}
 
 		protected override void OnLoadComplete(EventArgs e)
@@ -119,7 +123,7 @@ namespace HTLBIWebApp2012.App.Setting
 					return;
 				}
 				// Data source
-				My_wcDSSetting.DataWarehouse = widget.WHCode;
+				DataSourceSetting.DataWarehouse = widget.WHCode;
 				// KPI Setting
 				//My_wcKPISetting.DSCode = widget.DataSourceCode;
 				//My_wcKPISetting.KPICode = widget.KPICode;

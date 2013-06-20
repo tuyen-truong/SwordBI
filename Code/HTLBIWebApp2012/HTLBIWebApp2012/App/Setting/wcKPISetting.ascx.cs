@@ -643,7 +643,7 @@ namespace HTLBIWebApp2012.App.Setting
                     }
                     // Raise Event OnChange.
                     this.MyPage.My_wcLayoutSetting.Raise_OnChange("KPI", null);
-                    this.MyPage.My_wcDSSetting.Raise_OnChange("KPI", new HTLBIEventArgs(item.ParentCode));
+                    this.MyPage.DataSourceSetting.Raise_OnChange("KPI", new HTLBIEventArgs(item.ParentCode));
                 }
                 else if (cbo.ID == this.cboCtrlType.ID)
                 {

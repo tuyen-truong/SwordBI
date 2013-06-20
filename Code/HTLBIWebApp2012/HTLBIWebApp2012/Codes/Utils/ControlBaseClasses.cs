@@ -793,10 +793,7 @@ namespace HTLBIWebApp2012
 			InitData();
 		}
 
-		public virtual void InitData()
-		{
-
-		}
+		public virtual void InitData() { }
 	}
 
 	public abstract class PartPlugCtrlBase : System.Web.UI.UserControl

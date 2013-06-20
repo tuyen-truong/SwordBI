@@ -138,7 +138,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		public override void InitData()
 		{
-			// Data Warehouse
+            // Data Warehouse
 			if (!IsPostBack)
 			{
 				Helpers.SetDataSource(cbDataWarehouse, MyBI.Me.GetDW(), "Value", "Text");
@@ -360,9 +360,12 @@ namespace HTLBIWebApp2012.App.Setting
 			{
 				m_DSCode = String.Empty;
 			}
-
-			MyPage.My_wcKPISetting.DSCode = m_DSCode;
-			MyPage.My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
+            MyPage.My_wcKPISetting.DSCode = m_DSCode;
+            MyPage.My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
+            if (IsPostBack)
+            {
+                ((UpdatePanel)MyPage.My_wcKPISetting.FindControl("KpiUpdatePanel")).Update();
+            }
 		}
 
 		protected void lbSelectedFields_SelectedIndexChanged(object sender, EventArgs e)
@@ -557,10 +560,11 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
-			var ret = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
+            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["OLAPConnection"].ConnectionString;
+            var ret = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
 			{
 				PreffixDimTable = "AR",
-				OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny)
+                OlapCubeName = Helpers.GetCubeName(connectionString)
 			};
 
 			lsttbl_DashboardSource objDs = new lsttbl_DashboardSource()

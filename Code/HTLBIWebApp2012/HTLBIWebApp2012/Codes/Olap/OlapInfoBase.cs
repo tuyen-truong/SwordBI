@@ -13,7 +13,14 @@ namespace HTLBIWebApp2012.Olap
 		private String m_Caption = String.Empty;
 		public virtual String Caption
 		{
-			get { return m_Caption; }
+			get
+            {
+                if (String.IsNullOrWhiteSpace(m_Caption))
+                {
+                    m_Caption = m_Name;
+                }
+                return m_Caption;
+            }
 			set { m_Caption = value; }
 		}
 

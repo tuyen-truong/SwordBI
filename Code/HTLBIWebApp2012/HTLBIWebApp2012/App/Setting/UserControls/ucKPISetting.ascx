@@ -13,6 +13,8 @@
 	Namespace="DevExpress.Web.ASPxClasses" TagPrefix="dx" %>
 <%@ Register assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxPopupControl" tagprefix="dx" %>
 <%@ Register assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxPanel" tagprefix="dx" %>
+<asp:UpdatePanel ID="KpiUpdatePanel" runat="server" UpdateMode="Conditional">
+<ContentTemplate>
 <table cellpadding="0" cellspacing="0">
 	<tr>
 		<th style="font-size:90%;">KPI DEFINATION</th>
@@ -175,7 +177,8 @@
 		</dx:ASPxButton>
 	</td>
 	<td style="padding-left: 3px; padding-right: 3px">
-		<dx:ASPxButton ID="btnSave" runat="server" Text="Save" Width="80px">
+		<dx:ASPxButton ID="btnSave" runat="server" Text="Save" Width="80px" 
+            onclick="btnSave_Click">
 		</dx:ASPxButton>
 	</td>
 	<td>
@@ -265,4 +268,6 @@
 		</dx:PopupControlContentControl>
 	</ContentCollection>
 </dx:ASPxPopupControl>
+</ContentTemplate>
+</asp:UpdatePanel>
 
