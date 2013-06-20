@@ -26,6 +26,7 @@ namespace HTLBIWebApp2012.App.Setting
 		public event EventHandler NewButtonClicked;
 		public event EventHandler FieldAddButtonClicked;
 		public event EventHandler FieldRemoveButtonClicked;
+		public event EventHandler DataSourceChanged;
 
 		public String Name
 		{
@@ -42,7 +43,11 @@ namespace HTLBIWebApp2012.App.Setting
 		private String m_DSCode = String.Empty;
 		public String DSCode
 		{
-			get { return m_DSCode; }
+			get
+			{
+				m_DSCode = cbDataSource.Value.ToString();
+				return m_DSCode;
+			}
 			set { m_DSCode = value; }
 		}
 		public object DataWarehouse
@@ -154,7 +159,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected override object SaveControlState()
 		{
-			object[] controlState = new object[4];
+			object[] controlState = new object[5];
 			controlState[0] = base.SaveControlState();
 			controlState[1] = new Olap.DimensionFieldInfoCollection(lbSelectedFields.Items);
 			controlState[2] = new Olap.MeasureFieldInfoCollection(lbSelectedMetricFields.Items);
@@ -311,11 +316,6 @@ namespace HTLBIWebApp2012.App.Setting
 				Helpers.SetDataSource(cbDataSource, datasource, "Code", "NameEN");
 				cbDataSource.SelectedIndex = 0;
 				cbDataSource_ValueChanged(cbDataSource, EventArgs.Empty);
-				if (MyPage != null)
-				{
-					MyPage.My_wcKPISetting.Raise_OnChange("WH", EventArgs.Empty);
-					MyPage.My_wcLayoutSetting.Raise_OnChange("WH", EventArgs.Empty);
-				}
 			}
 		}
 
@@ -355,12 +355,9 @@ namespace HTLBIWebApp2012.App.Setting
 			{
 				m_DSCode = String.Empty;
 			}
-
-			// refress kpi tab
-			if (!IsPostBack && MyPage != null)
+			if (DataSourceChanged != null)
 			{
-				MyPage.My_wcKPISetting.DSCode = m_DSCode;
-				//MyPage.My_wcKPISetting.Raise_OnChange(String.Empty, EventArgs.Empty);
+				DataSourceChanged(this, EventArgs.Empty);
 			}
 		}
 

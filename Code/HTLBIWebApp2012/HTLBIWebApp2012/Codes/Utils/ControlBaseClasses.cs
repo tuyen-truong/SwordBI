@@ -771,6 +771,16 @@ namespace HTLBIWebApp2012
 	#region Control part base for defination: Filter, KPI, Property Controls
 	public abstract class UserControlBase : System.Web.UI.UserControl
 	{
+		public event EventHandler ValueChanged;
+		protected virtual void OnValueChanged(Object sender, EventArgs e)
+		{
+			EventHandler handler = ValueChanged;
+			if (handler != null)
+			{
+				handler(this, e);
+			}
+		}
+
 		protected override void OnInit(EventArgs e)
 		{
 			base.OnInit(e);

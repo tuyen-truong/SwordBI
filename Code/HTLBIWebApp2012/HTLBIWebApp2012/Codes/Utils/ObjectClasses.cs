@@ -2347,6 +2347,7 @@ namespace HTLBIWebApp2012
 			this.TblName = "[MASTER].[sys].[tables]";
 		}
 	}
+
 	/// <summary>
 	/// Thông tin của 1 field dữ liệu
 	/// </summary>

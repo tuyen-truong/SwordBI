@@ -13,6 +13,21 @@ namespace HTLBIWebApp2012.App.Setting
 {
 	public partial class ucKPISetting : UserControlBase
 	{
+		public event EventHandler ValueChanged;
+		protected virtual void OnValueChanged(EventArgs e)
+		{
+			cbKPI.Items.Clear();
+			txtKPIDisplayName.Text = "tui dang test";
+
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, e);
+			}
+		}
+		
+		public ASPxTextBox DisplayName { get { return txtKPIDisplayName; } }
+		public ASPxComboBox CtlKPI { get { return cbKPI; } }
+
 		public PortletSetting MyPage
 		{
 			get
@@ -27,9 +42,7 @@ namespace HTLBIWebApp2012.App.Setting
 			set
 			{
 				m_DSCode = value;
-				cbKPI.Items.Clear();
-				var kpis = MyBI.Me.Get_DashboardKPI_ByDS(m_DSCode).ToList();
-				Helpers.SetDataSource(cbKPI, kpis, "Code", "NameVI");
+				OnValueChanged(EventArgs.Empty);
 			}
 		}
 		private String m_KPICode = String.Empty;
@@ -142,22 +155,26 @@ namespace HTLBIWebApp2012.App.Setting
 				ctrl.Set_Info(part);
 				m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 			}
-			 /** 
+			
 			foreach (var part in kpi.Measures)
 			{
-				var myCtrl = this.Add_PartControl("measure", false);
-				myCtrl.Set_Info(part);
+				KPIPartCtrlBase ctrl = AddKPIPartControl("measure", String.Empty);
+				ctrl.Set_Info(part);
+				m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 			}
+			
 			foreach (var part in kpi.Contexts)
 			{
 				var type = "";
 				if (part.HasCalcFields())
-					type = "context-Calc";
+					type = "context-calc";
 				else
-					type = "context-Normal";
-				var myCtrl = this.Add_PartControl(type, false);
-				myCtrl.Set_Info(part);
+					type = "context-normal";
+				KPIPartCtrlBase ctrl = AddKPIPartControl("measure", String.Empty);
+				ctrl.Set_Info(part);
+				m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 			}
+			/*
 			foreach (var part in kpi.Filters)
 			{
 				var myCtrl = this.Add_FilterControl(part.GetTinyType(), false);
@@ -346,17 +363,14 @@ namespace HTLBIWebApp2012.App.Setting
 
 		internal void Raise_OnChange(string p, EventArgs eventArgs)
 		{
-			//cbKPI.Items.Clear();
-			//cbKPI.Value = null;
-			//cbKPI.Text = String.Empty;
+			
+		}
 
-			//List<lsttbl_DashboardSource> KpiCollection = MyBI.Me.Get_DashboardKPI_ByDS(m_DSCode).ToList();
-			//Helpers.SetDataSource(cbKPI, KpiCollection, "Code", "NameVI");
-			//if (cbKPI.Items.Count > 0)
-			//{
-			//    cbKPI.SelectedIndex = 0;
-			//    cbKPI_ValueChanged(cbKPI, EventArgs.Empty);
-			//}
+		public void SetSource(String dscode)
+		{
+			var kpis = MyBI.Me.Get_DashboardKPI_ByDS(dscode).ToList();
+			Helpers.SetDataSource(cbKPI, kpis, "Code", "NameVI");
+			cbKPI.SelectedIndex = 0;
 		}
 	}
 }
