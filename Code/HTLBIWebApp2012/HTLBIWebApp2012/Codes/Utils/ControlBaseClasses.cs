@@ -772,7 +772,7 @@ namespace HTLBIWebApp2012
 	public abstract class UserControlBase : System.Web.UI.UserControl
 	{
 		public event EventHandler ValueChanged;
-		protected virtual void OnValueChanged(Object sender, EventArgs e)
+		public void RaiseEvent(Object sender, EventArgs e)
 		{
 			EventHandler handler = ValueChanged;
 			if (handler != null)
@@ -785,6 +785,17 @@ namespace HTLBIWebApp2012
 		{
 			base.OnInit(e);
 			Page.RegisterRequiresControlState(this);
+		}
+
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+			InitData();
+		}
+
+		public virtual void InitData()
+		{
+
 		}
 	}
 

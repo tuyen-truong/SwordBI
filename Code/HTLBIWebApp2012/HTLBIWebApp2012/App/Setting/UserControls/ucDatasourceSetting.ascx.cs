@@ -26,7 +26,6 @@ namespace HTLBIWebApp2012.App.Setting
 		public event EventHandler NewButtonClicked;
 		public event EventHandler FieldAddButtonClicked;
 		public event EventHandler FieldRemoveButtonClicked;
-		public event EventHandler DataSourceChanged;
 
 		public String Name
 		{
@@ -137,7 +136,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected FilterControlInfoCollection m_Filters = new FilterControlInfoCollection();
 
-		protected void Page_Load(object sender, EventArgs e)
+		public override void InitData()
 		{
 			// Data Warehouse
 			if (!IsPostBack)
@@ -153,8 +152,14 @@ namespace HTLBIWebApp2012.App.Setting
 			Helpers.SetDataSource(lbMetricFields, MeasureFieldCollection, "UniqueName", "Caption");
 			// Events initialize
 			btnNewDataSource.Click += new EventHandler(btnNewDataSource_Click);
-			btnFieldAdd.Click+= new EventHandler(FieldAdd_Click);
+			btnFieldAdd.Click += new EventHandler(FieldAdd_Click);
 			btnFieldRemove.Click += new EventHandler(FieldRemove_Click);
+			ValueChanged += new EventHandler(ucDatasourceSetting_ValueChanged);
+		}
+
+		protected void ucDatasourceSetting_ValueChanged(object sender, EventArgs e)
+		{
+			MyPage.My_wcKPISetting.RaiseEvent(String.Empty, EventArgs.Empty);
 		}
 
 		protected override object SaveControlState()
@@ -355,10 +360,9 @@ namespace HTLBIWebApp2012.App.Setting
 			{
 				m_DSCode = String.Empty;
 			}
-			if (DataSourceChanged != null)
-			{
-				DataSourceChanged(this, EventArgs.Empty);
-			}
+
+			MyPage.My_wcKPISetting.DSCode = m_DSCode;
+			MyPage.My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
 		}
 
 		protected void lbSelectedFields_SelectedIndexChanged(object sender, EventArgs e)

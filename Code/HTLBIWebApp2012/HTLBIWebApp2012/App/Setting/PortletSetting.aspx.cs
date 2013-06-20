@@ -65,7 +65,7 @@ namespace HTLBIWebApp2012.App.Setting
 		protected override object SaveControlState()
 		{
 			object[] controlState = new object[2];
-			controlState[0] = null; base.SaveControlState();
+			controlState[0] = base.SaveControlState();
 			controlState[1] = WidgetCode;
 			return controlState;
 		}
@@ -86,8 +86,6 @@ namespace HTLBIWebApp2012.App.Setting
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			Page.Title = "Portlet Setting";
-			wcKPISetting1.ValueChanged += new EventHandler(wcKPISetting1_ValueChanged);
-			ucDatasourceSetting1.DataSourceChanged +=new EventHandler(ucDatasourceSetting1_DataSourceChanged);
 			if (!IsPostBack)
 			{
 				WidgetCode = Get_Param(PageArgs.WidgetCode);

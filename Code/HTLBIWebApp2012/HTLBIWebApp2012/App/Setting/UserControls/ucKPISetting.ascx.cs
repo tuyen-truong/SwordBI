@@ -13,18 +13,6 @@ namespace HTLBIWebApp2012.App.Setting
 {
 	public partial class ucKPISetting : UserControlBase
 	{
-		public event EventHandler ValueChanged;
-		protected virtual void OnValueChanged(EventArgs e)
-		{
-			cbKPI.Items.Clear();
-			txtKPIDisplayName.Text = "tui dang test";
-
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, e);
-			}
-		}
-		
 		public ASPxTextBox DisplayName { get { return txtKPIDisplayName; } }
 		public ASPxComboBox CtlKPI { get { return cbKPI; } }
 
@@ -42,7 +30,6 @@ namespace HTLBIWebApp2012.App.Setting
 			set
 			{
 				m_DSCode = value;
-				OnValueChanged(EventArgs.Empty);
 			}
 		}
 		private String m_KPICode = String.Empty;
@@ -76,7 +63,7 @@ namespace HTLBIWebApp2012.App.Setting
 		}
 		protected PartControlInfoCollection m_PartControls = new PartControlInfoCollection();
 
-		protected void Page_Load(object sender, EventArgs e)
+		public override void InitData()
 		{
 			if (!IsPostBack)
 			{
@@ -104,6 +91,15 @@ namespace HTLBIWebApp2012.App.Setting
 					Helpers.SetDataSource(cbKPI, kpis, "Code", "NameVI");
 				}
 			}
+			this.ValueChanged += new EventHandler(ucKPISetting_ValueChanged);
+		}
+
+		protected void ucKPISetting_ValueChanged(object senderm, EventArgs e)
+		{
+			var kpis = MyBI.Me.Get_DashboardKPI_ByDS(m_DSCode).ToList();
+			Helpers.SetDataSource(cbKPI, kpis, "Code", "NameVI");
+			cbKPI.SelectedIndex = 0;
+			cbKPI_ValueChanged(cbKPI, EventArgs.Empty);
 		}
 
 		protected override object SaveControlState()
@@ -226,6 +222,39 @@ namespace HTLBIWebApp2012.App.Setting
 			catch { }
 		}
 
+		protected void btnAddMeasure_Click(object sender, EventArgs e)
+		{
+			KPIPartCtrlBase ctrl = AddKPIPartControl("measure", string.Empty);
+			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
+		}
+
+		protected void popMenAddFilter_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
+		{
+			KPIPartCtrlBase ctrl = AddKPIPartControl(String.Format("filter-{0}", e.Item.Name).ToLower(), string.Empty);
+			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
+		}
+
+		protected void popMenAddCalcField_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
+		{
+			KPIPartCtrlBase ctrl = AddKPIPartControl(String.Format("context-{0}", e.Item.Name).ToLower(), string.Empty);
+			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
+		}
+
+		protected void gridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
+		{
+
+		}
+
+		protected void gridPreviewData_PageIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		protected void gridPreviewData_CustomUnboundColumnData(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDataEventArgs e)
+		{
+
+		}
+
 		#region Utility functions
 		[Serializable()]
 		public class PartControlInfo
@@ -325,39 +354,6 @@ namespace HTLBIWebApp2012.App.Setting
 			return ctrl;
 		}
 		#endregion
-
-		protected void btnAddMeasure_Click(object sender, EventArgs e)
-		{
-			KPIPartCtrlBase ctrl = AddKPIPartControl("measure", string.Empty);
-			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
-		}
-
-		protected void popMenAddFilter_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
-		{
-			KPIPartCtrlBase ctrl = AddKPIPartControl(String.Format("filter-{0}", e.Item.Name).ToLower(), string.Empty);
-			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
-		}
-
-		protected void popMenAddCalcField_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
-		{
-			KPIPartCtrlBase ctrl = AddKPIPartControl(String.Format("context-{0}", e.Item.Name).ToLower(), string.Empty);
-			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
-		}
-
-		protected void gridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
-		{
-
-		}
-
-		protected void gridPreviewData_PageIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		protected void gridPreviewData_CustomUnboundColumnData(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDataEventArgs e)
-		{
-
-		}
 
 		public string DSCode_Target { get; set; }
 
