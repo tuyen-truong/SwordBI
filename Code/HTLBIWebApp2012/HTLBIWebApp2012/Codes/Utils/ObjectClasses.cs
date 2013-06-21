@@ -2366,8 +2366,7 @@ namespace HTLBIWebApp2012
 			{
 				if (String.IsNullOrWhiteSpace(m_Name))
 				{
-					//m_Name = this.ColName;
-					this.Name = this.ColName;
+					m_Name = this.ColName;
 				}
 				return m_Name;
 			}
@@ -2382,6 +2381,7 @@ namespace HTLBIWebApp2012
 				{
 					m_DisplayName = m_Name;
 				}
+				ColName = m_Name;
 			}
 		}
 		private String m_DisplayName = String.Empty;
@@ -2401,7 +2401,12 @@ namespace HTLBIWebApp2012
 				}
 				return m_UniqueName;
 			}
-			set { m_UniqueName = value; }
+			set
+			{
+				m_UniqueName = value;
+				String[] parts = m_UniqueName.Split("].[", StringSplitOptions.RemoveEmptyEntries);
+				TblName = parts[0].TrimStart(new char[] { '[' }).Replace("AR", "");
+			}
 		}
 		private String m_Sort = String.Empty;
 		public String Sort
@@ -3632,13 +3637,13 @@ namespace HTLBIWebApp2012
 				// Lấy ra những field từ tập Filters mà nó tồn tại trong tập Fields SELECT để đưa lên cho SELECT.
 				var lstFilterInnerSELECT = this.Filters
 					.Where(p => p.HasWhereKey() &&
-								this.Fields.FirstOrDefault(q => q.ColName == p.WhereKey.ColName
+								this.Fields.FirstOrDefault(q => q.UniqueName == p.WhereKey.UniqueName
 														  ) != null
 						  ).ToList();
 				// Lấy ra những field từ tập Filters mà nó không tồn tại trong tập Fields SELECT để đưa xuống WHERE.
 				var lstFilterOuterSELECT = this.Filters
 					.Where(p => p.HasWhereKey() &&
-								this.Fields.FirstOrDefault(q => q.ColName == p.WhereKey.ColName
+								this.Fields.FirstOrDefault(q => q.UniqueName == p.WhereKey.UniqueName
 														  ) == null
 						  ).ToList();
 
@@ -3658,7 +3663,7 @@ namespace HTLBIWebApp2012
 				{
 					withMemberStr = withMemberStr + lineAndTab +
 						string.Format("SET {0} AS {1}", filterParse.Prop1, filterParse.Prop4);
-					var f = this.Fields.First(p => p.ColName == filterParse.Prop3);
+					var f = this.Fields.First(p => p.Name == filterParse.Prop3);
 					lstCROSSJOIN.Add(new COMCodeNameObj(f.Level.ToString(), f.ToMDX(filterParse.Prop1)));
 				}
 				// Lấy ra những field từ tập Fields SELECT mà nó không tồn tại trong tập lstFilterInnerSELECT
@@ -3766,7 +3771,14 @@ namespace HTLBIWebApp2012
 				}
 				sqlStr = withMemberStr + wrapLine + selectStr + wrapLine + fromStr + wrapLine + whereStr;
 			}
-			catch { }
+#if DEBUG
+			catch (Exception ex)
+			{ throw ex; }
+#else
+			catch
+			{ }
+#endif
+
 			return sqlStr;
 		}
 		/// <summary>

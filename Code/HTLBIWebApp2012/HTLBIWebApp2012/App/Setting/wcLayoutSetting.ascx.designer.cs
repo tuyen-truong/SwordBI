@@ -13,6 +13,15 @@ namespace HTLBIWebApp2012.App.Setting {
     public partial class wcLayoutSetting {
         
         /// <summary>
+        /// layoutUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel layoutUpdatePanel;
+        
+        /// <summary>
         /// cbp_Header control.
         /// </summary>
         /// <remarks>

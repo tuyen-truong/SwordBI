@@ -231,7 +231,7 @@ th.uc-title
 	{
 		dsGridPreviewData.PerformCallback();
 		dsTabPreviewMDX.PerformCallback();
-		frmDSPreview.Show();
+		//frmDSPreview.Show();
 	}
 }" />
 			</dx:ASPxButton>
@@ -306,7 +306,7 @@ th.uc-title
 	</ContentStyle>
 	<ContentCollection>
 		<dx:PopupControlContentControl ID="dsPreviewContent" runat="server">
-			<dx:ASPxPageControl ID="dsPreviewTabs" runat="server" ActiveTabIndex="0" 
+			<dx:ASPxPageControl ID="dsPreviewTabs" runat="server" ActiveTabIndex="1" 
 				Width="890px" Height="100%">
 				<ContentStyle>
 					<Paddings Padding="0" />
@@ -351,7 +351,7 @@ th.uc-title
 						</TabStyle>
 						<ContentCollection>
 							<dx:ContentControl ID="ContentControl5" runat="server">
-								<dx:ASPxCallbackPanel ID="dsCallbackPanel" runat="server">
+								<dx:ASPxCallbackPanel ID="dsCallbackPanel" runat="server" ClientInstanceName="dsCallbackPanel" OnCallback="dsCallbackPanel_Callback">
 									<PanelCollection>
 										<dx:PanelContent ID="dsPanelContent" runat="server">
 											<dx:ASPxMemo ID="txtDSPreviewMDX" runat="server" Height="500px" Width="100%" ReadOnly="true">

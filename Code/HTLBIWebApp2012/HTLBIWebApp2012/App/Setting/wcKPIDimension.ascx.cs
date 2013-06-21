@@ -26,7 +26,7 @@ namespace HTLBIWebApp2012.App.Setting
 				this.Reset_Info();
 				var myDs = ds as lsttbl_DashboardSource;
 				var obj = myDs.JsonObjMDX;
-				Helpers.SetDataSource(this.cboField, obj.Fields, "ColName", "ColAliasVI", this.cboField.Value);
+				Helpers.SetDataSource(this.cboField, obj.Fields, "UniqueName", "DisplayName", this.cboField.Value);
 			}
 			catch { }
 		}

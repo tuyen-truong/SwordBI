@@ -29,7 +29,7 @@ namespace HTLBIWebApp2012.App.Setting
 		{
 			get
             {
-                if (MyPage != null)
+                if (MyPage != null && !IsLoadControlState)
                 {
                     m_DSCode = MyPage.DataSourceSetting.DSCode;
                 }
@@ -91,6 +91,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		public override void InitData()
 		{
+			IsLoadControlState = false;
 			if (!IsPostBack)
 			{
 				String imgPathF = "~/Images/Control/{0}.png";
@@ -139,19 +140,24 @@ namespace HTLBIWebApp2012.App.Setting
 			return controlState;
 		}
 
+		protected bool IsLoadControlState = false;
 		protected override void LoadControlState(object savedState)
 		{
+			IsLoadControlState = true;
+
 			object[] controlState = (object[])savedState;
 			base.LoadControlState(controlState[0]);
+
+			DSCode = (String)controlState[2];
+			// WHCode
+			WHCode = (String)controlState[3];
+
 			// PartControl
             m_PartControls = (PartControlInfoCollection)controlState[1];
 			foreach (PartControlInfo ctrlInfo in m_PartControls.List)
 			{
 				AddKPIPartControl(ctrlInfo.ControlType, ctrlInfo.ID);
 			}
-            DSCode = (String)controlState[2];
-            // WHCode
-            WHCode = (String)controlState[3];
 		}
 
 		protected void btnAddDimension_Click(object sender, EventArgs e)
@@ -212,10 +218,11 @@ namespace HTLBIWebApp2012.App.Setting
 				var myCtrl = this.Add_FilterControl(part.GetTinyType(), false);
 				myCtrl.Set_Info(part);
 			}
+			*/
 			// Raise Event OnChange.
 			this.MyPage.My_wcLayoutSetting.Raise_OnChange("KPI", null);
-			this.MyPage.My_wcDSSetting.Raise_OnChange("KPI", new HTLBIEventArgs(item.ParentCode));
-			*/
+			((UpdatePanel)this.MyPage.My_wcLayoutSetting.FindControl("layoutUpdatePanel")).Update();
+			//this.MyPage.My_wcDSSetting.Raise_OnChange("KPI", new HTLBIEventArgs(item.ParentCode));
 		}
 
 		protected void cbCtrlType_ValueChanged(object sender, EventArgs e)
@@ -265,14 +272,23 @@ namespace HTLBIWebApp2012.App.Setting
 			try
 			{
 				var ctrlID = (sender.GetVal("Parent") as Control).ID;
-				tabPageDimensionsContainer.Controls.RemoveAll(c => c.ID == ctrlID);
+				if (sender is wcKPIDimension)
+				{
+					tabPageDimensionsContainer.Controls.RemoveAll(c => c.ID == ctrlID);
+				}
+				else if (sender is wcKPIMeasure)
+				{
+					measureContainer.Controls.RemoveAll(c => c.ID == ctrlID);
+				}
+				else if (sender is wcKPIContextMetric)
+				{
+					kpiContextMetricContainer.Controls.RemoveAll(c => c.ID == ctrlID);
+				}
+				else
+				{
+					kpiFilterContainer.Controls.RemoveAll(c => c.ID == ctrlID);
+				}
 				m_PartControls.Remove(ctrlID);
-				/*
-				this.CtrlKPIPartIDs.RemoveAll(p => p.Split(',', StringSplitOptions.RemoveEmptyEntries).First() == ctrlID);
-				this.ctrl_Dimensions.Controls.RemoveAll(p => p.ID == ctrlID);
-				this.ctrl_Measures.Controls.RemoveAll(p => p.ID == ctrlID);
-				this.ctrl_ContextMetric.Controls.RemoveAll(p => p.ID == ctrlID);
-				*/
 			}
 			catch { }
 		}
@@ -405,6 +421,8 @@ namespace HTLBIWebApp2012.App.Setting
 			}
 			ctrl.ID = id;
 			ctrl.OnRemove += new EventHandler(KPIPartControl_OnRemove);
+			lsttbl_DashboardSource ds = MyBI.Me.Get_DashboardSourceBy(DSCode);
+			ctrl.Set_Source(ds);
 			container.Controls.Add(ctrl);
 			return ctrl;
 		}

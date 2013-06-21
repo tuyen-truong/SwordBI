@@ -74,7 +74,8 @@
         );
     }
 </script>
-
+<asp:UpdatePanel ID="layoutUpdatePanel" runat="server" UpdateMode="Conditional">
+<ContentTemplate>
 <!--General-->
 <dx:ASPxCallbackPanel ID="cbp_Header" ClientInstanceName="Layout_cbp_Header" 
     runat="server" Width="100%" oncallback="cbp_Callback">
@@ -228,3 +229,5 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+</ContentTemplate>
+</asp:UpdatePanel>

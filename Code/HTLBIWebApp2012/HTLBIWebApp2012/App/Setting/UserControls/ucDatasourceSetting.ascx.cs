@@ -594,15 +594,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void dsGridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
 		{
-			var inq = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
-			{
-				PreffixDimTable = "AR",
-				OlapCubeName = Helpers.GetCubeName(GlobalVar.DbOLAP_ConnectionStr_Tiny)
-			};
-
-			var ds = (new MdxExecuter(GlobalVar.DbOLAP_ConnectionStr_Tiny)).ExecuteDataSet(inq.ToMDX());
-			dsGridPreviewData.DataSource = ds;
-			dsGridPreviewData.DataBind();
+			Callback(sender);
 		}
 
 		protected void dsGridPreviewData_CustomUnboundColumnData(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDataEventArgs e)
@@ -613,6 +605,31 @@ namespace HTLBIWebApp2012.App.Setting
 		protected void dsGridPreviewData_PageIndexChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		protected void dsCallbackPanel_Callback(object sender, DevExpress.Web.ASPxClasses.CallbackEventArgsBase e)
+		{
+			Callback(sender);
+		}
+
+		protected void Callback(object sender)
+		{
+			String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["OLAPConnection"].ConnectionString;
+			InqDefineSourceMDX inq = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
+			{
+				PreffixDimTable = "AR",
+				OlapCubeName = Helpers.GetCubeName(connectionString)
+			};
+			if (sender is DevExpress.Web.ASPxGridView.ASPxGridView)
+			{
+				var ds = (new MdxExecuter(connectionString)).ExecuteDataSet(inq.ToMDX());
+				dsGridPreviewData.DataSource = ds;
+				dsGridPreviewData.DataBind();
+			}
+			else
+			{
+				txtDSPreviewMDX.Text = inq.ToMDX(true);
+			}
 		}
 
 	}
