@@ -81,7 +81,7 @@
     runat="server" Width="100%" oncallback="cbp_Callback">
     <PanelCollection>
         <dx:PanelContent ID="PanelContent_Header" runat="server" SupportsDisabledAttribute="True">                
-            <asp:UpdatePanel ID="upp_Header" runat="server">
+            <asp:UpdatePanel ID="upp_Header" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <table>
                         <tr>

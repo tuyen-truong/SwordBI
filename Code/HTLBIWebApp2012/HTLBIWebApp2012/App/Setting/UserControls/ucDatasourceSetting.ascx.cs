@@ -362,10 +362,6 @@ namespace HTLBIWebApp2012.App.Setting
 			}
             MyPage.My_wcKPISetting.DSCode = m_DSCode;
             MyPage.My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
-            if (IsPostBack)
-            {
-                ((UpdatePanel)MyPage.My_wcKPISetting.FindControl("KpiUpdatePanel")).Update();
-            }
 		}
 
 		protected void lbSelectedFields_SelectedIndexChanged(object sender, EventArgs e)

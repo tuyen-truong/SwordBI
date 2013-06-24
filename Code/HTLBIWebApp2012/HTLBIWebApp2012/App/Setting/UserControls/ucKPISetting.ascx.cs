@@ -128,6 +128,7 @@ namespace HTLBIWebApp2012.App.Setting
 			Helpers.SetDataSource(cbKPI, kpis, "Code", "NameVI");
 			cbKPI.SelectedIndex = 0;
 			cbKPI_ValueChanged(cbKPI, EventArgs.Empty);
+			KpiUpdatePanel.Update();
 		}
 
 		protected override object SaveControlState()
@@ -221,7 +222,7 @@ namespace HTLBIWebApp2012.App.Setting
 			*/
 			// Raise Event OnChange.
 			this.MyPage.My_wcLayoutSetting.Raise_OnChange("KPI", null);
-			((UpdatePanel)this.MyPage.My_wcLayoutSetting.FindControl("layoutUpdatePanel")).Update();
+			//((UpdatePanel)this.MyPage.My_wcLayoutSetting.FindControl("layoutUpdatePanel")).Update();
 			//this.MyPage.My_wcDSSetting.Raise_OnChange("KPI", new HTLBIEventArgs(item.ParentCode));
 		}
 
@@ -453,6 +454,13 @@ namespace HTLBIWebApp2012.App.Setting
                 MaxValue = double.Parse(this.txtMaxValue.Text),
                 MinValue = double.Parse(this.txtMinValue.Text)
             };
+			// Dimemsions
+			foreach (Control ctrl in tabPageDimensionsContainer.Controls)
+			{
+
+			}
+			kpiDefineInfo.Dimensions = null;
+
             return kpiDefineInfo;
         }
 

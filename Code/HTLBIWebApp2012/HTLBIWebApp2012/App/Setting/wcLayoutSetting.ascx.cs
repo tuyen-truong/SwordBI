@@ -314,8 +314,13 @@ namespace HTLBIWebApp2012.App.Setting
 				var layouts = MyBI.Me.Get_Widget(whCode).ToList();
 				Helpers.SetDataSource(this.cboLayout, layouts, "Code", "Name");
 			}
-			else if ((cat == "DS" || cat == "KPI") && string.IsNullOrEmpty(this.LayoutCode) && !string.IsNullOrEmpty(dsCode))
+			else if ((cat == "DS" || cat == "KPI"))// && string.IsNullOrEmpty(this.LayoutCode) && !string.IsNullOrEmpty(dsCode))
 			{
+				// Load Available Layout By Warehouse.
+				var layouts = MyBI.Me.Get_Widget_ByDS(this.DSCode_OtherPriority).ToList();
+				Helpers.SetDataSource(cboLayout, layouts, "Code", "Name");
+				cboLayout.SelectedIndex = 0;
+				cbo_ValueChanged(cboLayout, EventArgs.Empty);
 				// Add datasource.
 				var selObj = this.GetDatasource();
 				if (selObj == null) return;
@@ -330,6 +335,8 @@ namespace HTLBIWebApp2012.App.Setting
 					this.cbo_ValueChanged(this.cboCtrl, null);
 				}
 			}
+			upp_Header.Update();
+			layoutUpdatePanel.Update();
 		}
 		protected void cbo_ValueChanged(object sender, EventArgs e)
 		{
