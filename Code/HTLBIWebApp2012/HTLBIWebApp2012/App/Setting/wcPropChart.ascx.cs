@@ -109,7 +109,7 @@ namespace HTLBIWebApp2012.App.Setting
                 else if (myDs.SettingCat == GlobalVar.SettingCat_KPI)
                 {
                     var obj = myDs.JsonObjKPI;
-                    var dsX = obj.Dimensions.Select(p => new { Code = p.FieldName, Name = p.DisplayName }).ToList();
+                    var dsX = obj.Dimensions.Select(p => new { Code = p.UniqueName, Name = p.DisplayName }).ToList();
                     dsX.Add(new { Code = "", Name = "" });
                     var dsY = obj.Get_SummaryFields();
                     Helpers.SetDataSource(this.cboAxisXField1, dsX, "Code", "Name", this.cboAxisXField1.Value);

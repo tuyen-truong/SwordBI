@@ -222,8 +222,6 @@ namespace HTLBIWebApp2012.App.Setting
 			*/
 			// Raise Event OnChange.
 			this.MyPage.My_wcLayoutSetting.Raise_OnChange("KPI", null);
-			//((UpdatePanel)this.MyPage.My_wcLayoutSetting.FindControl("layoutUpdatePanel")).Update();
-			//this.MyPage.My_wcDSSetting.Raise_OnChange("KPI", new HTLBIEventArgs(item.ParentCode));
 		}
 
 		protected void cbCtrlType_ValueChanged(object sender, EventArgs e)
@@ -457,9 +455,35 @@ namespace HTLBIWebApp2012.App.Setting
 			// Dimemsions
 			foreach (Control ctrl in tabPageDimensionsContainer.Controls)
 			{
-
+				if (ctrl is KPIPartCtrlBase)
+				{
+					kpiDefineInfo.AddDimension((ctrl as KPIPartCtrlBase).Get_KPIPartInfo());
+				}
 			}
-			kpiDefineInfo.Dimensions = null;
+			// Measures
+			foreach (Control ctrl in measureContainer.Controls)
+			{
+				if (ctrl is KPIPartCtrlBase)
+				{
+					kpiDefineInfo.AddMeasure((ctrl as KPIPartCtrlBase).Get_KPIPartInfo());
+				}
+			}
+			// Lấy thông tin ContextMetric.
+			foreach (Control ctrl in kpiContextMetricContainer.Controls)
+			{
+				if (ctrl is KPIPartCtrlBase)
+				{
+					kpiDefineInfo.AddContext((ctrl as KPIPartCtrlBase).Get_KPIPartInfo());
+				}
+			}
+			// Lấy thông tin Filter KPI.
+			foreach (Control ctrl in kpiFilterContainer.Controls)
+			{
+				if (ctrl is FilterCtrlBase)
+				{
+					kpiDefineInfo.AddFilter((ctrl as FilterCtrlBase).Get_FilterInfo());
+				}
+			}
 
             return kpiDefineInfo;
         }

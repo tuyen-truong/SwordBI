@@ -59,7 +59,7 @@
 				onvaluechanged="cbCtrlType_ValueChanged" ShowImageInEditBox="True" AutoPostBack="true">
 			</dx:ASPxComboBox>
 		</td>
-		<td>Control</td>
+		<td style="padding-left:3px">Control</td>
 		<td>
 			<dx:ASPxComboBox ID="cbCtrl" runat="server" Width="100%" ShowImageInEditBox="true">
 				<ItemStyle Height="20px" />
@@ -96,7 +96,7 @@
 	</tr>
 </table>
 </fieldset>
-<dx:ASPxPageControl ID="tabKPISetting" runat="server" ActiveTabIndex="1" 
+<dx:ASPxPageControl ID="tabKPISetting" runat="server" ActiveTabIndex="0" 
 	Width="1024px">
 <Border BorderStyle="None" />
 <ContentStyle>

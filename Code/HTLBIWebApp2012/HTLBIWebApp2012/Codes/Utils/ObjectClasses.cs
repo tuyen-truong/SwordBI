@@ -2435,7 +2435,7 @@ namespace HTLBIWebApp2012
 		{
 			get
 			{
-				return string.Format("[{0}].[{1}]", this.TblName, this.ColName); 
+				return m_UniqueName;// string.Format("[{0}].[{1}]", this.TblName, this.ColName); 
 			}
 		}
 		public bool Visible { get; set; }
@@ -3617,6 +3617,79 @@ namespace HTLBIWebApp2012
 			return sb.ToString();
 			*/
 
+			StringBuilder sb = new StringBuilder();
+			StringBuilder sbSelect = new StringBuilder();
+			foreach (InqFieldInfoMDX fld in this.Fields)
+			{
+				if (sb.Length == 0)
+				{
+					sb.AppendLine("WITH");
+				}
+				if (sbSelect.Length == 0)
+				{
+					sbSelect.Append("SELECT");
+				}
+				sb.AppendLine(String.Format("\tSET [{0}] AS {1}.[{2}]", fld.DisplayName, fld.UniqueName, fld.Name));
+				if (sbSelect.Length == "SELECT".Length)
+				{
+					sbSelect.AppendLine();
+					sbSelect.AppendLine(String.Format("\t[{0}]", fld.DisplayName));
+				}
+				else
+				{
+					sbSelect.AppendLine(String.Format("\t* [{0}]", fld.DisplayName));
+				}
+				
+			}
+			if (sbSelect.Length > 0)
+			{
+				if (this.Summaries.Count == 0)
+				{
+					sbSelect.AppendLine(" ON COLUMNS");
+				}
+				else
+				{
+					sbSelect.AppendLine(" ON ROWS,");
+					sbSelect.AppendLine("\t{");
+				}
+			}
+			int idx = 0;
+			foreach (InqSummaryInfoMDX fld in this.Summaries)
+			{
+				if (sb.Length == 0)
+				{
+					sb.AppendLine("WITH");
+				}
+				if (sbSelect.Length == 0)
+				{
+					sbSelect.Append("SELECT");
+				}
+				sb.AppendLine(String.Format("\tSET [{0}] AS {1}", fld.Field.DisplayName, fld.Field.UniqueName));
+				if (sbSelect.Length == "SELECT".Length)
+				{
+					sbSelect.AppendLine("{");
+				}
+				if (idx == 0)
+				{
+					sbSelect.AppendLine(String.Format("\t[{0}]", fld.Field.DisplayName));
+					idx++;
+				}
+				else
+				{
+					sbSelect.AppendLine(String.Format("\t, [{0}]", fld.Field.DisplayName));					
+				}
+				
+			}
+			if (this.Summaries.Count > 0)
+			{
+				sbSelect.AppendLine("} ON COLUMNS");
+			}
+			sb.AppendLine(sbSelect.ToString());
+			sb.Append(String.Format(" FROM [{0}]", this.OlapCubeName.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' })));
+			return sb.ToString();
+			
+			
+
 			var wrapLine = isWrapText ? Environment.NewLine : "";
 			var wrapTab = isWrapText ? "\t" : "";
 			var lineAndTab = wrapLine + wrapTab;
@@ -4018,6 +4091,7 @@ namespace HTLBIWebApp2012
 
 	public abstract class KPIField
 	{
+		public String UniqueName { get; set; }
 		/// <summary>
 		/// Tên trường dữ liệu.
 		/// </summary>
@@ -4232,17 +4306,17 @@ namespace HTLBIWebApp2012
 				var orgCopySummaries = ret.Copy_Summaries();
 				if (this.Dimensions.Count > 0)
 				{
-					ret.ReFilter_Fields(p => this.Dimensions.Exists(q => q.FieldName == p.ColName));
+					ret.ReFilter_Fields(p => this.Dimensions.Exists(q => q.UniqueName == p.UniqueName));
 					foreach (var f in ret.Fields)
 					{
-						var f1 = this.Dimensions.FirstOrDefault(p => p.FieldName == f.ColName);
+						var f1 = this.Dimensions.FirstOrDefault(p => p.UniqueName == f.UniqueName);
 						f.ColAliasVI = f1.DisplayName;
 						f.ColAliasEN = f1.DisplayName;
 					}
 				}
 				if (this.Measures.Count > 0)
 				{
-					ret.ReFilter_Summaries(p => this.Measures.Exists(q => q.FieldName == p.Field.ColName));
+					ret.ReFilter_Summaries(p => this.Measures.Exists(q => q.UniqueName == p.Field.UniqueName));
 					foreach (var f in ret.Summaries)
 					{
 						// Measure

@@ -35,7 +35,7 @@ namespace HTLBIWebApp2012.App.Setting
 			try
 			{
 				var myInfo = info as KPIDimension;
-				this.cboField.Value = myInfo.FieldName;
+				this.cboField.Value = myInfo.UniqueName;//myInfo.FieldName;
 				this.txtDisplayName.Text = myInfo.DisplayName;
 			}
 			catch { }
@@ -53,7 +53,8 @@ namespace HTLBIWebApp2012.App.Setting
 				var ret = new KPIDimension
 				{
 					DisplayName = this.txtDisplayName.Text,
-					FieldName = Lib.NTE(this.cboField.Value)
+					FieldName = Lib.NTE(this.cboField.Value),
+					UniqueName = Lib.NTE(this.cboField.Value)
 				};
 				return ret;
 			}

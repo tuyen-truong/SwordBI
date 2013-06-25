@@ -318,21 +318,28 @@ namespace HTLBIWebApp2012.App.Setting
 			{
 				// Load Available Layout By Warehouse.
 				var layouts = MyBI.Me.Get_Widget_ByDS(this.DSCode_OtherPriority).ToList();
-				Helpers.SetDataSource(cboLayout, layouts, "Code", "Name");
-				cboLayout.SelectedIndex = 0;
-				cbo_ValueChanged(cboLayout, EventArgs.Empty);
-				// Add datasource.
-				var selObj = this.GetDatasource();
-				if (selObj == null) return;
-				var ctrl = this.Find_PropControl();
-				if (ctrl != null) ctrl.Set_Source(selObj);
-				if (cat == "KPI")
+				if (layouts.Count > 0)
 				{
-					var kpi = selObj.JsonObjKPI;
-					this.cboCtrlType.Value = kpi.CtrlTypeDefault;
-					this.cbo_ValueChanged(this.cboCtrlType, null);
-					this.cboCtrl.Value = string.Format("{0}-{1}", kpi.CtrlTypeDefault, kpi.VisibleTypeDefault);
-					this.cbo_ValueChanged(this.cboCtrl, null);
+					Helpers.SetDataSource(cboLayout, layouts, "Code", "Name");
+					cboLayout.SelectedIndex = 0;
+					cbo_ValueChanged(cboLayout, EventArgs.Empty);
+					// Add datasource.
+					var selObj = this.GetDatasource();
+					if (selObj == null) return;
+					var ctrl = this.Find_PropControl();
+					if (ctrl != null) ctrl.Set_Source(selObj);
+					if (cat == "KPI")
+					{
+						var kpi = selObj.JsonObjKPI;
+						this.cboCtrlType.Value = kpi.CtrlTypeDefault;
+						this.cbo_ValueChanged(this.cboCtrlType, null);
+						this.cboCtrl.Value = string.Format("{0}-{1}", kpi.CtrlTypeDefault, kpi.VisibleTypeDefault);
+						this.cbo_ValueChanged(this.cboCtrl, null);
+					}
+				}
+				else
+				{
+					btn_Click(btnNewLayout, EventArgs.Empty);
 				}
 			}
 			upp_Header.Update();
@@ -382,10 +389,12 @@ namespace HTLBIWebApp2012.App.Setting
 							if (curDS.SettingCat == GlobalVar.SettingCat_DS)
 							{
 								//this.MyPage.My_wcDSSetting.Raise_OnChange("LAYOUT", new HTLBIEventArgs(layout.DSCode));
+								//MyPage.DataSourceSetting.RaiseEvent("LAYOUT", new HTLBIEventArgs(layout.DSCode));
 							}
 							else if (curDS.SettingCat == GlobalVar.SettingCat_KPI)
 							{
 								//this.MyPage.My_wcKPISetting.Raise_OnChange("LAYOUT", new HTLBIEventArgs(layout.DSCode));
+								//MyPage.My_wcKPISetting.RaiseEvent("LAYOUT", new HTLBIEventArgs(layout.DSCode));
 							}
 						}
 						//this.MyPage.My_wcInteractionSetting.Raise_OnChange("LAYOUT", null);

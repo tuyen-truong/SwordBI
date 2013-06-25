@@ -10,6 +10,7 @@ using DevExpress.Web.ASPxEditors;
 using HTLBIWebApp2012.Codes.BLL;
 using HTLBIWebApp2012.Codes.Models;
 using CECOM;
+using DevExpress.Web.ASPxGridView;
 
 namespace HTLBIWebApp2012.App.Setting
 {
@@ -36,7 +37,14 @@ namespace HTLBIWebApp2012.App.Setting
 		private String m_WHCode = String.Empty;
 		public String WHCode
 		{
-			get { return m_WHCode; }
+			get
+			{
+				if (String.IsNullOrWhiteSpace(m_WHCode))
+				{
+					m_WHCode = Lib.NTE(cbDataWarehouse.Value);
+				}
+				return m_WHCode;
+			}
 			set { m_WHCode = value; }
 		}
 		private String m_DSCode = String.Empty;
@@ -44,7 +52,7 @@ namespace HTLBIWebApp2012.App.Setting
 		{
 			get
 			{
-				m_DSCode = cbDataSource.Value.ToString();
+				m_DSCode = Lib.NTE(cbDataSource.Value);
 				return m_DSCode;
 			}
 			set { m_DSCode = value; }
@@ -138,7 +146,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		public override void InitData()
 		{
-            // Data Warehouse
+			// Data Warehouse
 			if (!IsPostBack)
 			{
 				Helpers.SetDataSource(cbDataWarehouse, MyBI.Me.GetDW(), "Value", "Text");
@@ -159,6 +167,25 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void ucDatasourceSetting_ValueChanged(object sender, EventArgs e)
 		{
+			/*
+			if (!(sender is string)) return;
+			var cat = sender.ToString();
+			if (cat == "LAYOUT" || cat == "KPI")
+			{
+				var eReceived = e as HTLBIEventArgs;
+				if (eReceived == null) return;
+				cbDataSource.Value = eReceived.Values.ToString();
+				cbDataSource_ValueChanged(cbDataSource, EventArgs.Empty);
+				if (cat == "LAYOUT")
+				{
+					this.MyPage.My_wcKPISetting.RaiseEvent("RESET", null);
+				}
+			}
+			else
+			{
+				MyPage.My_wcKPISetting.RaiseEvent(String.Empty, EventArgs.Empty);
+			}
+			*/
 			MyPage.My_wcKPISetting.RaiseEvent(String.Empty, EventArgs.Empty);
 		}
 
@@ -360,8 +387,8 @@ namespace HTLBIWebApp2012.App.Setting
 			{
 				m_DSCode = String.Empty;
 			}
-            MyPage.My_wcKPISetting.DSCode = m_DSCode;
-            MyPage.My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
+			MyPage.My_wcKPISetting.DSCode = m_DSCode;
+			MyPage.My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
 		}
 
 		protected void lbSelectedFields_SelectedIndexChanged(object sender, EventArgs e)
@@ -434,11 +461,6 @@ namespace HTLBIWebApp2012.App.Setting
 			cbFieldSort.SelectedIndex = 0;
 			cbMetricSort.SelectedIndex = 0;
 			cbFuncs.SelectedIndex = 0;
-		}
-
-		public void Raise_OnChange(object sende, EventArgs e)
-		{
-
 		}
 
 		private Olap.DimensionFieldInfoCollection m_DimFieldCollection = new Olap.DimensionFieldInfoCollection();
@@ -556,11 +578,11 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void btnSave_Click(object sender, EventArgs e)
 		{
-            String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["OLAPConnection"].ConnectionString;
-            var ret = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
+			String connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["OLAPConnection"].ConnectionString;
+			var ret = new InqDefineSourceMDX(SelectedFields, SelectedMetrics, SelectedFilters)
 			{
 				PreffixDimTable = "AR",
-                OlapCubeName = Helpers.GetCubeName(connectionString)
+				OlapCubeName = Helpers.GetCubeName(connectionString)
 			};
 
 			lsttbl_DashboardSource objDs = new lsttbl_DashboardSource()
@@ -595,12 +617,20 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void dsGridPreviewData_CustomUnboundColumnData(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewColumnDataEventArgs e)
 		{
-
+			try
+			{
+				if (e.Column.Name == "colLine")
+				{
+					e.Value = e.ListSourceRowIndex + 1;
+				}
+			}
+			catch { }
 		}
 
 		protected void dsGridPreviewData_PageIndexChanged(object sender, EventArgs e)
 		{
-
+			//if (!this.IsCurrentActive) return;
+			dsGridPreviewData_CustomCallback(sender, null);
 		}
 
 		protected void dsCallbackPanel_Callback(object sender, DevExpress.Web.ASPxClasses.CallbackEventArgsBase e)
@@ -619,8 +649,28 @@ namespace HTLBIWebApp2012.App.Setting
 			if (sender is DevExpress.Web.ASPxGridView.ASPxGridView)
 			{
 				var ds = (new MdxExecuter(connectionString)).ExecuteDataSet(inq.ToMDX());
-				dsGridPreviewData.DataSource = ds;
-				dsGridPreviewData.DataBind();
+				if (ds.Tables.Count > 0)
+				{
+					int colCount = ds.Tables[0].Columns.Count;
+					int idx1 = 0;
+					for (int idx = 0; idx < colCount; idx++)
+					{
+						GridViewDataTextColumn col = new GridViewDataTextColumn();
+						col.FieldName = ds.Tables[0].Columns[idx].ColumnName;
+						if (idx < inq.Fields.Count)
+						{
+							col.Caption = inq.Fields[idx].DisplayName;
+						}
+						else if (inq.Summaries.Count > 0)
+						{
+							col.Caption = inq.Summaries[idx1++].Field.DisplayName;
+						}
+						
+						dsGridPreviewData.Columns.Add(col);
+					}
+					dsGridPreviewData.DataSource = ds;
+					dsGridPreviewData.DataBind();
+				}
 			}
 			else
 			{

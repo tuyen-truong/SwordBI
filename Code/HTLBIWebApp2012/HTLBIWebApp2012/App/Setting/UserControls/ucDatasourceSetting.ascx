@@ -219,7 +219,7 @@ th.uc-title
 	if (selectedMetricFieldCount == 0)
 	{
 		errMsg += newline;
-		errMsg += 'The' + cbDataWarehouse.GetValue() + ' Fact data unavailable.';
+		errMsg += 'Please select at least one metric field.';
 	}
 	if (errMsg.length &gt; 0)
 	{
@@ -230,8 +230,7 @@ th.uc-title
 	else
 	{
 		dsGridPreviewData.PerformCallback();
-		dsTabPreviewMDX.PerformCallback();
-		//frmDSPreview.Show();
+		dsCallbackPanel.PerformCallback();
 	}
 }" />
 			</dx:ASPxButton>
@@ -260,7 +259,7 @@ th.uc-title
 	if (selectedMetricFieldCount == 0)
 	{
 		errMsg += newline;
-		errMsg += 'The' + cbDataWarehouse.GetValue() + ' Fact data unavailable.';
+		errMsg += 'Please select at least one metric field.';
 	}
 	if (errMsg.length &gt; 0)
 	{
@@ -268,10 +267,6 @@ th.uc-title
 		txtDataSourceName.Focus();
 		// to prevent postback event
 		e.processOnServer = false;
-	}
-	else
-	{
-		
 	}
 }" />
 			</dx:ASPxButton>
@@ -303,6 +298,7 @@ th.uc-title
 	</FooterTemplate>
 	<ContentStyle>
 		<Paddings Padding="5px" />
+<Paddings Padding="5px"></Paddings>
 	</ContentStyle>
 	<ContentCollection>
 		<dx:PopupControlContentControl ID="dsPreviewContent" runat="server">
@@ -310,15 +306,21 @@ th.uc-title
 				Width="890px" Height="100%">
 				<ContentStyle>
 					<Paddings Padding="0" />
+<Paddings Padding="0px"></Paddings>
 				</ContentStyle>
+
+<Paddings Padding="0px"></Paddings>
+
 				<TabStyle HorizontalAlign="Center" VerticalAlign="Middle">
 					<Paddings Padding="0" />
+<Paddings Padding="0px"></Paddings>
 				</TabStyle>
 				<Paddings Padding="0" />
 				<TabPages>
 					<dx:TabPage Name="dsTabPreviewData" Text="Data" ToolTip="Data">
 						<TabStyle HorizontalAlign="Center" VerticalAlign="Middle">
 							<Paddings Padding="3px" />
+<Paddings Padding="3px"></Paddings>
 						</TabStyle>
 						<ContentCollection>
 							<dx:ContentControl ID="ContentControl4" runat="server" Height="500px">
@@ -329,6 +331,7 @@ th.uc-title
 									OnPageIndexChanged="dsGridPreviewData_PageIndexChanged"
 									Width="100%">
 								<ClientSideEvents EndCallback="function(s, e){ frmDSPreview.Show(); }" />
+<ClientSideEvents EndCallback="function(s, e){ frmDSPreview.Show(); }"></ClientSideEvents>
 								<Columns>
 									<dx:GridViewDataTextColumn Caption="#" FieldName="#" Name="colLine" PropertiesTextEdit-DisplayFormatString="#,##0"
 										ShowInCustomizationForm="True" VisibleIndex="0" UnboundType="Integer">
@@ -340,6 +343,9 @@ th.uc-title
 									</dx:GridViewDataTextColumn>
 								</Columns>
 								<SettingsBehavior AllowSort="false" />
+
+<SettingsBehavior AllowSort="False"></SettingsBehavior>
+
 								<SettingsPager PageSize="20"></SettingsPager>
 								</dx:ASPxGridView>
 							</dx:ContentControl>
@@ -348,6 +354,7 @@ th.uc-title
 					<dx:TabPage Name="dsTabPreviewMDX" Text="MDX Query" ToolTip="MDX Query">
 						<TabStyle HorizontalAlign="Center" VerticalAlign="Middle">
 							<Paddings Padding="3px" />
+<Paddings Padding="3px"></Paddings>
 						</TabStyle>
 						<ContentCollection>
 							<dx:ContentControl ID="ContentControl5" runat="server">

@@ -32,7 +32,8 @@ namespace HTLBIWebApp2012.App.Setting
 				this.Reset_Info();
 				var myDs = ds as lsttbl_DashboardSource;
 				var obj = myDs.JsonObjMDX;
-				Helpers.SetDataSource(this.cboField, obj.Summaries, "Field.ColName", "FieldAlias", this.cboField.Value);
+				//Helpers.SetDataSource(this.cboField, obj.Summaries, "Field.ColName", "FieldAlias", this.cboField.Value);
+				Helpers.SetDataSource(this.cboField, obj.Summaries, "Field.UniqueName", "Field.DisplayName", this.cboField.Value);
 			}
 			catch { }
 		}
@@ -41,7 +42,7 @@ namespace HTLBIWebApp2012.App.Setting
 			try
 			{
 				var myInfo = info as KPIMeasure;
-				this.cboField.Value = myInfo.FieldName;
+				this.cboField.Value = myInfo.UniqueName;//myInfo.FieldName;
 				this.txtDisplayName.Text = myInfo.DisplayName;
 				this.cboAggregator.Value = myInfo.Aggregator;
 			}
@@ -61,7 +62,8 @@ namespace HTLBIWebApp2012.App.Setting
 				{
 					Aggregator = Lib.NTE(this.cboAggregator.Value),
 					DisplayName = this.txtDisplayName.Text,
-					FieldName = Lib.NTE(this.cboField.Value)
+					FieldName = Lib.NTE(this.cboField.Value),
+					UniqueName = Lib.NTE(this.cboField.Value)
 				};
 				return ret;
 			}
