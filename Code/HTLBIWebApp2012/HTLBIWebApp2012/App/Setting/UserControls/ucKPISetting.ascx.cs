@@ -13,8 +13,8 @@ namespace HTLBIWebApp2012.App.Setting
 {
 	public partial class ucKPISetting : UserControlBase
 	{
-        const int MAX_CONTROL_STATE = 5;
-        public ASPxTextBox DisplayName { get { return txtKPIDisplayName; } }
+		const int MAX_CONTROL_STATE = 5;
+		public ASPxTextBox DisplayName { get { return txtKPIDisplayName; } }
 		public ASPxComboBox CtlKPI { get { return cbKPI; } }
 
 		public PortletSetting MyPage
@@ -28,35 +28,35 @@ namespace HTLBIWebApp2012.App.Setting
 		public String DSCode
 		{
 			get
-            {
-                if (MyPage != null && !IsLoadControlState)
-                {
-                    m_DSCode = MyPage.DataSourceSetting.DSCode;
-                }
-                return m_DSCode;
-            }
+			{
+				if (MyPage != null && !IsLoadControlState)
+				{
+					m_DSCode = MyPage.DataSourceSetting.DSCode;
+				}
+				return m_DSCode;
+			}
 			set
 			{
 				m_DSCode = value;
 			}
 		}
 
-        private String m_WHCode = String.Empty;
-        public String WHCode 
-        {
-            get
-            {
-                if (MyPage != null)
-                {
-                    m_WHCode = MyPage.DataSourceSetting.WHCode;
-                }
-                return m_WHCode;
-            }
-            set
-            {
-                m_WHCode = value;
-            }
-        }
+		private String m_WHCode = String.Empty;
+		public String WHCode 
+		{
+			get
+			{
+				if (MyPage != null)
+				{
+					m_WHCode = MyPage.DataSourceSetting.WHCode;
+				}
+				return m_WHCode;
+			}
+			set
+			{
+				m_WHCode = value;
+			}
+		}
 
 		private String m_KPICode = String.Empty;
 		public String KPICode
@@ -123,8 +123,8 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void ucKPISetting_ValueChanged(object senderm, EventArgs e)
 		{
-            Cleanup();
-            var kpis = MyBI.Me.Get_DashboardKPI_ByDS(m_DSCode).ToList();
+			Cleanup();
+			var kpis = MyBI.Me.Get_DashboardKPI_ByDS(m_DSCode).ToList();
 			Helpers.SetDataSource(cbKPI, kpis, "Code", "NameVI");
 			cbKPI.SelectedIndex = 0;
 			cbKPI_ValueChanged(cbKPI, EventArgs.Empty);
@@ -133,11 +133,11 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected override object SaveControlState()
 		{
-            object[] controlState = new object[MAX_CONTROL_STATE];
+			object[] controlState = new object[MAX_CONTROL_STATE];
 			controlState[0] = base.SaveControlState();
 			controlState[1] = m_PartControls;
-            controlState[2] = DSCode;
-            controlState[3] = WHCode;
+			controlState[2] = DSCode;
+			controlState[3] = WHCode;
 			return controlState;
 		}
 
@@ -154,7 +154,7 @@ namespace HTLBIWebApp2012.App.Setting
 			WHCode = (String)controlState[3];
 
 			// PartControl
-            m_PartControls = (PartControlInfoCollection)controlState[1];
+			m_PartControls = (PartControlInfoCollection)controlState[1];
 			foreach (PartControlInfo ctrlInfo in m_PartControls.List)
 			{
 				AddKPIPartControl(ctrlInfo.ControlType, ctrlInfo.ID);
@@ -171,10 +171,10 @@ namespace HTLBIWebApp2012.App.Setting
 		{
 			ASPxComboBox _sender = (ASPxComboBox)sender;
 			lsttbl_DashboardSource _Kpi = Kpi;
-            if (_Kpi == null)
-            {
-                return;
-            }
+			if (_Kpi == null)
+			{
+				return;
+			}
 
 			MySession.KPIDefine_CurEditing = _Kpi.Code;
 			txtKPIDisplayName.Text = _Kpi.NameVI;
@@ -186,6 +186,13 @@ namespace HTLBIWebApp2012.App.Setting
 				cbCtrlType_ValueChanged(cbCtrlType, EventArgs.Empty);
 				cbCtrl.Value = string.Format("{0}-{1}", kpi.CtrlTypeDefault, kpi.VisibleTypeDefault);
 			}
+
+			// clear added control
+			tabPageDimensionsContainer.Controls.Clear();
+			measureContainer.Controls.Clear();
+			kpiFilterContainer.Controls.Clear();
+			kpiContextMetricContainer.Controls.Clear();
+			m_PartControls.Clear();
 			
 			// Add new Part controls of KPI is selected
 			foreach (var part in kpi.Dimensions)
@@ -242,50 +249,57 @@ namespace HTLBIWebApp2012.App.Setting
 			cbCtrl.SelectedIndex = 0;
 		}
 
-        void Cleanup()
-        {
-            txtKPIDisplayName.Text = String.Empty;
-            cbKPI.Text = String.Empty;
-            cbKPI.Items.Clear();
-            cbKPI.SelectedIndex = -1;
-            cbCtrl.Items.Clear();
-            if (cbCtrlType.Items.Count > 0)
-            {
-                cbCtrlType.SelectedIndex = 0;
-                cbCtrlType_ValueChanged(cbCtrlType, EventArgs.Empty);
-            }
-            // clear added control
-            tabPageDimensionsContainer.Controls.Clear();
-            measureContainer.Controls.Clear();
-            kpiFilterContainer.Controls.Clear();
-            kpiContextMetricContainer.Controls.Clear();
-            m_PartControls.Clear();
-        }
-        protected void btnNew_Click(object sender, EventArgs e)
+		void Cleanup()
 		{
-            Cleanup();
+			txtKPIDisplayName.Text = String.Empty;
+			cbKPI.Text = String.Empty;
+			cbKPI.Items.Clear();
+			cbKPI.SelectedIndex = -1;
+			cbCtrl.Items.Clear();
+			if (cbCtrlType.Items.Count > 0)
+			{
+				cbCtrlType.SelectedIndex = 0;
+				cbCtrlType_ValueChanged(cbCtrlType, EventArgs.Empty);
+			}
+			// clear added control
+			tabPageDimensionsContainer.Controls.Clear();
+			measureContainer.Controls.Clear();
+			kpiFilterContainer.Controls.Clear();
+			kpiContextMetricContainer.Controls.Clear();
+			m_PartControls.Clear();
+			KpiUpdatePanel.Update();
+		}
+		protected void btnNew_Click(object sender, EventArgs e)
+		{
+			Cleanup();
 		}
 
 		protected void KPIPartControl_OnRemove(object sender, EventArgs e)
 		{
 			try
 			{
-				var ctrlID = (sender.GetVal("Parent") as Control).ID;
-				if (sender is wcKPIDimension)
+				KPIPartCtrlBase parent = sender.GetVal("Parent") as KPIPartCtrlBase;
+				String ctrlID = parent.ID;
+				if (parent is wcKPIDimension)
 				{
 					tabPageDimensionsContainer.Controls.RemoveAll(c => c.ID == ctrlID);
 				}
-				else if (sender is wcKPIMeasure)
+				else if (parent is wcKPIMeasure)
 				{
 					measureContainer.Controls.RemoveAll(c => c.ID == ctrlID);
 				}
-				else if (sender is wcKPIContextMetric)
+				else if (parent is wcKPIContextMetric)
+				{
+					kpiContextMetricContainer.Controls.RemoveAll(c => c.ID == ctrlID);
+				}
+				else if (parent is wcKPIContextMetric_Calc)
 				{
 					kpiContextMetricContainer.Controls.RemoveAll(c => c.ID == ctrlID);
 				}
 				else
 				{
-					kpiFilterContainer.Controls.RemoveAll(c => c.ID == ctrlID);
+					return;
+					//kpiFilterContainer.Controls.RemoveAll(c => c.ID == ctrlID);
 				}
 				m_PartControls.Remove(ctrlID);
 			}
@@ -312,7 +326,9 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void gridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
 		{
-
+			var kpi = GetDefineInfo();
+			InqDefineSourceMDX inq = kpi.ReFilter_InqMDX();
+			inq.ToMDX();
 		}
 
 		protected void gridPreviewData_PageIndexChanged(object sender, EventArgs e)
@@ -441,17 +457,17 @@ namespace HTLBIWebApp2012.App.Setting
 			cbKPI.SelectedIndex = 0;
 		}
 
-        KPIDefineSource GetDefineInfo()
-        {
-            KPIDefineSource kpiDefineInfo = new KPIDefineSource()
-            {
-                DisplayName = txtKPIDisplayName.Text,
-                DatasourceID = DSCode,
-                CtrlTypeDefault = Lib.IsNOE(cbCtrlType.Value) ? "" : Lib.NTE(cbCtrlType.Value),
-                VisibleTypeDefault = Lib.IsNOE(cbCtrl.Value) ? "" : Lib.NTE(cbCtrl.Value).Split('-', StringSplitOptions.RemoveEmptyEntries).LastOrDefault(),
-                MaxValue = double.Parse(this.txtMaxValue.Text),
-                MinValue = double.Parse(this.txtMinValue.Text)
-            };
+		KPIDefineSource GetDefineInfo()
+		{
+			KPIDefineSource kpiDefineInfo = new KPIDefineSource()
+			{
+				DisplayName = txtKPIDisplayName.Text,
+				DatasourceID = DSCode,
+				CtrlTypeDefault = Lib.IsNOE(cbCtrlType.Value) ? "" : Lib.NTE(cbCtrlType.Value),
+				VisibleTypeDefault = Lib.IsNOE(cbCtrl.Value) ? "" : Lib.NTE(cbCtrl.Value).Split('-', StringSplitOptions.RemoveEmptyEntries).LastOrDefault(),
+				MaxValue = double.Parse(this.txtMaxValue.Text),
+				MinValue = double.Parse(this.txtMinValue.Text)
+			};
 			// Dimemsions
 			foreach (Control ctrl in tabPageDimensionsContainer.Controls)
 			{
@@ -485,35 +501,35 @@ namespace HTLBIWebApp2012.App.Setting
 				}
 			}
 
-            return kpiDefineInfo;
-        }
+			return kpiDefineInfo;
+		}
 
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                KPIDefineSource kpiDefine = GetDefineInfo();
-                // Gọi hàm save
-                var obj = new lsttbl_DashboardSource()
-                {
-                    Code = Lib.IfNOE(MySession.KPIDefine_CurEditing, "kpi_" + DateTime.Now.ToString("yyyyMMddHHmmss")),
-                    ParentCode = kpiDefine.DatasourceID,
-                    JsonStr = kpiDefine.ToJsonStr(),
-                    NameVI = txtKPIDisplayName.Text,
-                    NameEN = txtKPIDisplayName.Text,
-                    WHCode = WHCode,
-                    SettingCat = GlobalVar.SettingCat_KPI
-                };
-                MyBI.Me.Save_DashboardSource(obj);
-                MySession.KPIDefine_CurEditing = obj.Code;
-            }
-            catch(Exception ex)
-            {
+		protected void btnSave_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				KPIDefineSource kpiDefine = GetDefineInfo();
+				// Gọi hàm save
+				var obj = new lsttbl_DashboardSource()
+				{
+					Code = Lib.IfNOE(MySession.KPIDefine_CurEditing, "kpi_" + DateTime.Now.ToString("yyyyMMddHHmmss")),
+					ParentCode = kpiDefine.DatasourceID,
+					JsonStr = kpiDefine.ToJsonStr(),
+					NameVI = txtKPIDisplayName.Text,
+					NameEN = txtKPIDisplayName.Text,
+					WHCode = WHCode,
+					SettingCat = GlobalVar.SettingCat_KPI
+				};
+				MyBI.Me.Save_DashboardSource(obj);
+				MySession.KPIDefine_CurEditing = obj.Code;
+			}
+			catch(Exception ex)
+			{
 #if DEBUG
-                throw ex;
+				throw ex;
 #else
 #endif
-            }
-        }
+			}
+		}
 	}
 }

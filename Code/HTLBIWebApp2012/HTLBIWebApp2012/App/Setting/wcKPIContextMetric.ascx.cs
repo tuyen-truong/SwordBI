@@ -69,7 +69,7 @@ namespace HTLBIWebApp2012.App.Setting
 				this.Reset_Info();
 				var myDs = ds as lsttbl_DashboardSource;
 				var obj = myDs.JsonObjMDX;
-				Helpers.SetDataSource(this.cboField, obj.Summaries, "Field.ColName", "FieldAlias", this.cboField.Value);
+				Helpers.SetDataSource(this.cboField, obj.Summaries, "Field.UniqueName", "DisplayName", this.cboField.Value);
 			}
 			catch { }
 		}
@@ -78,7 +78,7 @@ namespace HTLBIWebApp2012.App.Setting
 			try
 			{
 				var myInfo = info as KPICtxtMetric;
-				this.cboField.Value = myInfo.FieldName;
+				this.cboField.Value = myInfo.UniqueName;//myInfo.FieldName;
 				this.txtDisplayName.Text = myInfo.DisplayName;
 				this.cboAggregator.Value = myInfo.Aggregator;
 				// Add filter...
@@ -120,7 +120,8 @@ namespace HTLBIWebApp2012.App.Setting
 				DisplayName = this.txtDisplayName.Text,
 				Aggregator = Lib.NTE(this.cboAggregator.Value),
 				Filters = filters,
-				TimeFilterPrev = timeFilterPrev
+				TimeFilterPrev = timeFilterPrev,
+				UniqueName = Lib.NTE(this.cboField.Value)
 			};
 			return ret;
 		}

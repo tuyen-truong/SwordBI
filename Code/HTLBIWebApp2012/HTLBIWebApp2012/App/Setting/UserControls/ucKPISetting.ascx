@@ -13,6 +13,9 @@
 	Namespace="DevExpress.Web.ASPxClasses" TagPrefix="dx" %>
 <%@ Register assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxPopupControl" tagprefix="dx" %>
 <%@ Register assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxPanel" tagprefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+	Namespace="DevExpress.Web.ASPxLoadingPanel" TagPrefix="dx" %>
+
 <asp:UpdatePanel ID="KpiUpdatePanel" runat="server" UpdateMode="Conditional">
 <ContentTemplate>
 <table cellpadding="0" cellspacing="0">

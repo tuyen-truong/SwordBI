@@ -3587,36 +3587,6 @@ namespace HTLBIWebApp2012
 		/// </summary>
 		public virtual string ToMDX(bool isWrapText)
 		{
-			/*
-			StringBuilder sb = new StringBuilder();
-			sb.Append("SELECT ");
-			try
-			{
-				this.AutoValidAllBeforeBuildToMDX();
-				this.Reset_SummariesID();
-
-				// build row dimension
-				string _fieldString = this.GetFields();
-				sb.Append(_fieldString);
-				if (!String.IsNullOrWhiteSpace(_fieldString))
-				{
-					sb.Append(",");
-					sb.AppendLine();
-				}
-				// build column dimension
-				string _rowString = this.GetMetrics();
-				sb.Append(_rowString);
-
-				sb.AppendLine();
-				sb.AppendFormat("FROM [{0}]", this.OlapCubeName);
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-			return sb.ToString();
-			*/
-
 			StringBuilder sb = new StringBuilder();
 			StringBuilder sbSelect = new StringBuilder();
 			foreach (InqFieldInfoMDX fld in this.Fields)

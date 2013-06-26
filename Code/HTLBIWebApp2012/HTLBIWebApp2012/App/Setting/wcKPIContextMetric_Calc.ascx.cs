@@ -52,7 +52,7 @@ namespace HTLBIWebApp2012.App.Setting
 			{
 				if (MyPage != null)
 				{
-					return MyPage.My_wcKPISetting.DSCode_Target;
+					return MyPage.My_wcKPISetting.DSCode;
 				}
 				return ViewState["wcKPIContextMetric_Calc_DSCode"] as String;
 			}
@@ -119,7 +119,7 @@ namespace HTLBIWebApp2012.App.Setting
 			CalcFieldCtrlBase ctrl = null;
 			var ds = MyBI.Me.Get_DashboardSourceBy(this.DSCode_Target);
 			if (ds == null || ds.JsonObjMDX == null) return null;
-			var dsField = ds.JsonObjMDX.Summaries.Select(p => new COMCodeNameObj(p.Field.ColName, p.Field.ColAliasVI)).ToList();
+			var dsField = ds.JsonObjMDX.Summaries.Select(p => new COMCodeNameObj(p.Field.UniqueName, p.Field.DisplayName)).ToList();
 
 			// ReCreate...
 			if (isReCreate)

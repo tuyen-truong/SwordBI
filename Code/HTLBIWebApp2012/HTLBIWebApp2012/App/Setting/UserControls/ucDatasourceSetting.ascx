@@ -34,7 +34,7 @@ th.uc-title
 	font-size: 90% !important;
 }
 </style>
-<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<asp:UpdatePanel ID="UpdatePanel1" runat="server" style="width:1024px">
 <ContentTemplate>
 <table cellpadding="0" cellspacing="0" class="ds-defination">
 	<tr>
@@ -279,7 +279,7 @@ th.uc-title
 </table>
 </ContentTemplate>
 </asp:UpdatePanel>
-<dx:ASPxLoadingPanel runat="server" ID="LoadingPanel1">
+<dx:ASPxLoadingPanel runat="server" ID="LoadingPanel1" ContainerElementID="UpdatePanel1">
 </dx:ASPxLoadingPanel>
 <!-- Popup Content -->
 <dx:ASPxPopupControl ID="frmDSPreview" runat="server" AllowDragging="True" ClientInstanceName="frmDSPreview"
