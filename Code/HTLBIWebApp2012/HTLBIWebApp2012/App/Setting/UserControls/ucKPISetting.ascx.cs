@@ -72,8 +72,8 @@ namespace HTLBIWebApp2012.App.Setting
 			set
 			{
 				m_KPICode = value;
-				cbKPI.Value = m_KPICode;
-				cbKPI_ValueChanged(cbKPI, EventArgs.Empty);
+				//cbKPI.Value = m_KPICode;
+				//cbKPI_ValueChanged(cbKPI, EventArgs.Empty);
 			}
 		}
 		public lsttbl_DashboardSource Kpi
@@ -116,6 +116,11 @@ namespace HTLBIWebApp2012.App.Setting
 				{
 					var kpis = MyBI.Me.Get_DashboardKPI_ByDS(m_DSCode).ToList();
 					Helpers.SetDataSource(cbKPI, kpis, "Code", "NameVI");
+					if (!String.IsNullOrWhiteSpace(m_KPICode))
+					{
+						cbKPI.Value = m_KPICode;
+						ReloadKpiInfo();
+					}
 				}
 			}
 			ValueChanged += new EventHandler(ucKPISetting_ValueChanged);
@@ -170,6 +175,20 @@ namespace HTLBIWebApp2012.App.Setting
 		protected void cbKPI_ValueChanged(object sender, EventArgs e)
 		{
 			ASPxComboBox _sender = (ASPxComboBox)sender;
+			ReloadKpiInfo();
+			// Raise Event OnChange.
+			this.MyPage.My_wcLayoutSetting.Raise_OnChange("KPI", null);
+		}
+
+		protected void ReloadKpiInfo()
+		{
+			// clear added control
+			tabPageDimensionsContainer.Controls.Clear();
+			measureContainer.Controls.Clear();
+			kpiFilterContainer.Controls.Clear();
+			kpiContextMetricContainer.Controls.Clear();
+			m_PartControls.Clear();
+
 			lsttbl_DashboardSource _Kpi = Kpi;
 			if (_Kpi == null)
 			{
@@ -187,13 +206,6 @@ namespace HTLBIWebApp2012.App.Setting
 				cbCtrl.Value = string.Format("{0}-{1}", kpi.CtrlTypeDefault, kpi.VisibleTypeDefault);
 			}
 
-			// clear added control
-			tabPageDimensionsContainer.Controls.Clear();
-			measureContainer.Controls.Clear();
-			kpiFilterContainer.Controls.Clear();
-			kpiContextMetricContainer.Controls.Clear();
-			m_PartControls.Clear();
-			
 			// Add new Part controls of KPI is selected
 			foreach (var part in kpi.Dimensions)
 			{
@@ -201,14 +213,14 @@ namespace HTLBIWebApp2012.App.Setting
 				ctrl.Set_Info(part);
 				m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 			}
-			
+
 			foreach (var part in kpi.Measures)
 			{
 				KPIPartCtrlBase ctrl = AddKPIPartControl("measure", String.Empty);
 				ctrl.Set_Info(part);
 				m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 			}
-			
+
 			foreach (var part in kpi.Contexts)
 			{
 				var type = "";
@@ -227,8 +239,6 @@ namespace HTLBIWebApp2012.App.Setting
 				myCtrl.Set_Info(part);
 			}
 			*/
-			// Raise Event OnChange.
-			this.MyPage.My_wcLayoutSetting.Raise_OnChange("KPI", null);
 		}
 
 		protected void cbCtrlType_ValueChanged(object sender, EventArgs e)

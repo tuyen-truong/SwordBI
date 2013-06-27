@@ -45,6 +45,8 @@ namespace HTLBIWebApp2012.App.Setting
 				return !string.IsNullOrEmpty(this.MyPage.KPICode) ? this.MyPage.KPICode : this.MyPage.DSCode;
 			}
 		}
+
+		private String m_LayoutCode = String.Empty;
 		public string LayoutCode
 		{
 			get
@@ -53,8 +55,9 @@ namespace HTLBIWebApp2012.App.Setting
 			}
 			set
 			{
-				this.cboLayout.Value = value;
-				cbo_ValueChanged(this.cboLayout, new EventArgs());
+				m_LayoutCode = value;
+				//this.cboLayout.Value = value;
+				//cbo_ValueChanged(this.cboLayout, new EventArgs());
 			}
 		}
 		public String WHCode
@@ -106,6 +109,16 @@ namespace HTLBIWebApp2012.App.Setting
 					var img = string.Format(imgPathF, item.Cat);
 					var litem = new ListEditItem(item.Name, item.Code, img);
 					this.cboCtrlType.Items.Add(litem);
+				}
+				if (!String.IsNullOrWhiteSpace(WHCode))
+				{
+					var layoputs = MyBI.Me.Get_Widget(WHCode).ToList();
+					Helpers.SetDataSource(this.cboLayout, layoputs, "Code", "Name");
+					if (!String.IsNullOrWhiteSpace(m_LayoutCode))
+					{
+						cboLayout.Value = m_LayoutCode;
+						ReloadLayoutInfo();
+					}
 				}
 			}
 			else
@@ -353,33 +366,7 @@ namespace HTLBIWebApp2012.App.Setting
 				if (cbo == null) return;
 				if (cbo.ID == this.cboLayout.ID)
 				{
-					var layout = this.GetLayout();
-					if (layout == null) return;
-
-					MySession.LayoutDefine_CurEditing = layout.Code;
-					this.txtDisplayName.Text = layout.Name;
-					if (layout.WidgetType.ToLower() == "chart")
-					{
-						var obj = layout.JsonObj_Chart;
-						this.cboCtrlType.Value = obj.CtrlType;
-						this.cbo_ValueChanged(this.cboCtrlType, null);
-						this.cboCtrl.Value = string.Format("{0}-{1}", obj.CtrlType, obj.ChartType);
-						this.cbo_ValueChanged(this.cboCtrl, null);
-					}
-					else if (layout.WidgetType.ToLower() == "gauge")
-					{
-						var obj = layout.JsonObj_Gauge;
-						this.cboCtrlType.Value = obj.CtrlType;
-						this.cbo_ValueChanged(this.cboCtrlType, null);
-						this.cboCtrl.Value = string.Format("{0}-{1}", obj.CtrlType, obj.VisibleType);
-						this.cbo_ValueChanged(this.cboCtrl, null);
-					}
-					else if (layout.WidgetType.ToLower() == "grid")
-					{
-						var obj = layout.JsonObj_Grid;
-						this.cboCtrlType.Value = obj.CtrlType;
-						this.cbo_ValueChanged(this.cboCtrlType, null);
-					}
+					lsttbl_Widget layout = ReloadLayoutInfo();
 					// Raise Event OnChange.
 					if (this.MyPage != null)
 					{
@@ -436,6 +423,39 @@ namespace HTLBIWebApp2012.App.Setting
 			}
 			catch { }
 		}
+
+		protected lsttbl_Widget ReloadLayoutInfo()
+		{
+			lsttbl_Widget layout = GetLayout();
+			if (layout == null) { return null; }
+
+			MySession.LayoutDefine_CurEditing = layout.Code;
+			this.txtDisplayName.Text = layout.Name;
+			if (layout.WidgetType.ToLower() == "chart")
+			{
+				var obj = layout.JsonObj_Chart;
+				this.cboCtrlType.Value = obj.CtrlType;
+				this.cbo_ValueChanged(this.cboCtrlType, null);
+				this.cboCtrl.Value = string.Format("{0}-{1}", obj.CtrlType, obj.ChartType);
+				this.cbo_ValueChanged(this.cboCtrl, null);
+			}
+			else if (layout.WidgetType.ToLower() == "gauge")
+			{
+				var obj = layout.JsonObj_Gauge;
+				this.cboCtrlType.Value = obj.CtrlType;
+				this.cbo_ValueChanged(this.cboCtrlType, null);
+				this.cboCtrl.Value = string.Format("{0}-{1}", obj.CtrlType, obj.VisibleType);
+				this.cbo_ValueChanged(this.cboCtrl, null);
+			}
+			else if (layout.WidgetType.ToLower() == "grid")
+			{
+				var obj = layout.JsonObj_Grid;
+				this.cboCtrlType.Value = obj.CtrlType;
+				this.cbo_ValueChanged(this.cboCtrlType, null);
+			}
+			return layout;
+		}
+		
 		protected void btn_Click(object sender, EventArgs e)
 		{
 			try

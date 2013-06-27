@@ -2503,7 +2503,7 @@ namespace HTLBIWebApp2012
 		/// </summary>
 		public virtual bool HasOrder()
 		{
-			return !string.IsNullOrEmpty(this.OrderName);
+			return !String.IsNullOrWhiteSpace(m_Sort) || !string.IsNullOrEmpty(this.OrderName);
 		}
 		/// <summary>
 		/// Trả về tên field theo cú pháp của MDX ([TableName].[ColumnName].CHILDREN). 
@@ -2537,6 +2537,35 @@ namespace HTLBIWebApp2012
 				return string.Format("{0}", filterSetName);
 			}
 			return string.Format("ORDER({0},[{1}].[{2}].CURRENTMEMBER.NAME,{3})", filterSetName, this.TblName, this.ColName, this.OrderName);
+		}
+		
+		public virtual String ToMdx(List<InqFilterInfoMDX> list)
+		{
+			StringBuilder sb = new StringBuilder();
+			String setExpression = String.Format("{0}.[{1}]", m_UniqueName, m_Name);
+			List<InqFilterInfoMDX> subList = list.FindAll(fld => fld.HasWhereKey() && fld.WhereKey.UniqueName == m_UniqueName);
+			if (subList != null && subList.Count > 0)
+			{
+				setExpression = "FILTER(" + setExpression;
+				InqFilterInfoMDX ft = subList[0];
+				setExpression += String.Format(", ({0}.CURRENTMEMBER.NAME {1} \"{2}\")", ft.WhereKey.UniqueName, ft.Operator, ft.Value);
+				for (int i = 1; i < subList.Count; i++)
+				{
+					setExpression += String.Format(" {0} ", ft.Logic.ToUpper());
+					ft = subList[i];
+					setExpression += String.Format("({0}.CURRENTMEMBER.NAME {1} \"{2}\")", ft.WhereKey.UniqueName, ft.Operator, ft.Value);
+				}
+				setExpression += ")";
+			}
+			if (HasOrder())
+			{
+				sb.AppendFormat("ORDER({0}, {1}.CURRENTMEMBER.NAME, {2})", setExpression, m_UniqueName, m_Sort);
+			}
+			else
+			{
+				sb.Append(setExpression);
+			}
+			return sb.ToString();
 		}
 		/// <summary>
 		/// Kiểm tra đối tượng chứa các thông tin có hợp lệ để đảm bảo tính dúng đắng logic
@@ -3599,7 +3628,7 @@ namespace HTLBIWebApp2012
 				{
 					sbSelect.Append("SELECT");
 				}
-				sb.AppendLine(String.Format("\tSET [{0}] AS {1}.[{2}]", fld.DisplayName, fld.UniqueName, fld.Name));
+				sb.AppendLine(String.Format("\tSET [{0}] AS {1}", fld.DisplayName, fld.ToMdx(_Filters)));
 				if (sbSelect.Length == "SELECT".Length)
 				{
 					sbSelect.AppendLine();
@@ -3656,6 +3685,26 @@ namespace HTLBIWebApp2012
 			}
 			sb.AppendLine(sbSelect.ToString());
 			sb.Append(String.Format(" FROM [{0}]", this.OlapCubeName.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' })));
+
+			List<InqFilterInfoMDX> filters = this.Filters.Where(ft => ft.HasWhereKey()
+																&& this.Fields.FirstOrDefault(q => q.UniqueName == ft.WhereKey.UniqueName) == null).ToList();
+			if (filters.Count > 0)
+			{
+				sb.AppendLine("WHERE (");
+				foreach (InqFilterInfoMDX ft in filters)
+				{
+					sb.Append("{");
+					sb.AppendFormat("FILTER({0}.[{1}],{2}.CURRENTMEMBER.NAME {3} {\"4}\")", ft.WhereKey.UniqueName, ft.WhereKey.Name, ft.WhereKey.UniqueName, ft.Operator, ft.Value);
+					sb.AppendLine("}");
+					sb.Append(",");
+				}
+				sb.Append(")");
+			}
+			
+			
+			
+			
+			
 			return sb.ToString();
 			
 			

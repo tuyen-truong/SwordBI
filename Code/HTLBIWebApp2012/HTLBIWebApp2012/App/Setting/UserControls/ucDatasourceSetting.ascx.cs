@@ -150,6 +150,17 @@ namespace HTLBIWebApp2012.App.Setting
 			if (!IsPostBack)
 			{
 				Helpers.SetDataSource(cbDataWarehouse, MyBI.Me.GetDW(), "Value", "Text");
+				if (!String.IsNullOrWhiteSpace(m_WHCode))
+				{
+					cbDataWarehouse.Value = m_WHCode;
+					var datasource = MyBI.Me.Get_DashboardSource(m_WHCode, GlobalVar.SettingCat_DS);
+					Helpers.SetDataSource(cbDataSource, datasource, "Code", "NameEN");
+					if (!String.IsNullOrWhiteSpace(m_DSCode))
+					{
+						cbDataSource.Value = m_DSCode;
+						ReloadQueryInformation();
+					}
+				}
 				cbFieldSort.Items.AddRange(InqMDX.GetOrderByName());
 				cbMetricSort.Items.AddRange(InqMDX.GetOrderByName());
 				cbFuncs.Items.AddRange(InqMDX.GetSummatyFuncName());
@@ -344,11 +355,16 @@ namespace HTLBIWebApp2012.App.Setting
 			if (selectedItemValue != null)
 			{
 				m_WHCode = selectedItemValue.ToString();
-				var datasource = MyBI.Me.Get_DashboardSource(m_WHCode, GlobalVar.SettingCat_DS);
-				Helpers.SetDataSource(cbDataSource, datasource, "Code", "NameEN");
+				ReloadDataSource();
 				cbDataSource.SelectedIndex = 0;
 				cbDataSource_ValueChanged(cbDataSource, EventArgs.Empty);
 			}
+		}
+
+		protected void ReloadDataSource()
+		{
+			var datasource = MyBI.Me.Get_DashboardSource(m_WHCode, GlobalVar.SettingCat_DS);
+			Helpers.SetDataSource(cbDataSource, datasource, "Code", "NameEN");
 		}
 
 		protected void cbDataSource_ValueChanged(object sender, EventArgs e)
@@ -361,27 +377,7 @@ namespace HTLBIWebApp2012.App.Setting
 			if (selectedItemValue != null)
 			{
 				m_DSCode = selectedItemValue.ToString();
-				lsttbl_DashboardSource datasource = MyBI.Me.Get_DashboardSourceBy(m_DSCode);
-				if (datasource != null)
-				{
-					MySession.DSDefine_CurEditing = datasource.Code;
-
-					txtDataSourceName.Text = datasource.NameEN;
-					if (datasource.WHCode != Lib.NTE(cbDataWarehouse.Value))
-					{
-						cbDataWarehouse.Value = datasource.WHCode;
-					}
-
-					InqDefineSourceMDX inq = datasource.JsonObjMDX;
-					Helpers.SetDataSource(lbSelectedFields, inq.Fields, "UniqueName", "Caption");
-					Helpers.SetDataSource(lbSelectedMetricFields, inq.Summaries, "UniqueName", "Caption");
-					foreach (InqFilterInfoMDX filter in inq.Filters)
-					{
-						FilterCtrlBase ctrl = GenerateFilterControl(filter.FilterType, String.Empty);
-						ctrl.Set_Info(filter);
-						m_Filters.Add(new FilterControlInfo(ctrl) { Type = filter.FilterType });
-					}
-				}
+				ReloadQueryInformation();
 			}
 			else
 			{
@@ -389,6 +385,34 @@ namespace HTLBIWebApp2012.App.Setting
 			}
 			MyPage.My_wcKPISetting.DSCode = m_DSCode;
 			MyPage.My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
+		}
+
+		protected void ReloadQueryInformation()
+		{
+			Cleanup();
+
+			if (String.IsNullOrWhiteSpace(m_DSCode)) { return; }
+			lsttbl_DashboardSource datasource = MyBI.Me.Get_DashboardSourceBy(m_DSCode);
+			if (datasource != null)
+			{
+				MySession.DSDefine_CurEditing = datasource.Code;
+
+				txtDataSourceName.Text = datasource.NameEN;
+				if (datasource.WHCode != Lib.NTE(cbDataWarehouse.Value))
+				{
+					cbDataWarehouse.Value = datasource.WHCode;
+				}
+
+				InqDefineSourceMDX inq = datasource.JsonObjMDX;
+				Helpers.SetDataSource(lbSelectedFields, inq.Fields, "UniqueName", "Caption");
+				Helpers.SetDataSource(lbSelectedMetricFields, inq.Summaries, "Field.UniqueName", "Field.Caption");
+				foreach (InqFilterInfoMDX filter in inq.Filters)
+				{
+					FilterCtrlBase ctrl = GenerateFilterControl(filter.FilterType, String.Empty);
+					ctrl.Set_Info(filter);
+					m_Filters.Add(new FilterControlInfo(ctrl) { Type = filter.FilterType });
+				}
+			}
 		}
 
 		protected void lbSelectedFields_SelectedIndexChanged(object sender, EventArgs e)

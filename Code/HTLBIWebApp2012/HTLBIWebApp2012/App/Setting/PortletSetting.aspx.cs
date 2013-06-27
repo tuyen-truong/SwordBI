@@ -89,8 +89,22 @@ namespace HTLBIWebApp2012.App.Setting
 			if (!IsPostBack)
 			{
 				WidgetCode = Get_Param(PageArgs.WidgetCode);
+				lsttbl_Widget widget = MyBI.Me.Get_Widget_ByCode(WidgetCode);
+				if (widget == null)
+				{
+					MySession.DSDefine_CurEditing = "";
+				}
+				else
+				{
+					DataSourceSetting.WHCode = widget.WHCode;
+					DataSourceSetting.DSCode = widget.DataSourceCode;
+					// KPI
+					My_wcKPISetting.DSCode = widget.DataSourceCode;
+					My_wcKPISetting.KPICode = widget.KPICode;
+					// Layout
+					My_wcLayoutSetting.LayoutCode = widget.Code;
+				}
 			}
-            //wcKPISetting1.ValueChanged += new EventHandler(wcKPISetting1_ValueChanged);
             ucDatasourceSetting1.ValueChanged += new EventHandler(ucDatasourceSetting1_ValueChanged);
 		}
 		protected void wcKPISetting1_ValueChanged(object sender, EventArgs e)
@@ -101,35 +115,13 @@ namespace HTLBIWebApp2012.App.Setting
 			//kpi.SetSource(My_wcDSSetting.DSCode);
 			
 		}
+
         protected void ucDatasourceSetting1_ValueChanged(object sender, EventArgs e)
 		{
 			String a = String.Empty;
 			My_wcKPISetting.DSCode = DataSourceSetting.DSCode;
             //My_wcKPISetting.RaiseEvent("DS", EventArgs.Empty);
             My_wcKPISetting.DisplayName.Text = DateTime.Now.ToLongTimeString();
-		}
-
-		protected override void OnLoadComplete(EventArgs e)
-		{
-			base.OnLoadComplete(e);
-
-			if (!IsPostBack
-				&& !String.IsNullOrWhiteSpace(WidgetCode))
-			{
-				lsttbl_Widget widget = MyBI.Me.Get_Widget_ByCode(WidgetCode);
-				if (widget == null)
-				{
-					MySession.DSDefine_CurEditing = "";
-					return;
-				}
-				// Data source
-				DataSourceSetting.DataWarehouse = widget.WHCode;
-				// KPI Setting
-				//My_wcKPISetting.DSCode = widget.DataSourceCode;
-				//My_wcKPISetting.KPICode = widget.KPICode;
-				//// Layout Setting
-				//My_wcLayoutSetting.LayoutCode = widget.Code;
-			}
 		}
 	}
 }
