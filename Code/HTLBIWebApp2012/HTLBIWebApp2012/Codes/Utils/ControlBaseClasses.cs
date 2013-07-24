@@ -798,6 +798,11 @@ namespace HTLBIWebApp2012
 
 	public abstract class PartPlugCtrlBase : System.Web.UI.UserControl
 	{
+		public virtual String PartType
+		{
+			get;
+			set;
+		}
 		public enum ControlMode
 		{
 			New,
@@ -1013,11 +1018,7 @@ namespace HTLBIWebApp2012
 	public abstract class KPIPartCtrlBase : PartPlugCtrlBase
 	{
 		public enum Parts{ Dimension, Measure, ContextMetric}
-		public virtual String PartType
-		{
-			get;
-			set;
-		}
+		
 		public virtual void Set_Info(KPIField info)
 		{
 		}

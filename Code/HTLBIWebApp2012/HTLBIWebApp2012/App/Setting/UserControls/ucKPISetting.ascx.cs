@@ -324,7 +324,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void popMenAddFilter_ItemClick(object source, DevExpress.Web.ASPxMenu.MenuItemEventArgs e)
 		{
-			KPIPartCtrlBase ctrl = AddKPIPartControl(String.Format("filter-{0}", e.Item.Name).ToLower(), string.Empty);
+			FilterCtrlBase ctrl = AddKPIFilterControl(String.Format("filter-{0}", e.Item.Name).ToLower(), string.Empty);
 			m_PartControls.Add(new PartControlInfo() { ID = ctrl.ID, ControlType = ctrl.PartType });
 		}
 
@@ -426,30 +426,67 @@ namespace HTLBIWebApp2012.App.Setting
 					ctrl = this.LoadControl("~/App/Setting/wcKPIContextMetric_Calc.ascx") as KPIPartCtrlBase;
 					container = kpiContextMetricContainer;
 					break;
-				case "filter-normal":
-					ctrl = this.LoadControl("~/App/Setting/wcNormalFilter.ascx") as KPIPartCtrlBase;
-					ctrl.PartType = "filter-normal";
-					container = kpiFilterContainer;
-					break;
-				case "filter-num":
-					ctrl = this.LoadControl("~/App/Setting/wcNumFilter.ascx") as KPIPartCtrlBase;
-					ctrl.PartType = "filter-num";
-					break;
-				default: // date
-					ctrl = this.LoadControl("~/App/Setting/wcTimeFilter.ascx") as KPIPartCtrlBase;
-					ctrl.PartType = "filter-date";
-					break;
+				default:
+					throw new Exception("AddKPIPartControl: Invalid control type");
 			}
 			if (string.IsNullOrWhiteSpace(id))
 			{
 				id = Guid.NewGuid().ToString();
 			}
-			ctrl.ID = id;
-			ctrl.OnRemove += new EventHandler(KPIPartControl_OnRemove);
-			lsttbl_DashboardSource ds = MyBI.Me.Get_DashboardSourceBy(DSCode);
-			ctrl.Set_Source(ds);
-			container.Controls.Add(ctrl);
-			return ctrl;
+			if (ctrl != null)
+			{
+				ctrl.ID = id;
+				ctrl.OnRemove += new EventHandler(KPIPartControl_OnRemove);
+				lsttbl_DashboardSource ds = MyBI.Me.Get_DashboardSourceBy(DSCode);
+				ctrl.Set_Source(ds);
+				container.Controls.Add(ctrl);
+				return ctrl;
+			}
+
+			return null;
+		}
+		
+		private FilterCtrlBase AddKPIFilterControl(String type, String id)
+		{
+			if (String.IsNullOrWhiteSpace(type))
+			{
+				return null;
+			}
+			Control container = null;
+			FilterCtrlBase filterCtrl = null;
+			switch (type)
+			{
+				case "filter-normal":
+					filterCtrl = this.LoadControl("~/App/Setting/wcNormalFilter.ascx") as FilterCtrlBase;
+					filterCtrl.PartType = "filter-normal";
+					container = kpiFilterContainer;
+					break;
+				case "filter-num":
+					filterCtrl = this.LoadControl("~/App/Setting/wcNumFilter.ascx") as FilterCtrlBase;
+					filterCtrl.PartType = "filter-num";
+					break;
+				case "filter-date":
+					filterCtrl = this.LoadControl("~/App/Setting/wcTimeFilter.ascx") as FilterCtrlBase;
+					filterCtrl.PartType = "filter-date";
+					break;
+				default:
+					throw new Exception("AddKPIFilterControl: Invalid control type");
+			}
+			if (string.IsNullOrWhiteSpace(id))
+			{
+				id = Guid.NewGuid().ToString();
+			}
+			if (filterCtrl != null)
+			{
+				filterCtrl.ID = id;
+				filterCtrl.OnRemove += new EventHandler(KPIPartControl_OnRemove);
+				lsttbl_DashboardSource ds = MyBI.Me.Get_DashboardSourceBy(DSCode);
+				filterCtrl.Set_Source(ds, "UniqueName", "Caption");
+				container.Controls.Add(filterCtrl);
+				return filterCtrl;
+			}
+
+			return null;
 		}
 		#endregion
 

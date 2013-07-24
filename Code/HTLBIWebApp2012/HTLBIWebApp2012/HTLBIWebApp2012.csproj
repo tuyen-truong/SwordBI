@@ -41,6 +41,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="C1.Web.C1WebChart.2, Version=2.0.20101.20060, Culture=neutral, PublicKeyToken=360971499c5cdc04, processorArchitecture=MSIL" />
+    <Reference Include="C1.Web.C1WebChart.Designer.2, Version=2.0.20101.20060, Culture=neutral, PublicKeyToken=360971499c5cdc04, processorArchitecture=MSIL" />
     <Reference Include="CECOM, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\CECOM.Vol11\CECOM\bin\Debug\CECOM.dll</HintPath>
@@ -149,6 +151,7 @@
     <Content Include="App\Setting\wcKPIDimension.ascx" />
     <Content Include="App\Setting\wcPropGauge_StateRange.ascx" />
     <Content Include="App\Setting\wcPropGrid_Column.ascx" />
+    <Content Include="App\UserControls\wcC1Chart.ascx" />
     <Content Include="App\UserControls\wcChart.ascx" />
     <Content Include="App\UserControls\wcFullCGauge.ascx" />
     <Content Include="App\UserControls\wcGrid.ascx" />
@@ -944,6 +947,13 @@
     </Compile>
     <Compile Include="App\Setting\wcPropGrid_Column.ascx.designer.cs">
       <DependentUpon>wcPropGrid_Column.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="App\UserControls\wcC1Chart.ascx.cs">
+      <DependentUpon>wcC1Chart.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\UserControls\wcC1Chart.ascx.designer.cs">
+      <DependentUpon>wcC1Chart.ascx</DependentUpon>
     </Compile>
     <Compile Include="App\UserControls\wcChart.ascx.cs">
       <DependentUpon>wcChart.ascx</DependentUpon>
