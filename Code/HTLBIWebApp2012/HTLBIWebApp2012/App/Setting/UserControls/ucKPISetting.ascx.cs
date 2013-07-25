@@ -336,9 +336,7 @@ namespace HTLBIWebApp2012.App.Setting
 
 		protected void gridPreviewData_CustomCallback(object sender, DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs e)
 		{
-			var kpi = GetDefineInfo();
-			InqDefineSourceMDX inq = kpi.ReFilter_InqMDX();
-			inq.ToMDX();
+			
 		}
 
 		protected void gridPreviewData_PageIndexChanged(object sender, EventArgs e)
@@ -577,6 +575,13 @@ namespace HTLBIWebApp2012.App.Setting
 #else
 #endif
 			}
+		}
+
+		protected void kpiCallbackPanel_Callback(object sender, DevExpress.Web.ASPxClasses.CallbackEventArgsBase e)
+		{
+			var kpi = GetDefineInfo();
+			InqDefineSourceMDX inq = kpi.ReFilter_InqMDX();
+			txtPreviewMDX.Text = inq.ToMDX();
 		}
 	}
 }

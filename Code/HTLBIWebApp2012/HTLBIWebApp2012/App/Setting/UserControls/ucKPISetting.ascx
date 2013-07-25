@@ -176,7 +176,7 @@
 <tr>
 	<td>
 		<dx:ASPxButton ID="btnPreview" runat="server" Text="Preview" Width="80px" AutoPostBack="false">
-			<ClientSideEvents Click="function(s, e){ gridPreviewData.PerformCallback(); }" />
+			<ClientSideEvents Click="function(s, e){ gridPreviewData.PerformCallback(); kpiCallbackPanel.PerformCallback(); }" />
 		</dx:ASPxButton>
 	</td>
 	<td style="padding-left: 3px; padding-right: 3px">
@@ -210,7 +210,7 @@
 	</ContentStyle>
 	<ContentCollection>
 		<dx:PopupControlContentControl ID="previewContent" runat="server">
-			<dx:ASPxPageControl ID="previewTabs" runat="server" ActiveTabIndex="0" 
+			<dx:ASPxPageControl ID="previewTabs" runat="server" ActiveTabIndex="1" 
 				Width="890px" Height="100%">
 				<ContentStyle>
 					<Paddings Padding="0" />
@@ -255,7 +255,7 @@
 						</TabStyle>
 						<ContentCollection>
 							<dx:ContentControl ID="ContentControl5" runat="server">
-								<dx:ASPxCallbackPanel ID="ASPxCallbackPanel1" runat="server">
+								<dx:ASPxCallbackPanel ID="kpiCallbackPanel" runat="server" ClientInstanceName="kpiCallbackPanel" OnCallback="kpiCallbackPanel_Callback">
 									<PanelCollection>
 										<dx:PanelContent ID="a" runat="server">
 											<dx:ASPxMemo ID="txtPreviewMDX" runat="server" Height="500px" Width="100%" ReadOnly="true">

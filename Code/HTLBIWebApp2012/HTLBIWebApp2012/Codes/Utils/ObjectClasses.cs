@@ -3690,21 +3690,25 @@ namespace HTLBIWebApp2012
 																&& this.Fields.FirstOrDefault(q => q.UniqueName == ft.WhereKey.UniqueName) == null).ToList();
 			if (filters.Count > 0)
 			{
-				sb.AppendLine("WHERE (");
+				StringBuilder sbWhere = new StringBuilder();
 				foreach (InqFilterInfoMDX ft in filters)
 				{
-					sb.Append("{");
-					sb.AppendFormat("FILTER({0}.[{1}],{2}.CURRENTMEMBER.NAME {3} {\"4}\")", ft.WhereKey.UniqueName, ft.WhereKey.Name, ft.WhereKey.UniqueName, ft.Operator, ft.Value);
-					sb.AppendLine("}");
-					sb.Append(",");
+					if (sbWhere.Length == 0)
+					{
+						sbWhere.AppendLine("WHERE (");
+						sbWhere.Append("{");
+					}
+					else
+					{
+						sbWhere.Append(", {");
+					}
+					sbWhere.AppendFormat("FILTER({0}.[{1}],{2}.CURRENTMEMBER.NAME {3} \"{4}\")", ft.WhereKey.UniqueName, ft.WhereKey.Name, ft.WhereKey.UniqueName, ft.Operator, ft.Value);
+					sbWhere.AppendLine("}");
 				}
-				sb.Append(")");
+				sbWhere.Append(")");
+				sb.AppendLine();
+				sb.AppendLine(sbWhere.ToString());
 			}
-			
-			
-			
-			
-			
 			return sb.ToString();
 			
 			
