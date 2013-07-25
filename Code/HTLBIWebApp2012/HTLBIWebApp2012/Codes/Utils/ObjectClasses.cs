@@ -3684,7 +3684,7 @@ namespace HTLBIWebApp2012
 				sbSelect.AppendLine("} ON COLUMNS");
 			}
 			sb.AppendLine(sbSelect.ToString());
-			sb.Append(String.Format(" FROM [{0}]", this.OlapCubeName.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' })));
+			sb.Append(String.Format("FROM [{0}]", this.OlapCubeName.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' })));
 
 			List<InqFilterInfoMDX> filters = this.Filters.Where(ft => ft.HasWhereKey()
 																&& this.Fields.FirstOrDefault(q => q.UniqueName == ft.WhereKey.UniqueName) == null).ToList();
@@ -4512,9 +4512,10 @@ namespace HTLBIWebApp2012
 			{
 				get
 				{
+					if (DataSource == null) { return String.Empty; }
 					if (DSCode.ToUpper().Contains("DS"))
 					{
-						return DataSource.Code;
+						return (DataSource != null) ? DataSource.Code : String.Empty;
 					}
 
 					return String.IsNullOrEmpty(DataSource.ParentCode) ? "" : DataSource.ParentCode;
@@ -4525,9 +4526,10 @@ namespace HTLBIWebApp2012
 			{
 				get
 				{
+					if (DataSource == null) { return String.Empty; }
 					if (DSCode.ToUpper().Contains("DS"))
 					{
-						return DataSource.NameEN;
+						return (DataSource != null) ? DataSource.NameEN : String.Empty;
 					}
 					else if (!String.IsNullOrEmpty(DataSource.ParentCode))
 					{
@@ -4540,16 +4542,24 @@ namespace HTLBIWebApp2012
 
 			public String KPICode
 			{
-				get { return DataSource.SettingCat.ToUpper().Equals("DS") ? String.Empty : DataSource.Code; }
+				get
+				{
+					if (DataSource == null)
+					{
+						return String.Empty;
+					}
+					return DataSource.SettingCat.ToUpper().Equals("DS") ? String.Empty : DataSource.Code;
+				}
 			}
 
 			public String KPIName
 			{
 				get
 				{
+					if (DataSource == null) { return String.Empty; }
 					if (DSCode.ToUpper().Contains("KPI"))
 					{
-						return DataSource.NameEN;
+						return (DataSource != null) ? DataSource.NameEN : String.Empty;
 					}
 					return String.Empty;
 				}
